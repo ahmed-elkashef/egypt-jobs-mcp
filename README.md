@@ -4,7 +4,7 @@ Read-only MCP tools for Egyptian public job sources, worldwide remote feeds,
 and freelance client projects. Built to make source acquisition reusable,
 observable and accessible.
 It combines the standalone [Egypt Job Sources Python library](https://github.com/ahmed-elkashef/egypt-job-sources)
-with a small TypeScript SDK server over standard input/output.
+with a small JavaScript SDK server over standard input/output.
 
 **MIT licensed.** Credits, exact upstream reference commits and authors are in
 [ACKNOWLEDGMENTS.md](ACKNOWLEDGMENTS.md) and
@@ -18,12 +18,12 @@ Requires Node.js 20 or newer and Python 3.11 or newer. Install the Python projec
 first; this release is distributed as source on GitHub, not through npm or PyPI.
 
 ```bash
-git clone --branch v0.3.0 --depth 1 https://github.com/ahmed-elkashef/egypt-job-sources.git
+git clone --branch v0.3.1 --depth 1 https://github.com/ahmed-elkashef/egypt-job-sources.git
 cd egypt-job-sources
 python3 -m venv .venv
 .venv/bin/python -m pip install .
 cd ..
-git clone --branch v0.3.0 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
+git clone --branch v0.3.1 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
 cd egypt-jobs-mcp
 npm ci --ignore-scripts
 EGYPT_JOBS_PYTHON="$(pwd)/../egypt-job-sources/.venv/bin/python" node smoke.mjs

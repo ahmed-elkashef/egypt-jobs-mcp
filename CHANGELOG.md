@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1
+
+- Require Python backend v0.3.1 in installation/CI to restore strict full-feed parsing of native Remote OK, Working Nomads and Himalayas job-link shapes.
+- Preserve a missing exact vacancy link as an explicit record gate rather than an empty feed. Tool names/read-only scope remain unchanged.
+
 ## 0.3.0
 
 - Three new read-only tools, fourteen total: ATS capabilities, explicit employer board, and exact Greenhouse/Lever job detail.
