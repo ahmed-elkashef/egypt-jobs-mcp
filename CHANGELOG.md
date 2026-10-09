@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.2
+
+- Paired aware `from_time` / `to_time` options on Freelancer search only, forwarded to Python v0.3.2 with exact raw-offset continuation.
+- Explain native update activity versus exact submission-window classification, unknown timestamps and the default hourly billing limit.
+- Refuse partial/cross-source date arguments and preserve read-only scope; no new tools or application actions.
+- Require backend v0.3.2 for the date options and full WUZZUF work-model taxonomy.
+
 ## 0.3.1
 
 - Require Python backend v0.3.1 in installation/CI to restore strict full-feed parsing of native Remote OK, Working Nomads and Himalayas job-link shapes.

@@ -9,7 +9,7 @@ import { registerAtsSources } from './ats-tools.mjs';
 
 const python = process.env.EGYPT_JOBS_PYTHON || 'python3';
 const execute = promisify(execFile);
-const server = new McpServer({name:'egypt-jobs-mcp',version:'0.3.1'});
+const server = new McpServer({name:'egypt-jobs-mcp',version:'0.3.2'});
 const source = z.enum(['wuzzuf','forasna','arabjobs','bayt','himalayas','jobicy','mostaql']);
 const annotations = {readOnlyHint:true,destructiveHint:false,openWorldHint:true};
 async function invoke(args, input, module='egypt_job_sources.sources') {

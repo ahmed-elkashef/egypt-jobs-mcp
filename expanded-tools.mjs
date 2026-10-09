@@ -29,12 +29,14 @@ export function registerExpandedSources(server, invoke) {
   },async ()=>invoke(['--capabilities'],undefined,'egypt_job_sources.freelance'));
 
   server.registerTool('read_freelance_projects',{
-    description:'Read one unfiltered client-project page, including source descriptions, budget currency/unit and hour commitments when published. Freelancer uses public active-project GET; Upwork uses only fixed GraphQL read queries and a previously approved machine-local UPWORK_ACCESS_TOKEN. Missing approval/credentials is an explicit limit. No bid, proposal, contact, payment, private account data or arbitrary query.',
-    inputSchema:{source:freelance,limit:z.number().int().min(1).max(100).default(20),offset:z.number().int().min(0).max(1000000).default(0),cursor:z.string().min(1).max(4096).optional()},annotations
-  },async ({source,limit,offset,cursor})=> {
+    description:'Read one client-project page without role/skill filters, including complete returned descriptions and budget terms. Freelancer public active-project GET optionally takes paired aware RFC3339 from_time/to_time: native dates constrain UPDATE activity, not new creation. Retain exact original submission screening and raw pagination; missing/conflicting dates remain undetermined. Hourly commitment is a billing limit, not proven minimum workload. Upwork custom API is separately approval-gated and accepts no time filters. No bid, contact, payment, account extras or arbitrary query.',
+    inputSchema:{source:freelance,limit:z.number().int().min(1).max(100).default(20),offset:z.number().int().min(0).max(1000000).default(0),cursor:z.string().min(1).max(4096).optional(),from_time:z.string().datetime({offset:true}).max(128).optional(),to_time:z.string().datetime({offset:true}).max(128).optional()},annotations
+  },async ({source,limit,offset,cursor,from_time,to_time})=> {
     if (source==='freelancer' && cursor) return limitation('Freelancer uses verified numeric offsets, not an opaque cursor.');
     if (source==='upwork' && offset!==0) return limitation('Upwork uses exact source-returned cursors, not numeric offsets.');
-    return invoke(['--source',source,'--limit',String(limit),...(source==='freelancer'?['--offset',String(offset)]:[]),...(cursor?['--cursor',cursor]:[])],undefined,'egypt_job_sources.freelance');
+    if ((from_time || to_time) && source!=='freelancer') return limitation('Time filters are supported only for Freelancer public activity search, not Upwork.');
+    if (!!from_time!==!!to_time) return limitation('Supply both aware from_time and to_time for one fixed activity interval.');
+    return invoke(['--source',source,'--limit',String(limit),...(source==='freelancer'?['--offset',String(offset)]:[]),...(cursor?['--cursor',cursor]:[]),...(from_time?['--from-time',from_time,'--to-time',to_time]:[])],undefined,'egypt_job_sources.freelance');
   });
 
   server.registerTool('read_freelance_project_detail',{

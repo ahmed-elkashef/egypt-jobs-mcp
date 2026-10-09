@@ -18,12 +18,12 @@ Requires Node.js 20 or newer and Python 3.11 or newer. Install the Python projec
 first; this release is distributed as source on GitHub, not through npm or PyPI.
 
 ```bash
-git clone --branch v0.3.1 --depth 1 https://github.com/ahmed-elkashef/egypt-job-sources.git
+git clone --branch v0.3.2 --depth 1 https://github.com/ahmed-elkashef/egypt-job-sources.git
 cd egypt-job-sources
 python3 -m venv .venv
 .venv/bin/python -m pip install .
 cd ..
-git clone --branch v0.3.1 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
+git clone --branch v0.3.2 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
 cd egypt-jobs-mcp
 npm ci --ignore-scripts
 EGYPT_JOBS_PYTHON="$(pwd)/../egypt-job-sources/.venv/bin/python" node smoke.mjs
@@ -163,3 +163,9 @@ candidate records, credentials or downloaded job corpora.
 ## Official employer boards
 
 Version 0.3.0 adds `ats_source_capabilities`, `read_employer_board`, and `read_employer_job_detail` (fourteen read-only tools total). Each board call requires an explicit confirmed provider/board token. Greenhouse/Ashby use official whole-board responses; Lever uses skip/limit and global/EU endpoints. Only Greenhouse/Lever have documented individual detail reads here. No employer-domain guessing, arbitrary URL target, application, candidate data or internal posting access. Full text and stable IDs are preserved; API failures remain limits. A board snapshot is not a geographic or frozen-week census.
+
+### Freelancer activity intervals
+
+`read_freelance_projects` accepts paired aware RFC3339 `from_time` and `to_time` only for `source:freelancer`. For example, freeze `2026-01-01T12:00:00Z` to `2026-01-03T12:00:00Z` and repeat those exact values on each returned-offset page. Native date filters constrain **update activity**; the backend separately reports exact `[start,end)` submission-window classification. Missing or conflicting source timestamps remain undetermined, and every public row and raw pagination count remains intact. Known activity outside the requested native interval produces an explicit limitation. These parameters do not establish first-ever creation, an exhaustive market census or immunity to provider limits. No date argument is accepted for Upwork or detail reads.
+
+The native hourly commitment value is a billing limit, often the default 40 hours per week, rather than proof of mandatory full-time attendance. Actual required hours must be established from the brief.
