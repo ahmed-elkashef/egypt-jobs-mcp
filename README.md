@@ -18,12 +18,12 @@ Requires Node.js 20 or newer and Python 3.11 or newer. Install the Python projec
 first; this release is distributed as source on GitHub, not through npm or PyPI.
 
 ```bash
-git clone --branch v0.3.2 --depth 1 https://github.com/ahmed-elkashef/egypt-job-sources.git
+git clone --branch v0.3.3 --depth 1 https://github.com/ahmed-elkashef/egypt-job-sources.git
 cd egypt-job-sources
 python3 -m venv .venv
 .venv/bin/python -m pip install .
 cd ..
-git clone --branch v0.3.2 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
+git clone --branch v0.3.3 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
 cd egypt-jobs-mcp
 npm ci --ignore-scripts
 EGYPT_JOBS_PYTHON="$(pwd)/../egypt-job-sources/.venv/bin/python" node smoke.mjs
@@ -77,6 +77,12 @@ Example tool input:
 ```json
 {"source":"wuzzuf","page":1,"work_model":"part_time"}
 ```
+
+### Exact Lever commitment labels
+
+`read_employer_board` accepts an optional Lever-only `commitments` array with one to twenty distinct nonempty exact labels, each at most 200 characters. Discover labels from the broad confirmed employer board's native `categories.commitment`; do not assume universal class names. The [official Lever API](https://github.com/lever/postings-api) applies repeated commitment parameters with case-sensitive OR matching. Preserve the same labels across every returned `next_skip` continuation. Full descriptions and original row counts remain intact, with `source_filters` and returned-label verification. Known contradictions fail explicitly; missing/mixed metadata stays undetermined.
+
+Keep the unfiltered unknown/other-label and full-time-contradiction complement when assessing supply. Internship, contract and fixed-term labels do not prove part-time hours or eligible geography. Greenhouse/Ashby and individual details refuse commitments; a filtered terminal page does not establish whole-board or weekly coverage.
 
 ## Source capabilities and limits
 

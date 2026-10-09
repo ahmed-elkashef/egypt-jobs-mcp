@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.3 — 2026-10-10
+
+- Expose optional Lever-only exact observed commitment labels as repeated native OR filters.
+- Preserve complete source text and raw continuation; reject malformed, cross-source and detail filters.
+- Retain positive-filter scope, per-employer taxonomy and unknown/other-label complement limits.
+
 ## 0.3.2
 
 - Paired aware `from_time` / `to_time` options on Freelancer search only, forwarded to Python v0.3.2 with exact raw-offset continuation.
