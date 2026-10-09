@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0
+
+- Three new read-only tools, fourteen total: ATS capabilities, explicit employer board, and exact Greenhouse/Lever job detail.
+
+- Explicit employer-board readers for the official Greenhouse, Lever and Ashby public contracts.
+- Retain stable posting IDs and complete native descriptions and location/model/date/compensation fields.
+- Distinguish whole-board snapshots from Lever pages and geographic/weekly coverage.
+- Failed transport or malformed payloads remain explicit limits instead of fabricated empty supply.
+- Exact board tokens, fixed trusted endpoints, and synthetic boundary/pagination/full-text checks.
+
 ## 0.2.0
 
 - Five new read-only tools, eleven total, for worldwide remote feeds and freelance projects.

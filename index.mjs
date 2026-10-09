@@ -5,10 +5,11 @@ import { z } from 'zod';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { registerExpandedSources } from './expanded-tools.mjs';
+import { registerAtsSources } from './ats-tools.mjs';
 
 const python = process.env.EGYPT_JOBS_PYTHON || 'python3';
 const execute = promisify(execFile);
-const server = new McpServer({name:'egypt-jobs-mcp',version:'0.2.0'});
+const server = new McpServer({name:'egypt-jobs-mcp',version:'0.3.0'});
 const source = z.enum(['wuzzuf','forasna','arabjobs','bayt','himalayas','jobicy','mostaql']);
 const annotations = {readOnlyHint:true,destructiveHint:false,openWorldHint:true};
 async function invoke(args, input, module='egypt_job_sources.sources') {
@@ -67,4 +68,5 @@ server.registerTool('wuzzuf_work_model_taxonomy',{
   description:'Read every native WUZZUF work-model facet for the blank-query Egypt inventory. Verify counts and unknown/mixed partitions before a full-supply run; native type labels do not establish compatible hours or fit. Undocumented public frontend contract, no authentication.',inputSchema:{},annotations
 },async ()=>invoke(['wuzzuf','--taxonomy']));
 registerExpandedSources(server, invoke);
+registerAtsSources(server, invoke);
 await server.connect(new StdioServerTransport(process.stdin,process.stdout,{maxBufferSize:64*1024*1024}));

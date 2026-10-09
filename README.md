@@ -18,12 +18,12 @@ Requires Node.js 20 or newer and Python 3.11 or newer. Install the Python projec
 first; this release is distributed as source on GitHub, not through npm or PyPI.
 
 ```bash
-git clone --branch v0.2.0 --depth 1 https://github.com/ahmed-elkashef/egypt-job-sources.git
+git clone --branch v0.3.0 --depth 1 https://github.com/ahmed-elkashef/egypt-job-sources.git
 cd egypt-job-sources
 python3 -m venv .venv
 .venv/bin/python -m pip install .
 cd ..
-git clone --branch v0.2.0 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
+git clone --branch v0.3.0 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
 cd egypt-jobs-mcp
 npm ci --ignore-scripts
 EGYPT_JOBS_PYTHON="$(pwd)/../egypt-job-sources/.venv/bin/python" node smoke.mjs
@@ -159,3 +159,7 @@ Tests use synthetic payloads and make no source-site network requests. GitHub
 Actions tests the MCP against the paired Python library. Contributions are
 welcome: see [CONTRIBUTING.md](CONTRIBUTING.md). Do not submit real captures,
 candidate records, credentials or downloaded job corpora.
+
+## Official employer boards
+
+Version 0.3.0 adds `ats_source_capabilities`, `read_employer_board`, and `read_employer_job_detail` (fourteen read-only tools total). Each board call requires an explicit confirmed provider/board token. Greenhouse/Ashby use official whole-board responses; Lever uses skip/limit and global/EU endpoints. Only Greenhouse/Lever have documented individual detail reads here. No employer-domain guessing, arbitrary URL target, application, candidate data or internal posting access. Full text and stable IDs are preserved; API failures remain limits. A board snapshot is not a geographic or frozen-week census.

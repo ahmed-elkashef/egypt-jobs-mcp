@@ -34,7 +34,7 @@ test('portable installed backend preserves parse and immutable receipt contracts
       {input:JSON.stringify(capture),encoding:'utf8',env:{...process.env,EGYPT_JOBS_CAPTURE_DIR:cache}}));
     await connected({EGYPT_JOBS_CAPTURE_DIR:cache},async client => {
       const listed = await client.listTools();
-      assert.equal(listed.tools.length,11);
+      assert.equal(listed.tools.length,14);
       assert.ok(listed.tools.every(tool=>tool.annotations?.readOnlyHint===true));
       assert.ok(listed.tools.find(tool=>tool.name==='read_source_page').inputSchema.properties.work_model.enum.includes('full_time'));
       for (const request of [
@@ -66,13 +66,13 @@ test('missing interpreter is an explicit limitation and does not crash the MCP',
     assert.equal(response.structuredContent.status,'source_limited');
     assert.equal(response.structuredContent.coverage_complete,false);
     assert.ok(!('listings' in response.structuredContent));
-    assert.equal((await client.listTools()).tools.length,11);
+    assert.equal((await client.listTools()).tools.length,14);
   });
 });
 
 test('expanded tools expose contracts and refuse credential and pagination drift',async () => {
   await connected({UPWORK_ACCESS_TOKEN:''},async client => {
-    for (const name of ['remote_source_capabilities','freelance_source_capabilities']) {
+    for (const name of ['remote_source_capabilities','freelance_source_capabilities','ats_source_capabilities']) {
       const response = await client.callTool({name,arguments:{}});
       assert.equal(response.isError,false);
       assert.equal(response.structuredContent.status,'ok');
@@ -119,7 +119,7 @@ test('oversize complete output is an honest limitation and the MCP connection su
       assert.equal(response.isError,true);
       assert.match(response.structuredContent.error,/9 MiB MCP message limit/);
       assert.ok(!('listings' in response.structuredContent));
-      assert.equal((await client.listTools()).tools.length,11);
+      assert.equal((await client.listTools()).tools.length,14);
     });
   } finally { rmSync(directory,{recursive:true,force:true}); }
 });
@@ -149,7 +149,7 @@ test('early backend exit while receiving a capture stays a limitation without cr
       const response=await client.callTool({name:'parse_rendered_board_page',arguments:{source:'wuzzuf',capture:{...capture,html:'x'.repeat(2*1024*1024)}}});
       assert.equal(response.isError,true);
       assert.equal(response.structuredContent.status,'source_limited');
-      assert.equal((await client.listTools()).tools.length,11);
+      assert.equal((await client.listTools()).tools.length,14);
     });
   } finally { rmSync(directory,{recursive:true,force:true}); }
 });
