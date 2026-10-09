@@ -4,25 +4,45 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { z } from 'zod';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
+import { registerExpandedSources } from './expanded-tools.mjs';
 
 const python = process.env.EGYPT_JOBS_PYTHON || 'python3';
 const execute = promisify(execFile);
-const server = new McpServer({name:'egypt-jobs-mcp',version:'0.1.0'});
+const server = new McpServer({name:'egypt-jobs-mcp',version:'0.2.0'});
 const source = z.enum(['wuzzuf','forasna','arabjobs','bayt','himalayas','jobicy','mostaql']);
 const annotations = {readOnlyHint:true,destructiveHint:false,openWorldHint:true};
 async function invoke(args, input, module='egypt_job_sources.sources') {
-  const execution=execute(python,['-m',module,...args],{timeout:55000,maxBuffer:12*1024*1024});
+  const execution=execute(python,['-m',module,...args],{timeout:55000,maxBuffer:64*1024*1024});
   // The capture is JSON data on stdin, never shell text, a URL fetch or JS execution.
+  execution.child.stdin.on('error',()=>{}); // exec completion reports early-exit failure.
   execution.child.stdin.end(input === undefined ? undefined : JSON.stringify(input));
   let data;
   try {
     const {stdout} = await execution;
     data=JSON.parse(stdout);
   } catch (error) {
-    data={status:'source_limited',coverage_complete:false,reviewed_by_model:false,
+    // Exit 2 is the backend's explicit, structured source limitation contract.
+    // Never preserve partial output from a timeout, overflow or unexpected exit.
+    if (error.code===2 && !error.killed && typeof error.stdout==='string') {
+      try {
+        const limited=JSON.parse(error.stdout);
+        if (limited && !Array.isArray(limited) && limited.status==='source_limited' &&
+            limited.coverage_complete===false && limited.reviewed_by_model===false &&
+            !('listings' in limited) && !('reported_total' in limited)) data=limited;
+      } catch { /* Malformed limitation output remains a failed acquisition. */ }
+    }
+    data ||= {status:'source_limited',coverage_complete:false,reviewed_by_model:false,
       error:error.killed?'Source process timed out; acquisition remains incomplete.':`Source process failed (${error.code || error.name}); acquisition remains incomplete.`};
   }
-  return {content:[{type:'text',text:JSON.stringify(data)}],structuredContent:data,isError:data.status==='source_limited'};
+  let result={content:[{type:'text',text:JSON.stringify(data)}],structuredContent:data,isError:data.status==='source_limited'};
+  // SDK clients commonly have a 10 MiB stdio message buffer. Return a small
+  // explicit limitation instead of disconnecting or slicing complete listings.
+  if (Buffer.byteLength(JSON.stringify(result),'utf8')>9*1024*1024) {
+    data={status:'source_limited',coverage_complete:false,reviewed_by_model:false,
+      error:'Complete source response exceeds the 9 MiB MCP message limit. Acquire complete data with the Python CLI into private storage; no listings were truncated.'};
+    result={content:[{type:'text',text:JSON.stringify(data)}],structuredContent:data,isError:true};
+  }
+  return result;
 }
 server.registerTool('read_source_page',{
   description:'Read one public source page. WUZZUF uses its verified public JSON:API search and full-description hydration, blank query with Egypt and optional native work model. Forasna HTTP is source_limited; use operator-authorized public DOM handoff. ArabJobs/Bayt Egypt, Himalayas EG including worldwide, Jobicy global seven-day cursor feed, Mostaql client projects. No keyword/role/seniority filters. Acquisition is not review or coverage completion.',
@@ -46,4 +66,5 @@ server.registerTool('jobicy_location_taxonomy',{
 server.registerTool('wuzzuf_work_model_taxonomy',{
   description:'Read every native WUZZUF work-model facet for the blank-query Egypt inventory. Verify counts and unknown/mixed partitions before a full-supply run; native type labels do not establish compatible hours or fit. Undocumented public frontend contract, no authentication.',inputSchema:{},annotations
 },async ()=>invoke(['wuzzuf','--taxonomy']));
-await server.connect(new StdioServerTransport());
+registerExpandedSources(server, invoke);
+await server.connect(new StdioServerTransport(process.stdin,process.stdout,{maxBufferSize:64*1024*1024}));

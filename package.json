@@ -1,6 +1,6 @@
 {
   "name": "egypt-jobs-mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Read-only MCP access to Egyptian public job sources and client projects.",
   "type": "module",
@@ -37,6 +37,7 @@
     "SOURCE_POLICY.md",
     "LICENSE",
     "CHANGELOG.md",
-    "CONTRIBUTING.md"
+    "CONTRIBUTING.md",
+    "expanded-tools.mjs"
   ]
 }
