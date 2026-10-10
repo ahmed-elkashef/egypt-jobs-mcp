@@ -18,12 +18,12 @@ Requires Node.js 20 or newer and Python 3.11 or newer. Install the Python projec
 first; this release is distributed as source on GitHub, not through npm or PyPI.
 
 ```bash
-git clone --branch v0.3.3 --depth 1 https://github.com/ahmed-elkashef/egypt-job-sources.git
+git clone --branch v0.3.4 --depth 1 https://github.com/ahmed-elkashef/egypt-job-sources.git
 cd egypt-job-sources
 python3 -m venv .venv
 .venv/bin/python -m pip install .
 cd ..
-git clone --branch v0.3.3 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
+git clone --branch v0.3.4 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
 cd egypt-jobs-mcp
 npm ci --ignore-scripts
 EGYPT_JOBS_PYTHON="$(pwd)/../egypt-job-sources/.venv/bin/python" node smoke.mjs
@@ -60,6 +60,7 @@ The server writes MCP messages to stdout; it does not open a network listener.
 | `jobicy_location_taxonomy` | Current official location slugs. |
 | `parse_rendered_board_page` | Source and exact `{url,kind,captured_at,html}` public DOM object; no network or browser control. |
 | `read_saved_board_capture` | SHA-256 receipt only; verifies and reparses original local evidence. |
+| `read_public_api_jobs` | Complete native Arbeitnow/The Muse pages; optional page or exact next_url, and bounded Muse testing mode. Requires Python 0.3.4. |
 | `remote_source_capabilities` | Access, attribution, pagination and completeness limits for each global feed. |
 | `read_remote_feed` | `source`: `remotive`, `remoteok`, `weworkremotely`, `workingnomads`, or `himalayas_global`; optional exact returned cursor for Himalayas only. All returned listings, without title/keyword filters or text slicing. |
 | `freelance_source_capabilities` | Public Freelancer and approval-gated Upwork contracts and limits. |
@@ -136,6 +137,8 @@ actual hours and country restrictions after reading the full canonical text.
 ## Browser evidence handoff
 
 The Python package's `egypt-job-capture serve` starts a loopback-only local form.
+
+The Forasna detail extractor retains only canonical public `JobPosting` job fields from JSON-LD. The Python parser reconciles the source identifier with the exact detail URL and preserves aware publication/expiry timestamps, original visible clock, applicant-country restrictions and native salary units. Conflicting clocks and expiry order are reported, not silently normalized. Source metadata does not establish compatible hours, historical completeness or candidate fit. Contact/account fields and executable scripts remain excluded.
 Run it with the same interpreter configured for this MCP, open its printed local
 URL, and transfer selected public DOM from a browser you are authorized to use.
 The standalone `captureEgyptBoardDOM` function in
@@ -175,3 +178,11 @@ Version 0.3.0 adds `ats_source_capabilities`, `read_employer_board`, and `read_e
 `read_freelance_projects` accepts paired aware RFC3339 `from_time` and `to_time` only for `source:freelancer`. For example, freeze `2026-01-01T12:00:00Z` to `2026-01-03T12:00:00Z` and repeat those exact values on each returned-offset page. Native date filters constrain **update activity**; the backend separately reports exact `[start,end)` submission-window classification. Missing or conflicting source timestamps remain undetermined, and every public row and raw pagination count remains intact. Known activity outside the requested native interval produces an explicit limitation. These parameters do not establish first-ever creation, an exhaustive market census or immunity to provider limits. No date argument is accepted for Upwork or detail reads.
 
 The native hourly commitment value is a billing limit, often the default 40 hours per week, rather than proof of mandatory full-time attendance. Actual required hours must be established from the brief.
+
+## Complete native public APIs
+
+`read_public_api_jobs` preserves every native HTML description and actual continuation. [Arbeitnow](https://www.arbeitnow.com/blog/job-board-api) starts at page 1; [The Muse](https://www.themuse.com/developers/api/v2) starts at page 0. Use only the returned `next_url` or native page; these APIs expose no candidate filters here. An ordinary wrapper may cap result counts or clip descriptions; this reader does neither. Missing, stalled or cross-source continuation fails explicitly.
+
+The Muse requires registered application access beyond capability testing. Its official limits are 500 anonymous test requests/hour and 3600 registered requests/hour. Keep `THEMUSE_API_KEY` machine-local; never put it in tool inputs. `testing:true` permits a bounded anonymous capability test, not a production market refresh. Arbeitnow has no verified numeric rate allowance: honor HTTP 429 and safe Retry-After metadata. Moving pages and native date fields do not establish historical completeness or original publication. Fifteen read-only tools are registered in this release.
+
+The complete API body is retained once as `description`, with every other native field in `source_data` and the original body key in `source_description_field`. Original native rows are exactly reconstructible. This removes duplicate HTML serialization without dropping any row or shortening any description.

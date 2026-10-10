@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.4 — 2026-10-10
+
+- New complete-body Arbeitnow/The Muse native API tool, fifteen total; correct one-based/zero-based pages, strict continuation scope and registered Muse production access.
+- Forasna canonical public JobPosting extraction retains aware dates, applicant countries and salary units without account/contact state.
+- Require paired Python v0.3.4 for WUZZUF internship URLs, safe cooldown metadata and Himalayas terminal cursor semantics.
+
 ## 0.3.3 — 2026-10-10
 
 - Expose optional Lever-only exact observed commitment labels as repeated native OR filters.

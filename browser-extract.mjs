@@ -91,9 +91,46 @@ export function captureEgyptBoardDOM({source, kind = 'page'}) {
     }
     const headerHTML=header ? '<header data-public-source-header>'+serialize(header)+'</header>' : '';
     const notice=(document.body.innerText.match(/©[^\n]*(?:\n[^\n]*){0,2}/) || [''])[0];
+    // A public JSON-LD JobPosting is DOM source evidence, not hidden app state.
+    // Retain only this detail's job fields. Never copy scripts, account/contact
+    // properties, application forms, tracking payloads or arbitrary nested data.
+    let structuredHTML = '';
+    if (source === 'forasna') {
+      const fields = {
+        '@type':{}, title:{}, description:{}, url:{},
+        identifier:{'@type':{},name:{},value:{}}, datePosted:{}, validThrough:{}, employmentType:{},
+        hiringOrganization:{'@type':{},name:{},sameAs:{}}, jobLocationType:{},
+        applicantLocationRequirements:{'@type':{},name:{}},
+        jobLocation:{'@type':{},address:{'@type':{},addressRegion:{},addressCountry:{}}},
+        baseSalary:{'@type':{},currency:{},value:{'@type':{},value:{},minValue:{},maxValue:{},unitText:{}}},
+      };
+      const select = (value, allowed) => {
+        if (Array.isArray(value)) return value.map(v=>select(v,allowed));
+        if (value === null || typeof value !== 'object') return value;
+        const selected = {};
+        for (const key of Object.keys(allowed)) if (Object.prototype.hasOwnProperty.call(value,key)) selected[key]=select(value[key],allowed[key]);
+        return selected;
+      };
+      const postings=[];
+      const walk=value=>{
+        if (Array.isArray(value)) value.forEach(walk);
+        else if (value && typeof value === 'object') {
+          if (value['@type']==='JobPosting') postings.push(value);
+          if (value['@graph']) walk(value['@graph']);
+        }
+      };
+      for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
+        try { walk(JSON.parse(script.textContent)); } catch { /* malformed metadata does not invent a posting */ }
+      }
+      if (postings.length) {
+        const expectedID=pathname.match(/-(\d+)$/)[1];
+        if (postings.length !== 1 || String(postings[0].identifier?.value) !== expectedID) throw Error('JobPosting/canonical detail identity mismatch');
+        structuredHTML='<script type="application/ld+json">'+JSON.stringify(select(postings[0],fields)).replace(/</g,'\\u003c')+'</script>';
+      }
+    }
     return {
       url:document.location.href,kind,captured_at:new Date().toISOString(),
-      html:'<html><body>'+headerHTML+Array.from(new Set(nodes.filter(Boolean))).map(serialize).join('\n')+'<footer data-source-notice>'+escape(notice)+'</footer></body></html>',
+      html:'<html><body>'+headerHTML+Array.from(new Set(nodes.filter(Boolean))).map(serialize).join('\n')+structuredHTML+'<footer data-source-notice>'+escape(notice)+'</footer></body></html>',
     };
   }
   return {

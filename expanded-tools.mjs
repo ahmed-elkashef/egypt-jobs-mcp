@@ -10,6 +10,16 @@ function limitation(error) {
 }
 
 export function registerExpandedSources(server, invoke) {
+  server.registerTool('read_public_api_jobs',{
+    description:'Read one complete native Arbeitnow or The Muse public API page, preserving every returned description. Arbeitnow starts at page1; The Muse starts at page0. Echo exact returned next_url for continuation. No title, role or keyword filters. The Muse needs registered app credentials in machine-local THEMUSE_API_KEY for production; testing=true is only a bounded anonymous capability test. An API page is not original-date proof or a historical census.',
+    inputSchema:{source:z.enum(['arbeitnow','themuse']),page:z.number().int().min(0).max(1000000).optional(),next_url:z.string().url().max(4096).optional(),testing:z.boolean().default(false)},annotations
+  },async ({source,page,next_url,testing})=> {
+    if (page!==undefined && next_url) return limitation('Choose a page or the exact returned next_url.');
+    if (source==='arbeitnow' && page===0) return limitation('Arbeitnow pages begin at one.');
+    if (source==='arbeitnow' && testing) return limitation('Anonymous testing mode is only for The Muse.');
+    return invoke([source,...(page!==undefined?['--page',String(page)]:[]),...(next_url?['--next-url',next_url]:[]),...(testing?['--testing']:[])],undefined,'egypt_job_sources.public_apis');
+  });
+
   server.registerTool('remote_source_capabilities',{
     description:'Offline source contracts, attribution, date/history limits and pagination for broad worldwide remote feeds. Country access, part-time hours, experience and actual income require individual review.',
     inputSchema:{},annotations

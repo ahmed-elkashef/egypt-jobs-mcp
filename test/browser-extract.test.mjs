@@ -86,3 +86,40 @@ test('verified public paths and native page scopes are accepted', () => {
     });
   }
 });
+
+test('Forasna public JobPosting metadata preserves exact dates/units/country and excludes contacts', () => {
+  withDocument('https://forasna.com/job/p/constructed-100001', synthetic => {
+    const posting = {
+      '@type':'JobPosting', identifier:{value:'100001'},
+      datePosted:'2026-10-05T19:13:21+03:00', validThrough:'2026-11-03T19:13:21+02:00',
+      description:'Constructed description </script> remains data',
+      jobLocationType:'TELECOMMUTE', applicantLocationRequirements:{name:'Constructed other country',email:'EXCLUDED'},
+      baseSalary:{currency:'EGP',value:{minValue:1500,maxValue:2500,unitText:'MONTH',account:'EXCLUDED'}},
+      hiringOrganization:{name:'Constructed company',contactPoint:{email:'EXCLUDED'}},
+      cookies:'EXCLUDED',
+    };
+    synthetic.document.querySelectorAll = selector => selector === 'script[type="application/ld+json"]'
+      ? [{textContent:JSON.stringify({'@graph':[{'@type':'WebSite',token:'EXCLUDED'},posting]})}] : [];
+    const result = captureEgyptBoardDOM({source:'forasna',kind:'detail'});
+    const raw = result.html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1];
+    const retained = JSON.parse(raw);
+    assert.equal(retained.identifier.value,'100001');
+    assert.equal(retained.datePosted,posting.datePosted);
+    assert.equal(retained.baseSalary.value.unitText,'MONTH');
+    assert.equal(retained.applicantLocationRequirements.name,'Constructed other country');
+    assert.equal(retained.description,posting.description);
+    assert.ok(!result.html.includes('EXCLUDED'));
+    assert.ok(!raw.includes('</script>'));
+  });
+});
+
+test('Forasna unrelated or mismatched structured postings cannot certify canonical detail', () => {
+  for (const postings of [
+    {'@type':'JobPosting',identifier:{value:'100002'}},
+    [{'@type':'JobPosting',identifier:{value:'100001'}},{'@type':'JobPosting',identifier:{value:'100002'}}],
+  ]) withDocument('https://forasna.com/job/p/constructed-100001', synthetic => {
+    synthetic.document.querySelectorAll = selector => selector === 'script[type="application/ld+json"]'
+      ? [{textContent:JSON.stringify(postings)}] : [];
+    assert.throws(()=>captureEgyptBoardDOM({source:'forasna',kind:'detail'}),/identity mismatch/);
+  });
+});
