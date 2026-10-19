@@ -55,6 +55,13 @@ test('public scope is validated before reading any DOM content', () => {
     ['forasna', 'detail', 'https://forasna.com/job/p/example-100001?cookie=example'],
     ['arabjobs', 'page', 'https://www.arabjobs.com/en/jobs/search/?pageIndex=1&filterJobCountry=SA&sortType=2'],
     ['arabjobs', 'page', 'https://www.arabjobs.com/en/jobs/search/?pageIndex=1&filterJobCountry=EG&sortType=2&filterJobTitle=example'],
+    ['arabjobs', 'page', 'https://www.arabjobs.com/en/jobs/search/?filterJobCountry=EG&filterJobType=99&sortType=2'],
+    ['forasna', 'page', 'https://forasna.com/وظائف-خالية?filters[jobType][0]=نصف%20يوم'],
+    ['tanqeeb', 'page', 'https://egypt.tanqeeb.com/jobs/search?keywords=example&country=213&state=0&lang=all'],
+    ['tanqeeb', 'page', 'https://egypt.tanqeeb.com/jobs/search?keywords=&country=113&state=0&lang=all'],
+    ['tanqeeb', 'detail', 'https://egypt.tanqeeb.com/account/profile'],
+    ['akhtaboot', 'page', 'https://www.akhtaboot.com/en/jordan/jobs'],
+    ['akhtaboot', 'detail', 'https://www.akhtaboot.com/en/jordan/jobs/amman/100001-constructed'],
   ];
   for (const [source, kind, url] of invalid) {
     withDocument(url, synthetic => {
@@ -71,8 +78,10 @@ test('verified public paths and native page scopes are accepted', () => {
     ['wuzzuf', 'detail', 'https://wuzzuf.net/jobs/p/abcdefghijkl-example-egypt'],
     ['forasna', 'page', 'https://forasna.com/%D9%88%D8%B8%D8%A7%D8%A6%D9%81-%D8%AE%D8%A7%D9%84%D9%8A%D8%A9'],
     ['forasna', 'page', 'https://forasna.com/%D9%88%D8%B8%D8%A7%D8%A6%D9%81-%D8%AE%D8%A7%D9%84%D9%8A%D8%A9?start=30'],
+    ['forasna', 'page', 'https://forasna.com/وظائف-خالية?filters[country][0]=مصر&filters[jobType][0]=نصف%20يوم'],
     ['forasna', 'detail', 'https://forasna.com/job/p/constructed-%2F-example-100001'],
     ['arabjobs', 'page', 'https://www.arabjobs.com/en/jobs/search/?pageIndex=2&filterJobCountry=EG&sortType=2'],
+    ['arabjobs', 'page', 'https://www.arabjobs.com/en/jobs/search/?pageIndex=2&filterJobCountry=EG&filterJobType=2&sortType=2'],
     ['arabjobs', 'detail', 'https://www.arabjobs.com/en/jobs/j/egypt/example/100001'],
   ];
   for (const [source, kind, url] of safe) {
@@ -85,6 +94,24 @@ test('verified public paths and native page scopes are accepted', () => {
       assert.ok(synthetic.reads() > 0);
     });
   }
+});
+
+test('Tanqeeb extraction requires and retains selected native state, never forms or account inputs',()=>{
+  withDocument('https://egypt.tanqeeb.com/jobs/search/page/2?keywords=&country=213&state=0&lang=all',synthetic=>{
+    synthetic.document.querySelector=selector=>selector.includes('countryHeader') ? {value:'213',textContent:'Egypt'} : null;
+    synthetic.document.querySelectorAll=selector=>selector==='input:checked,select option:checked' ? [
+      {name:'refine[job_types][]',value:'2',labels:[{innerText:'Part Time'}]},
+      {name:'refine[order_by]',value:'most_recent',labels:[{innerText:'Most Recent'}]},
+      {name:'csrf_token',value:'EXCLUDED_TOKEN',labels:[]},
+    ] : [];
+    const result=captureEgyptBoardDOM({source:'tanqeeb'});
+    assert.match(result.html,/data-country="Egypt"/);
+    assert.match(result.html,/data-filter-value="2"/);
+    assert.match(result.html,/most_recent/);
+    assert.ok(!result.html.includes('EXCLUDED_TOKEN'));
+    synthetic.document.querySelector=()=>({value:'113',textContent:'Other'});
+    assert.throws(()=>captureEgyptBoardDOM({source:'tanqeeb'}),/selected Egypt/);
+  });
 });
 
 test('Forasna public JobPosting metadata preserves exact dates/units/country and excludes contacts', () => {

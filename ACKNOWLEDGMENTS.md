@@ -90,3 +90,7 @@ affiliation with or endorsement by any source platform.
 ## Employer-board documentation added in 0.3.0
 
 The independent Greenhouse, Lever and Ashby readers use the providers' public documentation: [Greenhouse Job Board API](https://docs.greenhouse.io/job-board.html), [Lever Postings API](https://github.com/lever/postings-api), and [Ashby Public Job Posting API](https://developers.ashbyhq.com/docs/public-job-posting-api). No third-party ATS implementation is copied or bundled. Provider documentation and vacancy-content rights remain separate from this project's MIT code license.
+
+## Secondary Egypt boards added in0.3.5
+
+Tanqeeb and Akhtaboot adapters and the native ArabJobs/Forasna filter repairs were independently implemented from bounded public source inspection. No third-party scraper was copied or forked for these additions. Provider names, markup and listings remain their owners' property; live captures and candidate records are not included. Existing upstream research credits above remain applicable.

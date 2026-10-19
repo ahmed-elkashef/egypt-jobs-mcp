@@ -18,12 +18,12 @@ Requires Node.js 20 or newer and Python 3.11 or newer. Install the Python projec
 first; this release is distributed as source on GitHub, not through npm or PyPI.
 
 ```bash
-git clone --branch v0.3.4 --depth 1 https://github.com/ahmed-elkashef/egypt-job-sources.git
+git clone --branch v0.3.5 --depth 1 https://github.com/ahmed-elkashef/egypt-job-sources.git
 cd egypt-job-sources
 python3 -m venv .venv
 .venv/bin/python -m pip install .
 cd ..
-git clone --branch v0.3.4 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
+git clone --branch v0.3.5 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
 cd egypt-jobs-mcp
 npm ci --ignore-scripts
 EGYPT_JOBS_PYTHON="$(pwd)/../egypt-job-sources/.venv/bin/python" node smoke.mjs
@@ -67,7 +67,7 @@ The server writes MCP messages to stdout; it does not open a network listener.
 | `read_freelance_projects` | `source`: `freelancer` or `upwork`; `limit` 1–100, default 20. Freelancer uses `offset`; Upwork uses its returned `cursor`. |
 | `read_freelance_project_detail` | Source and a numeric `project_id`. Full client brief; no bids, profiles, messages or files. |
 
-Supported sources: WUZZUF, Forasna, ArabJobs, Bayt Egypt, Himalayas, Jobicy and
+Supported sources: WUZZUF, Forasna, ArabJobs, Tanqeeb, Akhtaboot, Bayt Egypt, Himalayas, Jobicy and
 Mostaql, plus the worldwide feeds and freelance routes above. WUZZUF models include `full_time`, `part_time`, `freelance_project`
 (`freelance` alias), `internship`, `shift_based` and `volunteering`; omission means
 broad Egypt inventory. No keyword, career-title, skill or seniority filter is
@@ -78,6 +78,14 @@ Example tool input:
 ```json
 {"source":"wuzzuf","page":1,"work_model":"part_time"}
 ```
+
+### Verified native Egypt work models (0.3.5)
+
+ArabJobs `work_model:part_time` uses `filterJobType=2` with Egypt `EG` and newest `sortType=2`; every returned continuation retains those exact filters. Other observed labels are `full_time`, `contract_temp`, `consultant` and `freelance`. Forasna `work_model:part_time` constructs the actual country `مصر` and case-sensitive `filters[jobType][0]=نصف يوم` controls. Ordinary HTTP may still be denied; the selected public DOM extractor accepts the same exact scope. An SEO landing-page heading alone is not geography proof.
+
+Tanqeeb requires the actual selected Egypt country, checked type and sort state in the public capture. Its native Part Time checkbox value is2; Internship5 and Freelance/Project7 are separate labels. The collector preserves every returned card, including contradictions and unknowns. `next_url` is deliberately null when a Next URL omits native state; `next_browser_action` requires an actual native click followed by matching filter signature verification. Reopening a URL alone can reset the filters. A changing-sort-last sequence also returned full-time cards while Part Time remained checked. The verified sequence is: set newest sort first, apply the native work-type last, wait for returned card membership, then use Next and verify membership again. Preserve leakage and contradictory cards for consumer screening; a checkbox is not result-membership proof. Filtered HTTP parameters are not invented.
+
+These are acquisition filters, not a guarantee of compatible actual hours or worker eligibility. A consumer must reconcile unknown/mixed/contradictory labels, original publication instants, duplicates and source limits. This public package contains no person's private preferences.
 
 ### Exact Lever commitment labels
 
@@ -92,6 +100,8 @@ Keep the unfiltered unknown/other-label and full-time-contradiction complement w
 | WUZZUF | Transparent anonymous public JSON:API, 15/page and full-resource hydration | Undocumented frontend contract; can change. Public start is a page index, API startIndex is a card offset. |
 | Forasna | Operator-authorized public browser DOM | Ordinary HTTP may be denied. Click visible Next and verify URL/active page/IDs: href offsets and rendered UI actions can disagree. No inferred numbered offsets. |
 | ArabJobs | Country-only Egypt HTTP, newest-first pager and canonical details | Archive-like inventory and sparse descriptions may not represent active vacancies. |
+| Tanqeeb | Selected public DOM cards/details and observed native controls | Anonymous HTTP currently yields an empty202 response. Model/type state can disappear from Next URLs; use native UI continuation and compare captured filter signatures. |
+| Akhtaboot Egypt | Anonymous HTTP or selected public DOM, exact Egypt scope | Explicit scoped empty state is distinguished from loading/challenges. Nonempty markup validation is separate from current Egypt supply; original dates/hours still need review. |
 | Bayt Egypt | Public page and JobPosting parser | HTTP access may be denied; failures remain visible. |
 | Himalayas | Official country-filtered API | Egypt includes worldwide listings. Preserve canonical source attribution; verify location/hours. |
 | Jobicy | Official global cursor feed and taxonomies | Seven-day window. Start new polling passes no more than hourly; cursor requests can complete one pass. |

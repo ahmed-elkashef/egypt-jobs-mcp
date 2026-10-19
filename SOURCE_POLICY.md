@@ -141,3 +141,7 @@ written scraper has an open-source license.
 ## Official employer boards — 0.3.0
 
 Greenhouse, Lever and Ashby are employer-specific published-job interfaces, not geographic job indexes. Use exact confirmed board tokens; never guess an employer's token from its domain. No application POST, candidate APIs, applicant profiles or internal postings are accessed. Full returned public description fields and provider timestamp semantics are preserved. Code licensing does not grant redistribution rights to job content. Public source snapshots cannot establish original frozen-interval or regional completeness. Official contracts: https://docs.greenhouse.io/job-board.html ; https://github.com/lever/postings-api ; https://developers.ashbyhq.com/docs/public-job-posting-api . Checked 9 October 2026.
+
+## Secondary Egypt board additions (0.3.5)
+
+Tanqeeb anonymous empty202 responses are an access limitation, not a zero count. Use only operator-authorized selected public DOM when available; no challenge solving, session/cookie transport, browser impersonation or undocumented native filter guessing. Preserve selected type/sort state across actual Next clicks. Akhtaboot exact Egypt empty state requires successful recognized source scope; global/foreign results are never substituted. Provider content is for the consumer's permitted use, not a redistributable data license. The software MIT license does not cover job descriptions. Current native filter evidence does not guarantee future availability or rate-limit immunity.

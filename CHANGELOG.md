@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.5 — 2026-10-19
+
+- Expose reusable Tanqeeb and Akhtaboot Egypt page/detail and public DOM capture routes through the installed Python backend.
+- Preserve native model state and observed browser pagination independently of URL parameters; acquisition remains separate from candidate screening.
+- Require paired Python v0.3.5, including reconciled Forasna source metadata and missing actual-task-description checks.
+- Ordinary access denial remains an explicit source limit; no challenge bypass, account scraping or redistributed listings.
+
 ## 0.3.4 — 2026-10-10
 
 - New complete-body Arbeitnow/The Muse native API tool, fifteen total; correct one-based/zero-based pages, strict continuation scope and registered Muse production access.

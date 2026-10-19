@@ -37,6 +37,10 @@ test('portable installed backend preserves parse and immutable receipt contracts
       assert.equal(listed.tools.length,15);
       assert.ok(listed.tools.every(tool=>tool.annotations?.readOnlyHint===true));
       assert.ok(listed.tools.find(tool=>tool.name==='read_source_page').inputSchema.properties.work_model.enum.includes('full_time'));
+      for(const name of ['read_source_page','read_source_detail','parse_rendered_board_page']) {
+        const sources=listed.tools.find(tool=>tool.name===name).inputSchema.properties.source.enum;
+        assert.ok(sources.includes('tanqeeb') && sources.includes('akhtaboot'));
+      }
       for (const request of [
         {name:'parse_rendered_board_page',arguments:{source:'wuzzuf',capture}},
         {name:'read_saved_board_capture',arguments:{receipt_id:saved.receipt_id}},
@@ -57,6 +61,23 @@ test('portable installed backend preserves parse and immutable receipt contracts
   } finally {
     rmSync(cache,{recursive:true,force:true});
   }
+});
+
+test('new board captures traverse actual installed backend and stdio without invented empty supply',async()=>{
+  const tanqeeb={url:'https://egypt.tanqeeb.com/jobs/search?keywords=&country=213&state=0&lang=all&order_by=most_recent',kind:'page',captured_at:'2026-01-01T12:00:00Z',html:'<section data-public-native-filters data-country="Egypt"><span data-filter-name="refine[job_types][]" data-filter-value="2">Part Time</span><span data-filter-name="refine[order_by]" data-filter-value="most_recent">Most Recent</span></section><article data-job-id="100001" data-job-type="Part Time" data-job-closed="0"><h2><a href="/jobs-in-egypt/all/jobs/0100001.html">Constructed role</a></h2></article>'};
+  const akhtaboot={url:'https://www.akhtaboot.com/en/egypt/jobs',kind:'page',captured_at:tanqeeb.captured_at,html:'<section data-public-native-filters data-country="Egypt"></section><li id="current_page">Jobs in Egypt</li><p class="error_message">Sorry, no results found</p>'};
+  await connected({},async client=>{
+    const parsed=await client.callTool({name:'parse_rendered_board_page',arguments:{source:'tanqeeb',capture:tanqeeb}});
+    assert.equal(parsed.isError,false);
+    assert.equal(parsed.structuredContent.listings[0].employment_type_raw,'Part Time');
+    assert.ok(parsed.structuredContent.source_filters.native_filter_signature);
+    const empty=await client.callTool({name:'parse_rendered_board_page',arguments:{source:'akhtaboot',capture:akhtaboot}});
+    assert.equal(empty.isError,false);
+    assert.equal(empty.structuredContent.native_empty_state_verified,true);
+    const denied=await client.callTool({name:'parse_rendered_board_page',arguments:{source:'akhtaboot',capture:{...akhtaboot,html:'<p>Access denied</p>'}}});
+    assert.equal(denied.isError,true);
+    assert.ok(!('listings' in denied.structuredContent));
+  });
 });
 
 test('missing interpreter is an explicit limitation and does not crash the MCP',async () => {
