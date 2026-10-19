@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.6 — 2026-10-19
+
+- Add person-neutral authorized browser capture runner for Tanqeeb and Forasna.
+- Automate verified native filters, returned-membership checks, actual Next
+  controls, bounded resumption and private queued full-description capture.
+- Add offline `browser_capture_plan` discovery tool; sixteen read-only tools.
+- Preserve all source limits, credits and Python adapter v0.3.5 compatibility.
+
 ## 0.3.5 — 2026-10-19
 
 - Expose reusable Tanqeeb and Akhtaboot Egypt page/detail and public DOM capture routes through the installed Python backend.

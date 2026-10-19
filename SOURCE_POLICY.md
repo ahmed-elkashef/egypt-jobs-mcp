@@ -145,3 +145,14 @@ Greenhouse, Lever and Ashby are employer-specific published-job interfaces, not 
 ## Secondary Egypt board additions (0.3.5)
 
 Tanqeeb anonymous empty202 responses are an access limitation, not a zero count. Use only operator-authorized selected public DOM when available; no challenge solving, session/cookie transport, browser impersonation or undocumented native filter guessing. Preserve selected type/sort state across actual Next clicks. Akhtaboot exact Egypt empty state requires successful recognized source scope; global/foreign results are never substituted. Provider content is for the consumer's permitted use, not a redistributable data license. The software MIT license does not cover job descriptions. Current native filter evidence does not guarantee future availability or rate-limit immunity.
+
+
+### Native browser runner
+
+The optional injected-tab runner uses only documented authorized CUA UI actions
+and read-only DOM capture. It never launches or attaches an alternate browser,
+exports sessions, fetches provider endpoints directly, solves challenges or
+changes accounts. Stop on genuine access barriers or source-contract drift;
+retain dated private evidence. A passive reCAPTCHA badge on a functioning results
+page is not a solved challenge. Source terms remain authoritative for permitted
+use; this software does not grant permission or promise uninterrupted access.

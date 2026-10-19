@@ -150,3 +150,16 @@ test('Forasna unrelated or mismatched structured postings cannot certify canonic
     assert.throws(()=>captureEgyptBoardDOM({source:'forasna',kind:'detail'}),/identity mismatch/);
   });
 });
+
+test('only native Tanqeeb inventory disclosure anchors normalize without widening scope',()=>{
+ for(const hash of ['#order-by-wrap','#job-type-wrap']) {
+  const base='https://egypt.tanqeeb.com/jobs/search?keywords=&country=213&state=0&lang=all&order_by=most_recent';
+  withDocument(base+hash,synthetic=>{
+   synthetic.document.querySelector=selector=>selector.includes('countryHeader') ? {value:'213',textContent:'Egypt'} : null;
+   synthetic.document.querySelectorAll=()=>[];
+   assert.equal(captureEgyptBoardDOM({source:'tanqeeb'}).url,base);
+  });
+ }
+ withDocument('https://egypt.tanqeeb.com/jobs/search?country=213#account',()=>assert.throws(()=>captureEgyptBoardDOM({source:'tanqeeb'})));
+ withDocument('https://egypt.tanqeeb.com/jobs-in-middle-east/all/jobs/0100001.html#order-by-wrap',()=>assert.throws(()=>captureEgyptBoardDOM({source:'tanqeeb',kind:'detail'})));
+});

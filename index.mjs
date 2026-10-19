@@ -6,10 +6,11 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { registerExpandedSources } from './expanded-tools.mjs';
 import { registerAtsSources } from './ats-tools.mjs';
+import { registerBrowserCapturePlan } from './browser-tools.mjs';
 
 const python = process.env.EGYPT_JOBS_PYTHON || 'python3';
 const execute = promisify(execFile);
-const server = new McpServer({name:'egypt-jobs-mcp',version:'0.3.5'});
+const server = new McpServer({name:'egypt-jobs-mcp',version:'0.3.6'});
 const source = z.enum(['wuzzuf','forasna','arabjobs','tanqeeb','akhtaboot','bayt','himalayas','jobicy','mostaql']);
 const annotations = {readOnlyHint:true,destructiveHint:false,openWorldHint:true};
 async function invoke(args, input, module='egypt_job_sources.sources') {
@@ -69,4 +70,5 @@ server.registerTool('wuzzuf_work_model_taxonomy',{
 },async ()=>invoke(['wuzzuf','--taxonomy']));
 registerExpandedSources(server, invoke);
 registerAtsSources(server, invoke);
+registerBrowserCapturePlan(server);
 await server.connect(new StdioServerTransport(process.stdin,process.stdout,{maxBufferSize:64*1024*1024}));

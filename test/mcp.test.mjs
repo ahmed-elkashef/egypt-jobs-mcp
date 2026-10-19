@@ -34,7 +34,7 @@ test('portable installed backend preserves parse and immutable receipt contracts
       {input:JSON.stringify(capture),encoding:'utf8',env:{...process.env,EGYPT_JOBS_CAPTURE_DIR:cache}}));
     await connected({EGYPT_JOBS_CAPTURE_DIR:cache},async client => {
       const listed = await client.listTools();
-      assert.equal(listed.tools.length,15);
+      assert.equal(listed.tools.length,16);
       assert.ok(listed.tools.every(tool=>tool.annotations?.readOnlyHint===true));
       assert.ok(listed.tools.find(tool=>tool.name==='read_source_page').inputSchema.properties.work_model.enum.includes('full_time'));
       for(const name of ['read_source_page','read_source_detail','parse_rendered_board_page']) {
@@ -80,6 +80,33 @@ test('new board captures traverse actual installed backend and stdio without inv
   });
 });
 
+test('browser capture plans expose verified native recipes offline and reject unsupported source models',async()=>{
+  await connected({},async client=>{
+    const listed=await client.listTools();
+    assert.equal(listed.tools.length,16);
+    assert.ok(listed.tools.some(tool=>tool.name==='browser_capture_plan'));
+    const forasna=await client.callTool({name:'browser_capture_plan',arguments:{source:'forasna',work_model:'part_time'}});
+    assert.equal(forasna.isError,false);
+    assert.equal(forasna.structuredContent.status,'ok');
+    assert.equal(forasna.structuredContent.execution_runtime,'authorized_cua_repl_with_injected_tab_and_private_sink');
+    const native=new URL(forasna.structuredContent.initial_url);
+    assert.equal(native.searchParams.get('filters[country][0]'),'مصر');
+    assert.equal(native.searchParams.get('filters[jobType][0]'),'نصف يوم');
+    assert.equal(forasna.structuredContent.coverage_complete,false);
+    const tanqeeb=await client.callTool({name:'browser_capture_plan',arguments:{source:'tanqeeb',work_model:'internship'}});
+    assert.equal(tanqeeb.isError,false);
+    assert.equal(tanqeeb.structuredContent.status,'ok');
+    assert.equal(tanqeeb.structuredContent.controls.model_value,'5');
+    assert.equal(tanqeeb.structuredContent.native_filter_plan.native_work_model,'internship');
+    const unsupported=await client.callTool({name:'browser_capture_plan',arguments:{source:'forasna',work_model:'internship'}});
+    assert.equal(unsupported.isError,true);
+    assert.equal(unsupported.structuredContent.status,'source_limited');
+    assert.equal(unsupported.structuredContent.coverage_complete,false);
+    assert.ok(!('listings' in unsupported.structuredContent));
+    assert.equal((await client.listTools()).tools.length,16);
+  });
+});
+
 test('missing interpreter is an explicit limitation and does not crash the MCP',async () => {
   await connected({EGYPT_JOBS_PYTHON:path.join(tmpdir(),'egypt-jobs-nonexistent-python')},async client => {
     const response = await client.callTool({name:'jobicy_location_taxonomy',arguments:{}});
@@ -87,7 +114,7 @@ test('missing interpreter is an explicit limitation and does not crash the MCP',
     assert.equal(response.structuredContent.status,'source_limited');
     assert.equal(response.structuredContent.coverage_complete,false);
     assert.ok(!('listings' in response.structuredContent));
-    assert.equal((await client.listTools()).tools.length,15);
+    assert.equal((await client.listTools()).tools.length,16);
   });
 });
 
@@ -140,7 +167,7 @@ test('oversize complete output is an honest limitation and the MCP connection su
       assert.equal(response.isError,true);
       assert.match(response.structuredContent.error,/9 MiB MCP message limit/);
       assert.ok(!('listings' in response.structuredContent));
-      assert.equal((await client.listTools()).tools.length,15);
+      assert.equal((await client.listTools()).tools.length,16);
     });
   } finally { rmSync(directory,{recursive:true,force:true}); }
 });
@@ -170,7 +197,7 @@ test('early backend exit while receiving a capture stays a limitation without cr
       const response=await client.callTool({name:'parse_rendered_board_page',arguments:{source:'wuzzuf',capture:{...capture,html:'x'.repeat(2*1024*1024)}}});
       assert.equal(response.isError,true);
       assert.equal(response.structuredContent.status,'source_limited');
-      assert.equal((await client.listTools()).tools.length,15);
+      assert.equal((await client.listTools()).tools.length,16);
     });
   } finally { rmSync(directory,{recursive:true,force:true}); }
 });

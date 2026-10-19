@@ -10,10 +10,12 @@ export function captureEgyptBoardDOM({source, kind = 'page'}) {
     // Do not copy forms, hidden inputs, CSRF metadata or account state.
     const expectedHost = source === 'tanqeeb' ? 'egypt.tanqeeb.com' : 'www.akhtaboot.com';
     const current = new URL(document.location.href);
+    // Native disclosure anchors do not change the provider inventory request.
+    if (source==='tanqeeb' && kind==='page' && ['#order-by-wrap','#job-type-wrap'].includes(current.hash)) current.hash='';
     if (current.protocol !== 'https:' || current.hostname !== expectedHost || current.port || current.username || current.password || current.hash || !['page','detail'].includes(kind)) throw Error('Canonical public board URL required');
     if (source === 'tanqeeb') {
       if (kind === 'detail') {
-        if (!/^\/jobs-in-middle-east\/all\/jobs\/0?\d+\.html$/.test(current.pathname) || current.search) throw Error('Canonical Tanqeeb detail required');
+        if (!/^\/jobs-in-(?:egypt|middle-east)\/all\/jobs\/0?\d+\.html$/.test(current.pathname) || current.search) throw Error('Canonical Tanqeeb detail required');
       } else {
         if (!/^\/jobs\/search(?:\/page\/[1-9]\d*)?$/.test(current.pathname)) throw Error('Canonical Tanqeeb Egypt inventory required');
         const allowed = new Set(['keywords','country','state','lang','order_by']);

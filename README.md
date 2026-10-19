@@ -196,3 +196,48 @@ The native hourly commitment value is a billing limit, often the default 40 hour
 The Muse requires registered application access beyond capability testing. Its official limits are 500 anonymous test requests/hour and 3600 registered requests/hour. Keep `THEMUSE_API_KEY` machine-local; never put it in tool inputs. `testing:true` permits a bounded anonymous capability test, not a production market refresh. Arbeitnow has no verified numeric rate allowance: honor HTTP 429 and safe Retry-After metadata. Moving pages and native date fields do not establish historical completeness or original publication. Fifteen read-only tools are registered in this release.
 
 The complete API body is retained once as `description`, with every other native field in `source_data` and the original body key in `source_description_field`. Original native rows are exactly reconstructible. This removes duplicate HTML serialization without dropping any row or shortening any description.
+
+
+## Automatic authorized browser capture
+
+`browser_capture_plan` exposes verified native recipes for **Tanqeeb Egypt** and
+**Forasna Egypt**. Import `browser-runner.mjs` inside the supported CUA runtime,
+inject an authorized source Tab and a trusted private checkpoint sink, then call:
+
+```js
+await runBoardCapture({tab, sink, source: 'tanqeeb', workModel: 'part_time',
+  maxPages: 20, maxMillis: 45000, collectDetails: true});
+```
+
+The runner controls native filters, observes actual card membership, clicks native
+Next controls, saves selected DOM, resumes bounded chunks and captures only briefs
+queued by the private intake. It has no browser launcher, network client, session
+export, CAPTCHA solver or application actions. Browser access must be available
+through the authorized runtime. Native dates and candidate fit still require
+independent evidence and review; capture completion is not market coverage.
+
+Tanqeeb ordering is applied before the compatible job type. Type is applied last
+because live testing found that changing sort afterward could silently restore
+full-time results despite selected part-time controls. Forasna uses explicit Egypt
+and half-day controls; pagination follows the actual control, not guessed offsets.
+Unknown/mixed supply requires a separate all-types complement and objective private
+screening. Full-time only supply is excluded before brief capture.
+
+The injected sink implements `status()`, `capture(capture, meta)`,
+`detail(capture, proof)`, `recover(options)` and `limit(metadata)`. It must persist
+immutable binding/captures and validate native scope, continuation and stable IDs.
+Status provides `source`, `initial_url`, `native_filter_plan`, `cursor`,
+`source_continuation`, `detail_queue`, `listing_terminal_observed` and
+`capture_complete`. A lost browser page is recovered by replaying from the seed
+with preserved deduplication. Access barriers and layout changes stop with a
+checkpoint rather than being reported as zero jobs. See the offline tests for
+synthetic examples; no live listing data is shipped.
+
+
+Native disclosure fragments on Tanqeeb are normalized only for the two observed
+filter panels. Same-source, same-ID canonical detail slug redirects are allowed;
+foreign hosts, different IDs and query-bearing detail URLs are rejected. Native
+card/body visibility waits handle hydration. Browser-host navigation errors are
+accepted only if the intended canonical identity is visibly reached and all
+normal readiness/membership checks subsequently pass. Missing original publication
+clocks and genuinely empty briefs remain evidence limitations, never invented facts.

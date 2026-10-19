@@ -94,3 +94,12 @@ The independent Greenhouse, Lever and Ashby readers use the providers' public do
 ## Secondary Egypt boards added in0.3.5
 
 Tanqeeb and Akhtaboot adapters and the native ArabJobs/Forasna filter repairs were independently implemented from bounded public source inspection. No third-party scraper was copied or forked for these additions. Provider names, markup and listings remain their owners' property; live captures and candidate records are not included. Existing upstream research credits above remain applicable.
+
+## Native browser runner added in0.3.6
+
+The injected-tab runner was independently authored from the verified public
+Tanqeeb and Forasna native controls and documented CUA Tab APIs. It is not a
+fork of a browser scraper and bundles no third-party browser driver. Source
+providers retain their content rights; bounded UI diagnostics and synthetic
+tests do not grant endorsement, unrestricted acquisition or redistribution.
+The runner exports no browser sessions, private records or live job corpus.
