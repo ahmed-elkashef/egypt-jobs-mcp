@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.7 — 2026-10-26
 
 - Accept Forasna's explicit native All marker for broad inventory capture, while
   retaining Egypt, restrictive-selection, part-time and access-barrier checks.

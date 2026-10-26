@@ -23,7 +23,7 @@ cd egypt-job-sources
 python3 -m venv .venv
 .venv/bin/python -m pip install .
 cd ..
-git clone --branch v0.3.5 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
+git clone --branch v0.3.7 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
 cd egypt-jobs-mcp
 npm ci --ignore-scripts
 EGYPT_JOBS_PYTHON="$(pwd)/../egypt-job-sources/.venv/bin/python" node smoke.mjs
