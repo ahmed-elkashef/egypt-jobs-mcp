@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Accept Forasna's explicit native All marker for broad inventory capture, while
+  retaining Egypt, restrictive-selection, part-time and access-barrier checks.
+- Add offline synthetic regression cases for broad and restricted membership.
+
 ## 0.3.6 — 2026-10-19
 
 - Add person-neutral authorized browser capture runner for Tanqeeb and Forasna.

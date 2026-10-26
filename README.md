@@ -223,6 +223,12 @@ and half-day controls; pagination follows the actual control, not guessed offset
 Unknown/mixed supply requires a separate all-types complement and objective private
 screening. Full-time only supply is excluded before brief capture.
 
+Forasna's all-types view may explicitly select its native `الكل-jobtype` option.
+The runner accepts that All marker or no selected type for a broad capture, while
+still rejecting restrictive or mixed type selections and requiring the same
+verified Egypt controls. This does not change the part-time returned-membership
+checks, bypass access barriers or establish historical completeness.
+
 The injected sink implements `status()`, `capture(capture, meta)`,
 `detail(capture, proof)`, `recover(options)` and `limit(metadata)`. It must persist
 immutable binding/captures and validate native scope, continuation and stable IDs.
