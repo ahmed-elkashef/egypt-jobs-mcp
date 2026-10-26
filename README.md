@@ -23,7 +23,7 @@ cd egypt-job-sources
 python3 -m venv .venv
 .venv/bin/python -m pip install .
 cd ..
-git clone --branch v0.3.5 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
+git clone --branch v0.3.7 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
 cd egypt-jobs-mcp
 npm ci --ignore-scripts
 EGYPT_JOBS_PYTHON="$(pwd)/../egypt-job-sources/.venv/bin/python" node smoke.mjs
@@ -222,6 +222,12 @@ full-time results despite selected part-time controls. Forasna uses explicit Egy
 and half-day controls; pagination follows the actual control, not guessed offsets.
 Unknown/mixed supply requires a separate all-types complement and objective private
 screening. Full-time only supply is excluded before brief capture.
+
+Forasna's all-types view may explicitly select its native `الكل-jobtype` option.
+The runner accepts that All marker or no selected type for a broad capture, while
+still rejecting restrictive or mixed type selections and requiring the same
+verified Egypt controls. This does not change the part-time returned-membership
+checks, bypass access barriers or establish historical completeness.
 
 The injected sink implements `status()`, `capture(capture, meta)`,
 `detail(capture, proof)`, `recover(options)` and `limit(metadata)`. It must persist

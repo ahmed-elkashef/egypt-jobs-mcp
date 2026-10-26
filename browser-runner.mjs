@@ -141,7 +141,7 @@ export function inspectDetailDOM({source,expectedURL}) {
   return {url:current.href,ready,gate,body_characters,empty_description,fingerprint:JSON.stringify({url:current.href,title:title?.innerText.trim(),body_characters,requirements})};
 }
 
-function membership(state, source, model) {
+export function membership(state, source, model) {
   if (state.gate) return 'source_barrier';
   if (!state.rows.length || state.rows.some(row=>!row.id || !row.url)) return 'unsettled_or_changed_markup';
   if (source === 'tanqeeb') {
@@ -153,7 +153,9 @@ function membership(state, source, model) {
     if (state.rows.every(row=>row.country && row.country!=='Egypt')) return 'native_country_membership_drift';
   } else {
     if (state.country?.value!=='مصر' || state.country?.text!=='Egypt' || !state.controls.find(row=>row.name==='Egypt-country')?.value || (model==='part_time' && !state.controls.find(row=>row.name==='half-day')?.value)) return 'selected_filter_drift';
-    if (model==='all' && (state.controls.find(row=>row.name==='half-day')?.value || state.controls.some(row=>row.name==='selected-jobtype'))) return 'selected_filter_drift';
+    // Forasna explicitly checks its native All option in an unfiltered type
+    // inventory. Only a restrictive type selection is scope drift.
+    if (model==='all' && (state.controls.find(row=>row.name==='half-day')?.value || state.controls.some(row=>row.name==='selected-jobtype' && row.value!=='الكل-jobtype'))) return 'selected_filter_drift';
     if (model==='part_time' && state.rows.every(row=>row.type==='يوم كامل' && !row.part_time_contradiction)) return 'native_membership_drift';
   }
   return null;
