@@ -35,9 +35,15 @@ test('empty native array differs from missing envelope; 401/429/redirect are err
     assert.equal(calls,1);assert.equal(result.http_status,status);assert.equal(result.coverage_complete,false);assert.equal(result.retry_after,'60');
   }
 });
-test('oversized and malformed JSON never return partial success',async()=>{
+test('oversized, malformed or mismatched detail never returns partial success',async()=>{
   const big=await read({operation:'agency_list'},{env,maxBytes:3,fetchImpl:async()=>new Response('{"stellenangebote":[]}',{headers:{'content-type':'application/json'}})});
   assert.equal(big.code,'response_too_large');assert.ok(!('raw_response'in big));
   const bad=await read({operation:'detail',id:5},{env,fetchImpl:async()=>new Response('{',{headers:{'content-type':'application/json'}})});
   assert.equal(bad.code,'invalid_json');
+  const raw={Id:5,Langtext:'Full native detail '.repeat(1000),extra:{preserved:true}};
+  const detail=await read({operation:'detail',id:5},{env,fetchImpl:async()=>new Response(JSON.stringify(raw),{headers:{'content-type':'application/json'}})});
+  assert.equal(detail.status,'ok');assert.deepEqual(detail.raw_response,raw);
+  const wrong=await read({operation:'detail',id:6},{env,fetchImpl:async()=>new Response(JSON.stringify(raw),{headers:{'content-type':'application/json'}})});
+  assert.equal(wrong.status,'source_limited');assert.equal(wrong.code,'detail_identity_mismatch');
+  assert.equal(wrong.coverage_complete,false);assert.ok(!('raw_response'in wrong));
 });

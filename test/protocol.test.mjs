@@ -4,6 +4,17 @@ import {fileURLToPath} from 'node:url';
 import {Client} from '@modelcontextprotocol/sdk/client/index.js';
 import {StdioClientTransport} from '@modelcontextprotocol/sdk/client/stdio.js';
 
+test('legacy root entrypoint still serves the original Egypt tool catalogue',async()=>{
+  const client=new Client({name:'legacy-entry-test',version:'1'});
+  try{
+    await client.connect(new StdioClientTransport({command:process.execPath,args:[fileURLToPath(new URL('../index.mjs',import.meta.url))],env:{...process.env},stderr:'pipe'}));
+    const tools=(await client.listTools()).tools;
+    assert.equal(tools.length,16);assert.ok(tools.some(t=>t.name==='read_source_page'));
+    const result=await client.callTool({name:'browser_capture_plan',arguments:{source:'forasna'}});
+    assert.notEqual(result.isError,true);
+  }finally{await client.close();}
+});
+
 test('real unified stdio lists countries and routes through Egypt and Germany offline',async()=>{
   const client=new Client({name:'country-protocol-test',version:'1'});
   const transport=new StdioClientTransport({command:process.execPath,args:[fileURLToPath(new URL('../server.mjs',import.meta.url))],env:{...process.env},stderr:'pipe'});

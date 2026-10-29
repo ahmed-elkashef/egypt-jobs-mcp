@@ -1,6 +1,6 @@
 {
   "as_of": "2026-10-29",
-  "node_tests": 100,
+  "node_tests": 102,
   "python_tests": 201,
   "failed": 0,
   "real_stdio_tools": 52,
@@ -17,5 +17,6 @@
     "Interamt missing-approved-key gate verified, authenticated live read not performed.",
     "Source register retains52 research-required entries.",
     "No private applicant, raw job corpus, credential, account configuration or source workflow imported."
-  ]
+  ],
+  "clean_checkout_verified": true
 }
