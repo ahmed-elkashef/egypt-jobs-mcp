@@ -36,7 +36,7 @@ Four catalogue tools work without acquiring jobs:
 - `source_capabilities`: one source's supported routes, fixed arguments and native tool schemas.
 - `plan_country_scan`: a plan for explicit geography and offset-aware `[from,to)` dates, retaining unresolved sources.
 
-[The source registry](sources.json) currently contains 93 distinct source/channel entries. It is an open discovery register, **not proof that every Egyptian or German employer or vacancy is represented**. Entries explicitly distinguish implemented readers, access-limited routes, employer-seeded readers, credential requirements, external connectors, research gaps and statistical context. [Coverage](docs/coverage.md) explains the remaining work.
+[The source registry](sources.json) currently contains 94 distinct source/channel entries. It is an open discovery register, **not proof that every Egyptian or German employer or vacancy is represented**. Entries explicitly distinguish implemented readers, access-limited routes, employer-seeded readers, credential requirements, external connectors, research gaps and statistical context. [Coverage](docs/coverage.md) explains the remaining work.
 
 ## End to end
 
@@ -52,7 +52,7 @@ The federation forwards full native responses without shortening job description
 
 The original [Jobmensa, StudentJob and YoungCapital readers](countries/de/student-boards/README.md) enumerate complete public native pages and full visible job details without a browser. Current robots policy, exact native continuation and model/date/worker-country ambiguities remain explicit. It makes no account, contact or application action.
 
-The original [public-board readers](countries/de/public-boards/README.md) also cover Absolventa, academics, stellenanzeigen.de, Yourfirm, GermanTechJobs the permitted official government vacancy feed, Jobs.de, Jobware, BerlinStartupJobs EnglishJobs metadata and anonymous XING inventory/body/discovery. Native full bodies, verified pagination and distinct clocks remain separate from coverage and applicant fit.
+The original [public-board readers](countries/de/public-boards/README.md) also cover Absolventa, academics, stellenanzeigen.de, Yourfirm, GermanTechJobs the permitted official government vacancy feed, Jobs.de, Jobware, BerlinStartupJobs EnglishJobs metadata and anonymous XING inventory/body/discovery, get in Engineering and Zenjob public shifts. Native full bodies, verified pagination and distinct clocks remain separate from coverage and applicant fit.
 
 ## Additional Germany API
 

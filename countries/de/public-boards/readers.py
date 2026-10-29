@@ -20,13 +20,15 @@ from xml.etree import ElementTree
 
 import berlin
 import englishjobs
+import getinengineering
 import jobware
 import source_capture
 import xing
+import zenjob
 from lxml import html
 from native_flight import public_search_state
 
-AGENT = "job-market-mcp/0.4.6"
+AGENT = "job-market-mcp/0.4.7"
 MAX_BYTES = 8 * 1024 * 1024
 ORIGINS = {
     name: "https://www." + host
@@ -44,7 +46,11 @@ ORIGINS["jobware"] = "https://www.jobware.de"
 ORIGINS["englishjobs"] = englishjobs.ORIGIN
 ORIGINS["berlinstartupjobs"] = berlin.ORIGIN
 ORIGINS["xing"] = xing.ORIGIN
+ORIGINS["getinengineering"] = getinengineering.ORIGIN
+ORIGINS["zenjob"] = zenjob.ORIGIN
 LIST_PATHS = {
+    "getinengineering": "/jobsuche",
+    "zenjob": "/de/jobboerse",
     "xing": "/jobs/k-student",
     "englishjobs": "/in/hessen",
     "berlinstartupjobs": "/",
@@ -113,6 +119,10 @@ def checked_url(source, url, operation):
         return berlin.checked_url(url, operation)
     if source == "xing":
         return xing.checked_url(url, operation)
+    if source in {"getinengineering", "zenjob"}:
+        return (getinengineering if source == "getinengineering" else zenjob).checked_url(
+            url, operation
+        )
     if operation == "inventory":
         if path != LIST_PATHS[source]:
             raise SourceError("Only the observed unfiltered inventory path is supported")
@@ -140,6 +150,8 @@ def checked_url(source, url, operation):
 def identity(source, url):
     if source == "xing":
         return xing.native_id(url)
+    if source in {"getinengineering", "zenjob"}:
+        return (getinengineering if source == "getinengineering" else zenjob).native_id(url)
     match = re.fullmatch(DETAILS[source], unquote(urlsplit(url).path), re.I)
     if not match:
         raise SourceError("Native detail identity absent")
@@ -174,12 +186,17 @@ class SafeRedirect(HTTPRedirectHandler):
 
 
 def fetch(source, url, operation, policy=None):
+    headers = {
+        "User-Agent": AGENT,
+        "Accept": "text/html,application/json,application/rss+xml,text/plain",
+    }
+    if source == "getinengineering" and urlsplit(url).path == getinengineering.API_PATH:
+        # Required by this published anonymous openV2 client. No credentials,
+        # browser impersonation or inherited insecure TLS configuration.
+        headers["X-Requested-With"] = "XMLHttpRequest"
     request = Request(
         url,
-        headers={
-            "User-Agent": AGENT,
-            "Accept": "text/html,application/json,application/rss+xml,text/plain",
-        },
+        headers=headers,
     )
     with build_opener(SafeRedirect(source, operation, url, policy)).open(
         request, timeout=25
@@ -656,6 +673,12 @@ def postings(value):
 
 def parse_detail(source, body, url):
     checked_url(source, url, "detail")
+    if source in {"getinengineering", "zenjob"}:
+        result = envelope(source, body, url, "german_public_board_detail")
+        result.update(
+            (getinengineering if source == "getinengineering" else zenjob).detail(body, url)
+        )
+        return result
     if source == "xing":
         result = envelope(source, body, url, "german_public_board_detail")
         result.update(xing.detail(body, url))
@@ -745,6 +768,12 @@ def parse_detail(source, body, url):
 
 def parse_inventory(source, body, url):
     checked_url(source, url, "inventory")
+    if source in {"getinengineering", "zenjob"}:
+        result = envelope(source, body, url, "german_public_board_page")
+        result.update(
+            (getinengineering if source == "getinengineering" else zenjob).inventory(body, url)
+        )
+        return result
     if source == "xing":
         result = envelope(source, body, url, "german_public_board_page")
         result.update(xing.inventory(body, url))
@@ -836,12 +865,14 @@ def capabilities():
         "operations": ["inventory", "detail"],
         "limits": LIMITS,
         "coverage_complete": False,
-        "numeric_page_contract": ["stellenanzeigen", "yourfirm", "jobs_de"],
+        "numeric_page_contract": ["stellenanzeigen", "yourfirm", "jobs_de", "getinengineering"],
         "operations_by_source": {
             source: ["inventory"] if source == "englishjobs" else ["inventory", "detail"]
             for source in ORIGINS
         },
         "native_partition_discovery": {
+            "getinengineering": "Whole SSR first39 records; native published openV2 GET search client provides start=0/39/78 with limit39 and required X-Requested-With protocol header. SSR start query resets and is not continuation. No role/degree filters or restricted API calls.",
+            "zenjob": "Whole public shift lists and actual page links. Native shift starts, structured publication dates and contract type differ; student shift supply is not automatically a working-student contract. Full visible notes beyond structured description retained. Filter POST/signup/app actions unsupported.",
             "berlinstartupjobs": "Read the root category catalogue, then every category and native continuation; homepage featured cards are incomplete.",
             "englishjobs": {
                 "states": [englishjobs.ORIGIN + "/in/" + state for state in englishjobs.STATES],
@@ -893,7 +924,16 @@ def main():
             if isinstance(error, HTTPError) and error.headers
             else None,
             "message": str(error)
-            if isinstance(error, (SourceError, xing.XingError, source_capture.CaptureError))
+            if isinstance(
+                error,
+                (
+                    SourceError,
+                    xing.XingError,
+                    getinengineering.EngineeringError,
+                    zenjob.ZenjobError,
+                    source_capture.CaptureError,
+                ),
+            )
             else "Native source unavailable, changed or incomplete; no partial/empty success.",
         }
     print(json.dumps(result, ensure_ascii=False))

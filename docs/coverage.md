@@ -4,13 +4,13 @@ As of 29 October 2026. This is code/source-contract coverage, not a fresh vacanc
 
 | Implementation/access state | Sources/channel groups |
 | --- | --- |
-| access_limited | 11 |
+| access_limited | 12 |
 | context_only | 4 |
 | credential_required | 3 |
 | external_connector | 3 |
-| implemented | 31 |
+| implemented | 33 |
 | requires_employer_seed | 7 |
-| research_required | 35 |
+| research_required | 32 |
 
 The registry has 94 unique entries: 43 apply to Egypt and 79 to Germany, including shared entries. These counts overlap; they are not numbers of vacancies, employers or live working transports.
 
@@ -65,7 +65,7 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [Jobmensa](https://www.jobmensa.de/) | DE | implemented | student_board |
 | [Stellenwerk](https://www.stellenwerk.de/) | DE | research_required | student_board |
 | [StudentJob Germany](https://www.studentjob.de/) | DE | implemented | student_board |
-| [Zenjob](https://www.zenjob.com/de/) | DE | research_required | temporary_work |
+| [Zenjob](https://www.zenjob.com/de/) | DE | implemented | temporary_work |
 | [YoungCapital Germany](https://www.youngcapital.de/) | DE | implemented | student_board |
 | [Ausbildung.de](https://www.ausbildung.de/) | DE | research_required | apprenticeships |
 | [Azubiyo](https://www.azubiyo.de/) | DE | research_required | apprenticeships |
@@ -77,7 +77,7 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [Berlin Startup Jobs](https://berlinstartupjobs.com/) | DE | implemented | regional_board |
 | [EnglishJobs.de](https://englishjobs.de/) | DE | access_limited | national_board |
 | [Instaffo](https://instaffo.com/) | DE | research_required | matching_platform |
-| [get in Engineering](https://www.get-in-engineering.de/) | DE | research_required | specialist_board |
+| [get in Engineering](https://www.get-in-engineering.de/) | DE | implemented | specialist_board |
 | [service.bund.de vacancies](https://www.service.bund.de/) | DE | access_limited | public_sector |
 | [Interamt](https://gate.interamt.de/interamtApi/api-doc/index.html) | DE | credential_required | public_sector |
 | [Karriere.NRW](https://developer.karriere.nrw/) | DE | credential_required | state_public_sector |
@@ -119,8 +119,7 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [freelancermap](https://www.freelancermap.de/) | DE | research_required | freelance_demand |
 | [GULP](https://www.gulp.de/) | DE | research_required | freelance_demand |
 | [Khamsat](https://khamsat.com/) | EG | research_required | freelance_demand |
-
-| [HeyJobs](https://www.heyjobs.co/de-de/) | DE | research_required | national_board |
+| [HeyJobs](https://www.heyjobs.co/de-de/) | DE | access_limited | national_board |
 
 Jobmensa public list/detail routes were added in v0.4.2 with live policy checks, native continuation and synthetic regressions. This changes implementation status only; it does not close any national or historical coverage claim.
 
@@ -150,3 +149,12 @@ reference/advertised-sitemap403, EURAXESS search robots denial and Jobvector
 robots403 are dated route-specific access limits; other legitimate provider
 routes remain discovery questions. HeyJobs was discovered as actual external
 primary cards and is explicitly registered for further verification.
+
+
+v0.4.7 adds original get in Engineering anonymous native SSR/open-API continuation
+and full content, plus Zenjob primary shift pages, native continuation and full
+visible details including notes beyond schema description. This does not verify
+student contracts, remote eligibility or source-original dates. HeyJobs native
+list/detail202 limits are explicit despite permitted directory/sitemap200.
+Instaffo's FAQ excludes internships/working-student roles; its public general job
+board remains a broader research/implementation entry, not a login-only claim.

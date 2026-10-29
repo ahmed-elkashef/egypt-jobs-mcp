@@ -1,6 +1,6 @@
 # Original public German board readers
 
-This package reads eleven providers (EnglishJobs metadata only; source-specific access/cap limits apply) through ordinary permitted HTTP, native JSON,
+This package reads thirteen providers (EnglishJobs metadata only; source-specific access/cap limits apply) through ordinary permitted HTTP, native JSON,
 SSR data and an official feed. No browser, account or application action starts.
 
 | Source | Inventory | Full detail |
@@ -113,3 +113,33 @@ the exact capture_id and zero-based segment_index. Segments contain1,000 URIs,
 are explicitly consumer segmentation rather than provider pagination, and bind
 the original resource hash. Missing configuration, checksum changes, symlinks and
 invalid/out-of-range indices fail without truncation or an arbitrary file API.
+
+
+## get in Engineering and Zenjob in v0.4.7
+
+get in Engineering's first39 native SSR records reconcile with every visible
+primary card. Its published anonymous openV2 GET `/api/v2/open/job/search`
+contract supplies39 records at offsets0/39/78 with `X-Requested-With:
+XMLHttpRequest`. This is a protocol header, with no authentication or browser
+identity; normal verified TLS remains enabled. The SSR search always starts at0,
+so a guessed SSR `start` URL is refused. Only that unfiltered native GET is
+supported; degree, career, title, debug and restricted API fields are refused.
+Full native content sections match the visible sections plus an independent
+JobPosting. Home office and schema publication dates remain unqualified evidence.
+
+Zenjob exposes public UUID shift cards, native active-page markers and real
+continuation links. The `>>` control is another native link, not an assumed last
+page. Full detail retains both structured description and the entire visible
+requirements/notes; the source can include a shift-length warning only in the
+latter. Shift starts, datePosted and expiry remain separate. PART_TIME and
+student-oriented shifts do not establish a working-student contract. A source
+schema URL can omit the actual `/jobs/` route; the reader reconciles UUID/title
+without requesting that alternate path. No native filter POST, app signup,
+account or application action is supported.
+
+HeyJobs' permitted directory/sitemap discovery is accessible but the tested
+native list/detail routes returned202. No challenge, protected API workaround,
+Next-data rewrite or browser fingerprint was used. Instaffo's own current FAQ
+excludes internships/working-student roles; its public general job board remains
+a separate implementation question. These are dated source facts, not national
+coverage claims. See the aggregate proof; raw corpus/bootstrap stays private.

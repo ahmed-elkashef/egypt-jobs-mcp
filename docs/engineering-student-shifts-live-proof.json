@@ -1,0 +1,63 @@
+{
+  "as_of": "2026-10-29",
+  "kind": "bounded_original_source_engineering_proof",
+  "public_vacancy_corpus_included": false,
+  "coverage_complete": false,
+  "getinengineering": {
+    "native_ssr_records": 39,
+    "native_reported_total": 2949,
+    "open_api_offsets": [
+      0,
+      39,
+      78
+    ],
+    "records_each": 39,
+    "required_protocol_header": "X-Requested-With: XMLHttpRequest",
+    "authentication_used": false,
+    "verified_tls": true,
+    "whole_native_detail_characters": 6007,
+    "visible_all_sections_reconciled": true,
+    "ssr_start_is_pagination": false,
+    "original_publication_verified": false
+  },
+  "zenjob": {
+    "native_pages": [
+      1,
+      2,
+      3
+    ],
+    "records_each": 9,
+    "whole_visible_detail_characters": 1935,
+    "separate_notes_beyond_schema_retained": true,
+    "shift_start_is_publication": false,
+    "working_student_contract_verified": false,
+    "schema_uri_disagreement_retained": true
+  },
+  "heyjobs": {
+    "native_directory_and_advertised_sitemaps_http": 200,
+    "native_model_and_city_list_http": 202,
+    "advertised_canonical_detail_http": 202,
+    "challenge_or_api_workaround_performed": false,
+    "discovery_uris_are_active_jobs": false
+  },
+  "instaffo_student_scope": {
+    "source": "https://www.instaffo.com/faq",
+    "provider_excludes_internships_and_working_student_roles": true,
+    "public_general_board": "https://jobs.instaffo.com/de/jobs",
+    "general_inventory_implemented": false
+  },
+  "applications_or_contact_started": false,
+  "real_stdio_mcp": {
+    "read_only_tools": 63,
+    "native_board_sources": 13,
+    "probes": 9,
+    "all_probe_results_ok": true,
+    "original_backend_services_unchanged": true
+  },
+  "local_tests": {
+    "node": 103,
+    "python": 306,
+    "total": 409,
+    "public_board_regressions": 78
+  }
+}
