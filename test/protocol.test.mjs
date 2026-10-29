@@ -37,7 +37,8 @@ test('real unified stdio lists countries and routes through Egypt and Germany of
     const unsafe=await client.callTool({name:'de_public_student_board_page',arguments:{source:'studentjob',url:'https://example.test/stellenangebote'}});
     assert.equal(unsafe.isError,true);assert.equal(unsafe.structuredContent.returned_count,null);
     const publicBoards=await client.callTool({name:'de_public_german_boards_capabilities',arguments:{}});
-    assert.equal(publicBoards.structuredContent.sources.length,6);
+    assert.deepEqual([...publicBoards.structuredContent.sources].sort(),['absolventa','academics','stellenanzeigen','yourfirm','germantechjobs','bund_de','jobs_de','jobware','berlinstartupjobs','englishjobs'].sort());
+    assert.deepEqual(publicBoards.structuredContent.operations_by_source.englishjobs,['inventory']);
     const unsafeBoard=await client.callTool({name:'de_public_german_board_inventory',arguments:{source:'germantechjobs',url:'https://germantechjobs.de/api/jobApply'}});
     assert.equal(unsafeBoard.isError,true);assert.equal(unsafeBoard.structuredContent.returned_count,null);
     const interamt=await client.callTool({name:'de_public_interamt_read',arguments:{operation:'agency_list'}});
