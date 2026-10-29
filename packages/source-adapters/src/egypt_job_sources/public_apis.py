@@ -70,9 +70,10 @@ def _posting_url(source: str, value) -> str:
     value = _string(value, "native posting URL")
     parts = urlsplit(value)
     # The official Germany feed also returns the footer-linked UK, France and
-    # Switzerland sister sites. Preserve these actual native posting URLs.
+    # Switzerland/Netherlands sister sites. Preserve actual native posting URLs;
+    # a board's domain does not establish worker eligibility or physical scope.
     hosts = (
-        {"www.arbeitnow.com", "www.arbeitnow.co.uk", "www.arbeitnow.fr", "www.arbeitnow.ch"}
+        {"www.arbeitnow.com", "www.arbeitnow.co.uk", "www.arbeitnow.fr", "www.arbeitnow.ch", "www.arbeitnow.nl"}
         if source == "arbeitnow"
         else {"www.themuse.com"}
     )

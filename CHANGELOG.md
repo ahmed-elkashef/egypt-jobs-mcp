@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.1 — 2026-10-29
+
+- Preserve BA v6's native `stellenangebotsart` ahead of legacy offering aliases;
+  retain source enum values without inferring a precise employment model.
+- Preserve Arbeitnow's officially linked Netherlands posting URLs in mixed
+  native pages. Keep the fetch endpoint and continuation scope fixed, complete
+  bodies intact, and hostile lookalike domains rejected.
+- Package versions: German Arbeitsmarkt 1.1.1 and Python source adapters 0.3.6.
+  No new source, country-eligibility or frozen-market completeness is claimed.
+
 ## 0.4.0 — country consolidation
 
 - Rename the existing Egypt MCP repository to Job Market MCP and preserve its history and releases.

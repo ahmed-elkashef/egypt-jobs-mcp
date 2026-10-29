@@ -93,11 +93,35 @@ class PublicAPITests(unittest.TestCase):
             parse_page("arbeitnow", json.dumps(raw), endpoint("arbeitnow", 1))
 
     def test_arbeitnow_official_sister_posting_hosts(self):
-        for host in ["www.arbeitnow.co.uk", "www.arbeitnow.fr", "www.arbeitnow.ch"]:
+        for host in ["www.arbeitnow.co.uk", "www.arbeitnow.fr", "www.arbeitnow.ch", "www.arbeitnow.nl"]:
             raw = self.arbeit()
             raw["data"][0]["url"] = f"https://{host}/jobs/companies/company/role-42"
             page = parse_page("arbeitnow", json.dumps(raw), endpoint("arbeitnow", 1))
             self.assertEqual(page["listings"][0]["url"], raw["data"][0]["url"])
+
+    def test_mixed_native_page_keeps_every_row_and_full_body(self):
+        raw = self.arbeit()
+        template = raw["data"][0]
+        raw["data"] = [
+            {**template, "slug": f"synthetic-{i}",
+             "url": f"https://www.arbeitnow.com/jobs/companies/example/synthetic-{i}"}
+            for i in range(300)
+        ]
+        raw["data"][-1]["url"] = "https://www.arbeitnow.nl/jobs/companies/example/synthetic-299"
+        parsed = parse_page("arbeitnow", json.dumps(raw), endpoint("arbeitnow", 1))
+        self.assertEqual(parsed["returned_count"], 300)
+        self.assertEqual(parsed["listings"][-1]["url"], raw["data"][-1]["url"])
+        self.assertTrue(all(len(row["description"]) == 12000 for row in parsed["listings"]))
+        self.assertEqual(parsed["request_url"], endpoint("arbeitnow", 1))
+        self.assertEqual(parsed["next_url"], endpoint("arbeitnow", 2))
+
+    def test_sister_host_support_does_not_allow_lookalikes_or_endpoint_changes(self):
+        raw = self.arbeit()
+        raw["data"][0]["url"] = "https://www.arbeitnow.nl.evil.test/jobs/example"
+        with self.assertRaises(ValueError):
+            parse_page("arbeitnow", json.dumps(raw), endpoint("arbeitnow", 1))
+        with self.assertRaises(ValueError):
+            validate_endpoint("arbeitnow", "https://www.arbeitnow.nl/api/job-board-api?page=2")
 
     def test_continuation_scope_and_stall(self):
         for url in [
