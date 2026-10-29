@@ -4,13 +4,13 @@ As of 29 October 2026. This is code/source-contract coverage, not a fresh vacanc
 
 | Implementation/access state | Sources/channel groups |
 | --- | --- |
-| access_limited | 4 |
+| access_limited | 5 |
 | context_only | 4 |
 | credential_required | 3 |
 | external_connector | 3 |
-| implemented | 23 |
+| implemented | 28 |
 | requires_employer_seed | 7 |
-| research_required | 49 |
+| research_required | 43 |
 
 The registry has 93 unique entries: 43 apply to Egypt and 78 to Germany, including shared entries. These counts overlap; they are not numbers of vacancies, employers or live working transports.
 
@@ -51,16 +51,16 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [Indeed Germany](https://de.indeed.com/) | DE | research_required | national_board |
 | [XING Jobs](https://www.xing.com/jobs) | DE | research_required | national_board |
 | [meinestadt.de](https://jobs.meinestadt.de/) | DE | research_required | local_board |
-| [stellenanzeigen.de](https://www.stellenanzeigen.de/) | DE | research_required | national_board |
+| [stellenanzeigen.de](https://www.stellenanzeigen.de/) | DE | implemented | national_board |
 | [Jobware](https://www.jobware.de/) | DE | research_required | national_board |
 | [Kimeta](https://www.kimeta.de/) | DE | research_required | aggregator |
 | [Monster Germany](https://www.monster.de/) | DE | research_required | national_board |
 | [jobvector](https://www.jobvector.de/) | DE | research_required | specialist_board |
-| [Yourfirm](https://www.yourfirm.de/) | DE | research_required | smb_board |
+| [Yourfirm](https://www.yourfirm.de/) | DE | implemented | smb_board |
 | [Jobs.de](https://www.jobs.de/) | DE | research_required | national_board |
 | [jobtensor](https://jobtensor.com/) | DE | research_required | specialist_board |
-| [Absolventa](https://www.absolventa.de/) | DE | research_required | graduate_board |
-| [academics](https://www.academics.de/) | DE | research_required | research_board |
+| [Absolventa](https://www.absolventa.de/) | DE | implemented | graduate_board |
+| [academics](https://www.academics.de/) | DE | implemented | research_board |
 | [EURAXESS](https://euraxess.ec.europa.eu/jobs) | DE | research_required | research_board |
 | [Jobmensa](https://www.jobmensa.de/) | DE | implemented | student_board |
 | [Stellenwerk](https://www.stellenwerk.de/) | DE | research_required | student_board |
@@ -73,12 +73,12 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [IHK apprenticeship channels](https://www.ihk.de/) | DE | research_required | chamber_channels |
 | [Handwerk apprenticeship channels](https://www.handwerk.de/) | DE | research_required | chamber_channels |
 | [JOIN](https://join.com/) | DE | research_required | smb_board |
-| [GermanTechJobs](https://germantechjobs.de/) | DE | research_required | specialist_board |
+| [GermanTechJobs](https://germantechjobs.de/) | DE | implemented | specialist_board |
 | [Berlin Startup Jobs](https://berlinstartupjobs.com/) | DE | research_required | regional_board |
 | [EnglishJobs.de](https://englishjobs.de/) | DE | research_required | national_board |
 | [Instaffo](https://instaffo.com/) | DE | research_required | matching_platform |
 | [get in Engineering](https://www.get-in-engineering.de/) | DE | research_required | specialist_board |
-| [service.bund.de vacancies](https://www.service.bund.de/) | DE | research_required | public_sector |
+| [service.bund.de vacancies](https://www.service.bund.de/) | DE | access_limited | public_sector |
 | [Interamt](https://gate.interamt.de/interamtApi/api-doc/index.html) | DE | credential_required | public_sector |
 | [Karriere.NRW](https://developer.karriere.nrw/) | DE | credential_required | state_public_sector |
 | [State and municipal career portals](https://www.berlin.de/karriereportal/) | DE | research_required | public_sector |
@@ -123,3 +123,5 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 Jobmensa public list/detail routes were added in v0.4.2 with live policy checks, native continuation and synthetic regressions. This changes implementation status only; it does not close any national or historical coverage claim.
 
 StudentJob and YoungCapital native list/detail readers were added in v0.4.3. External redirect records are retained and can remain access-limited under current robots. Their presence does not mean original-employer body access or applicant fit was verified.
+
+Six original native public-board/feed/API readers were added in v0.4.4. service.bund.de remains access_limited: its permitted RSS snapshot does not cover the frozen week and its ordinary search route was denied.

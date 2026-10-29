@@ -6,7 +6,7 @@ import { Federation,loadRegistry,countrySources,scanPlan,READ_ONLY } from './lib
 
 const registry=await loadRegistry();
 const federation=await new Federation().initialize();
-const server=new Server({name:'job-market-mcp',version:'0.4.3'},{capabilities:{tools:{}}});
+const server=new Server({name:'job-market-mcp',version:'0.4.4'},{capabilities:{tools:{}}});
 const object=(properties={},required=[])=>({type:'object',properties,required,additionalProperties:false});
 const country={type:'string',enum:['EG','DE']};
 const catalogue=[

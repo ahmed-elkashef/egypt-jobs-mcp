@@ -2,8 +2,8 @@ import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {StdioServerTransport} from '@modelcontextprotocol/sdk/server/stdio.js';
 import {z} from 'zod';
 import {capabilities,read} from '../interamt/client.mjs';
-import {jobmensa,studentBoards} from '../student-boards/bridge.mjs';
-const server=new McpServer({name:'germany-public-services',version:'0.3.0'});
+import {jobmensa,studentBoards,germanBoards} from '../student-boards/bridge.mjs';
+const server=new McpServer({name:'germany-public-services',version:'0.4.0'});
 const result=data=>({content:[{type:'text',text:JSON.stringify(data)}],structuredContent:data,
   isError:!['ok',undefined].includes(data.status)});
 const annotations={readOnlyHint:true,destructiveHint:false,openWorldHint:true};
@@ -18,4 +18,8 @@ server.registerTool('student_boards_capabilities',{description:'Offline original
 for(const operation of ['page','detail','resolve_external'])server.registerTool(`student_board_${operation}`,{
  description:`Read one public StudentJob or YoungCapital ${operation} with current robots and exact native paths. Lists retain all native cards, actual continuation, filters, counts and ambiguous/promoted records. Details preserve complete visible description plus conflicting JSON-LD; URL ID is authoritative over placeholder schema IDs. External resolution only HEADs the native redirect when policy permits, never fetches its target. No keyword census, apply, login, save, subscription, email or profile action.`,
  inputSchema:{source:z.enum(['studentjob','youngcapital']),url:z.string().url().max(2048)},annotations},async input=>result(await studentBoards({...input,operation})));
+server.registerTool('german_boards_capabilities',{description:'Offline original public list/feed/API/full-detail contracts for Absolventa, academics, stellenanzeigen.de, Yourfirm, GermanTechJobs and service.bund.de. Describes native pagination and feed-history limits; no network or account action.',inputSchema:{},annotations:{...annotations,openWorldHint:false}},async()=>result(await germanBoards()));
+for(const operation of ['inventory','detail'])server.registerTool(`german_board_${operation}`,{
+ description:`Read one complete permitted public German board ${operation}. Exact source/origin/path/query guards and current robots apply. Static native links or independently verified native numeric page/offset/count contracts drive continuation; no role keywords. Preserve all API requirements fields, original versus renewal/activation/feed clocks, and incomplete feed items. The observed500-item RSS retention does not establish a full week. No login, application, save, email, subscription or account action.`,
+ inputSchema:{source:z.enum(['absolventa','academics','stellenanzeigen','yourfirm','germantechjobs','bund_de']),url:z.string().url().max(2048)},annotations},async input=>result(await germanBoards({...input,operation})));
 await server.connect(new StdioServerTransport());
