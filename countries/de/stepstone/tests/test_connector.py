@@ -6,11 +6,10 @@ from types import SimpleNamespace
 
 import httpx
 import pytest
-
 from stepstone_mcp.client import StepStoneClient, collect_inventory, location_url
 from stepstone_mcp.errors import SourceError
 from stepstone_mcp.parsers import parse_job_html, parse_listing_html, publication
-from stepstone_mcp.transport import PublicTransport, ROBOTS_URL, robots_allowed
+from stepstone_mcp.transport import ROBOTS_URL, PublicTransport, robots_allowed
 
 LISTING = "https://www.stepstone.de/jobs/in-10115"
 JOB = "https://www.stepstone.de/stellenangebote--Synthetic-Example--123456-inline.html"

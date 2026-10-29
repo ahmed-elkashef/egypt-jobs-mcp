@@ -32,5 +32,5 @@ jobs:
           JOB_MARKET_PYTHON: python
           EGYPT_JOBS_PYTHON: python
       - run: python scripts/test-python.py
-      - run: python -m ruff check packages/source-adapters/src packages/source-adapters/tests countries/de/stepstone/stepstone_mcp countries/de/stepstone/tests
+      - run: python -m ruff check --config ruff.toml packages/source-adapters/src packages/source-adapters/tests countries/de/stepstone/stepstone_mcp countries/de/stepstone/tests
       - run: npm audit --audit-level=high

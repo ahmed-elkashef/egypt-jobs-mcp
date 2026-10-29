@@ -6,15 +6,15 @@ The robot policy is checked before the requested page and every redirect.
 
 from __future__ import annotations
 
-import math
 import json
+import math
 import re
 import shutil
 import subprocess
 import time
-from pathlib import Path
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
+from pathlib import Path
 from urllib.parse import unquote, urljoin, urlsplit
 
 import httpx

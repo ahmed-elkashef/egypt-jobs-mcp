@@ -182,7 +182,8 @@ def parse_listing_html(html: str, source_url: str, requested_page: int | None = 
             duplicate_cards += 1
             continue
         seen.add(identifier)
-        values = lambda selector: list(dict.fromkeys(text(e) for e in article.select(selector) if text(e)))
+        def values(selector):
+            return list(dict.fromkeys(text(e) for e in article.select(selector) if text(e)))
         location_values = values('[data-at="job-item-location"]')
         snippet = values('[data-at="jobcard-content"]')
         posted = text(article.select_one('[data-at="job-item-timeago"]'))

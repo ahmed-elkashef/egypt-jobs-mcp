@@ -5,13 +5,13 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from pathlib import Path
 from datetime import datetime, timezone
+from pathlib import Path
 from urllib.parse import parse_qs, urlencode, urlsplit
 
 from .errors import SourceError
 from .parsers import parse_job_html, parse_listing_html
-from .transport import PublicTransport, ROBOTS_URL, robots_allowed
+from .transport import ROBOTS_URL, PublicTransport, robots_allowed
 
 
 def location_url(zip_code: str, radius: int = 25, page: int = 1, age_days: int = 7) -> str:
