@@ -32,6 +32,15 @@ test('a start date or update timestamp never substitutes for publication', () =>
     .original_publication.raw, null);
 });
 
+test('native v6 offering kind is preserved ahead of legacy aliases without inventing a precise model', () => {
+  for (const kind of ['ARBEIT', 'PRAKTIKUM_TRAINEE', 'FUTURE_NATIVE_KIND']) {
+    const job = normalizeJob({ stellenangebotsart: kind, angebotsart: 'legacy-value' });
+    assert.equal(job.offering_type, kind);
+    assert.equal(job.raw.stellenangebotsart, kind);
+    assert.equal('employment_type' in job, false);
+  }
+});
+
 test('legacy listing envelopes and all legacy workplace fields survive', () => {
   const page = normalizePage({ stellenangebote: [{ titel: 'Legacy', arbeitsort: { ort: 'Berlin', plz: '10115' } }] }, request);
   assert.equal(page.jobs[0].workplaces[0].adresse.plz, '10115');

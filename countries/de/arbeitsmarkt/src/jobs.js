@@ -80,7 +80,7 @@ export function normalizeJob(entry) {
     workplaces, source_distance: first(entry.entfernung, job.entfernung),
     hours_flags: hoursFlags, homeoffice_possible: first(job.homeofficemoeglich, job.homeOfficeMoeglich),
     career_change_eligible: first(job.quereinstiegGeeignet, job.fuerQuereinstiegGeeignet),
-    offering_type: first(job.angebotsart, job.angebotsArt),
+    offering_type: first(job.stellenangebotsart, job.angebotsart, job.angebotsArt),
     original_publication: publication(job), native_dates: nativeDates,
     description: descriptionField ? job[descriptionField] : null,
     description_source_field: descriptionField ?? null,

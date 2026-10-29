@@ -1,6 +1,6 @@
 {
   "name": "@ahmed-elkashef/german-arbeitsmarkt-mcp",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Six-family German labour-market MCP with structured BA v6 jobs, complete workplaces and explicit pagination evidence",
   "type": "module",
   "bin": {
