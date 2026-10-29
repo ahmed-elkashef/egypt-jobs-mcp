@@ -668,13 +668,34 @@
         "DE"
       ],
       "category": "national_board",
-      "status": "research_required",
+      "status": "implemented",
       "references": [
-        "https://www.stellenanzeigen.de/"
+        "https://www.stellenanzeigen.de/",
+        "https://www.stellenanzeigen.de/robots.txt"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "stellenanzeigen"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_detail",
+          "public_tool": "de_public_german_board_detail",
+          "fixed_arguments": {
+            "source": "stellenanzeigen"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Original read-only public native inventory and complete visible/source detail fields; current robots and exact URL/identity/query guards.",
+        "Native links or separately verified numeric page/offset/count continuation remain explicit. Moving pages are not frozen historical coverage.",
+        "Original campaign, renewal, activation, expiry and observation clocks remain distinct; no invented employer publication or applicant fit.",
+        "No login, application, contact, save, subscription or account action. Raw web/session state is excluded from public fixtures."
       ]
     },
     {
@@ -748,13 +769,34 @@
         "DE"
       ],
       "category": "smb_board",
-      "status": "research_required",
+      "status": "implemented",
       "references": [
-        "https://www.yourfirm.de/"
+        "https://www.yourfirm.de/",
+        "https://www.yourfirm.de/robots.txt"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "yourfirm"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_detail",
+          "public_tool": "de_public_german_board_detail",
+          "fixed_arguments": {
+            "source": "yourfirm"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Original read-only public native inventory and complete visible/source detail fields; current robots and exact URL/identity/query guards.",
+        "Native links or separately verified numeric page/offset/count continuation remain explicit. Moving pages are not frozen historical coverage.",
+        "Original campaign, renewal, activation, expiry and observation clocks remain distinct; no invented employer publication or applicant fit.",
+        "No login, application, contact, save, subscription or account action. Raw web/session state is excluded from public fixtures."
       ]
     },
     {
@@ -796,13 +838,34 @@
         "DE"
       ],
       "category": "graduate_board",
-      "status": "research_required",
+      "status": "implemented",
       "references": [
-        "https://www.absolventa.de/"
+        "https://www.absolventa.de/",
+        "https://www.absolventa.de/robots.txt"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "absolventa"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_detail",
+          "public_tool": "de_public_german_board_detail",
+          "fixed_arguments": {
+            "source": "absolventa"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Original read-only public native inventory and complete visible/source detail fields; current robots and exact URL/identity/query guards.",
+        "Native links or separately verified numeric page/offset/count continuation remain explicit. Moving pages are not frozen historical coverage.",
+        "Original campaign, renewal, activation, expiry and observation clocks remain distinct; no invented employer publication or applicant fit.",
+        "No login, application, contact, save, subscription or account action. Raw web/session state is excluded from public fixtures."
       ]
     },
     {
@@ -812,13 +875,34 @@
         "DE"
       ],
       "category": "research_board",
-      "status": "research_required",
+      "status": "implemented",
       "references": [
-        "https://www.academics.de/"
+        "https://www.academics.de/",
+        "https://www.academics.de/robots.txt"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "academics"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_detail",
+          "public_tool": "de_public_german_board_detail",
+          "fixed_arguments": {
+            "source": "academics"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Original read-only public native inventory and complete visible/source detail fields; current robots and exact URL/identity/query guards.",
+        "Native links or separately verified numeric page/offset/count continuation remain explicit. Moving pages are not frozen historical coverage.",
+        "Original campaign, renewal, activation, expiry and observation clocks remain distinct; no invented employer publication or applicant fit.",
+        "No login, application, contact, save, subscription or account action. Raw web/session state is excluded from public fixtures."
       ]
     },
     {
@@ -1099,13 +1183,35 @@
         "DE"
       ],
       "category": "specialist_board",
-      "status": "research_required",
+      "status": "implemented",
       "references": [
-        "https://germantechjobs.de/"
+        "https://germantechjobs.de/",
+        "https://germantechjobs.de/robots.txt"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "germantechjobs"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_detail",
+          "public_tool": "de_public_german_board_detail",
+          "fixed_arguments": {
+            "source": "germantechjobs"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Original read-only public native inventory and complete visible/source detail fields; current robots and exact URL/identity/query guards.",
+        "Native links or separately verified numeric page/offset/count continuation remain explicit. Moving pages are not frozen historical coverage.",
+        "Original campaign, renewal, activation, expiry and observation clocks remain distinct; no invented employer publication or applicant fit.",
+        "No login, application, contact, save, subscription or account action. Raw web/session state is excluded from public fixtures.",
+        "Native light array is complete for that response; full detail preserves description, must/nice requirements and responsibilities, not description alone. Activation is not original publication and .de is not worker-country eligibility."
       ]
     },
     {
@@ -1179,13 +1285,36 @@
         "DE"
       ],
       "category": "public_sector",
-      "status": "research_required",
+      "status": "access_limited",
       "references": [
-        "https://www.service.bund.de/"
+        "https://www.service.bund.de/",
+        "https://www.service.bund.de/robots.txt"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "bund_de"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_detail",
+          "public_tool": "de_public_german_board_detail",
+          "fixed_arguments": {
+            "source": "bund_de"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Original read-only public native inventory and complete visible/source detail fields; current robots and exact URL/identity/query guards.",
+        "Native links or separately verified numeric page/offset/count continuation remain explicit. Moving pages are not frozen historical coverage.",
+        "Original campaign, renewal, activation, expiry and observation clocks remain distinct; no invented employer publication or applicant fit.",
+        "No login, application, contact, save, subscription or account action. Raw web/session state is excluded from public fixtures.",
+        "Official search route currently denied by robots. Separately permitted official RSS returned500items covering27–29October only; earlier weekly history is unresolved.",
+        "Retain incomplete feed metadata; canonical resource URLs remove client fragments/session markers and provider/path namespaces preserve identity."
       ]
     },
     {

@@ -21,3 +21,7 @@ export async function jobmensa(input={}){
 export async function studentBoards(input={}){
  return native('./studentjobs.py',input.operation?['--source',input.source,'--operation',input.operation,'--url',input.url]:['--capabilities'],input.source??'student_boards');
 }
+
+export async function germanBoards(input={}){
+ return native('../public-boards/readers.py',input.operation?['--source',input.source,'--operation',input.operation,'--url',input.url]:['--capabilities'],input.source??'german_public_boards');
+}

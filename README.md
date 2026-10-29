@@ -52,6 +52,8 @@ The federation forwards full native responses without shortening job description
 
 The original [Jobmensa, StudentJob and YoungCapital readers](countries/de/student-boards/README.md) enumerate complete public native pages and full visible job details without a browser. Current robots policy, exact native continuation and model/date/worker-country ambiguities remain explicit. It makes no account, contact or application action.
 
+The original [public-board readers](countries/de/public-boards/README.md) also cover Absolventa, academics, stellenanzeigen.de, Yourfirm, GermanTechJobs and the permitted official government vacancy feed. Native full bodies, verified pagination and distinct clocks remain separate from coverage and applicant fit.
+
 ## Additional Germany API
 
 Original Interamt capability/list/detail code is included under `countries/de/interamt`. Its public OpenAPI requires an approved API key; single-customer and MultiMandant scopes remain distinct. `de_public_interamt_capabilities` inspects this offline; `de_public_interamt_read` refuses before network without approved local access and an explicitly confirmed API base. No authenticated live access is claimed.

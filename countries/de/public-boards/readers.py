@@ -1,0 +1,644 @@
+"""Original read-only German public board contracts; no account or application actions."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+import re
+from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
+from pathlib import Path
+from urllib.error import HTTPError
+from urllib.parse import parse_qs, unquote, urlencode, urljoin, urlsplit, urlunsplit
+from urllib.request import HTTPRedirectHandler, Request, build_opener
+from urllib.robotparser import RobotFileParser
+from xml.etree import ElementTree
+
+from lxml import html
+from native_flight import public_search_state
+
+AGENT = "job-market-mcp/0.4.4"
+MAX_BYTES = 8 * 1024 * 1024
+ORIGINS = {
+    name: "https://www." + host
+    for name, host in {
+        "absolventa": "absolventa.de",
+        "academics": "academics.de",
+        "stellenanzeigen": "stellenanzeigen.de",
+        "yourfirm": "yourfirm.de",
+        "bund_de": "service.bund.de",
+    }.items()
+}
+ORIGINS["germantechjobs"] = "https://germantechjobs.de"
+LIST_PATHS = {
+    "absolventa": "/jobs",
+    "academics": "/stellenanzeigen",
+    "stellenanzeigen": "/jobs/",
+    "yourfirm": "/stellenangebote/",
+    "germantechjobs": "/api/jobsLight",
+    "bund_de": "/Content/Globals/Functions/RSSFeed/RSSGenerator_Stellen.xml",
+}
+DETAILS = {
+    "absolventa": r"/stellenangebote/([1-9][0-9]*)-[^/]+",
+    "academics": r"/jobs/[^/]+-([1-9][0-9]*)",
+    "stellenanzeigen": r"/job/[^/]+?-((?:sde-)?[1-9][0-9]*)/",
+    "yourfirm": r"/job/[^/]+/[^/]+/(yf-[1-9][0-9]*)/",
+    "germantechjobs": r"/api/jobWithUrl/([^/]+)",
+    "bund_de": r"/IMPORTE/Stellenangebote/(?:[^/?#;]+/)+([A-Za-z0-9][A-Za-z0-9_.-]*)\.html",
+}
+LIMITS = [
+    "Code/source transport is not complete national or frozen-interval coverage.",
+    "Site country, source role categories and remote labels do not establish worker eligibility or applicant fit.",
+    "Moving pages, original campaign clocks, renewal clocks and observation clocks remain distinct.",
+    "Full source bodies can still require comparison with the original employer and actual required documents.",
+    "No login, apply, account, save, favourite, subscription, email or contact action is supported.",
+]
+
+
+class SourceError(ValueError):
+    pass
+
+
+def clean(value):
+    return " ".join(value.split())
+
+
+def without_session(value):
+    return re.sub(r';jsessionid=[^/?#;\s"<>]+', "", value, flags=re.I)
+
+
+def checked_url(source, url, operation):
+    if source not in ORIGINS:
+        raise SourceError("Unsupported public source")
+    parsed = urlsplit(url)
+    if (
+        parsed.scheme != "https"
+        or parsed.netloc != urlsplit(ORIGINS[source]).netloc
+        or parsed.username
+        or parsed.password
+        or parsed.fragment
+        or ";" in parsed.path
+    ):
+        raise SourceError("Exact public HTTPS origin without account/session markers required")
+    path = unquote(parsed.path)
+    if "%" in path or any(ord(c) < 32 for c in path):
+        raise SourceError("Ambiguous encoded route")
+    query = parse_qs(parsed.query, keep_blank_values=True)
+    if any(len(v) != 1 for v in query.values()):
+        raise SourceError("Ambiguous duplicate source query")
+    if operation == "inventory":
+        if path != LIST_PATHS[source]:
+            raise SourceError("Only the observed unfiltered inventory path is supported")
+        allowed = (
+            {"nn"} if source == "bund_de" else set() if source == "germantechjobs" else {"page"}
+        )
+        if not set(query) <= allowed:
+            raise SourceError("Unknown or career-keyword inventory fields refused")
+        if "page" in query and not re.fullmatch(r"[1-9][0-9]{0,5}", query["page"][0]):
+            raise SourceError("Invalid native page")
+        if "nn" in query and query["nn"] != ["4641956"]:
+            raise SourceError("Unverified feed navigation parameter")
+    elif operation == "detail":
+        if query or not re.fullmatch(DETAILS[source], path, re.I):
+            raise SourceError("Only an exact native public detail route is supported")
+    else:
+        raise SourceError("Unsupported read operation")
+    return url
+
+
+def identity(source, url):
+    match = re.fullmatch(DETAILS[source], unquote(urlsplit(url).path), re.I)
+    if not match:
+        raise SourceError("Native detail identity absent")
+    if source == "bund_de":
+        return unquote(
+            urlsplit(url).path
+        )  # Provider/path namespace prevents numeric ID collisions.
+    return match[1].upper() if source in {"stellenanzeigen", "yourfirm"} else match[1]
+
+
+class SafeRedirect(HTTPRedirectHandler):
+    def __init__(self, source, operation, initial, policy=None):
+        super().__init__()
+        self.source, self.operation, self.initial, self.policy = source, operation, initial, policy
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        if self.operation == "robots":
+            if newurl != ORIGINS[self.source] + "/robots.txt":
+                raise SourceError("Robots canonical origin requires separate verification")
+        else:
+            checked_url(self.source, newurl, self.operation)
+            if self.operation == "detail":
+                if identity(self.source, newurl) != identity(self.source, self.initial):
+                    raise SourceError("Redirect changes vacancy identity")
+            elif urlsplit(newurl).path != urlsplit(self.initial).path or parse_qs(
+                urlsplit(newurl).query
+            ) != parse_qs(urlsplit(self.initial).query):
+                raise SourceError("Redirect changes inventory partition/page")
+            if self.policy is None or not self.policy.can_fetch(AGENT, newurl):
+                raise SourceError("Redirect target is denied or has no checked policy")
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+def fetch(source, url, operation, policy=None):
+    request = Request(
+        url,
+        headers={
+            "User-Agent": AGENT,
+            "Accept": "text/html,application/json,application/rss+xml,text/plain",
+        },
+    )
+    with build_opener(SafeRedirect(source, operation, url, policy)).open(
+        request, timeout=25
+    ) as response:
+        if response.status != 200:
+            raise SourceError("A complete200 response is required, never a partial/empty transport")
+        body = response.read(MAX_BYTES + 1)
+        if len(body) > MAX_BYTES:
+            raise SourceError("Full source exceeds bound; no truncated response")
+        return body, response.geturl()
+
+
+def envelope(source, body, url, kind):
+    return {
+        "source": source,
+        "status": "ok",
+        "kind": kind,
+        "source_url": url,
+        "observed_at": datetime.now(timezone.utc).isoformat(),
+        "source_sha256": hashlib.sha256(body).hexdigest(),
+        "coverage_complete": False,
+        "reviewed_by_model": False,
+        "limits": LIMITS,
+    }
+
+
+def card(source, url, title, **extra):
+    checked_url(source, url, "detail")
+    return {
+        "id": identity(source, url),
+        "url": url,
+        "title": title,
+        "original_source_date": None,
+        "source_body_complete": False,
+        "applicant_fit_assessed": False,
+        **extra,
+    }
+
+
+def static_page(source, body, url):
+    tree = html.fromstring(body)
+    page = int(parse_qs(urlsplit(url).query).get("page", ["1"])[0])
+    if source == "absolventa":
+        anchors = tree.xpath('//a[@data-job-offer-target="jobOfferTeaser"]')
+        navigations = tree.xpath('//nav[@aria-label="Mobile Pagination"]')
+        active = {
+            clean(e.text_content())
+            for nav in navigations
+            for e in nav.xpath("./span")
+            if clean(e.text_content()).isdecimal()
+        }
+    else:
+        anchors = tree.xpath('//a[@data-stm-job-id and starts-with(@id,"job-")]')
+        navigations = tree.xpath('//a[starts-with(@id,"job-teasers-select-page-")]/..')
+        active = {
+            clean(e.text_content())
+            for e in tree.xpath(
+                '//a[starts-with(@id,"job-teasers-select-page-") and contains(@class,"underline")]'
+            )
+        }
+    if active != {str(page)}:
+        raise SourceError("Native active page missing or different from request")
+    rows = []
+    for anchor in anchors:
+        target = urljoin(url, anchor.get("href", ""))
+        headings = list(dict.fromkeys(clean(e.text_content()) for e in anchor.xpath(".//h2|.//h3")))
+        title = anchor.get("title") or (headings[0] if len(headings) == 1 else None)
+        if not title:
+            raise SourceError("Native card title missing or ambiguous")
+        row = card(
+            source,
+            target,
+            clean(title),
+            native_card_text=clean(anchor.text_content()),
+            native_card_id=anchor.get("id"),
+        )
+        rows.append(row)
+    if not rows or len({r["id"] for r in rows}) != len(rows):
+        raise SourceError("No verified primary cards or duplicate native identity")
+    links = {}
+    for nav in navigations:
+        for anchor in nav.xpath(".//a[@href]"):
+            target = urljoin(url, anchor.get("href"))
+            checked_url(source, target, "inventory")
+            number = int(parse_qs(urlsplit(target).query).get("page", ["1"])[0])
+            if number in links and links[number] != target:
+                raise SourceError("Conflicting native continuation URLs")
+            links[number] = target
+    later = sorted(n for n in links if n > page)
+    if later and later[0] != page + 1:
+        raise SourceError("Native page gap")
+    result = envelope(source, body, url, "german_public_board_page")
+    result.update(
+        listings=rows,
+        returned_count=len(rows),
+        reported_total=None,
+        pagination={
+            "page": page,
+            "native_page_links": links,
+            "next_url": links[later[0]] if later else None,
+            "continuation_basis": "actual native pagination links",
+            "historical_coverage_verified": False,
+        },
+    )
+    return result
+
+
+def flight_page(source, body, url):
+    state = public_search_state(body)
+    query = state["searchQuery"]["query"]
+    params = state["currentPageParams"]["pageParams"]["searchParams"]
+    requested_page = int(parse_qs(urlsplit(url).query).get("page", ["1"])[0])
+    actual = int(query.get("page", 1))
+    limit = params.get("limit")
+    offset = params.get("offset")
+    if (
+        actual != requested_page
+        or not isinstance(limit, int)
+        or limit <= 0
+        or offset != (actual - 1) * limit
+    ):
+        raise SourceError("Native page/limit/offset differs from requested inventory")
+    if query.get("fulltext") or query.get("locationIds") or query.get("onlyTopJobs"):
+        raise SourceError("Native source unexpectedly narrowed the unfiltered inventory")
+    if query.get("portal") != {"stellenanzeigen": "stanz", "yourfirm": "yourfirm"}[source]:
+        raise SourceError("Native source portal differs from the requested source")
+    models = []
+    for response in state["api"]["queries"].values():
+        data = response.get("data", {}).get("requests", {}).get("jobSearchResult", {})
+        if isinstance(data, dict) and isinstance(data.get("jobAdSearchResultModel"), dict):
+            models.append(data["jobAdSearchResultModel"])
+    if len(models) != 1:
+        raise SourceError("One complete native search result required")
+    model = models[0]
+    jobs = model.get("jobAds")
+    total = model.get("count")
+    if (
+        not isinstance(jobs, list)
+        or not jobs
+        or not isinstance(total, int)
+        or total < offset + len(jobs)
+    ):
+        raise SourceError("Native result/cardinality/total is unresolved")
+    tree = html.fromstring(body)
+    cards = tree.xpath("//*[@data-jobid]")
+    by_id = {e.get("data-jobid").upper(): e for e in cards}
+    if len(cards) != len(by_id) or len(cards) != len(jobs):
+        raise SourceError("Native metadata and visible primary-card counts disagree")
+    if offset + len(jobs) < total and len(jobs) != limit:
+        raise SourceError("Short native page contradicts its continuation count")
+    rows = []
+    for entry in jobs:
+        job = entry.get("jobAd")
+        if not isinstance(job, dict) or not job.get("id") or str(job["id"]).upper() not in by_id:
+            raise SourceError("Native card/reference identity missing")
+        node = by_id[str(job["id"]).upper()]
+        anchors = node.xpath('.//a[@data-testid="qa-hitzone"]')
+        if len(anchors) != 1:
+            raise SourceError("One native primary-card link required")
+        anchor = anchors[0]
+        target = urljoin(url, anchor.get("href", ""))
+        row = card(
+            source,
+            target,
+            anchor.get("title"),
+            native_card_id=job["id"],
+            native_source_record=job,
+            native_search_record=entry,
+            native_card_text=clean(node.text_content()),
+            native_clock_fields={
+                k: job.get(k) for k in ["originalStartDate", "startDate", "expirationDate"]
+            },
+        )
+        if row["id"] != str(job["id"]).upper() or not row["title"]:
+            raise SourceError("Canonical native URL/card identity differs")
+        rows.append(row)
+    result = envelope(source, body, url, "german_public_board_page")
+    result.update(
+        listings=rows,
+        returned_count=len(rows),
+        reported_total=total,
+        reported_relevant_total=model.get("countRelevant"),
+        native_default_filters={
+            key: query.get(key)
+            for key in [
+                "portal",
+                "backfillTypes",
+                "contractType",
+                "employmentType",
+                "homeOfficeType",
+                "onlyTopJobs",
+                "locationIds",
+                "sort",
+                "limit",
+                "page",
+            ]
+        },
+        pagination={
+            "page": actual,
+            "offset": offset,
+            "limit": limit,
+            "native_page_links": {},
+            "next_url": ORIGINS[source] + LIST_PATHS[source] + "?" + urlencode({"page": actual + 1})
+            if offset + len(rows) < total
+            else None,
+            "continuation_unresolved": False,
+            "next_url_is_provider_emitted_href": False,
+            "continuation_basis": "Verified native numeric page/limit/offset/count contract; next URL derived from that contract. Actual pages1,2,3 verified separately; not a provider-emitted next href.",
+            "historical_coverage_verified": False,
+        },
+    )
+    return result
+
+
+def tech_inventory(body, url):
+    jobs = json.loads(body)
+    if not isinstance(jobs, list) or not jobs:
+        raise SourceError("A nonempty complete native metadata array is required")
+    rows = []
+    seen = set()
+    for job in jobs:
+        if (
+            not isinstance(job, dict)
+            or not job.get("_id")
+            or not job.get("jobUrl")
+            or job["_id"] in seen
+        ):
+            raise SourceError("Native API identity missing or duplicated")
+        seen.add(job["_id"])
+        target = ORIGINS["germantechjobs"] + "/api/jobWithUrl/" + job["jobUrl"]
+        rows.append(
+            {
+                "id": str(job["_id"]),
+                "url": target,
+                "public_job_url": ORIGINS["germantechjobs"] + "/jobs/" + job["jobUrl"],
+                "title": job.get("name"),
+                "native_source_record": job,
+                "source_body_complete": False,
+                "original_source_date": None,
+                "activation_clock": job.get("activeFrom"),
+                "applicant_fit_assessed": False,
+            }
+        )
+        checked_url("germantechjobs", target, "detail")
+    result = envelope("germantechjobs", body, url, "german_public_board_page")
+    result.update(
+        listings=rows,
+        returned_count=len(rows),
+        reported_total=None,
+        pagination={
+            "native_whole_array_response": True,
+            "next_url": None,
+            "historical_coverage_verified": False,
+        },
+    )
+    return result
+
+
+def bund_feed(body, url):
+    root = ElementTree.fromstring(body)
+    channel = root.find("channel")
+    if root.tag != "rss" or channel is None:
+        raise SourceError("One official native RSS channel required")
+    rows = []
+    for item in channel.findall("item"):
+        native_target = without_session(item.findtext("link") or "")
+        target_parts = urlsplit(native_target)
+        target = urlunsplit(
+            (target_parts.scheme, target_parts.netloc, target_parts.path, target_parts.query, "")
+        )
+        title = item.findtext("title")
+        guid = without_session(item.findtext("guid") or "")
+        row = {
+            "id": guid or target,
+            "url": target,
+            "title": title,
+            "metadata_verification_required": not bool(title),
+            "native_client_fragment_removed": bool(target_parts.fragment),
+            "description_snippet": without_session(item.findtext("description") or ""),
+            "source_feed_publication_raw": item.findtext("pubDate"),
+            "native_guid": guid,
+            "source_body_complete": False,
+            "applicant_fit_assessed": False,
+            "original_source_date": None,
+            "native_detail_url": None,
+            "body_route_status": "original_source_resolution_required",
+        }
+        try:
+            checked_url("bund_de", target, "detail")
+            row.update(
+                id=identity("bund_de", target),
+                native_detail_url=target,
+                body_route_status="native_detail_route",
+            )
+        except SourceError:
+            pass  # Retain actual metadata when a native body route needs separate verification.
+        try:
+            row["source_feed_publication"] = parsedate_to_datetime(
+                item.findtext("pubDate")
+            ).isoformat()
+        except (TypeError, ValueError):
+            row["source_feed_publication"] = None
+        rows.append(row)
+    if not rows:
+        raise SourceError("Native feed empty state has not been verified")
+    result = envelope("bund_de", body, url, "german_public_board_page")
+    result.update(
+        listings=rows,
+        returned_count=len(rows),
+        reported_total=None,
+        pagination={
+            "next_url": None,
+            "feed_snapshot_count": len(rows),
+            "retention_or_history_cap_unresolved": True,
+            "historical_coverage_verified": False,
+        },
+    )
+    return result
+
+
+def postings(value):
+    if isinstance(value, list):
+        for item in value:
+            yield from postings(item)
+    elif isinstance(value, dict):
+        if value.get("@type") == "JobPosting":
+            yield value
+        if "@graph" in value:
+            yield from postings(value["@graph"])
+
+
+def parse_detail(source, body, url):
+    checked_url(source, url, "detail")
+    if source == "germantechjobs":
+        job = json.loads(body)
+        if (
+            not isinstance(job, dict)
+            or not job.get("_id")
+            or job.get("jobUrl") != identity(source, url)
+        ):
+            raise SourceError("Native API detail identity differs from requested jobUrl")
+        fields = {
+            key: job.get(key)
+            for key in [
+                "description",
+                "requirementsMustTextArea",
+                "requirementsNiceTextArea",
+                "responsibilitiesTextArea",
+            ]
+        }
+        if not any(isinstance(value, str) and value.strip() for value in fields.values()):
+            raise SourceError("Native full detail fields missing; no snippet fallback")
+        result = envelope(source, body, url, "german_public_board_detail")
+        result.update(
+            id=str(job["_id"]),
+            title=job.get("name"),
+            native_job=job,
+            native_body_fields=fields,
+            description="\n\n".join(
+                key + "\n" + value
+                for key, value in fields.items()
+                if isinstance(value, str) and value.strip()
+            ),
+            source_body_untruncated=True,
+            full_posting_reviewed=False,
+            requirements_completeness_verified=False,
+        )
+        return result
+    tree = html.fromstring(body)
+    selectors = {
+        "absolventa": '//*[@id="internal-job-offer"]',
+        "academics": '//*[@id="job-ad-content"]',
+        "stellenanzeigen": '//*[@id="job-ad-details-widget"]',
+        "yourfirm": '//*[@id="job-ad-details-widget"]',
+        "bund_de": '//*[@id="main"]',
+    }
+    containers = tree.xpath(selectors[source])
+    if len(containers) != 1 or not clean(containers[0].text_content()):
+        raise SourceError("One complete native body container required")
+    native = []
+    for script in tree.xpath('//script[@type="application/ld+json"]'):
+        try:
+            native.extend(postings(json.loads(script.text or "")))
+        except ValueError:
+            continue
+    if source != "bund_de" and len(native) != 1:
+        raise SourceError("One native JobPosting required alongside complete visible body")
+    container = containers[0]
+    body_text = without_session(clean(container.text_content()))
+    result = envelope(source, body, url, "german_public_board_detail")
+    result.update(
+        id=identity(source, url),
+        title=native[0].get("title") if native else None,
+        native_job_posting=native[0] if native else None,
+        native_heading_texts=list(
+            dict.fromkeys(clean(e.text_content()) for e in tree.xpath("//h1"))
+        ),
+        description=body_text,
+        description_html=without_session(html.tostring(container, encoding="unicode")),
+        source_body_untruncated=True,
+        full_posting_reviewed=False,
+        requirements_completeness_verified=False,
+    )
+    return result
+
+
+def parse_inventory(source, body, url):
+    checked_url(source, url, "inventory")
+    if source in {"absolventa", "academics"}:
+        return static_page(source, body, url)
+    if source in {"stellenanzeigen", "yourfirm"}:
+        return flight_page(source, body, url)
+    if source == "germantechjobs":
+        return tech_inventory(body, url)
+    return bund_feed(body, url)
+
+
+def read(source, operation, url):
+    checked_url(source, url, operation)
+    robots, _ = fetch(source, ORIGINS[source] + "/robots.txt", "robots")
+    policy = RobotFileParser()
+    policy.parse(robots.decode("utf-8").splitlines())
+    if not policy.can_fetch(AGENT, url):
+        raise SourceError("Current robots denies this route; no resource request performed")
+    body, actual = fetch(source, url, operation, policy)
+    capture = None
+    if os.environ.get("JOB_MARKET_CAPTURE_DIR"):
+        folder = Path(os.environ["JOB_MARKET_CAPTURE_DIR"])
+        folder.mkdir(parents=True, exist_ok=True)
+        path = folder / (hashlib.sha256(body).hexdigest() + ".native")
+        try:
+            with path.open("xb") as handle:
+                handle.write(body)
+        except FileExistsError:
+            pass
+        capture = str(path)
+    result = (parse_inventory if operation == "inventory" else parse_detail)(source, body, actual)
+    result.update(
+        requested_url=url,
+        robots_sha256=hashlib.sha256(robots).hexdigest(),
+        private_raw_checkpoint=capture,
+    )
+    return result
+
+
+def capabilities():
+    return {
+        "status": "ok",
+        "sources": list(ORIGINS),
+        "origins": ORIGINS,
+        "inventory_paths": LIST_PATHS,
+        "operations": ["inventory", "detail"],
+        "limits": LIMITS,
+        "coverage_complete": False,
+        "numeric_page_contract": ["stellenanzeigen", "yourfirm"],
+        "feed_history_cap": ["bund_de"],
+        "reviewed_by_model": False,
+    }
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source", choices=list(ORIGINS))
+    parser.add_argument("--operation", choices=["inventory", "detail"])
+    parser.add_argument("--url")
+    parser.add_argument("--capabilities", action="store_true")
+    args = parser.parse_args()
+    try:
+        result = (
+            capabilities() if args.capabilities else read(args.source, args.operation, args.url)
+        )
+    except Exception as error:
+        result = {
+            "source": args.source,
+            "status": "source_limited",
+            "returned_count": None,
+            "coverage_complete": False,
+            "reviewed_by_model": False,
+            "error_type": type(error).__name__,
+            "http_status": error.code if isinstance(error, HTTPError) else None,
+            "retry_after": error.headers.get("Retry-After")
+            if isinstance(error, HTTPError) and error.headers
+            else None,
+            "message": str(error)
+            if isinstance(error, SourceError)
+            else "Native source unavailable, changed or incomplete; no partial/empty success.",
+        }
+    print(json.dumps(result, ensure_ascii=False))
+    return 0 if result["status"] == "ok" else 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,147 @@
+{
+  "as_of": "2026-10-29",
+  "root_tools": 62,
+  "all_read_only": true,
+  "receipts": [
+    {
+      "source": "absolventa",
+      "operation": "inventory",
+      "source_url": "https://www.absolventa.de/jobs?page=2",
+      "observed_at": "2026-10-29T19:45:43.643022+00:00",
+      "body_sha256": "e3a156c9ff0fe03496831aa2c93c66148dadff8c75a83959619f25f13a70f943",
+      "returned_count": 20,
+      "reported_total": null,
+      "pagination": {
+        "page": 2,
+        "native_page_links": {
+          "1": "https://www.absolventa.de/jobs",
+          "3": "https://www.absolventa.de/jobs?page=3",
+          "4": "https://www.absolventa.de/jobs?page=4",
+          "5": "https://www.absolventa.de/jobs?page=5"
+        },
+        "next_url": "https://www.absolventa.de/jobs?page=3",
+        "continuation_basis": "actual native pagination links",
+        "historical_coverage_verified": false
+      }
+    },
+    {
+      "source": "academics",
+      "operation": "inventory",
+      "source_url": "https://www.academics.de/stellenanzeigen?page=2",
+      "observed_at": "2026-10-29T19:45:44.180470+00:00",
+      "body_sha256": "3bcbba07afde525349bd41a887cf501679cf35df79f6dae93ce402cc5dfa1218",
+      "returned_count": 50,
+      "reported_total": null,
+      "pagination": {
+        "page": 2,
+        "native_page_links": {
+          "1": "https://www.academics.de/stellenanzeigen",
+          "2": "https://www.academics.de/stellenanzeigen?page=2",
+          "3": "https://www.academics.de/stellenanzeigen?page=3",
+          "4": "https://www.academics.de/stellenanzeigen?page=4",
+          "11": "https://www.academics.de/stellenanzeigen?page=11"
+        },
+        "next_url": "https://www.academics.de/stellenanzeigen?page=3",
+        "continuation_basis": "actual native pagination links",
+        "historical_coverage_verified": false
+      }
+    },
+    {
+      "source": "stellenanzeigen",
+      "operation": "inventory",
+      "source_url": "https://www.stellenanzeigen.de/jobs/?page=3",
+      "observed_at": "2026-10-29T19:45:44.646408+00:00",
+      "body_sha256": "d168f9154dd10234d2781e8e47910eee325ae10968f653179a8cd8b632d0b683",
+      "returned_count": 25,
+      "reported_total": 26746,
+      "pagination": {
+        "page": 3,
+        "offset": 50,
+        "limit": 25,
+        "native_page_links": {},
+        "next_url": "https://www.stellenanzeigen.de/jobs/?page=4",
+        "continuation_unresolved": false,
+        "next_url_is_provider_emitted_href": false,
+        "continuation_basis": "Verified native numeric page/limit/offset/count contract; next URL derived from that contract. Actual pages1,2,3 verified separately; not a provider-emitted next href.",
+        "historical_coverage_verified": false
+      }
+    },
+    {
+      "source": "yourfirm",
+      "operation": "inventory",
+      "source_url": "https://www.yourfirm.de/stellenangebote/?page=3",
+      "observed_at": "2026-10-29T19:45:45.296053+00:00",
+      "body_sha256": "dbbd93208f91703deaa99550bb3ce30dd56f8a0fdd552fde93d9c9f6417144ed",
+      "returned_count": 25,
+      "reported_total": 35446,
+      "pagination": {
+        "page": 3,
+        "offset": 50,
+        "limit": 25,
+        "native_page_links": {},
+        "next_url": "https://www.yourfirm.de/stellenangebote/?page=4",
+        "continuation_unresolved": false,
+        "next_url_is_provider_emitted_href": false,
+        "continuation_basis": "Verified native numeric page/limit/offset/count contract; next URL derived from that contract. Actual pages1,2,3 verified separately; not a provider-emitted next href.",
+        "historical_coverage_verified": false
+      }
+    },
+    {
+      "source": "germantechjobs",
+      "operation": "inventory",
+      "source_url": "https://germantechjobs.de/api/jobsLight",
+      "observed_at": "2026-10-29T19:45:45.820825+00:00",
+      "body_sha256": "83e08f52840516fc4c24150de6eefcdc33bb35015df2fffd41ade31e51247442",
+      "returned_count": 647,
+      "reported_total": null,
+      "pagination": {
+        "native_whole_array_response": true,
+        "next_url": null,
+        "historical_coverage_verified": false
+      }
+    },
+    {
+      "source": "germantechjobs",
+      "operation": "detail",
+      "source_url": "https://germantechjobs.de/api/jobWithUrl/ING-Deutschland-Senior-Frontend-Engineering-Expert-wmd",
+      "observed_at": "2026-10-29T19:45:46.359020+00:00",
+      "body_sha256": "d4dfe9552a609c4bc32aa9f8c90dfa0d662acfb6a298a9806478e391c9c09100",
+      "body_characters": 4646,
+      "full_posting_reviewed": false
+    },
+    {
+      "source": "bund_de",
+      "operation": "inventory",
+      "source_url": "https://www.service.bund.de/Content/Globals/Functions/RSSFeed/RSSGenerator_Stellen.xml?nn=4641956",
+      "observed_at": "2026-10-29T19:45:46.979505+00:00",
+      "body_sha256": "069f604a1280e39fc627212fe05b5e4dbf0484fd91cfe33538835cc05ae17c7a",
+      "returned_count": 500,
+      "reported_total": null,
+      "pagination": {
+        "next_url": null,
+        "feed_snapshot_count": 500,
+        "retention_or_history_cap_unresolved": true,
+        "historical_coverage_verified": false
+      }
+    },
+    {
+      "source": "bund_de",
+      "operation": "detail",
+      "source_url": "https://www.service.bund.de/IMPORTE/Stellenangebote/editor/Saechsisches-Staatsministerium-der-Justiz-und-fuer-Demokratie-Europa-und-Gleichstellung/2026/10/6682137.html",
+      "observed_at": "2026-10-29T19:45:47.388849+00:00",
+      "body_sha256": "55c68de34af855c47720b6c5fcb42db8695659f98b2270b1fb8c2cf752751300",
+      "body_characters": 7093,
+      "full_posting_reviewed": false
+    }
+  ],
+  "coverage_complete": false,
+  "registered_weekly_supply": false,
+  "account_or_candidate_action": false,
+  "scope": "Bounded real stdio engineering reads. No vacancy corpus, candidate profile, frozen week or national coverage claim.",
+  "date_and_retention_findings": [
+    "Native originalStartDate14September and current startDate29October are preserved separately.",
+    "Government RSS observed500records with27\u201329October history; earlier week remains unresolved.",
+    "GermanTechJobs light array moved637 to647 across separate observations, proving no frozen snapshot continuity.",
+    "Complete detail includes mandatory/nice requirements and responsibilities beyond description."
+  ]
+}
