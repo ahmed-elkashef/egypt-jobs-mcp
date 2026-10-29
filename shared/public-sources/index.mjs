@@ -5,8 +5,7 @@ import {
   fetchAshbyJobs,
   fetchGreenhouseJobs,
   fetchLeverJobs,
-  fetchRipplingJobs,
-  fetchWorkdayJobs
+  fetchRipplingJobs
 } from "@mambalabsdev/ats-scrapers";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
@@ -17,6 +16,7 @@ import {
 import { XMLParser } from "fast-xml-parser";
 import { pathToFileURL } from "node:url";
 import { InventoryClient, inventoryTools, plainText, SourceError, errorResult } from "./inventory.mjs";
+import {workdayTools,workday} from './workday.mjs';
 const inventoryClient = new InventoryClient();
 
 const DEFAULT_TIMEOUT_MS = Number(process.env.JOBFLOW_PUBLIC_JOBS_TIMEOUT_MS || 15000);
@@ -31,6 +31,7 @@ const server = new Server(
 );
 
 export const tools = [
+  ...workdayTools,
   ...inventoryTools,
   {
     name: "search_public_jobs",
@@ -278,6 +279,10 @@ server.setRequestHandler(CallToolRequestSchema, request => callTool(request.para
 
 export async function callTool(name, args = {}) {
   try {
+    if(workdayTools.some(tool=>tool.name===name)) {
+      const data=await workday(name,args);
+      return {...jsonContent(data),structuredContent:data,isError:data.status!=='ok'};
+    }
     let data;
     switch (name) {
       case "get_public_inventory": data = await inventoryClient.inventory(args); break;
@@ -545,6 +550,7 @@ async function fetchCompanyAtsJobs(args) {
   if (ats === "auto") {
     return detectCompanyAts(args);
   }
+  if(ats==='workday')throw new SourceError('Use the original workday_inventory/workday_detail tools with an explicitly verified board_url. The legacy capped domain reader is disabled.','workday_explicit_board_required');
 
   const domain = normalizeDomain(args.domain);
   const options = { slug: args.slug || undefined, timeout: DEFAULT_TIMEOUT_MS };
@@ -552,7 +558,6 @@ async function fetchCompanyAtsJobs(args) {
     greenhouse: fetchGreenhouseJobs,
     lever: fetchLeverJobs,
     ashby: fetchAshbyJobs,
-    workday: fetchWorkdayJobs,
     rippling: fetchRipplingJobs
   }[ats];
 
