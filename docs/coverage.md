@@ -4,15 +4,15 @@ As of 29 October 2026. This is code/source-contract coverage, not a fresh vacanc
 
 | Implementation/access state | Sources/channel groups |
 | --- | --- |
-| access_limited | 7 |
+| access_limited | 11 |
 | context_only | 4 |
 | credential_required | 3 |
 | external_connector | 3 |
 | implemented | 31 |
 | requires_employer_seed | 7 |
-| research_required | 38 |
+| research_required | 35 |
 
-The registry has 93 unique entries: 43 apply to Egypt and 78 to Germany, including shared entries. These counts overlap; they are not numbers of vacancies, employers or live working transports.
+The registry has 94 unique entries: 43 apply to Egypt and 79 to Germany, including shared entries. These counts overlap; they are not numbers of vacancies, employers or live working transports.
 
 ## What still needs original implementation or access
 
@@ -49,19 +49,19 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [BA coaching](https://www.arbeitsagentur.de/) | DE | implemented | training_context |
 | [StepStone Germany](https://www.stepstone.de/) | DE | access_limited | national_board |
 | [Indeed Germany](https://de.indeed.com/) | DE | research_required | national_board |
-| [XING Jobs](https://www.xing.com/jobs) | DE | research_required | national_board |
-| [meinestadt.de](https://jobs.meinestadt.de/) | DE | research_required | local_board |
+| [XING Jobs](https://www.xing.com/jobs) | DE | access_limited | national_board |
+| [meinestadt.de](https://jobs.meinestadt.de/) | DE | access_limited | local_board |
 | [stellenanzeigen.de](https://www.stellenanzeigen.de/) | DE | implemented | national_board |
 | [Jobware](https://www.jobware.de/) | DE | implemented | national_board |
 | [Kimeta](https://www.kimeta.de/) | DE | research_required | aggregator |
 | [Monster Germany](https://www.monster.de/) | DE | research_required | national_board |
-| [jobvector](https://www.jobvector.de/) | DE | research_required | specialist_board |
+| [jobvector](https://www.jobvector.de/) | DE | access_limited | specialist_board |
 | [Yourfirm](https://www.yourfirm.de/) | DE | implemented | smb_board |
 | [Jobs.de](https://www.jobs.de/) | DE | implemented | national_board |
 | [jobtensor](https://jobtensor.com/) | DE | access_limited | specialist_board |
 | [Absolventa](https://www.absolventa.de/) | DE | implemented | graduate_board |
 | [academics](https://www.academics.de/) | DE | implemented | research_board |
-| [EURAXESS](https://euraxess.ec.europa.eu/jobs) | DE | research_required | research_board |
+| [EURAXESS](https://euraxess.ec.europa.eu/jobs) | DE | access_limited | research_board |
 | [Jobmensa](https://www.jobmensa.de/) | DE | implemented | student_board |
 | [Stellenwerk](https://www.stellenwerk.de/) | DE | research_required | student_board |
 | [StudentJob Germany](https://www.studentjob.de/) | DE | implemented | student_board |
@@ -120,6 +120,8 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [GULP](https://www.gulp.de/) | DE | research_required | freelance_demand |
 | [Khamsat](https://khamsat.com/) | EG | research_required | freelance_demand |
 
+| [HeyJobs](https://www.heyjobs.co/de-de/) | DE | research_required | national_board |
+
 Jobmensa public list/detail routes were added in v0.4.2 with live policy checks, native continuation and synthetic regressions. This changes implementation status only; it does not close any national or historical coverage claim.
 
 StudentJob and YoungCapital native list/detail readers were added in v0.4.3. External redirect records are retained and can remain access-limited under current robots. Their presence does not mean original-employer body access or applicant fit was verified.
@@ -136,3 +138,15 @@ reading but remains access_limited because its signed outbound routes are denied
 no full-body transport is claimed. Jobtensor native search returned HTTP403; no
 challenge, account or bypass was attempted. See the separate dated proof for
 counts and limits; none of this proves a frozen country week or applicant fit.
+
+
+
+v0.4.6 adds original anonymous XING inventory/body/discovery parsing. Native
+semantic search/range echoes, promoted external records, ambiguous literal
+locations and the observed 2,000-result retrieval cap remain explicit. Advertised
+sitemaps include expired adverts. Large whole URI partitions use immutable private
+consumer segments, **not** native pages or active-job counts. Meinestadt ordinary
+reference/advertised-sitemap403, EURAXESS search robots denial and Jobvector
+robots403 are dated route-specific access limits; other legitimate provider
+routes remain discovery questions. HeyJobs was discovered as actual external
+primary cards and is explicitly registered for further verification.

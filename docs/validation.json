@@ -1,10 +1,10 @@
 {
   "as_of": "2026-10-29",
   "node_tests": 103,
-  "python_tests": 274,
+  "python_tests": 294,
   "failed": 0,
-  "real_stdio_tools": 62,
-  "source_registry_entries": 93,
+  "real_stdio_tools": 63,
+  "source_registry_entries": 94,
   "upstream_vendor_files": 55,
   "vendor_bytes_changed": 0,
   "npm_audit_high_or_critical": 0,
@@ -14,12 +14,13 @@
     "docs/jobmensa-live-proof.json",
     "docs/student-boards-live-proof.json",
     "docs/public-boards-live-proof.json",
-    "docs/public-boards-next-live-proof.json"
+    "docs/public-boards-next-live-proof.json",
+    "docs/xing-live-proof.json"
   ],
   "limits": [
     "Engineering probes do not establish country/interval coverage.",
     "Interamt missing-approved-key gate verified, authenticated live read not performed.",
-    "Source register retains38 research-required entries.",
+    "Source register retains35 research-required entries.",
     "No private applicant, raw job corpus, credential, account configuration or source workflow imported."
   ],
   "validation_scope": "Local synthetic regression suite; clean checkout CI required before merge"

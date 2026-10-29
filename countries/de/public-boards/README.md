@@ -1,6 +1,6 @@
 # Original public German board readers
 
-This package reads ten providers (EnglishJobs metadata only) through ordinary permitted HTTP, native JSON,
+This package reads eleven providers (EnglishJobs metadata only; source-specific access/cap limits apply) through ordinary permitted HTTP, native JSON,
 SSR data and an official feed. No browser, account or application action starts.
 
 | Source | Inventory | Full detail |
@@ -85,3 +85,31 @@ robots denial remains explicit. Signed/encrypted redirect values never reach
 outputs; no redirect decoding, challenge execution or denied request is used.
 Actual original employer identity and a separately permitted complete body remain
 necessary. A native theme is not a proven employment contract or national census.
+
+
+## XING and immutable URI discovery in v0.4.6
+
+Anonymous native lists retain all primary records and actual page/range/count
+metadata, including external promoted cards. The source enum INTERN is labelled
+Studierende; visible descriptions and exact contracts still need reconciliation.
+The native jobs-in-hessen route resolves literal location text Hessen with a20km
+radius. It is **not** evidence of a Hesse state polygon. The student page100
+returned20 records with no next link despite more than12,000 reported records;
+this terminal is a provider cap and remains unresolved coverage.
+
+The data-object parser accepts only inert JSON plus explicit undefined-as-unknown.
+It never executes website JavaScript. Only selected job facts are hydrated from
+references; viewer/account/matching graphs, tracking tokens and signed branding
+assets are excluded. A full detail requires matching native DTO and visible
+complete description plus the independent JobPosting. Refreshed/activation clocks
+never silently become an original employer publication.
+
+Advertised sitemap records are URI discovery, including expired adverts and
+directory/category links. They are never normal vacancy pages. For a large whole
+partition, set JOB_MARKET_CAPTURE_DIR to an explicitly private directory. The
+reader preserves every URI in a content-addressed immutable capture and returns a
+manifest. Read every segment using de_public_german_board_capture_segment with
+the exact capture_id and zero-based segment_index. Segments contain1,000 URIs,
+are explicitly consumer segmentation rather than provider pagination, and bind
+the original resource hash. Missing configuration, checksum changes, symlinks and
+invalid/out-of-range indices fail without truncation or an arbitrary file API.

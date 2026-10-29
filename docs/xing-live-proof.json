@@ -1,0 +1,229 @@
+{
+  "version": "0.4.6",
+  "read_only_tools": 63,
+  "all_read_only": true,
+  "probes": [
+    {
+      "name": "capabilities",
+      "tool": "de_public_german_boards_capabilities",
+      "isError": false,
+      "status": "ok",
+      "kind": null,
+      "records": null,
+      "description_characters": null,
+      "native_partitions": null,
+      "sources": 11,
+      "next": null,
+      "native_uri_count": null,
+      "capture_id": null,
+      "consumer_segments": null,
+      "continuation_unresolved": null,
+      "geography_membership_verified": null,
+      "external_primary_cards": null,
+      "coverage_complete": false
+    },
+    {
+      "name": "xing-student-page1",
+      "tool": "de_public_german_board_inventory",
+      "isError": false,
+      "status": "ok",
+      "kind": "german_public_board_page",
+      "records": 20,
+      "description_characters": null,
+      "native_partitions": null,
+      "sources": null,
+      "next": "https://www.xing.com/jobs/k-student?page=2",
+      "native_uri_count": null,
+      "capture_id": null,
+      "consumer_segments": null,
+      "continuation_unresolved": false,
+      "geography_membership_verified": false,
+      "external_primary_cards": 0,
+      "coverage_complete": false
+    },
+    {
+      "name": "xing-student-page2",
+      "tool": "de_public_german_board_inventory",
+      "isError": false,
+      "status": "ok",
+      "kind": "german_public_board_page",
+      "records": 20,
+      "description_characters": null,
+      "native_partitions": null,
+      "sources": null,
+      "next": "https://www.xing.com/jobs/k-student?page=3",
+      "native_uri_count": null,
+      "capture_id": null,
+      "consumer_segments": null,
+      "continuation_unresolved": false,
+      "geography_membership_verified": false,
+      "external_primary_cards": 0,
+      "coverage_complete": false
+    },
+    {
+      "name": "xing-student-page100",
+      "tool": "de_public_german_board_inventory",
+      "isError": false,
+      "status": "ok",
+      "kind": "german_public_board_page",
+      "records": 20,
+      "description_characters": null,
+      "native_partitions": null,
+      "sources": null,
+      "next": null,
+      "native_uri_count": null,
+      "capture_id": null,
+      "consumer_segments": null,
+      "continuation_unresolved": true,
+      "geography_membership_verified": false,
+      "external_primary_cards": 0,
+      "coverage_complete": false
+    },
+    {
+      "name": "xing-ambiguous-hessen",
+      "tool": "de_public_german_board_inventory",
+      "isError": false,
+      "status": "ok",
+      "kind": "german_public_board_page",
+      "records": 20,
+      "description_characters": null,
+      "native_partitions": null,
+      "sources": null,
+      "next": "https://www.xing.com/jobs/jobs-in-hessen?page=2",
+      "native_uri_count": null,
+      "capture_id": null,
+      "consumer_segments": null,
+      "continuation_unresolved": false,
+      "geography_membership_verified": false,
+      "external_primary_cards": 2,
+      "coverage_complete": false
+    },
+    {
+      "name": "xing-full-detail",
+      "tool": "de_public_german_board_detail",
+      "isError": false,
+      "status": "ok",
+      "kind": "german_public_board_detail",
+      "records": null,
+      "description_characters": 659,
+      "native_partitions": null,
+      "sources": null,
+      "next": null,
+      "native_uri_count": null,
+      "capture_id": null,
+      "consumer_segments": null,
+      "continuation_unresolved": null,
+      "geography_membership_verified": null,
+      "external_primary_cards": null,
+      "coverage_complete": false
+    },
+    {
+      "name": "xing-uri-capture",
+      "tool": "de_public_german_board_inventory",
+      "isError": false,
+      "status": "ok",
+      "kind": "source_uri_capture_manifest",
+      "records": null,
+      "description_characters": null,
+      "native_partitions": null,
+      "sources": null,
+      "next": null,
+      "native_uri_count": 50000,
+      "capture_id": "7b22f290759f06d39bba76fdf0fdd22ed7126e97ab721012948de0b448df45f3",
+      "consumer_segments": 50,
+      "continuation_unresolved": null,
+      "geography_membership_verified": null,
+      "external_primary_cards": null,
+      "coverage_complete": false
+    },
+    {
+      "name": "uri-segment-0",
+      "returned_uri_count": 1000,
+      "native_uri_count": 50000,
+      "native_pagination": false,
+      "current_vacancy_status_verified": false,
+      "coverage_complete": false
+    },
+    {
+      "name": "uri-segment-49",
+      "returned_uri_count": 1000,
+      "native_uri_count": 50000,
+      "native_pagination": false,
+      "current_vacancy_status_verified": false,
+      "coverage_complete": false
+    }
+  ],
+  "coverage_complete": false,
+  "as_of": "2026-10-29",
+  "whole_uri_consumer_reassembly": {
+    "status": "ok",
+    "native_uris": 50000,
+    "unique_uris": 50000,
+    "immutable_consumer_segments": 50,
+    "native_pagination": false,
+    "current_vacancy_status_verified": false,
+    "coverage_complete": false,
+    "capture_id": "7b22f290759f06d39bba76fdf0fdd22ed7126e97ab721012948de0b448df45f3"
+  },
+  "native_source_findings": {
+    "student_native_filter": {
+      "employmentType": {
+        "id": [
+          "INTERN.dc571c"
+        ]
+      },
+      "native_label": "Studierende",
+      "verified_contract_model": false
+    },
+    "hessen_native_location": {
+      "text": "Hessen",
+      "radius": 20,
+      "state_polygon_verified": false
+    },
+    "native_student_page100": {
+      "records": 20,
+      "next_url": null,
+      "reported_total_more_than_12000": true,
+      "retrieval_cap_unresolved": true
+    },
+    "first_advertised_old_job_detail_http_status": 410,
+    "sitemap_uris_are_current_vacancies": false,
+    "employer_sitemap_is_census": false,
+    "external_cards_retained": true,
+    "signed_asset_and_tracking_values_emitted": false
+  },
+  "additional_access_evidence": [
+    {
+      "source": "meinestadt",
+      "routes": [
+        "/",
+        "/jobs-files/sitemap/stellen/sitemap-index.xml"
+      ],
+      "robots_allowed": true,
+      "http_status": 403
+    },
+    {
+      "source": "euraxess",
+      "native_search_route": "/jobs/search",
+      "robots_allowed": false,
+      "search_request_performed": false,
+      "permitted_sitemap_kinds": [
+        "basic-pages",
+        "events",
+        "news"
+      ]
+    },
+    {
+      "source": "jobvector",
+      "policy_route": "/robots.txt",
+      "http_status": 403,
+      "inventory_request_performed": false
+    }
+  ],
+  "limits": [
+    "Dated bounded engineering evidence, not country-week coverage or applicant-fit review.",
+    "No real job corpus, raw web/bootstrap, signed query values, applicant or account records published.",
+    "Consumer URI segments are not provider pagination or active-job counts. Source native terminal100 leaves supply unresolved.",
+    "HeyJobs external primary links were registered for further original verification, not silently dropped."
+  ]
+}
