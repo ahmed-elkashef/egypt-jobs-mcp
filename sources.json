@@ -705,14 +705,38 @@
         "DE"
       ],
       "category": "national_board",
-      "status": "research_required",
+      "status": "implemented",
       "references": [
         "https://www.jobware.de/"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "jobware"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_detail",
+          "public_tool": "de_public_german_board_detail",
+          "fixed_arguments": {
+            "source": "jobware"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
-      ]
+        "Original read-only public native inventory and complete visible/source detail fields; current robots and exact URL/identity/query guards.",
+        "Native links or separately verified numeric page/offset/count continuation remain explicit. Moving pages are not frozen historical coverage.",
+        "Original campaign, renewal, activation, expiry and observation clocks remain distinct; no invented employer publication or applicant fit.",
+        "No login, application, contact, save, subscription or account action. Raw web/session state is excluded from public fixtures.",
+        "Whole official advertisement sitemap; preserve leading-zero native IDs, lastmod and expires. Neither clock is silently original employer publication.",
+        "Details preserve structured JobPosting plus the full exact native iframe, separately checking its current policy and original ad identity. A moving sitemap is not historical retention proof."
+      ],
+      "code_audited_on": "2026-10-29",
+      "last_saved_transport_evidence": "2026-10-29"
     },
     {
       "id": "kimeta",
@@ -806,14 +830,38 @@
         "DE"
       ],
       "category": "national_board",
-      "status": "research_required",
+      "status": "implemented",
       "references": [
         "https://www.jobs.de/"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "jobs_de"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_detail",
+          "public_tool": "de_public_german_board_detail",
+          "fixed_arguments": {
+            "source": "jobs_de"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
-      ]
+        "Original read-only public native inventory and complete visible/source detail fields; current robots and exact URL/identity/query guards.",
+        "Native links or separately verified numeric page/offset/count continuation remain explicit. Moving pages are not frozen historical coverage.",
+        "Original campaign, renewal, activation, expiry and observation clocks remain distinct; no invented employer publication or applicant fit.",
+        "No login, application, contact, save, subscription or account action. Raw web/session state is excluded from public fixtures.",
+        "Whole native jobs DTOs, including source clocks and address/model fields; unfiltered native numeric range verified at pages 1, 2, 3. Last is a count, not an end index.",
+        "Native application flags can be portal defaults for external applications; false is not proof the employer waives a CV or letter."
+      ],
+      "code_audited_on": "2026-10-29",
+      "last_saved_transport_evidence": "2026-10-29"
     },
     {
       "id": "jobtensor",
@@ -822,14 +870,17 @@
         "DE"
       ],
       "category": "specialist_board",
-      "status": "research_required",
+      "status": "access_limited",
       "references": [
         "https://jobtensor.com/"
       ],
       "routes": [],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
-      ]
+        "The native search route, discovered from its own route map, returned HTTP403 after an allowed robots check on 2026-10-29. This is not zero supply or proof login is required.",
+        "No challenge execution, fingerprinting, account action or access bypass. Inventory, continuation and full-body access remain unresolved."
+      ],
+      "code_audited_on": "2026-10-29",
+      "last_saved_transport_evidence": "2026-10-29"
     },
     {
       "id": "absolventa",
@@ -1221,14 +1272,38 @@
         "DE"
       ],
       "category": "regional_board",
-      "status": "research_required",
+      "status": "implemented",
       "references": [
         "https://berlinstartupjobs.com/"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "berlinstartupjobs"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_detail",
+          "public_tool": "de_public_german_board_detail",
+          "fixed_arguments": {
+            "source": "berlinstartupjobs"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
-      ]
+        "Original read-only public native inventory and complete visible/source detail fields; current robots and exact URL/identity/query guards.",
+        "Native links or separately verified numeric page/offset/count continuation remain explicit. Moving pages are not frozen historical coverage.",
+        "Original campaign, renewal, activation, expiry and observation clocks remain distinct; no invented employer publication or applicant fit.",
+        "No login, application, contact, save, subscription or account action. Raw web/session state is excluded from public fixtures.",
+        "The root returns all native category partitions, not an empty vacancy page. Enumerate every category and actual next href, retaining overlaps and newly unsupported partitions.",
+        "Dated diagnostic traversed all 12 native categories and emitted pagination: 136 unique native metadata URLs. Full-body/applicant/frozen-week review is separate."
+      ],
+      "code_audited_on": "2026-10-29",
+      "last_saved_transport_evidence": "2026-10-29"
     },
     {
       "id": "englishjobs",
@@ -1237,14 +1312,30 @@
         "DE"
       ],
       "category": "national_board",
-      "status": "research_required",
+      "status": "access_limited",
       "references": [
         "https://englishjobs.de/"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "englishjobs"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
-      ]
+        "Original read-only public native inventory and complete visible/source detail fields; current robots and exact URL/identity/query guards.",
+        "Native links or separately verified numeric page/offset/count continuation remain explicit. Moving pages are not frozen historical coverage.",
+        "Original campaign, renewal, activation, expiry and observation clocks remain distinct; no invented employer publication or applicant fit.",
+        "No login, application, contact, save, subscription or account action. Raw web/session state is excluded from public fixtures.",
+        "Original native metadata reader retains every card and emitted continuation in observed state/student/remote partitions. Themes and month/day labels do not establish contract, country or original year.",
+        "Current signed outbound clickouts were denied by robots. Never request, decrypt or bypass denied redirects, and never emit their signed/encrypted query values. No implemented full-body route; independently evidenced original-employer resolution remains required."
+      ],
+      "code_audited_on": "2026-10-29",
+      "last_saved_transport_evidence": "2026-10-29"
     },
     {
       "id": "instaffo",

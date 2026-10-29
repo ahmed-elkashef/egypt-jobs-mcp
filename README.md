@@ -52,7 +52,7 @@ The federation forwards full native responses without shortening job description
 
 The original [Jobmensa, StudentJob and YoungCapital readers](countries/de/student-boards/README.md) enumerate complete public native pages and full visible job details without a browser. Current robots policy, exact native continuation and model/date/worker-country ambiguities remain explicit. It makes no account, contact or application action.
 
-The original [public-board readers](countries/de/public-boards/README.md) also cover Absolventa, academics, stellenanzeigen.de, Yourfirm, GermanTechJobs and the permitted official government vacancy feed. Native full bodies, verified pagination and distinct clocks remain separate from coverage and applicant fit.
+The original [public-board readers](countries/de/public-boards/README.md) also cover Absolventa, academics, stellenanzeigen.de, Yourfirm, GermanTechJobs the permitted official government vacancy feed, Jobs.de, Jobware, BerlinStartupJobs and EnglishJobs metadata. Native full bodies, verified pagination and distinct clocks remain separate from coverage and applicant fit.
 
 ## Additional Germany API
 

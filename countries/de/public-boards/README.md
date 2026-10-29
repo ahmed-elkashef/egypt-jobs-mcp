@@ -1,6 +1,6 @@
 # Original public German board readers
 
-This package reads six providers through ordinary permitted HTTP, native JSON,
+This package reads ten providers (EnglishJobs metadata only) through ordinary permitted HTTP, native JSON,
 SSR data and an official feed. No browser, account or application action starts.
 
 | Source | Inventory | Full detail |
@@ -56,3 +56,32 @@ content-addressed native bytes. Never commit real job datasets, raw web pages,
 bootstrap/session state, applicants or credentials. Code licensing does not grant
 rights to republish provider content. Tests are synthetic; bounded live evidence
 is separate and dated.
+
+
+## Additional native contracts in v0.4.5
+
+Jobs.de returns native jobs DTOs, current clocks and explicit page ranges. Pages
+1, 2 and 3 and the frontend formula independently establish that `ranges.last`
+is a count. Conditions and fulltext must remain empty; numeric continuation is
+labelled as derived rather than a provider-emitted href. Native application flags
+are retained as portal data, never employer document waivers.
+
+Jobware exposes its official complete advertisements sitemap. Each nine-digit
+advertisement ID retains leading zeroes. `lastmod` and `expires` do not become an
+original publication date. Full details require both the structured wrapper and
+the exact same-advertisement native iframe, with independent current robots
+checks. An empty/denied/mismatched iframe never falls back to a short snippet.
+
+BerlinStartupJobs root inventory returns a **partition catalogue**, with no empty
+vacancy array. Read every category and emitted next-page href, retaining new
+unsupported categories rather than dropping them. Current role and work-model
+categories overlap; acquiring only candidate-interest categories is incomplete.
+The dated diagnostic traversed all 12 native categories and found 136 distinct
+native URLs. Complete visible bodies remain separate from metadata and fit.
+
+EnglishJobs supports native state/student/remote **metadata only**. It preserves
+all cards, the selected page and real continuation. The dated signed-clickout
+robots denial remains explicit. Signed/encrypted redirect values never reach
+outputs; no redirect decoding, challenge execution or denied request is used.
+Actual original employer identity and a separately permitted complete body remain
+necessary. A native theme is not a proven employment contract or national census.
