@@ -1,0 +1,47 @@
+{
+  "name": "@ahmed-elkashef/german-arbeitsmarkt-mcp",
+  "version": "1.1.0",
+  "description": "Six-family German labour-market MCP with structured BA v6 jobs, complete workplaces and explicit pagination evidence",
+  "type": "module",
+  "bin": {
+    "german-arbeitsmarkt-mcp": "src/index.js"
+  },
+  "main": "src/server.js",
+  "exports": {
+    ".": "./src/server.js",
+    "./jobs": "./src/jobs.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test",
+    "test:live": "node scripts/live-proof.mjs"
+  },
+  "author": "Greyt GmbH",
+  "contributors": [
+    "Ahmed Elkashef"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmed-elkashef/job-market-mcp.git",
+    "directory": "countries/de/arbeitsmarkt"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "4.6.7"
+  },
+  "files": [
+    "src",
+    "vendor",
+    "LICENSE",
+    "README.md",
+    "CREDITS.md",
+    "UPSTREAM.json"
+  ],
+  "bugs": {
+    "url": "https://github.com/ahmed-elkashef/job-market-mcp/issues"
+  }
+}

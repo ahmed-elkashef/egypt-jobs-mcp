@@ -1,0 +1,11 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.live-test/
+*.tgz
+.DS_Store
+
+# Upstream distribution is deliberately tracked source, not a local build.
+!vendor/greyt-1.0.0/dist/
+!vendor/greyt-1.0.0/dist/**

@@ -1,0 +1,64 @@
+# Changelog
+
+## 0.3.5 — 2026-10-19
+
+- Add reusable Tanqeeb public DOM list/detail parsing, canonical IDs, selected native country/model signatures and safe continuation instructions when Next URLs omit selected state.
+- Add strict Akhtaboot Egypt anonymous HTTP/DOM pages and canonical details, separating the verified current scoped-empty state from unavailable/challenge responses. Nonempty provider markup diagnostics are not Egyptian market supply.
+- Add independently verified ArabJobs native work-model partitions and continuation scope checks. No inferred native weekly-date filter.
+- Add verified Forasna half-day plus explicit Egypt query controls; preserve case-sensitive native names and continuation scope rather than substituting a country-ambiguous SEO page.
+- Reconcile Forasna structured identity/date/country/pay evidence with the missing actual duty-body guard.
+- Extend immutable local capture support to both boards; add synthetic privacy, scope, empty-state, contradiction and continuation regressions. No candidate preferences or real listing corpus is distributed.
+
+## 0.3.4 — 2026-10-10
+
+- Forasna narrow JobPosting reconciliation: exact source identity, aware timestamps, native salary units and applicant-country requirements; report visible-clock contradictions.
+- WUZZUF verified canonical internship URL support and safe rate/cooldown headers.
+- Himalayas official omitted terminal nextCursor is exhausted; present invalid/stalled cursors remain errors.
+- Serialize complete native HTML once with exact native-row reconstruction, avoiding duplicate-body buffer pressure.
+- Complete-body Arbeitnow/The Muse adapters preserve all native rows, exact pagination and descriptions; registered Muse access required beyond bounded testing. Safe errors retain no credential-bearing URL.
+
+## 0.3.3 — 2026-10-10
+
+- Optional Lever-only exact observed commitment labels, encoded as repeated native OR parameters.
+- Preserve complete descriptions, raw counts and returned-offset continuation; verify known commitments and retain uncertain metadata.
+- Reject malformed/cross-source/detail filters before network access; positive filters never establish whole-board or geographic coverage.
+
+## 0.3.2 — 2026-10-10
+
+- Paired aware Freelancer activity-window arguments, fixed native epoch filters, returned-update verification and separate exact submission-window classification without dropping rows or changing offsets.
+- Missing/conflicting source dates remain undetermined; activity filters and matching submission fields do not prove first-ever creation. Explicit native-filter contradictions fail closed.
+- Preserve the hourly billing-limit basis; the native default 40-hour limit is not proof of required full-time attendance.
+- Synthetic boundary, future-contradiction, privacy, cross-source and dispatch tests. Existing WUZZUF full-time model support remains available for source taxonomy reconciliation.
+
+## 0.3.1 — 2026-10-10
+
+- Accept verified native Working Nomads numeric redirect links and Himalayas company/job posting paths while retaining fixed source-host and URL security checks.
+- Preserve a Remote OK index-only row with its source ID and full text, a missing exact-posting-link gate and source-index attribution; never drop a whole feed or invent a vacancy URL.
+- Synthetic regressions cover observed URL shapes and malformed-path boundaries; no job corpus or private records are included.
+
+## 0.3.0
+
+- Explicit employer-board readers for the official Greenhouse, Lever and Ashby public contracts.
+- Retain stable posting IDs and complete native descriptions and location/model/date/compensation fields.
+- Distinguish whole-board snapshots from Lever pages and geographic/weekly coverage.
+- Failed transport or malformed payloads remain explicit limits instead of fabricated empty supply.
+- Exact board tokens, fixed trusted endpoints, and synthetic boundary/pagination/full-text checks.
+
+## 0.2.0 — 2026-10-09
+
+- Broad Remotive, Remote OK, We Work Remotely RSS and Working Nomads snapshot adapters, preserving every returned item and full source fields without keyword or candidate filters.
+- Himalayas global browse adapter with official cursor pagination, salary periods and source metadata; separate from Egypt country search.
+- Worldwide Freelancer active-project and detail reads with full descriptions, currencies, explicit pagination and public/deleted-content guards.
+- Optional approved-token Upwork marketplace search/content reader with fixed read-only GraphQL operations. Live authorized API behavior remains unverified.
+- Remote and freelance console commands, offline capability discovery and explicit source-limited errors.
+- Strict feed URLs, rejected redirects, response bounds, RSS declaration/entity guards and additional synthetic boundary tests.
+- Expanded official-source policy and pinned research credits; no third-party implementation code, live dataset or credentials added.
+
+## 0.1.0 — 2026-10-09
+
+- Initial independent public extraction of Egypt source adapters.
+- WUZZUF public frontend JSON:API acquisition, geography verification, full descriptions, native facets, and stable public IDs.
+- Forasna and ArabJobs public DOM parsers with guarded URLs and explicit pagination limits.
+- Mostaql public project briefs and raw terms; public remote-feed and Bayt parser support.
+- Local operator-capture handoff with immutable receipts, digest validation, and a user cache.
+- Offline synthetic tests; no source corpus or private workflow data included.

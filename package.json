@@ -1,46 +1,32 @@
 {
-  "name": "egypt-jobs-mcp",
-  "version": "0.3.7",
+  "name": "job-market-mcp",
+  "version": "0.4.0",
   "private": true,
-  "description": "Read-only MCP access to Egyptian public job sources and client projects.",
+  "description": "Country-organized read-only labour-market sources: Egypt, Germany and shared infrastructure.",
   "type": "module",
   "license": "MIT",
   "author": "Ahmed Elkashef",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahmed-elkashef/egypt-jobs-mcp.git"
-  },
-  "bugs": {
-    "url": "https://github.com/ahmed-elkashef/egypt-jobs-mcp/issues"
-  },
-  "homepage": "https://github.com/ahmed-elkashef/egypt-jobs-mcp#readme",
-  "scripts": {
-    "start": "node index.mjs",
-    "test": "node --test test/*.test.mjs",
-    "smoke": "node smoke.mjs"
-  },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "1.32.1",
-    "zod": "3.25.76"
+    "url": "git+https://github.com/ahmed-elkashef/job-market-mcp.git"
   },
   "engines": {
     "node": ">=20"
   },
-  "files": [
-    "index.mjs",
-    "browser-extract.mjs",
-    "smoke.mjs",
-    "test/",
-    "README.md",
-    "ACKNOWLEDGMENTS.md",
-    "upstream-references.json",
-    "SOURCE_POLICY.md",
-    "LICENSE",
-    "CHANGELOG.md",
-    "CONTRIBUTING.md",
-    "expanded-tools.mjs",
-    "ats-tools.mjs",
-    "browser-runner.mjs",
-    "browser-tools.mjs"
-  ]
+  "workspaces": [
+    "countries/eg/mcp",
+    "countries/de/arbeitsmarkt",
+    "shared/public-sources"
+  ],
+  "scripts": {
+    "start": "node server.mjs",
+    "start:egypt": "node index.mjs",
+    "test": "node --test test/*.test.mjs && npm run test --workspaces --if-present",
+    "check": "node --check server.mjs && node --check lib/federation.mjs && node scripts/check-registry.mjs",
+    "test:python": "python3 scripts/test-python.py"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "zod": "4.6.7"
+  }
 }

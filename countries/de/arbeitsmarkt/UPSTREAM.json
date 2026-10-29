@@ -1,0 +1,14 @@
+{
+  "package": "german-arbeitsmarkt-mcp",
+  "version": "1.0.0",
+  "author": "Greyt GmbH",
+  "license_declared_by_upstream": "MIT",
+  "npm": "https://www.npmjs.com/package/german-arbeitsmarkt-mcp/v/1.0.0",
+  "tarball": "https://registry.npmjs.org/german-arbeitsmarkt-mcp/-/german-arbeitsmarkt-mcp-1.0.0.tgz",
+  "tarball_sha1": "2388b81a8ad996bf015d9cb26f46f4bba1fa1957",
+  "tarball_integrity": "sha512-/YFT1RHId/VIg4zBwiU49yPZqtmwZcCcLDCPpzbMQCLJMUz3tvkh/wjLsyj03xRUHfd5Unv92wADcWeQo7hiFg==",
+  "npm_git_head": "ac1e174e731bd0eba84a93fdae088b0d7aafbd45",
+  "repository_in_npm_metadata": null,
+  "packaging_note": "The npm distribution declares MIT and lists LICENSE/README.md in package.files, but omits both from the tarball. This derivative includes standard MIT licence text with Greyt GmbH attribution.",
+  "provenance": "Derived from the integrity-verified published npm distribution. No upstream repository URL is provided in package metadata or found through exact public GitHub repository search. This is not a GitHub fork."
+}

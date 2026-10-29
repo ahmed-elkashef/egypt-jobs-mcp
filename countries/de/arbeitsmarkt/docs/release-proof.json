@@ -1,0 +1,159 @@
+{
+  "version": "1.1.0",
+  "verified_at": "2026-10-10T08:16:07.942Z",
+  "unit_and_protocol_tests": {
+    "status": "PASS",
+    "tests": 12,
+    "node": "v26.7.0",
+    "command": "node --test"
+  },
+  "code_sha256": {
+    "package-lock.json": "4eb559f184daf6685e54f91bf2eedb7fe4c73109fa2ff8ba1c3a4f5df8abc0cf",
+    "package.json": "3b499d74734c1351b21bc7487dd56c5b3e7fd796b3337f688b67421fb90cde3a",
+    "src/index.js": "3e9fa5ecbf65e80a0f6f1305408caee3e73769cc16e9d0f7ee2e85e6f7b16956",
+    "src/jobs.js": "5e7ed88b87355ea7fe378b3858253f8bffe3e63efb291c8ebfa82aeed56ec80d",
+    "src/server.js": "f1c9a9af08631dd346771510d5beb5c2c1b52595f74474bac7440bed83d23a4c",
+    "test/jobs.test.js": "1e09dd91ec35a54e3d5a9884f7b32e3b343c2e00c1285e42a99ae6e5941d9c56",
+    "test/mcp.test.js": "8fc5edcfa0c8a234dfaa1085a04c927b8e5c43b3fc12674055f9a78a00262eaf"
+  },
+  "upstream": {
+    "published_files": 55,
+    "integrity_verified": true,
+    "metadata": "UPSTREAM.json",
+    "file_manifest": "docs/upstream-files.sha256.json"
+  },
+  "live": {
+    "tested_at": "2026-10-10T08:13:36.241Z",
+    "scope": "Bounded live MCP diagnostics, not full-market or interval coverage",
+    "query": {
+      "wo": "10115",
+      "umkreis": 25,
+      "veroeffentlicht_seit": 7,
+      "size": 100
+    },
+    "tools": [
+      "ausbildung_suche",
+      "coaching_suche",
+      "gehalt_regionen",
+      "gehalt_suche",
+      "job_details",
+      "job_suche",
+      "studienfelder",
+      "studium_suche",
+      "weiterbildung_suche"
+    ],
+    "checks": [
+      {
+        "offering_type": 1,
+        "requested_page": 1,
+        "returned": 100,
+        "pagination": {
+          "page": 1,
+          "size": 100,
+          "returned_count": 100,
+          "page_reported_by_source": true,
+          "size_reported_by_source": true,
+          "reported_total": 6492,
+          "consistent": true,
+          "exhausted_by_reported_total": false,
+          "next_page": 2,
+          "exact_interval_coverage": false,
+          "snapshot_stable": false
+        },
+        "resolved_location": {
+          "bereinigterOrt": "10115",
+          "suchmodus": "UMKREISSUCHE",
+          "koordinaten": [
+            {
+              "lat": 52.5319761,
+              "lon": 13.3867379
+            }
+          ]
+        },
+        "multi_workplace_records": 0,
+        "calendar_date_records": 100,
+        "source_response_sha256": "1f0b2020dd2a0936d7b3601b9f3f6c5718f21d1426a57bda5a5930ff354c8857",
+        "preserved_workplaces": true
+      },
+      {
+        "offering_type": 1,
+        "requested_page": 2,
+        "returned": 100,
+        "pagination": {
+          "page": 2,
+          "size": 100,
+          "returned_count": 100,
+          "page_reported_by_source": true,
+          "size_reported_by_source": true,
+          "reported_total": 6492,
+          "consistent": true,
+          "exhausted_by_reported_total": false,
+          "next_page": 3,
+          "exact_interval_coverage": false,
+          "snapshot_stable": false
+        },
+        "resolved_location": {
+          "bereinigterOrt": "10115",
+          "suchmodus": "UMKREISSUCHE",
+          "koordinaten": [
+            {
+              "lat": 52.5319761,
+              "lon": 13.3867379
+            }
+          ]
+        },
+        "multi_workplace_records": 0,
+        "calendar_date_records": 100,
+        "source_response_sha256": "54e2a1e37561738fe6a30cd5af2c59d9feecdec54e4e888b6124f7cfb0ce7cc3",
+        "preserved_workplaces": true
+      },
+      {
+        "offering_type": 34,
+        "requested_page": 1,
+        "returned": 66,
+        "pagination": {
+          "page": 1,
+          "size": 100,
+          "returned_count": 66,
+          "page_reported_by_source": true,
+          "size_reported_by_source": true,
+          "reported_total": 66,
+          "consistent": true,
+          "exhausted_by_reported_total": true,
+          "next_page": null,
+          "exact_interval_coverage": false,
+          "snapshot_stable": false
+        },
+        "resolved_location": {
+          "bereinigterOrt": "10115",
+          "suchmodus": "UMKREISSUCHE",
+          "koordinaten": [
+            {
+              "lat": 52.5319761,
+              "lon": 13.3867379
+            }
+          ]
+        },
+        "multi_workplace_records": 0,
+        "calendar_date_records": 66,
+        "source_response_sha256": "ac43dc154c6f44fc1210d701c025f04d80c138cd8047f3555007d1c371ad4bbd",
+        "preserved_workplaces": true
+      }
+    ],
+    "error": null,
+    "work_page_overlap": 0,
+    "detail": {
+      "description_characters": 2788,
+      "workplaces": 1,
+      "source_response_sha256": "717e1522f128c1e533ea903faa8ed29c8f0393c5aeb596304c32873127b1759d",
+      "preserved_full_source_body": true,
+      "reference_sha256": "b9acce4d251932ca5f476d60978dc79094ad8d635d196dc51c301836e3da4203"
+    },
+    "status": "PASS"
+  },
+  "limitations": [
+    "Live proof covers BA jobs only. Five other tool families are preserved and protocol-registered, not exhaustively live-tested.",
+    "No complete market census, immutable snapshot, original-instant proof or exemption from rate limits is claimed.",
+    "No personal profile, private source calibration, raw job body, employer contact, credential or session is stored in this proof."
+  ]
+}

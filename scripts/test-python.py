@@ -1,0 +1,14 @@
+"""Run both retained Python suites in separate processes and import scopes."""
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+root = Path(__file__).resolve().parents[1]
+for directory, arguments in [
+    (root / "packages/source-adapters", ["-m", "unittest", "discover", "-s", "tests"]),
+    (root / "countries/de/stepstone", ["-m", "pytest", "-q"]),
+]:
+    env = dict(os.environ)
+    env["PYTHONPATH"] = os.pathsep.join([str(root / "packages/source-adapters/src"), str(root / "countries/de/stepstone")])
+    subprocess.run([sys.executable, *arguments], cwd=directory, env=env, check=True)
