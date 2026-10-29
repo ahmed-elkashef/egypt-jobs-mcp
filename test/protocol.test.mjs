@@ -23,7 +23,12 @@ test('real unified stdio lists countries and routes through Egypt and Germany of
     await client.connect(transport);
     const list=await client.listTools();
     for(const name of ['list_countries','list_country_sources','plan_country_scan','eg_read_source_page','de_ba_job_suche','de_stepstone_get_capabilities','shared_get_public_inventory','de_public_interamt_capabilities','de_public_interamt_read','de_public_jobmensa_capabilities','de_public_jobmensa_page','de_public_jobmensa_detail','de_public_student_boards_capabilities','de_public_student_board_page','de_public_student_board_detail','de_public_student_board_resolve_external','de_public_german_boards_capabilities','de_public_german_board_inventory','de_public_german_board_detail','de_public_german_board_capture_segment'])assert.ok(list.tools.some(t=>t.name===name),name);
-    assert.equal(list.tools.length,63);
+    assert.equal(list.tools.length,66);
+    for(const name of ['shared_workday_capabilities','shared_workday_inventory','shared_workday_detail'])assert.ok(list.tools.some(t=>t.name===name),name);
+    const workday=await client.callTool({name:'shared_workday_capabilities',arguments:{}});
+    assert.equal(workday.structuredContent.source,'workday');assert.equal(workday.structuredContent.seed_required,true);
+    const unsafeWorkday=await client.callTool({name:'shared_workday_inventory',arguments:{board_url:'https://example.test/External'}});
+    assert.equal(unsafeWorkday.isError,true);assert.equal(unsafeWorkday.structuredContent.count,null);
     assert.ok(list.tools.every(t=>t.annotations?.readOnlyHint===true));
     const countries=await client.callTool({name:'list_countries',arguments:{}});
     assert.equal(countries.structuredContent.countries.length,2);

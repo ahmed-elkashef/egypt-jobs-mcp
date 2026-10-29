@@ -54,6 +54,10 @@ The original [Jobmensa, StudentJob and YoungCapital readers](countries/de/studen
 
 The original [public-board readers](countries/de/public-boards/README.md) also cover Absolventa, academics, stellenanzeigen.de, Yourfirm, GermanTechJobs the permitted official government vacancy feed, Jobs.de, Jobware, BerlinStartupJobs EnglishJobs metadata and anonymous XING inventory/body/discovery, get in Engineering, Zenjob public shifts and the official Frankfurt student portal. Native full bodies, verified pagination and distinct clocks remain separate from coverage and applicant fit.
 
+## Original shared Workday reader
+
+The [original Workday CXS reader](shared/workday/README.md) adds `shared_workday_capabilities`, `shared_workday_inventory` and `shared_workday_detail`. It enumerates an explicitly identified employer board without role keywords, preserves native continuation and full descriptions, and checks tenant/site/posting identity. The live proof reconciled 922 distinct current postings across 47 native pages and three complete source bodies. The legacy capped Workday domain reader is disabled. Employer discovery and historical interval coverage remain separate requirements.
+
 ## Additional Germany API
 
 Original Interamt capability/list/detail code is included under `countries/de/interamt`. Its public OpenAPI requires an approved API key; single-customer and MultiMandant scopes remain distinct. `de_public_interamt_capabilities` inspects this offline; `de_public_interamt_read` refuses before network without approved local access and an explicitly confirmed API base. No authenticated live access is claimed.

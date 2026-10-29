@@ -2135,13 +2135,37 @@
         "*"
       ],
       "category": "direct_ats",
-      "status": "research_required",
+      "status": "requires_employer_seed",
       "references": [
-        "https://www.workday.com/"
+        "https://www.workday.com/",
+        "https://www.zeiss.com/career/en/job-search.html",
+        "https://zeissgroup.wd3.myworkdayjobs.com/en-US/External"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "workday_capabilities",
+          "public_tool": "shared_workday_capabilities",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public",
+          "tool": "workday_inventory",
+          "public_tool": "shared_workday_inventory",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public",
+          "tool": "workday_detail",
+          "public_tool": "shared_workday_detail",
+          "fixed_arguments": {}
+        }
+      ],
       "limits": [
-        "A verified original board/list/detail implementation and employer discovery are required. Existing external libraries or connectors are not treated as complete authored coverage."
+        "Original anonymous native CXS inventory/full-description reads require an exact board URL verified from the official employer careers authority; no employer or country census.",
+        "Follow all returned continuation arguments, including first_page_total: native later totals may be zero with jobs and out-of-range offsets can reset to page one. Reconcile distinct IDs, initial count and moving supply.",
+        "Source-relative postedOn, native startDate, primary country, remote and full-time labels do not establish original publication instant, employment start, Germany remote eligibility or student contract.",
+        "Legacy capped Workday domain fetching is disabled. No account, apply, candidate, contact or subscription endpoint is supported."
       ]
     },
     {

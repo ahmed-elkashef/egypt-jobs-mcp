@@ -1,0 +1,51 @@
+{
+  "observed_date_utc": "2026-10-29",
+  "observed_local_date": "2026-10-30",
+  "source": "workday",
+  "seed_authority": "https://www.zeiss.com/career/en/job-search.html",
+  "seed_verification": "Official advertised career component -> exact published production job-search GraphQL query -> anonymous externalApplyURL values on the native Workday board. No application link was requested.",
+  "board_url": "https://zeissgroup.wd3.myworkdayjobs.com/en-US/External",
+  "current_native_metadata": {
+    "pages": 47,
+    "distinct_postings": 922,
+    "initial_total": 922,
+    "first_page_recheck_total": 922,
+    "reconciled": true
+  },
+  "protocol": {
+    "basis": "Published Workday candidate-experience-jobs script, inspected as inert source only.",
+    "inventory_method": "POST",
+    "fixed_body": {
+      "appliedFacets": {},
+      "searchText": "",
+      "limit": 20,
+      "offset": "native continuation"
+    },
+    "later_total_zero_with_nonempty_jobs": true,
+    "out_of_range_resets_to_first_page": true,
+    "terminal_basis": "Last nonempty page reaches exact observed first-page total; no empty terminal is required.",
+    "offset_echo_present": false
+  },
+  "full_native_body_reads": {
+    "count": 3,
+    "represented_cases": [
+      "US onsite technical counterexample",
+      "Germany internship",
+      "Germany working-student posting"
+    ],
+    "browser_rendered": false,
+    "independently_person_reviewed": false
+  },
+  "official_company_index": {
+    "reported_total": 881,
+    "only_first_page_read": true,
+    "same_as_native_workday_index": false,
+    "difference_explained": false
+  },
+  "credentials_or_cookies_used": false,
+  "account_or_application_calls": false,
+  "coverage_complete": false,
+  "historical_week_complete": false,
+  "employer_census_complete": false,
+  "raw_posting_content_published": false
+}
