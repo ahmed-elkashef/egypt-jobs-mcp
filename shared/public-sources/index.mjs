@@ -17,6 +17,7 @@ import { XMLParser } from "fast-xml-parser";
 import { pathToFileURL } from "node:url";
 import { InventoryClient, inventoryTools, plainText, SourceError, errorResult } from "./inventory.mjs";
 import {workdayTools,workday} from './workday.mjs';
+import {teamtailorTools,teamtailor} from './teamtailor.mjs';
 const inventoryClient = new InventoryClient();
 
 const DEFAULT_TIMEOUT_MS = Number(process.env.JOBFLOW_PUBLIC_JOBS_TIMEOUT_MS || 15000);
@@ -32,6 +33,7 @@ const server = new Server(
 
 export const tools = [
   ...workdayTools,
+  ...teamtailorTools,
   ...inventoryTools,
   {
     name: "search_public_jobs",
@@ -281,6 +283,10 @@ export async function callTool(name, args = {}) {
   try {
     if(workdayTools.some(tool=>tool.name===name)) {
       const data=await workday(name,args);
+      return {...jsonContent(data),structuredContent:data,isError:data.status!=='ok'};
+    }
+    if(teamtailorTools.some(tool=>tool.name===name)) {
+      const data=await teamtailor(name,args);
       return {...jsonContent(data),structuredContent:data,isError:data.status!=='ok'};
     }
     let data;

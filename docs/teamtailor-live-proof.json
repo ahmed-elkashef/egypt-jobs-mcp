@@ -1,0 +1,42 @@
+{
+  "observed_utc_date": "2026-10-29",
+  "observed_local_date": "2026-10-30",
+  "source": "teamtailor",
+  "primary_contracts": [
+    "https://support.teamtailor.com/en/articles/11171756-rss-feed-how-to-guide",
+    "https://www.jsonfeed.org/version/1.1/"
+  ],
+  "native_discovery": "Each permitted /jobs page advertises an exact same-origin API catalogue; its /jobs service-desc advertises jobs.json as JSON Feed1.1. Native HTML also advertises RSS.",
+  "current_examples": [
+    {
+      "careers_origin": "https://career.teamtailor.com",
+      "html_count": 15,
+      "json_items": 15,
+      "rss_items": 15
+    },
+    {
+      "careers_origin": "https://jobs.highsnobiety.com",
+      "html_count": 5,
+      "json_items": 5,
+      "rss_items": 5
+    },
+    {
+      "careers_origin": "https://careers.voi.com",
+      "html_count": 78,
+      "json_items": 78,
+      "rss_items": 78
+    }
+  ],
+  "all_source_guid_uri_title_sets_reconciled": true,
+  "full_native_bodies": 98,
+  "json_schema_rss_description_markup_equal_count": 98,
+  "one_native_job_html_contains_exact_feed_description": true,
+  "index_search_counts_used_as_current": false,
+  "credentials_cookies_or_account_api_used": false,
+  "application_forms_or_contact_requests": false,
+  "raw_posting_content_published": false,
+  "employer_census_complete": false,
+  "historical_week_complete": false,
+  "person_fit_assessed": false,
+  "coverage_complete": false
+}

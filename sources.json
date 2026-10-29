@@ -2175,13 +2175,38 @@
         "*"
       ],
       "category": "direct_ats",
-      "status": "research_required",
+      "status": "requires_employer_seed",
       "references": [
-        "https://docs.teamtailor.com/"
+        "https://docs.teamtailor.com/",
+        "https://support.teamtailor.com/en/articles/11171756-rss-feed-how-to-guide",
+        "https://www.jsonfeed.org/version/1.1/",
+        "https://career.teamtailor.com/.well-known/api-catalog"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "teamtailor_capabilities",
+          "public_tool": "shared_teamtailor_capabilities",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public",
+          "tool": "teamtailor_inventory",
+          "public_tool": "shared_teamtailor_inventory",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public",
+          "tool": "teamtailor_detail",
+          "public_tool": "shared_teamtailor_detail",
+          "fixed_arguments": {}
+        }
+      ],
       "limits": [
-        "A verified original board/list/detail implementation and employer discovery are required. Existing external libraries or connectors are not treated as complete authored coverage."
+        "Original anonymous career-site API catalogue and whole JSON/RSS feed readers require an explicitly verified employer career origin. Vendor career subdomains and the capabilities-listed custom origins are supported; not an employer/country census.",
+        "Native HTML count, JSON Feed1.1 and RSS GUID/URI/title sets reconcile without role/candidate filters. All complete source-body variants and RSS location/remote/department facts are retained. Unknown UI counts stay unknown; unverified pagination fails explicitly.",
+        "Source date_published/datePosted/pubDate, remoteStatus and country facts are not verified original publication, worker eligibility, student contract, fit or application readiness.",
+        "No secret-key account API, credentials, cookies, account, application form, contact or subscriptions. Failed reads have null counts."
       ]
     },
     {
