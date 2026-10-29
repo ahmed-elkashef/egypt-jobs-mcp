@@ -26,7 +26,7 @@ The original Egypt-only `node index.mjs` entrypoint remains available. Python im
 | Package | Included implementation | Unified tool prefix |
 | --- | --- | --- |
 | [Egypt](countries/eg/README.md) | WUZZUF, Forasna, ArabJobs, Tanqeeb, Akhtaboot, Bayt and Mostaql readers; native public DOM recipes where HTTP is unavailable | `eg_` |
-| [Germany](countries/de/README.md) | Structured BA jobs plus salary, Ausbildung, study, training and coaching; original StepStone transport/parser | `de_ba_`, `de_stepstone_` |
+| [Germany](countries/de/README.md) | Structured BA jobs; salary, study and training; original StepStone, Interamt and public student-board readers | `de_ba_`, `de_stepstone_`, `de_public_` |
 | [Shared](shared/README.md) | Native public feeds, complete snapshot/detail retrieval, direct ATS boards and public client-project reads | `shared_` |
 
 Four catalogue tools work without acquiring jobs:
@@ -47,6 +47,10 @@ Four catalogue tools work without acquiring jobs:
 5. Evaluate eligibility or applicant fit in the consuming application. A read, source total, native terminal or registry entry never proves a complete frozen market.
 
 The federation forwards full native responses without shortening job descriptions. It exposes an explicit read-only tool allowlist, namespaces tool identities and isolates backend failure. Unknown/new backend tools are not enabled automatically. Oversized results fail explicitly rather than returning truncated descriptions. Child processes are owned by the server and closed with it.
+
+## Germany public boards
+
+The original [Jobmensa reader](countries/de/student-boards/README.md) enumerates complete public native pages and full JobPosting details without a browser. Current robots policy, exact native continuation and model/date/worker-country ambiguities remain explicit. It makes no account, contact or application action.
 
 ## Additional Germany API
 

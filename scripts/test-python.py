@@ -1,4 +1,4 @@
-"""Run both retained Python suites in separate processes and import scopes."""
+"""Run retained Python suites in separate processes and import scopes."""
 import os
 from pathlib import Path
 import subprocess
@@ -8,6 +8,7 @@ root = Path(__file__).resolve().parents[1]
 for directory, arguments in [
     (root / "packages/source-adapters", ["-m", "unittest", "discover", "-s", "tests"]),
     (root / "countries/de/stepstone", ["-m", "pytest", "-q"]),
+    (root / "countries/de/student-boards", ["-m", "unittest", "discover", "-s", "tests"]),
 ]:
     env = dict(os.environ)
     env["PYTHONPATH"] = os.pathsep.join([str(root / "packages/source-adapters/src"), str(root / "countries/de/stepstone")])

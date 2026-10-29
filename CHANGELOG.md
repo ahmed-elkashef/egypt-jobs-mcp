@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.2
+
+- Add original Germany Jobmensa public page/detail tools with current robots checks, strict native URL/continuation validation, complete JSON-LD and private raw capture.
+- Keep mixed models, source dates, hours and worker-country constraints separate; no account or application action.
+- Extend offline protocol and synthetic parser tests. Country registry remains an open discovery register.
+
 ## 0.4.1 — 2026-10-29
 
 - Preserve BA v6's native `stellenangebotsart` ahead of legacy offering aliases;

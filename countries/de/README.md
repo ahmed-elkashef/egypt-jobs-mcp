@@ -4,6 +4,7 @@ The Germany package consolidates original StepStone implementation and the maint
 
 - [arbeitsmarkt/](arbeitsmarkt/): structured Jobsuche v6 list, full v4 detail and all workplaces/dates, with salary, Ausbildung, study, training and coaching families. Original Greyt GmbH distribution and notices remain intact. Five retained non-job families require their own current live verification; jobs success does not certify them.
 - [stepstone/](stepstone/): independent complete HTML/native-record parser, current robots-aware HTTP access, exact geography/query preservation, resumable checkpoints and explicit errors. The new module entrypoint and read-only annotations make the same implementation available through the unified MCP.
+- [student-boards/](student-boards/): original Jobmensa public list/detail reader, exact native partitions and pagination, current robots checks, complete native structured descriptions and explicit source limits. Its three read-only tools run through [public-services/](public-services/), alongside the credential-gated Interamt API.
 - Shared ATS, native public feeds and full snapshot/detail retrieval are registered once; country eligibility is not inferred from a global feed label.
 
 For vacancy inventory, BA work, internship, apprenticeship and self-employment offerings are distinct partitions. Native age filters are not exact publication instants, resolved geography must be inspected, and distance ordering does not justify early date stopping.
