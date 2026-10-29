@@ -1,0 +1,1982 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-29",
+  "countries": [
+    {
+      "code": "EG",
+      "name": "Egypt",
+      "package": "countries/eg"
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "package": "countries/de"
+    }
+  ],
+  "limits": [
+    "Maintained starting source universe, not a claim to enumerate every job, employer or informal/closed channel. Discovery is open and must be maintained.",
+    "Implementation, current transport access, complete native traversal, exact interval coverage and individual review are separate states.",
+    "No live source call, account connection, submission, message, payment or monitor is started by inspecting the catalogue or preparing a plan."
+  ],
+  "sources": [
+    {
+      "id": "wuzzuf",
+      "name": "WUZZUF",
+      "countries": [
+        "EG"
+      ],
+      "category": "national_board",
+      "status": "implemented",
+      "references": [
+        "https://wuzzuf.net/"
+      ],
+      "routes": [
+        {
+          "backend": "egypt",
+          "tool": "read_source_page",
+          "public_tool": "eg_read_source_page",
+          "fixed_arguments": {
+            "source": "wuzzuf"
+          }
+        },
+        {
+          "backend": "egypt",
+          "tool": "read_source_detail",
+          "public_tool": "eg_read_source_detail",
+          "fixed_arguments": {
+            "source": "wuzzuf"
+          }
+        }
+      ],
+      "limits": [
+        "Public JSON:API, full-resource hydration; undocumented provider contract can change.",
+        "Exact original publication instants and full historical coverage are not guaranteed."
+      ],
+      "code_audited_on": "2026-10-29",
+      "last_saved_transport_evidence": "2026-10-19"
+    },
+    {
+      "id": "forasna",
+      "name": "Forasna",
+      "countries": [
+        "EG"
+      ],
+      "category": "national_board",
+      "status": "access_limited",
+      "references": [
+        "https://forasna.com/"
+      ],
+      "routes": [
+        {
+          "backend": "egypt",
+          "tool": "read_source_page",
+          "public_tool": "eg_read_source_page",
+          "fixed_arguments": {
+            "source": "forasna"
+          }
+        },
+        {
+          "backend": "egypt",
+          "tool": "read_source_detail",
+          "public_tool": "eg_read_source_detail",
+          "fixed_arguments": {
+            "source": "forasna"
+          }
+        }
+      ],
+      "limits": [
+        "HTTP denial remains explicit; maintained authorized public DOM parser and native-Next runner, not a browser-free route.",
+        "Exact original publication instants and full historical coverage are not guaranteed."
+      ],
+      "code_audited_on": "2026-10-29",
+      "last_saved_transport_evidence": "2026-10-19"
+    },
+    {
+      "id": "arabjobs",
+      "name": "ArabJobs",
+      "countries": [
+        "EG"
+      ],
+      "category": "national_board",
+      "status": "implemented",
+      "references": [
+        "https://www.arabjobs.com/"
+      ],
+      "routes": [
+        {
+          "backend": "egypt",
+          "tool": "read_source_page",
+          "public_tool": "eg_read_source_page",
+          "fixed_arguments": {
+            "source": "arabjobs"
+          }
+        },
+        {
+          "backend": "egypt",
+          "tool": "read_source_detail",
+          "public_tool": "eg_read_source_detail",
+          "fixed_arguments": {
+            "source": "arabjobs"
+          }
+        }
+      ],
+      "limits": [
+        "Country EG and native model/order/pagination; archive-like totals do not establish active supply.",
+        "Exact original publication instants and full historical coverage are not guaranteed."
+      ],
+      "code_audited_on": "2026-10-29",
+      "last_saved_transport_evidence": "2026-10-19"
+    },
+    {
+      "id": "tanqeeb",
+      "name": "Tanqeeb Egypt",
+      "countries": [
+        "EG"
+      ],
+      "category": "national_board",
+      "status": "access_limited",
+      "references": [
+        "https://egypt.tanqeeb.com/"
+      ],
+      "routes": [
+        {
+          "backend": "egypt",
+          "tool": "read_source_page",
+          "public_tool": "eg_read_source_page",
+          "fixed_arguments": {
+            "source": "tanqeeb"
+          }
+        },
+        {
+          "backend": "egypt",
+          "tool": "read_source_detail",
+          "public_tool": "eg_read_source_detail",
+          "fixed_arguments": {
+            "source": "tanqeeb"
+          }
+        }
+      ],
+      "limits": [
+        "Empty HTTP202 is not zero supply. Native DOM filter/order/Next recipe must verify actual returned membership.",
+        "Exact original publication instants and full historical coverage are not guaranteed."
+      ],
+      "code_audited_on": "2026-10-29",
+      "last_saved_transport_evidence": "2026-10-19"
+    },
+    {
+      "id": "akhtaboot",
+      "name": "Akhtaboot Egypt",
+      "countries": [
+        "EG"
+      ],
+      "category": "national_board",
+      "status": "implemented",
+      "references": [
+        "https://www.akhtaboot.com/en/egypt/jobs"
+      ],
+      "routes": [
+        {
+          "backend": "egypt",
+          "tool": "read_source_page",
+          "public_tool": "eg_read_source_page",
+          "fixed_arguments": {
+            "source": "akhtaboot"
+          }
+        },
+        {
+          "backend": "egypt",
+          "tool": "read_source_detail",
+          "public_tool": "eg_read_source_detail",
+          "fixed_arguments": {
+            "source": "akhtaboot"
+          }
+        }
+      ],
+      "limits": [
+        "Explicit native empty state required; zero previously observed is dated, not a current count.",
+        "Exact original publication instants and full historical coverage are not guaranteed."
+      ],
+      "code_audited_on": "2026-10-29",
+      "last_saved_transport_evidence": "2026-10-19"
+    },
+    {
+      "id": "bayt",
+      "name": "Bayt Egypt",
+      "countries": [
+        "EG"
+      ],
+      "category": "national_board",
+      "status": "access_limited",
+      "references": [
+        "https://www.bayt.com/en/egypt/jobs/"
+      ],
+      "routes": [
+        {
+          "backend": "egypt",
+          "tool": "read_source_page",
+          "public_tool": "eg_read_source_page",
+          "fixed_arguments": {
+            "source": "bayt"
+          }
+        },
+        {
+          "backend": "egypt",
+          "tool": "read_source_detail",
+          "public_tool": "eg_read_source_detail",
+          "fixed_arguments": {
+            "source": "bayt"
+          }
+        }
+      ],
+      "limits": [
+        "Card summaries do not replace full descriptions. HTTP/detail access and provider reuse terms remain limits.",
+        "Exact original publication instants and full historical coverage are not guaranteed."
+      ],
+      "code_audited_on": "2026-10-29",
+      "last_saved_transport_evidence": "2026-10-19"
+    },
+    {
+      "id": "jobzella",
+      "name": "Jobzella",
+      "countries": [
+        "EG"
+      ],
+      "category": "national_board",
+      "status": "research_required",
+      "references": [
+        "https://www.jobzella.com/"
+      ],
+      "routes": [],
+      "limits": [
+        "Source discovery remains open; no nationwide employer census, permission to enter closed groups or reliable complete transport is established."
+      ]
+    },
+    {
+      "id": "gulftalent",
+      "name": "GulfTalent",
+      "countries": [
+        "EG"
+      ],
+      "category": "regional_board",
+      "status": "research_required",
+      "references": [
+        "https://www.gulftalent.com/"
+      ],
+      "routes": [],
+      "limits": [
+        "Source discovery remains open; no nationwide employer census, permission to enter closed groups or reliable complete transport is established."
+      ]
+    },
+    {
+      "id": "egypt_labour",
+      "name": "Egypt Ministry of Labour vacancy bulletins",
+      "countries": [
+        "EG"
+      ],
+      "category": "official_vacancies",
+      "status": "research_required",
+      "references": [
+        "https://www.manpower.gov.eg/"
+      ],
+      "routes": [],
+      "limits": [
+        "Source discovery remains open; no nationwide employer census, permission to enter closed groups or reliable complete transport is established."
+      ]
+    },
+    {
+      "id": "egypt_government",
+      "name": "Egypt Government Jobs Portal",
+      "countries": [
+        "EG"
+      ],
+      "category": "official_vacancies",
+      "status": "research_required",
+      "references": [
+        "https://jobs.caoa.gov.eg/"
+      ],
+      "routes": [],
+      "limits": [
+        "Source discovery remains open; no nationwide employer census, permission to enter closed groups or reliable complete transport is established."
+      ]
+    },
+    {
+      "id": "egypt_universities",
+      "name": "University and student career channels",
+      "countries": [
+        "EG"
+      ],
+      "category": "student_channels",
+      "status": "research_required",
+      "references": [
+        "https://careercenter.aucegypt.edu/"
+      ],
+      "routes": [],
+      "limits": [
+        "Source discovery remains open; no nationwide employer census, permission to enter closed groups or reliable complete transport is established."
+      ]
+    },
+    {
+      "id": "egypt_directories",
+      "name": "Employer directories, chambers and industrial zones",
+      "countries": [
+        "EG"
+      ],
+      "category": "employer_discovery",
+      "status": "research_required",
+      "references": [
+        "https://www.fei.org.eg/"
+      ],
+      "routes": [],
+      "limits": [
+        "Source discovery remains open; no nationwide employer census, permission to enter closed groups or reliable complete transport is established."
+      ]
+    },
+    {
+      "id": "egypt_local_channels",
+      "name": "Local, informal, referral and closed community channels",
+      "countries": [
+        "EG"
+      ],
+      "category": "offline_boundary",
+      "status": "research_required",
+      "references": [
+        "https://www.ilo.org/"
+      ],
+      "routes": [],
+      "limits": [
+        "Source discovery remains open; no nationwide employer census, permission to enter closed groups or reliable complete transport is established."
+      ]
+    },
+    {
+      "id": "mostaql",
+      "name": "Mostaql client projects",
+      "countries": [
+        "EG",
+        "DE"
+      ],
+      "category": "freelance_demand",
+      "status": "implemented",
+      "references": [
+        "https://mostaql.com/projects"
+      ],
+      "routes": [
+        {
+          "backend": "egypt",
+          "tool": "read_source_page",
+          "public_tool": "eg_read_source_page",
+          "fixed_arguments": {
+            "source": "mostaql"
+          }
+        },
+        {
+          "backend": "egypt",
+          "tool": "read_source_detail",
+          "public_tool": "eg_read_source_detail",
+          "fixed_arguments": {
+            "source": "mostaql"
+          }
+        }
+      ],
+      "limits": [
+        "Full public project briefs, budgets and delivery terms; project budget is not salary, hours or payment eligibility."
+      ]
+    },
+    {
+      "id": "ba_jobs",
+      "name": "Bundesagentur Jobsuche",
+      "countries": [
+        "DE"
+      ],
+      "category": "official_vacancies",
+      "status": "implemented",
+      "references": [
+        "https://www.arbeitsagentur.de/jobsuche/"
+      ],
+      "routes": [
+        {
+          "backend": "ba",
+          "tool": "job_suche",
+          "public_tool": "de_ba_job_suche",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "ba",
+          "tool": "job_details",
+          "public_tool": "de_ba_job_details",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Enumerate offering types1,2,4,34 separately where relevant; type1 alone is not the whole source.",
+        "Native age and mutable pagination do not establish a frozen original-time interval.",
+        "All workplaces and original source dates remain intact."
+      ],
+      "code_audited_on": "2026-10-29"
+    },
+    {
+      "id": "ba_ausbildung",
+      "name": "BA Ausbildung",
+      "countries": [
+        "DE"
+      ],
+      "category": "apprenticeships",
+      "status": "implemented",
+      "references": [
+        "https://www.arbeitsagentur.de/bildung/ausbildung"
+      ],
+      "routes": [
+        {
+          "backend": "ba",
+          "tool": "ausbildung_suche",
+          "public_tool": "de_ba_ausbildung_suche",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "ba",
+          "tool": "job_suche",
+          "public_tool": "de_ba_job_suche",
+          "fixed_arguments": {
+            "angebotsart": 4
+          }
+        }
+      ],
+      "limits": [
+        "Retained legacy Ausbildung client is separate from structured v6 offering-type4; current endpoint availability needs a bounded live check."
+      ]
+    },
+    {
+      "id": "ba_salary",
+      "name": "BA Entgeltatlas",
+      "countries": [
+        "DE"
+      ],
+      "category": "salary_context",
+      "status": "implemented",
+      "references": [
+        "https://web.arbeitsagentur.de/entgeltatlas/"
+      ],
+      "routes": [
+        {
+          "backend": "ba",
+          "tool": "gehalt_suche",
+          "public_tool": "de_ba_gehalt_suche",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "ba",
+          "tool": "gehalt_regionen",
+          "public_tool": "de_ba_gehalt_regionen",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Salary statistics, not advertised or guaranteed pay. Retained upstream endpoints require separate live validation."
+      ]
+    },
+    {
+      "id": "ba_study",
+      "name": "BA Studienangebote",
+      "countries": [
+        "DE"
+      ],
+      "category": "education_context",
+      "status": "implemented",
+      "references": [
+        "https://www.arbeitsagentur.de/bildung/studium"
+      ],
+      "routes": [
+        {
+          "backend": "ba",
+          "tool": "studium_suche",
+          "public_tool": "de_ba_studium_suche",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Education/training/coaching supply is separate from vacancy demand; live availability of retained upstream endpoints is not established by the jobs tests."
+      ]
+    },
+    {
+      "id": "ba_study_fields",
+      "name": "BA Studienfelder",
+      "countries": [
+        "DE"
+      ],
+      "category": "education_context",
+      "status": "implemented",
+      "references": [
+        "https://www.arbeitsagentur.de/bildung/studium"
+      ],
+      "routes": [
+        {
+          "backend": "ba",
+          "tool": "studienfelder",
+          "public_tool": "de_ba_studienfelder",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Education/training/coaching supply is separate from vacancy demand; live availability of retained upstream endpoints is not established by the jobs tests."
+      ]
+    },
+    {
+      "id": "ba_training",
+      "name": "BA Weiterbildung / mein NOW",
+      "countries": [
+        "DE"
+      ],
+      "category": "training_context",
+      "status": "implemented",
+      "references": [
+        "https://mein-now.de/"
+      ],
+      "routes": [
+        {
+          "backend": "ba",
+          "tool": "weiterbildung_suche",
+          "public_tool": "de_ba_weiterbildung_suche",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Education/training/coaching supply is separate from vacancy demand; live availability of retained upstream endpoints is not established by the jobs tests."
+      ]
+    },
+    {
+      "id": "ba_coaching",
+      "name": "BA coaching",
+      "countries": [
+        "DE"
+      ],
+      "category": "training_context",
+      "status": "implemented",
+      "references": [
+        "https://www.arbeitsagentur.de/"
+      ],
+      "routes": [
+        {
+          "backend": "ba",
+          "tool": "coaching_suche",
+          "public_tool": "de_ba_coaching_suche",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Education/training/coaching supply is separate from vacancy demand; live availability of retained upstream endpoints is not established by the jobs tests."
+      ]
+    },
+    {
+      "id": "stepstone",
+      "name": "StepStone Germany",
+      "countries": [
+        "DE"
+      ],
+      "category": "national_board",
+      "status": "access_limited",
+      "references": [
+        "https://www.stepstone.de/"
+      ],
+      "routes": [
+        {
+          "backend": "stepstone",
+          "tool": "get_capabilities",
+          "public_tool": "de_stepstone_get_capabilities",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "stepstone",
+          "tool": "search_location_page",
+          "public_tool": "de_stepstone_search_location_page",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "stepstone",
+          "tool": "get_job_details",
+          "public_tool": "de_stepstone_get_job_details",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "stepstone",
+          "tool": "parse_listing_html",
+          "public_tool": "de_stepstone_parse_listing_html",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "stepstone",
+          "tool": "parse_job_html",
+          "public_tool": "de_stepstone_parse_job_html",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Current policy must be checked by get_capabilities. Saved filtered/pagination routes were robots-denied, and must remain explicit errors.",
+        "Independent original parser preserves full source sections; no bypass, cookie import or silent radius widening."
+      ]
+    },
+    {
+      "id": "indeed",
+      "name": "Indeed Germany",
+      "countries": [
+        "DE"
+      ],
+      "category": "national_board",
+      "status": "research_required",
+      "references": [
+        "https://de.indeed.com/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "xing",
+      "name": "XING Jobs",
+      "countries": [
+        "DE"
+      ],
+      "category": "national_board",
+      "status": "research_required",
+      "references": [
+        "https://www.xing.com/jobs"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "meinestadt",
+      "name": "meinestadt.de",
+      "countries": [
+        "DE"
+      ],
+      "category": "local_board",
+      "status": "research_required",
+      "references": [
+        "https://jobs.meinestadt.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "stellenanzeigen",
+      "name": "stellenanzeigen.de",
+      "countries": [
+        "DE"
+      ],
+      "category": "national_board",
+      "status": "research_required",
+      "references": [
+        "https://www.stellenanzeigen.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "jobware",
+      "name": "Jobware",
+      "countries": [
+        "DE"
+      ],
+      "category": "national_board",
+      "status": "research_required",
+      "references": [
+        "https://www.jobware.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "kimeta",
+      "name": "Kimeta",
+      "countries": [
+        "DE"
+      ],
+      "category": "aggregator",
+      "status": "research_required",
+      "references": [
+        "https://www.kimeta.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "monster",
+      "name": "Monster Germany",
+      "countries": [
+        "DE"
+      ],
+      "category": "national_board",
+      "status": "research_required",
+      "references": [
+        "https://www.monster.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "jobvector",
+      "name": "jobvector",
+      "countries": [
+        "DE"
+      ],
+      "category": "specialist_board",
+      "status": "research_required",
+      "references": [
+        "https://www.jobvector.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "yourfirm",
+      "name": "Yourfirm",
+      "countries": [
+        "DE"
+      ],
+      "category": "smb_board",
+      "status": "research_required",
+      "references": [
+        "https://www.yourfirm.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "jobs_de",
+      "name": "Jobs.de",
+      "countries": [
+        "DE"
+      ],
+      "category": "national_board",
+      "status": "research_required",
+      "references": [
+        "https://www.jobs.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "jobtensor",
+      "name": "jobtensor",
+      "countries": [
+        "DE"
+      ],
+      "category": "specialist_board",
+      "status": "research_required",
+      "references": [
+        "https://jobtensor.com/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "absolventa",
+      "name": "Absolventa",
+      "countries": [
+        "DE"
+      ],
+      "category": "graduate_board",
+      "status": "research_required",
+      "references": [
+        "https://www.absolventa.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "academics",
+      "name": "academics",
+      "countries": [
+        "DE"
+      ],
+      "category": "research_board",
+      "status": "research_required",
+      "references": [
+        "https://www.academics.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "euraxess",
+      "name": "EURAXESS",
+      "countries": [
+        "DE"
+      ],
+      "category": "research_board",
+      "status": "research_required",
+      "references": [
+        "https://euraxess.ec.europa.eu/jobs"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "jobmensa",
+      "name": "Jobmensa",
+      "countries": [
+        "DE"
+      ],
+      "category": "student_board",
+      "status": "research_required",
+      "references": [
+        "https://www.jobmensa.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "stellenwerk",
+      "name": "Stellenwerk",
+      "countries": [
+        "DE"
+      ],
+      "category": "student_board",
+      "status": "research_required",
+      "references": [
+        "https://www.stellenwerk.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "studentjob",
+      "name": "StudentJob Germany",
+      "countries": [
+        "DE"
+      ],
+      "category": "student_board",
+      "status": "research_required",
+      "references": [
+        "https://www.studentjob.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "zenjob",
+      "name": "Zenjob",
+      "countries": [
+        "DE"
+      ],
+      "category": "temporary_work",
+      "status": "research_required",
+      "references": [
+        "https://www.zenjob.com/de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "youngcapital",
+      "name": "YoungCapital Germany",
+      "countries": [
+        "DE"
+      ],
+      "category": "student_board",
+      "status": "research_required",
+      "references": [
+        "https://www.youngcapital.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "ausbildung_de",
+      "name": "Ausbildung.de",
+      "countries": [
+        "DE"
+      ],
+      "category": "apprenticeships",
+      "status": "research_required",
+      "references": [
+        "https://www.ausbildung.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "azubiyo",
+      "name": "Azubiyo",
+      "countries": [
+        "DE"
+      ],
+      "category": "apprenticeships",
+      "status": "research_required",
+      "references": [
+        "https://www.azubiyo.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "aubi_plus",
+      "name": "AUBI-plus",
+      "countries": [
+        "DE"
+      ],
+      "category": "apprenticeships",
+      "status": "research_required",
+      "references": [
+        "https://www.aubi-plus.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "ihk",
+      "name": "IHK apprenticeship channels",
+      "countries": [
+        "DE"
+      ],
+      "category": "chamber_channels",
+      "status": "research_required",
+      "references": [
+        "https://www.ihk.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "handwerk",
+      "name": "Handwerk apprenticeship channels",
+      "countries": [
+        "DE"
+      ],
+      "category": "chamber_channels",
+      "status": "research_required",
+      "references": [
+        "https://www.handwerk.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "join",
+      "name": "JOIN",
+      "countries": [
+        "DE"
+      ],
+      "category": "smb_board",
+      "status": "research_required",
+      "references": [
+        "https://join.com/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "germantechjobs",
+      "name": "GermanTechJobs",
+      "countries": [
+        "DE"
+      ],
+      "category": "specialist_board",
+      "status": "research_required",
+      "references": [
+        "https://germantechjobs.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "berlinstartupjobs",
+      "name": "Berlin Startup Jobs",
+      "countries": [
+        "DE"
+      ],
+      "category": "regional_board",
+      "status": "research_required",
+      "references": [
+        "https://berlinstartupjobs.com/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "englishjobs",
+      "name": "EnglishJobs.de",
+      "countries": [
+        "DE"
+      ],
+      "category": "national_board",
+      "status": "research_required",
+      "references": [
+        "https://englishjobs.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "instaffo",
+      "name": "Instaffo",
+      "countries": [
+        "DE"
+      ],
+      "category": "matching_platform",
+      "status": "research_required",
+      "references": [
+        "https://instaffo.com/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "getinengineering",
+      "name": "get in Engineering",
+      "countries": [
+        "DE"
+      ],
+      "category": "specialist_board",
+      "status": "research_required",
+      "references": [
+        "https://www.get-in-engineering.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "bund_de",
+      "name": "service.bund.de vacancies",
+      "countries": [
+        "DE"
+      ],
+      "category": "public_sector",
+      "status": "research_required",
+      "references": [
+        "https://www.service.bund.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "interamt",
+      "name": "Interamt",
+      "countries": [
+        "DE"
+      ],
+      "category": "public_sector",
+      "status": "credential_required",
+      "references": [
+        "https://gate.interamt.de/interamtApi/api-doc/index.html"
+      ],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "interamt_capabilities",
+          "public_tool": "de_public_interamt_capabilities",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public_de",
+          "tool": "interamt_read",
+          "public_tool": "de_public_interamt_read",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Original read-only adapter implemented against official OpenAPI; approved key and explicit provider-confirmed deployment are required. No authenticated live read is claimed.",
+        "Stellenangebote is one authorized customer. MasterBehoerde and internship export require a MultiMandant key; none is a verified all-Germany census.",
+        "Official relative server is labelled internal staging. Credentials are never sent to a default host."
+      ],
+      "code_audited_on": "2026-10-29"
+    },
+    {
+      "id": "karriere_nrw",
+      "name": "Karriere.NRW",
+      "countries": [
+        "DE"
+      ],
+      "category": "state_public_sector",
+      "status": "credential_required",
+      "references": [
+        "https://developer.karriere.nrw/"
+      ],
+      "routes": [],
+      "limits": [
+        "Official published API exists; account/authorization requirements must be established before source calls. No credentials or write methods are exposed."
+      ]
+    },
+    {
+      "id": "state_municipal",
+      "name": "State and municipal career portals",
+      "countries": [
+        "DE"
+      ],
+      "category": "public_sector",
+      "status": "research_required",
+      "references": [
+        "https://www.berlin.de/karriereportal/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "public_institutions",
+      "name": "Universities, hospitals and research institutions",
+      "countries": [
+        "DE"
+      ],
+      "category": "employer_discovery",
+      "status": "research_required",
+      "references": [
+        "https://www.hochschulkompass.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "staffing",
+      "name": "Staffing and temporary-work employer boards",
+      "countries": [
+        "DE"
+      ],
+      "category": "employer_discovery",
+      "status": "research_required",
+      "references": [
+        "https://www.bap-personaldienstleister.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "de_employer_census",
+      "name": "National/local employer directory discovery",
+      "countries": [
+        "DE"
+      ],
+      "category": "employer_discovery",
+      "status": "research_required",
+      "references": [
+        "https://www.unternehmensregister.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+      ]
+    },
+    {
+      "id": "capmas",
+      "name": "CAPMAS",
+      "countries": [
+        "EG"
+      ],
+      "category": "statistics_context",
+      "status": "context_only",
+      "references": [
+        "https://www.capmas.gov.eg/"
+      ],
+      "routes": [],
+      "limits": [
+        "Context/statistics are not vacancies; no time series value or present count is inferred from this registry."
+      ]
+    },
+    {
+      "id": "ba_statistics",
+      "name": "BA labour-market statistics API",
+      "countries": [
+        "DE"
+      ],
+      "category": "statistics_context",
+      "status": "context_only",
+      "references": [
+        "https://statistik.arbeitsagentur.de/DE/Navigation/Service/API/API-Start-Nav.html"
+      ],
+      "routes": [],
+      "limits": [
+        "Context/statistics are not vacancies; no time series value or present count is inferred from this registry."
+      ]
+    },
+    {
+      "id": "destatis",
+      "name": "Destatis / GENESIS",
+      "countries": [
+        "DE"
+      ],
+      "category": "statistics_context",
+      "status": "context_only",
+      "references": [
+        "https://www.destatis.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Context/statistics are not vacancies; no time series value or present count is inferred from this registry."
+      ]
+    },
+    {
+      "id": "ilo",
+      "name": "ILO labour-market statistics",
+      "countries": [
+        "*"
+      ],
+      "category": "statistics_context",
+      "status": "context_only",
+      "references": [
+        "https://ilostat.ilo.org/"
+      ],
+      "routes": [],
+      "limits": [
+        "Context/statistics are not vacancies; no time series value or present count is inferred from this registry."
+      ]
+    },
+    {
+      "id": "linkedin",
+      "name": "LinkedIn",
+      "countries": [
+        "*"
+      ],
+      "category": "external_account_service",
+      "status": "external_connector",
+      "references": [
+        "https://www.linkedin.com/jobs/"
+      ],
+      "routes": [],
+      "limits": [
+        "External provider connector, authentication and permissions remain outside this reusable repository. No account/session migration, personal data, applications, messages or payments."
+      ]
+    },
+    {
+      "id": "trackly",
+      "name": "Trackly",
+      "countries": [
+        "*"
+      ],
+      "category": "external_account_service",
+      "status": "external_connector",
+      "references": [
+        "https://trackly.ai/"
+      ],
+      "routes": [],
+      "limits": [
+        "External provider connector, authentication and permissions remain outside this reusable repository. No account/session migration, personal data, applications, messages or payments."
+      ]
+    },
+    {
+      "id": "upwork_native",
+      "name": "Official Upwork MCP",
+      "countries": [
+        "*"
+      ],
+      "category": "external_account_service",
+      "status": "external_connector",
+      "references": [
+        "https://www.upwork.com/ai/mcp"
+      ],
+      "routes": [],
+      "limits": [
+        "External provider connector, authentication and permissions remain outside this reusable repository. No account/session migration, personal data, applications, messages or payments."
+      ]
+    },
+    {
+      "id": "arbeitnow",
+      "name": "Arbeitnow",
+      "countries": [
+        "*"
+      ],
+      "category": "public_job_feed",
+      "status": "implemented",
+      "references": [
+        "https://www.arbeitnow.com/api/job-board-api"
+      ],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "get_public_inventory",
+          "public_tool": "shared_get_public_inventory",
+          "fixed_arguments": {
+            "source": "arbeitnow"
+          }
+        },
+        {
+          "backend": "public",
+          "tool": "get_public_job_from_snapshot",
+          "public_tool": "shared_get_public_job_from_snapshot",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Complete native response, not all geography/worker eligibility or historical vacancies. Source-native continuation, attribution and access limits remain.",
+        "Process-local snapshots expire and must be persisted privately by the consumer if authorized."
+      ]
+    },
+    {
+      "id": "remotive",
+      "name": "Remotive",
+      "countries": [
+        "*"
+      ],
+      "category": "public_job_feed",
+      "status": "implemented",
+      "references": [
+        "https://remotive.com/api/remote-jobs"
+      ],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "get_public_inventory",
+          "public_tool": "shared_get_public_inventory",
+          "fixed_arguments": {
+            "source": "remotive"
+          }
+        },
+        {
+          "backend": "public",
+          "tool": "get_public_job_from_snapshot",
+          "public_tool": "shared_get_public_job_from_snapshot",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Complete native response, not all geography/worker eligibility or historical vacancies. Source-native continuation, attribution and access limits remain.",
+        "Process-local snapshots expire and must be persisted privately by the consumer if authorized."
+      ]
+    },
+    {
+      "id": "remoteok",
+      "name": "Remote OK",
+      "countries": [
+        "*"
+      ],
+      "category": "public_job_feed",
+      "status": "implemented",
+      "references": [
+        "https://remoteok.com/api"
+      ],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "get_public_inventory",
+          "public_tool": "shared_get_public_inventory",
+          "fixed_arguments": {
+            "source": "remoteok"
+          }
+        },
+        {
+          "backend": "public",
+          "tool": "get_public_job_from_snapshot",
+          "public_tool": "shared_get_public_job_from_snapshot",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Complete native response, not all geography/worker eligibility or historical vacancies. Source-native continuation, attribution and access limits remain.",
+        "Process-local snapshots expire and must be persisted privately by the consumer if authorized."
+      ]
+    },
+    {
+      "id": "himalayas",
+      "name": "Himalayas",
+      "countries": [
+        "*"
+      ],
+      "category": "public_job_feed",
+      "status": "implemented",
+      "references": [
+        "https://himalayas.app/api"
+      ],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "get_public_inventory",
+          "public_tool": "shared_get_public_inventory",
+          "fixed_arguments": {
+            "source": "himalayas"
+          }
+        },
+        {
+          "backend": "public",
+          "tool": "get_public_job_from_snapshot",
+          "public_tool": "shared_get_public_job_from_snapshot",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Complete native response, not all geography/worker eligibility or historical vacancies. Source-native continuation, attribution and access limits remain.",
+        "Process-local snapshots expire and must be persisted privately by the consumer if authorized."
+      ]
+    },
+    {
+      "id": "themuse",
+      "name": "The Muse",
+      "countries": [
+        "*"
+      ],
+      "category": "public_job_feed",
+      "status": "implemented",
+      "references": [
+        "https://www.themuse.com/developers/api/v2"
+      ],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "get_public_inventory",
+          "public_tool": "shared_get_public_inventory",
+          "fixed_arguments": {
+            "source": "themuse"
+          }
+        },
+        {
+          "backend": "public",
+          "tool": "get_public_job_from_snapshot",
+          "public_tool": "shared_get_public_job_from_snapshot",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Complete native response, not all geography/worker eligibility or historical vacancies. Source-native continuation, attribution and access limits remain.",
+        "Process-local snapshots expire and must be persisted privately by the consumer if authorized."
+      ]
+    },
+    {
+      "id": "wwr",
+      "name": "We Work Remotely",
+      "countries": [
+        "*"
+      ],
+      "category": "public_job_feed",
+      "status": "implemented",
+      "references": [
+        "https://weworkremotely.com/"
+      ],
+      "routes": [
+        {
+          "backend": "egypt",
+          "tool": "read_remote_feed",
+          "public_tool": "shared_read_remote_feed",
+          "fixed_arguments": {
+            "source": "weworkremotely"
+          }
+        }
+      ],
+      "limits": [
+        "Feed freshness, description completeness, source-native availability and worker eligibility differ. Use returned cursors; no invented country slug or archive."
+      ]
+    },
+    {
+      "id": "workingnomads",
+      "name": "Working Nomads",
+      "countries": [
+        "*"
+      ],
+      "category": "public_job_feed",
+      "status": "implemented",
+      "references": [
+        "https://www.workingnomads.com/"
+      ],
+      "routes": [
+        {
+          "backend": "egypt",
+          "tool": "read_remote_feed",
+          "public_tool": "shared_read_remote_feed",
+          "fixed_arguments": {
+            "source": "workingnomads"
+          }
+        }
+      ],
+      "limits": [
+        "Feed freshness, description completeness, source-native availability and worker eligibility differ. Use returned cursors; no invented country slug or archive."
+      ]
+    },
+    {
+      "id": "jobicy",
+      "name": "Jobicy",
+      "countries": [
+        "*"
+      ],
+      "category": "public_job_feed",
+      "status": "implemented",
+      "references": [
+        "https://jobicy.com/"
+      ],
+      "routes": [
+        {
+          "backend": "egypt",
+          "tool": "read_source_page",
+          "public_tool": "eg_read_source_page",
+          "fixed_arguments": {
+            "source": "jobicy"
+          }
+        },
+        {
+          "backend": "egypt",
+          "tool": "jobicy_location_taxonomy",
+          "public_tool": "shared_jobicy_location_taxonomy",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Feed freshness, description completeness, source-native availability and worker eligibility differ. Use returned cursors; no invented country slug or archive."
+      ]
+    },
+    {
+      "id": "greenhouse",
+      "name": "Greenhouse",
+      "countries": [
+        "*"
+      ],
+      "category": "direct_ats",
+      "status": "requires_employer_seed",
+      "references": [
+        "https://developers.greenhouse.io/job-board.html"
+      ],
+      "routes": [
+        {
+          "backend": "egypt",
+          "tool": "read_employer_board",
+          "public_tool": "shared_read_employer_board",
+          "fixed_arguments": {
+            "source": "greenhouse"
+          }
+        }
+      ],
+      "limits": [
+        "Requires a verified employer/board token. Provider support is not discovery of every employer or every German/Egyptian workplace.",
+        "Do not count training, external examples, missing descriptions, date ambiguity or native caps as complete country coverage."
+      ]
+    },
+    {
+      "id": "lever",
+      "name": "Lever",
+      "countries": [
+        "*"
+      ],
+      "category": "direct_ats",
+      "status": "requires_employer_seed",
+      "references": [
+        "https://github.com/lever/postings-api"
+      ],
+      "routes": [
+        {
+          "backend": "egypt",
+          "tool": "read_employer_board",
+          "public_tool": "shared_read_employer_board",
+          "fixed_arguments": {
+            "source": "lever"
+          }
+        }
+      ],
+      "limits": [
+        "Requires a verified employer/board token. Provider support is not discovery of every employer or every German/Egyptian workplace.",
+        "Do not count training, external examples, missing descriptions, date ambiguity or native caps as complete country coverage."
+      ]
+    },
+    {
+      "id": "ashby",
+      "name": "Ashby",
+      "countries": [
+        "*"
+      ],
+      "category": "direct_ats",
+      "status": "requires_employer_seed",
+      "references": [
+        "https://developers.ashbyhq.com/docs/public-job-posting-api"
+      ],
+      "routes": [
+        {
+          "backend": "egypt",
+          "tool": "read_employer_board",
+          "public_tool": "shared_read_employer_board",
+          "fixed_arguments": {
+            "source": "ashby"
+          }
+        }
+      ],
+      "limits": [
+        "Requires a verified employer/board token. Provider support is not discovery of every employer or every German/Egyptian workplace.",
+        "Do not count training, external examples, missing descriptions, date ambiguity or native caps as complete country coverage."
+      ]
+    },
+    {
+      "id": "personio",
+      "name": "Personio",
+      "countries": [
+        "*"
+      ],
+      "category": "direct_ats",
+      "status": "requires_employer_seed",
+      "references": [
+        "https://developer.personio.de/docs/retrieving-open-job-positions"
+      ],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "get_public_inventory",
+          "public_tool": "shared_get_public_inventory",
+          "fixed_arguments": {
+            "source": "personio"
+          }
+        }
+      ],
+      "limits": [
+        "Requires a verified employer/board token. Provider support is not discovery of every employer or every German/Egyptian workplace.",
+        "Do not count training, external examples, missing descriptions, date ambiguity or native caps as complete country coverage."
+      ]
+    },
+    {
+      "id": "recruitee",
+      "name": "Recruitee",
+      "countries": [
+        "*"
+      ],
+      "category": "direct_ats",
+      "status": "requires_employer_seed",
+      "references": [
+        "https://docs.recruitee.com/"
+      ],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "get_public_inventory",
+          "public_tool": "shared_get_public_inventory",
+          "fixed_arguments": {
+            "source": "recruitee"
+          }
+        }
+      ],
+      "limits": [
+        "Requires a verified employer/board token. Provider support is not discovery of every employer or every German/Egyptian workplace.",
+        "Do not count training, external examples, missing descriptions, date ambiguity or native caps as complete country coverage."
+      ]
+    },
+    {
+      "id": "workable",
+      "name": "Workable",
+      "countries": [
+        "*"
+      ],
+      "category": "direct_ats",
+      "status": "requires_employer_seed",
+      "references": [
+        "https://help.workable.com/"
+      ],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "fetch_workable_jobs",
+          "public_tool": "shared_fetch_workable_jobs",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Requires a verified employer/board token. Provider support is not discovery of every employer or every German/Egyptian workplace.",
+        "Do not count training, external examples, missing descriptions, date ambiguity or native caps as complete country coverage."
+      ]
+    },
+    {
+      "id": "smartrecruiters",
+      "name": "SmartRecruiters",
+      "countries": [
+        "*"
+      ],
+      "category": "direct_ats",
+      "status": "requires_employer_seed",
+      "references": [
+        "https://developers.smartrecruiters.com/"
+      ],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "fetch_smartrecruiters_jobs",
+          "public_tool": "shared_fetch_smartrecruiters_jobs",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Requires a verified employer/board token. Provider support is not discovery of every employer or every German/Egyptian workplace.",
+        "Do not count training, external examples, missing descriptions, date ambiguity or native caps as complete country coverage."
+      ]
+    },
+    {
+      "id": "workday",
+      "name": "Workday",
+      "countries": [
+        "*"
+      ],
+      "category": "direct_ats",
+      "status": "research_required",
+      "references": [
+        "https://www.workday.com/"
+      ],
+      "routes": [],
+      "limits": [
+        "A verified original board/list/detail implementation and employer discovery are required. Existing external libraries or connectors are not treated as complete authored coverage."
+      ]
+    },
+    {
+      "id": "teamtailor",
+      "name": "Teamtailor",
+      "countries": [
+        "*"
+      ],
+      "category": "direct_ats",
+      "status": "research_required",
+      "references": [
+        "https://docs.teamtailor.com/"
+      ],
+      "routes": [],
+      "limits": [
+        "A verified original board/list/detail implementation and employer discovery are required. Existing external libraries or connectors are not treated as complete authored coverage."
+      ]
+    },
+    {
+      "id": "successfactors",
+      "name": "SAP SuccessFactors",
+      "countries": [
+        "*"
+      ],
+      "category": "direct_ats",
+      "status": "research_required",
+      "references": [
+        "https://www.sap.com/products/hcm/recruiting-software.html"
+      ],
+      "routes": [],
+      "limits": [
+        "A verified original board/list/detail implementation and employer discovery are required. Existing external libraries or connectors are not treated as complete authored coverage."
+      ]
+    },
+    {
+      "id": "oracle_recruiting",
+      "name": "Oracle Recruiting",
+      "countries": [
+        "*"
+      ],
+      "category": "direct_ats",
+      "status": "research_required",
+      "references": [
+        "https://www.oracle.com/human-capital-management/recruiting/"
+      ],
+      "routes": [],
+      "limits": [
+        "A verified original board/list/detail implementation and employer discovery are required. Existing external libraries or connectors are not treated as complete authored coverage."
+      ]
+    },
+    {
+      "id": "onlyfy",
+      "name": "onlyfy",
+      "countries": [
+        "*"
+      ],
+      "category": "direct_ats",
+      "status": "research_required",
+      "references": [
+        "https://onlyfy.com/"
+      ],
+      "routes": [],
+      "limits": [
+        "A verified original board/list/detail implementation and employer discovery are required. Existing external libraries or connectors are not treated as complete authored coverage."
+      ]
+    },
+    {
+      "id": "dvinci",
+      "name": "d.vinci",
+      "countries": [
+        "*"
+      ],
+      "category": "direct_ats",
+      "status": "research_required",
+      "references": [
+        "https://www.dvinci.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "A verified original board/list/detail implementation and employer discovery are required. Existing external libraries or connectors are not treated as complete authored coverage."
+      ]
+    },
+    {
+      "id": "freelancer",
+      "name": "Freelancer public client projects",
+      "countries": [
+        "*"
+      ],
+      "category": "freelance_demand",
+      "status": "implemented",
+      "references": [
+        "https://developers.freelancer.com/"
+      ],
+      "routes": [
+        {
+          "backend": "egypt",
+          "tool": "read_freelance_projects",
+          "public_tool": "shared_read_freelance_projects",
+          "fixed_arguments": {
+            "source": "freelancer"
+          }
+        },
+        {
+          "backend": "egypt",
+          "tool": "read_freelance_project_detail",
+          "public_tool": "shared_read_freelance_project_detail",
+          "fixed_arguments": {
+            "source": "freelancer"
+          }
+        }
+      ],
+      "limits": [
+        "Budgets, currency, creation/update clocks and delivery remain distinct; source activity time is not first publication or paid income."
+      ]
+    },
+    {
+      "id": "upwork_api",
+      "name": "Optional Upwork marketplace API",
+      "countries": [
+        "*"
+      ],
+      "category": "freelance_demand",
+      "status": "credential_required",
+      "references": [
+        "https://www.upwork.com/developer"
+      ],
+      "routes": [
+        {
+          "backend": "egypt",
+          "tool": "read_freelance_projects",
+          "public_tool": "shared_read_freelance_projects",
+          "fixed_arguments": {
+            "source": "upwork"
+          }
+        },
+        {
+          "backend": "egypt",
+          "tool": "read_freelance_project_detail",
+          "public_tool": "shared_read_freelance_project_detail",
+          "fixed_arguments": {
+            "source": "upwork"
+          }
+        }
+      ],
+      "limits": [
+        "Missing approved token fails before network. Native MCP remains preferred where authorized; no automated corpus census, bids or account writes."
+      ]
+    },
+    {
+      "id": "malt",
+      "name": "Malt",
+      "countries": [
+        "DE"
+      ],
+      "category": "freelance_demand",
+      "status": "research_required",
+      "references": [
+        "https://www.malt.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Client-funded demand must be distinguished from freelancer profiles, seller service supply and speculative opportunities; no suitable inventory transport verified."
+      ]
+    },
+    {
+      "id": "freelancermap",
+      "name": "freelancermap",
+      "countries": [
+        "DE"
+      ],
+      "category": "freelance_demand",
+      "status": "research_required",
+      "references": [
+        "https://www.freelancermap.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Client-funded demand must be distinguished from freelancer profiles, seller service supply and speculative opportunities; no suitable inventory transport verified."
+      ]
+    },
+    {
+      "id": "gulp",
+      "name": "GULP",
+      "countries": [
+        "DE"
+      ],
+      "category": "freelance_demand",
+      "status": "research_required",
+      "references": [
+        "https://www.gulp.de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Client-funded demand must be distinguished from freelancer profiles, seller service supply and speculative opportunities; no suitable inventory transport verified."
+      ]
+    },
+    {
+      "id": "khamsat",
+      "name": "Khamsat",
+      "countries": [
+        "EG"
+      ],
+      "category": "freelance_demand",
+      "status": "research_required",
+      "references": [
+        "https://khamsat.com/"
+      ],
+      "routes": [],
+      "limits": [
+        "Client-funded demand must be distinguished from freelancer profiles, seller service supply and speculative opportunities; no suitable inventory transport verified."
+      ]
+    }
+  ]
+}

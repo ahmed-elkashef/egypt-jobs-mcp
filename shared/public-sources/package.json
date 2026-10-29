@@ -1,0 +1,41 @@
+{
+  "name": "public-job-sources-mcp",
+  "version": "0.2.0",
+  "private": false,
+  "type": "module",
+  "bin": {
+    "public-job-sources-mcp": "index.mjs"
+  },
+  "dependencies": {
+    "@mambalabsdev/ats-scrapers": "0.1.0",
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "fast-xml-parser": "5.11.2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "Read-only MCP for public job feeds and employer boards, with complete records, snapshot reuse, native pagination and explicit source limits.",
+  "license": "MIT",
+  "author": "Ahmed Elkashef",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmed-elkashef/job-market-mcp.git",
+    "directory": "shared/public-sources"
+  },
+  "scripts": {
+    "start": "node index.mjs",
+    "test": "node --test",
+    "check": "node --check index.mjs && node --check inventory.mjs",
+    "smoke": "node scripts/live-smoke.mjs"
+  },
+  "files": [
+    "index.mjs",
+    "inventory.mjs",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "bugs": {
+    "url": "https://github.com/ahmed-elkashef/job-market-mcp/issues"
+  }
+}

@@ -1,35 +1,36 @@
-name: CI
-on:
-  push:
-  pull_request:
+name: Country MCP CI
+on: [push, pull_request]
 permissions:
   contents: read
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        node: [20, 22, 24]
+        include:
+          - node: 20
+            python: '3.11'
+          - node: 22
+            python: '3.12'
+          - node: 24
+            python: '3.13'
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          repository: ahmed-elkashef/egypt-job-sources
-          ref: v0.3.5
-          path: python-backend
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
           cache: npm
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-      - run: python -m pip install ./python-backend
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -e 'packages/source-adapters[dev]' -e 'countries/de/stepstone[test]'
       - run: npm ci --ignore-scripts
+      - run: npm run check
       - run: npm test
         env:
+          JOB_MARKET_PYTHON: python
           EGYPT_JOBS_PYTHON: python
-      - run: node smoke.mjs
+      - run: python scripts/test-python.py
+      - run: python -m ruff check --config ruff.toml packages/source-adapters/src packages/source-adapters/tests countries/de/stepstone/stepstone_mcp countries/de/stepstone/tests
+      - run: npm audit --audit-level=high

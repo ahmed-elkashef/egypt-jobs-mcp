@@ -1,0 +1,40 @@
+{
+  "as_of": "2026-10-29T00:22:42.136Z",
+  "purpose": "Bounded live stdio proof; no full-market or interval coverage claim.",
+  "account_credentials_supplied": false,
+  "raw_job_data_published": false,
+  "calls": [
+    {
+      "name": "shared_get_public_inventory",
+      "arguments": {
+        "source": "arbeitnow",
+        "page": 1
+      },
+      "isError": false,
+      "status": "native_result",
+      "code": null,
+      "sha256": "c5f794367671905fbb2b98ec1491542d8a5c49a9da2b27ce7b966e78e6da1a24",
+      "bytes": 822040,
+      "returned_count": 300,
+      "description_characters": null,
+      "coverage_complete": false
+    },
+    {
+      "name": "shared_get_public_job_from_snapshot",
+      "arguments": {
+        "snapshot_id": "0d2b7bcc-f443-4457-aab8-6e5fdf22544f",
+        "source_id": "solutions-engineer-uas-aviation-munich-269823",
+        "record_index": 0
+      },
+      "isError": false,
+      "status": "native_result",
+      "code": null,
+      "sha256": "8de04fe5f6498e6369b5eea0b63cd8d3b7f24e1947c660b55d0de053bb44a404",
+      "bytes": 33025,
+      "returned_count": null,
+      "description_characters": 4591,
+      "coverage_complete": false
+    }
+  ],
+  "tool_count": 52
+}

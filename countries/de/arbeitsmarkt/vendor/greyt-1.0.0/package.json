@@ -1,0 +1,43 @@
+{
+  "name": "german-arbeitsmarkt-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for German labor market data — Salaries, Jobs, Apprenticeships, Studies, Training & Coaching",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "german-arbeitsmarkt-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "start:remote": "node dist/remote.js"
+  },
+  "keywords": [
+    "mcp",
+    "arbeitsmarkt",
+    "entgeltatlas",
+    "jobsuche",
+    "bundesagentur",
+    "germany",
+    "labor-market"
+  ],
+  "author": "Greyt GmbH",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}

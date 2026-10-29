@@ -1,0 +1,36 @@
+{
+  "as_of": "2026-10-29",
+  "imports": [
+    {
+      "repository": "https://github.com/ahmed-elkashef/egypt-jobs-mcp",
+      "path": "countries/eg/mcp",
+      "commit": "eb1cd6527065323b5ae6b26287eac3b43e6daef7",
+      "date": "2026-10-26T11:02:20+01:00"
+    },
+    {
+      "repository": "https://github.com/ahmed-elkashef/egypt-job-sources",
+      "commit": "331812324924d10397cde5da40c82bf87d77e813",
+      "path": "packages/source-adapters",
+      "method": "Tracked public source import; original licences and credits retained"
+    },
+    {
+      "repository": "https://github.com/ahmed-elkashef/german-arbeitsmarkt-mcp",
+      "commit": "d10ceb40a50a2a948165e401b08ec9d09247dd84",
+      "path": "countries/de/arbeitsmarkt",
+      "method": "Tracked public source import; original licences and credits retained"
+    },
+    {
+      "repository": "https://github.com/ahmed-elkashef/stepstone-mcp",
+      "commit": "aabdbb2a359fb055bfc9f877b11d5676df7d2362",
+      "path": "countries/de/stepstone",
+      "method": "Tracked public source import; original licences and credits retained"
+    },
+    {
+      "repository": "https://github.com/ahmed-elkashef/public-job-sources-mcp",
+      "commit": "9308a9b518f5441d32a9ef02eb0424358044414b",
+      "path": "shared/public-sources",
+      "method": "Tracked public source import; original licences and credits retained"
+    }
+  ],
+  "private_data_imported": false
+}

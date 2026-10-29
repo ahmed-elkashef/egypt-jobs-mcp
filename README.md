@@ -1,249 +1,70 @@
-# Egypt Jobs MCP
+# Job Market MCP
 
-Read-only MCP tools for Egyptian public job sources, worldwide remote feeds,
-and freelance client projects. Built to make source acquisition reusable,
-observable and accessible.
-It combines the standalone [Egypt Job Sources Python library](https://github.com/ahmed-elkashef/egypt-job-sources)
-with a small JavaScript SDK server over standard input/output.
+One source repository for country-based labour-market tools. Egypt and Germany are the first country packages. Public feeds, employer ATS readers and client-project adapters are shared. More countries can use the same contracts without copying another country's implementation.
 
-**MIT licensed.** Credits, exact upstream reference commits and authors are in
-[ACKNOWLEDGMENTS.md](ACKNOWLEDGMENTS.md) and
-[upstream-references.json](upstream-references.json). These are independently
-written adapters informed by community references. No fork ancestry, copied
-scraper implementation or platform affiliation is claimed.
+The repository was renamed from `egypt-jobs-mcp`; its existing Git history and releases are preserved. It consolidates the authored Egypt adapters, the Germany BA derivative, the original StepStone implementation and the shared public-source server. Exact imported commits and retained licences are in [import provenance](docs/import-provenance.json) and [credits](ACKNOWLEDGMENTS.md).
 
-## Install from GitHub
+## Install and run
 
-Requires Node.js 20 or newer and Python 3.11 or newer. Install the Python project
-first; this release is distributed as source on GitHub, not through npm or PyPI.
+Requires Node.js 20+ and Python 3.11+.
 
-```bash
-git clone --branch v0.3.5 --depth 1 https://github.com/ahmed-elkashef/egypt-job-sources.git
-cd egypt-job-sources
+```sh
+git clone https://github.com/ahmed-elkashef/job-market-mcp.git
+cd job-market-mcp
 python3 -m venv .venv
-.venv/bin/python -m pip install .
-cd ..
-git clone --branch v0.3.7 --depth 1 https://github.com/ahmed-elkashef/egypt-jobs-mcp.git
-cd egypt-jobs-mcp
+.venv/bin/python -m pip install -e packages/source-adapters -e countries/de/stepstone
 npm ci --ignore-scripts
-EGYPT_JOBS_PYTHON="$(pwd)/../egypt-job-sources/.venv/bin/python" node smoke.mjs
+JOB_MARKET_PYTHON="$PWD/.venv/bin/python" npm start
 ```
 
-On Windows use the virtual environment's `Scripts/python.exe`. Configure an MCP
-client with absolute paths:
+`server.mjs` exposes the unified stdio MCP. Set `JOB_MARKET_PYTHON` to the absolute Python executable in your MCP client's environment; use the absolute `server.mjs` path as its Node argument. No sibling checkout or account login is needed for the public adapters. Account-based external services remain separately configured.
 
-```json
-{
-  "mcpServers": {
-    "egypt-jobs": {
-      "command": "node",
-      "args": ["/absolute/path/egypt-jobs-mcp/index.mjs"],
-      "env": {
-        "EGYPT_JOBS_PYTHON": "/absolute/path/egypt-job-sources/.venv/bin/python"
-      }
-    }
-  }
-}
-```
+The original Egypt-only `node index.mjs` entrypoint remains available. Python imports/CLI names under `egypt_job_sources` are preserved for compatibility. `private: true` in the npm manifest prevents accidental npm publication; it does not describe GitHub repository visibility.
 
-Without `EGYPT_JOBS_PYTHON`, the server uses `python3` on PATH. The Python package
-must be installed into that interpreter. Start directly with `npm start`.
-The server writes MCP messages to stdout; it does not open a network listener.
+## Country packages and tools
 
-## Tools
-
-| Tool | Inputs and behavior |
-| --- | --- |
-| `read_source_page` | `source`, `page` (default 1), optional `work_model`, Jobicy `cursor`, or board `continuation_url`. WUZZUF pages include hydrated full resources. |
-| `read_source_detail` | `source` and canonical public `url`; no generic URL fetch. |
-| `wuzzuf_work_model_taxonomy` | Blank-query Egypt employment facets and selected country. |
-| `jobicy_location_taxonomy` | Current official location slugs. |
-| `parse_rendered_board_page` | Source and exact `{url,kind,captured_at,html}` public DOM object; no network or browser control. |
-| `read_saved_board_capture` | SHA-256 receipt only; verifies and reparses original local evidence. |
-| `read_public_api_jobs` | Complete native Arbeitnow/The Muse pages; optional page or exact next_url, and bounded Muse testing mode. Requires Python 0.3.4. |
-| `remote_source_capabilities` | Access, attribution, pagination and completeness limits for each global feed. |
-| `read_remote_feed` | `source`: `remotive`, `remoteok`, `weworkremotely`, `workingnomads`, or `himalayas_global`; optional exact returned cursor for Himalayas only. All returned listings, without title/keyword filters or text slicing. |
-| `freelance_source_capabilities` | Public Freelancer and approval-gated Upwork contracts and limits. |
-| `read_freelance_projects` | `source`: `freelancer` or `upwork`; `limit` 1–100, default 20. Freelancer uses `offset`; Upwork uses its returned `cursor`. |
-| `read_freelance_project_detail` | Source and a numeric `project_id`. Full client brief; no bids, profiles, messages or files. |
-
-Supported sources: WUZZUF, Forasna, ArabJobs, Tanqeeb, Akhtaboot, Bayt Egypt, Himalayas, Jobicy and
-Mostaql, plus the worldwide feeds and freelance routes above. WUZZUF models include `full_time`, `part_time`, `freelance_project`
-(`freelance` alias), `internship`, `shift_based` and `volunteering`; omission means
-broad Egypt inventory. No keyword, career-title, skill or seniority filter is
-exposed. Source labels do not establish actual hours or candidate suitability.
-
-Example tool input:
-
-```json
-{"source":"wuzzuf","page":1,"work_model":"part_time"}
-```
-
-### Verified native Egypt work models (0.3.5)
-
-ArabJobs `work_model:part_time` uses `filterJobType=2` with Egypt `EG` and newest `sortType=2`; every returned continuation retains those exact filters. Other observed labels are `full_time`, `contract_temp`, `consultant` and `freelance`. Forasna `work_model:part_time` constructs the actual country `مصر` and case-sensitive `filters[jobType][0]=نصف يوم` controls. Ordinary HTTP may still be denied; the selected public DOM extractor accepts the same exact scope. An SEO landing-page heading alone is not geography proof.
-
-Tanqeeb requires the actual selected Egypt country, checked type and sort state in the public capture. Its native Part Time checkbox value is2; Internship5 and Freelance/Project7 are separate labels. The collector preserves every returned card, including contradictions and unknowns. `next_url` is deliberately null when a Next URL omits native state; `next_browser_action` requires an actual native click followed by matching filter signature verification. Reopening a URL alone can reset the filters. A changing-sort-last sequence also returned full-time cards while Part Time remained checked. The verified sequence is: set newest sort first, apply the native work-type last, wait for returned card membership, then use Next and verify membership again. Preserve leakage and contradictory cards for consumer screening; a checkbox is not result-membership proof. Filtered HTTP parameters are not invented.
-
-These are acquisition filters, not a guarantee of compatible actual hours or worker eligibility. A consumer must reconcile unknown/mixed/contradictory labels, original publication instants, duplicates and source limits. This public package contains no person's private preferences.
-
-### Exact Lever commitment labels
-
-`read_employer_board` accepts an optional Lever-only `commitments` array with one to twenty distinct nonempty exact labels, each at most 200 characters. Discover labels from the broad confirmed employer board's native `categories.commitment`; do not assume universal class names. The [official Lever API](https://github.com/lever/postings-api) applies repeated commitment parameters with case-sensitive OR matching. Preserve the same labels across every returned `next_skip` continuation. Full descriptions and original row counts remain intact, with `source_filters` and returned-label verification. Known contradictions fail explicitly; missing/mixed metadata stays undetermined.
-
-Keep the unfiltered unknown/other-label and full-time-contradiction complement when assessing supply. Internship, contract and fixed-term labels do not prove part-time hours or eligible geography. Greenhouse/Ashby and individual details refuse commitments; a filtered terminal page does not establish whole-board or weekly coverage.
-
-## Source capabilities and limits
-
-| Source | Route | Limit |
+| Package | Included implementation | Unified tool prefix |
 | --- | --- | --- |
-| WUZZUF | Transparent anonymous public JSON:API, 15/page and full-resource hydration | Undocumented frontend contract; can change. Public start is a page index, API startIndex is a card offset. |
-| Forasna | Operator-authorized public browser DOM | Ordinary HTTP may be denied. Click visible Next and verify URL/active page/IDs: href offsets and rendered UI actions can disagree. No inferred numbered offsets. |
-| ArabJobs | Country-only Egypt HTTP, newest-first pager and canonical details | Archive-like inventory and sparse descriptions may not represent active vacancies. |
-| Tanqeeb | Selected public DOM cards/details and observed native controls | Anonymous HTTP currently yields an empty202 response. Model/type state can disappear from Next URLs; use native UI continuation and compare captured filter signatures. |
-| Akhtaboot Egypt | Anonymous HTTP or selected public DOM, exact Egypt scope | Explicit scoped empty state is distinguished from loading/challenges. Nonempty markup validation is separate from current Egypt supply; original dates/hours still need review. |
-| Bayt Egypt | Public page and JobPosting parser | HTTP access may be denied; failures remain visible. |
-| Himalayas | Official country-filtered API | Egypt includes worldwide listings. Preserve canonical source attribution; verify location/hours. |
-| Jobicy | Official global cursor feed and taxonomies | Seven-day window. Start new polling passes no more than hourly; cursor requests can complete one pass. |
-| Mostaql | Public client-project list and scoped brief/terms | Posted project budget is not salary or earned income; scope, fees, hours and payment access need review. |
-| Remotive | Official global JSON feed | 24-hour delay; cache responses and observe the provider's limit of four fresh fetches per day. Attribution required. |
-| Remote OK | Public JSON feed with source legal metadata | Recent snapshot, not a historical census. Preserve source name and canonical links; descriptions may be abbreviated. |
-| We Work Remotely | Official all-jobs RSS | Current feed window only; public source text may omit details. Canonical listing review required. |
-| Working Nomads | Public footer-linked JSON endpoint | Exposed snapshot; no verified historical exhaustion or description completeness. Source reuse restrictions apply. |
-| Himalayas global | Official full global cursor feed, 20/page | Daily refresh; follow exact returned cursor. Location, timezone, pay currency and pay period need review. |
-| Freelancer.com | Public active-project API and numeric-ID detail | Moving offset inventory; full briefs, original budgets and commitments. Only public project fields retained; no account required for these reads. |
-| Upwork | Fixed read-only GraphQL marketplace queries | Approved API application, authorized scopes and OAuth access token required. Browser login alone is insufficient. No live authenticated API verification is claimed. |
+| [Egypt](countries/eg/README.md) | WUZZUF, Forasna, ArabJobs, Tanqeeb, Akhtaboot, Bayt and Mostaql readers; native public DOM recipes where HTTP is unavailable | `eg_` |
+| [Germany](countries/de/README.md) | Structured BA jobs plus salary, Ausbildung, study, training and coaching; original StepStone transport/parser | `de_ba_`, `de_stepstone_` |
+| [Shared](shared/README.md) | Native public feeds, complete snapshot/detail retrieval, direct ATS boards and public client-project reads | `shared_` |
 
-Successful text acquisition is not a model review or a completed market census.
-Responses retain `coverage_complete=false` and `reviewed_by_model=false`.
-Access, structure, identity or hydration failures are `source_limited`; they
-never become fabricated zero jobs. Raw dates with unknown timezones stay raw.
-Keep source-owned content private and follow [SOURCE_POLICY.md](SOURCE_POLICY.md).
-The MIT license covers authored software, not third-party listings or site data.
+Four catalogue tools work without acquiring jobs:
 
-### Upwork activation
+- `list_countries`: packages and actual local backend readiness.
+- `list_country_sources`: national and shared sources, current implementation gaps and access conditions.
+- `source_capabilities`: one source's supported routes, fixed arguments and native tool schemas.
+- `plan_country_scan`: a plan for explicit geography and offset-aware `[from,to)` dates, retaining unresolved sources.
 
-The server reads `UPWORK_ACCESS_TOKEN` only from its machine-local environment.
-Obtain it through an approved Upwork API application with the required read
-scopes; never pass browser cookies, session tokens or credentials as tool inputs.
-Missing approval/token returns an explicit `api_approval_required` limitation.
-See [Upwork's API requirements](https://support.upwork.com/hc/en-us/articles/115015857647-How-to-request-an-API-key-from-Upwork).
-Only fixed marketplace search/detail queries are implemented. No arbitrary
-GraphQL or account write operations are exposed. Canonical job URLs stay null
-when the verified query contract does not supply one.
+[The source registry](sources.json) currently contains 93 distinct source/channel entries. It is an open discovery register, **not proof that every Egyptian or German employer or vacancy is represented**. Entries explicitly distinguish implemented readers, access-limited routes, employer-seeded readers, credential requirements, external connectors, research gaps and statistical context. [Coverage](docs/coverage.md) explains the remaining work.
 
-### Bounded acquisition
+## End to end
 
-Remote HTTP bodies are limited to 25 MiB; MCP Python subprocess output is limited
-to 64 MiB and 55 seconds. Serialized MCP results are bounded to 9 MiB to fit
-common SDK client buffers; larger complete results return `source_limited` and
-can be acquired through the Python CLI into private storage. No partial listings
-are returned. Oversize output, timeouts and malformed responses are
-visible limitations, never silently truncated listings or empty supply. Feeds
-without a cursor return `has_more=null`; a snapshot does not prove exhaustion.
-Native work-type and worldwide labels may conflict with descriptions. Resolve
-actual hours and country restrictions after reading the full canonical text.
+1. Resolve the country and source capabilities before acquiring supply.
+2. Enumerate genuine native geography/model partitions and pagination; do not hide title, role or skill filters in an inventory route.
+3. Preserve each native response, IDs, source/observation dates, continuation and access errors in the consumer's private evidence store.
+4. Hydrate complete descriptions and requirements, then reconcile duplicates, changed/reopened postings and uncertain publication clocks.
+5. Evaluate eligibility or applicant fit in the consuming application. A read, source total, native terminal or registry entry never proves a complete frozen market.
 
-## Browser evidence handoff
+The federation forwards full native responses without shortening job descriptions. It exposes an explicit read-only tool allowlist, namespaces tool identities and isolates backend failure. Unknown/new backend tools are not enabled automatically. Oversized results fail explicitly rather than returning truncated descriptions. Child processes are owned by the server and closed with it.
 
-The Python package's `egypt-job-capture serve` starts a loopback-only local form.
+## Additional Germany API
 
-The Forasna detail extractor retains only canonical public `JobPosting` job fields from JSON-LD. The Python parser reconciles the source identifier with the exact detail URL and preserves aware publication/expiry timestamps, original visible clock, applicant-country restrictions and native salary units. Conflicting clocks and expiry order are reported, not silently normalized. Source metadata does not establish compatible hours, historical completeness or candidate fit. Contact/account fields and executable scripts remain excluded.
-Run it with the same interpreter configured for this MCP, open its printed local
-URL, and transfer selected public DOM from a browser you are authorized to use.
-The standalone `captureEgyptBoardDOM` function in
-[browser-extract.mjs](browser-extract.mjs) validates the public page scope before
-reading content. Copy the function without its `export` keyword into your
-browser tool's read-only DOM evaluator and call it with
-`{source:'forasna',kind:'page'}` or `kind:'detail'`.
+Original Interamt capability/list/detail code is included under `countries/de/interamt`. Its public OpenAPI requires an approved API key; single-customer and MultiMandant scopes remain distinct. `de_public_interamt_capabilities` inspects this offline; `de_public_interamt_read` refuses before network without approved local access and an explicitly confirmed API base. No authenticated live access is claimed.
 
-Submit the exact capture object through the local form and inspect the saved
-receipt. Call `read_saved_board_capture` with its SHA-256. The capture tool keeps
-immutable receipts in the user's local cache; `EGYPT_JOBS_CAPTURE_DIR` can select
-another local directory. It never reads cookies, session storage, hidden account
-state or applicant data. Stop the receiver after use. It does not drive a
-browser, solve challenges or widen access.
+## Browser use and limits
 
-## Development
+API, feed and ordinary authorized HTTP routes are the default. A browser is a last transport option where a maintained source actually requires it. Forasna/Tanqeeb's existing runners remain explicit browser-dependent routes. StepStone checks its current route policy and does not turn denied pagination into a fake empty market. LinkedIn, Upwork and similar account services are external access boundaries, not anonymous scraper fallbacks.
 
-Install the Python library into your test interpreter, then:
+A country package is complete only when every required registered source has tested discovery, native partitions, continuation, complete details, clock evidence and honest access results. Today's consolidation does **not** claim that the remaining Germany/Egypt research entries are implemented. [Architecture and workflow](docs/architecture.md) records the exact ownership and migration boundary.
 
-```bash
-npm ci --ignore-scripts
-EGYPT_JOBS_PYTHON=/path/to/python npm test
-node smoke.mjs
+## Verify
+
+```sh
+.venv/bin/python -m pip install -e 'packages/source-adapters[dev]' -e 'countries/de/stepstone[test]'
+JOB_MARKET_PYTHON="$PWD/.venv/bin/python" EGYPT_JOBS_PYTHON="$PWD/.venv/bin/python" npm test
+npm run check
+.venv/bin/python scripts/test-python.py
 ```
 
-Tests use synthetic payloads and make no source-site network requests. GitHub
-Actions tests the MCP against the paired Python library. Contributions are
-welcome: see [CONTRIBUTING.md](CONTRIBUTING.md). Do not submit real captures,
-candidate records, credentials or downloaded job corpora.
-
-## Official employer boards
-
-Version 0.3.0 adds `ats_source_capabilities`, `read_employer_board`, and `read_employer_job_detail` (fourteen read-only tools total). Each board call requires an explicit confirmed provider/board token. Greenhouse/Ashby use official whole-board responses; Lever uses skip/limit and global/EU endpoints. Only Greenhouse/Lever have documented individual detail reads here. No employer-domain guessing, arbitrary URL target, application, candidate data or internal posting access. Full text and stable IDs are preserved; API failures remain limits. A board snapshot is not a geographic or frozen-week census.
-
-### Freelancer activity intervals
-
-`read_freelance_projects` accepts paired aware RFC3339 `from_time` and `to_time` only for `source:freelancer`. For example, freeze `2026-01-01T12:00:00Z` to `2026-01-03T12:00:00Z` and repeat those exact values on each returned-offset page. Native date filters constrain **update activity**; the backend separately reports exact `[start,end)` submission-window classification. Missing or conflicting source timestamps remain undetermined, and every public row and raw pagination count remains intact. Known activity outside the requested native interval produces an explicit limitation. These parameters do not establish first-ever creation, an exhaustive market census or immunity to provider limits. No date argument is accepted for Upwork or detail reads.
-
-The native hourly commitment value is a billing limit, often the default 40 hours per week, rather than proof of mandatory full-time attendance. Actual required hours must be established from the brief.
-
-## Complete native public APIs
-
-`read_public_api_jobs` preserves every native HTML description and actual continuation. [Arbeitnow](https://www.arbeitnow.com/blog/job-board-api) starts at page 1; [The Muse](https://www.themuse.com/developers/api/v2) starts at page 0. Use only the returned `next_url` or native page; these APIs expose no candidate filters here. An ordinary wrapper may cap result counts or clip descriptions; this reader does neither. Missing, stalled or cross-source continuation fails explicitly.
-
-The Muse requires registered application access beyond capability testing. Its official limits are 500 anonymous test requests/hour and 3600 registered requests/hour. Keep `THEMUSE_API_KEY` machine-local; never put it in tool inputs. `testing:true` permits a bounded anonymous capability test, not a production market refresh. Arbeitnow has no verified numeric rate allowance: honor HTTP 429 and safe Retry-After metadata. Moving pages and native date fields do not establish historical completeness or original publication. Fifteen read-only tools are registered in this release.
-
-The complete API body is retained once as `description`, with every other native field in `source_data` and the original body key in `source_description_field`. Original native rows are exactly reconstructible. This removes duplicate HTML serialization without dropping any row or shortening any description.
-
-
-## Automatic authorized browser capture
-
-`browser_capture_plan` exposes verified native recipes for **Tanqeeb Egypt** and
-**Forasna Egypt**. Import `browser-runner.mjs` inside the supported CUA runtime,
-inject an authorized source Tab and a trusted private checkpoint sink, then call:
-
-```js
-await runBoardCapture({tab, sink, source: 'tanqeeb', workModel: 'part_time',
-  maxPages: 20, maxMillis: 45000, collectDetails: true});
-```
-
-The runner controls native filters, observes actual card membership, clicks native
-Next controls, saves selected DOM, resumes bounded chunks and captures only briefs
-queued by the private intake. It has no browser launcher, network client, session
-export, CAPTCHA solver or application actions. Browser access must be available
-through the authorized runtime. Native dates and candidate fit still require
-independent evidence and review; capture completion is not market coverage.
-
-Tanqeeb ordering is applied before the compatible job type. Type is applied last
-because live testing found that changing sort afterward could silently restore
-full-time results despite selected part-time controls. Forasna uses explicit Egypt
-and half-day controls; pagination follows the actual control, not guessed offsets.
-Unknown/mixed supply requires a separate all-types complement and objective private
-screening. Full-time only supply is excluded before brief capture.
-
-Forasna's all-types view may explicitly select its native `الكل-jobtype` option.
-The runner accepts that All marker or no selected type for a broad capture, while
-still rejecting restrictive or mixed type selections and requiring the same
-verified Egypt controls. This does not change the part-time returned-membership
-checks, bypass access barriers or establish historical completeness.
-
-The injected sink implements `status()`, `capture(capture, meta)`,
-`detail(capture, proof)`, `recover(options)` and `limit(metadata)`. It must persist
-immutable binding/captures and validate native scope, continuation and stable IDs.
-Status provides `source`, `initial_url`, `native_filter_plan`, `cursor`,
-`source_continuation`, `detail_queue`, `listing_terminal_observed` and
-`capture_complete`. A lost browser page is recovered by replaying from the seed
-with preserved deduplication. Access barriers and layout changes stop with a
-checkpoint rather than being reported as zero jobs. See the offline tests for
-synthetic examples; no live listing data is shipped.
-
-
-Native disclosure fragments on Tanqeeb are normalized only for the two observed
-filter panels. Same-source, same-ID canonical detail slug redirects are allowed;
-foreign hosts, different IDs and query-bearing detail URLs are rejected. Native
-card/body visibility waits handle hydration. Browser-host navigation errors are
-accepted only if the intended canonical identity is visibly reached and all
-normal readiness/membership checks subsequently pass. Missing original publication
-clocks and genuinely empty briefs remain evidence limitations, never invented facts.
+Tests use synthetic data, mocked source requests and real local stdio MCP connections. The Python receiver test binds an owned temporary loopback port. Live probes are separate and bounded; no source census, account connection, application, message, bid, purchase or monitor starts from installation or testing. See [source policy](SOURCE_POLICY.md).

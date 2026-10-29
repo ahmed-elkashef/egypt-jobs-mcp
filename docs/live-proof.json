@@ -1,0 +1,151 @@
+{
+  "as_of": "2026-10-29T00:21:37.461Z",
+  "purpose": "Bounded live stdio proof; no full-market or interval coverage claim.",
+  "account_credentials_supplied": false,
+  "raw_job_data_published": false,
+  "calls": [
+    {
+      "name": "eg_read_source_page",
+      "arguments": {
+        "source": "wuzzuf",
+        "page": 1
+      },
+      "isError": false,
+      "status": "ok",
+      "code": null,
+      "sha256": "b0d95b569ef50e0f07939e44764c832c1b368272271ee3f6da0940b48c389539",
+      "bytes": 315243,
+      "returned_count": 15,
+      "description_characters": null,
+      "coverage_complete": false
+    },
+    {
+      "name": "eg_read_source_detail",
+      "arguments": {
+        "source": "wuzzuf",
+        "url": "https://wuzzuf.net/jobs/p/k5eu5rqrxnue-medical-representative-dakahlia-group-sharqia-egypt"
+      },
+      "isError": false,
+      "status": "ok",
+      "code": null,
+      "sha256": "563fa77d2f393032f4fb84c41e0aa1e6430b7965bb010dc868d3ff0df2d02a41",
+      "bytes": 17607,
+      "returned_count": null,
+      "description_characters": null,
+      "coverage_complete": false
+    },
+    {
+      "name": "de_ba_job_suche",
+      "arguments": {
+        "wo": "10115",
+        "umkreis": 25,
+        "angebotsart": 1,
+        "page": 1,
+        "size": 2,
+        "veroeffentlicht_seit": 7
+      },
+      "isError": false,
+      "status": "ba_job_search_page",
+      "code": null,
+      "sha256": "f41bb16cf8df8d64988c5f4ce3a94233eac4027d0dc5f8a9515ca14d57dfb6ba",
+      "bytes": 51956,
+      "returned_count": 2,
+      "description_characters": null,
+      "coverage_complete": false
+    },
+    {
+      "name": "de_ba_job_suche",
+      "arguments": {
+        "wo": "10115",
+        "umkreis": 25,
+        "angebotsart": 1,
+        "page": 2,
+        "size": 2,
+        "veroeffentlicht_seit": 7
+      },
+      "isError": false,
+      "status": "ba_job_search_page",
+      "code": null,
+      "sha256": "6d9dfac2b116411ee896a6d6f4fb16ee0c16810062fbb0ae641c543694ed8d2e",
+      "bytes": 51876,
+      "returned_count": 2,
+      "description_characters": null,
+      "coverage_complete": false
+    },
+    {
+      "name": "de_ba_job_details",
+      "arguments": {
+        "hashId": "MTQ3NjMtNDQ1MzgwMDktMTAyOC1T"
+      },
+      "isError": false,
+      "status": "ba_job_details",
+      "code": null,
+      "sha256": "f528be7bf2e944c426cef829f7f9161a1d6ea15f227c7fb43bfc3dadda15541c",
+      "bytes": 45622,
+      "returned_count": null,
+      "description_characters": 4208,
+      "coverage_complete": false
+    },
+    {
+      "name": "de_ba_job_suche",
+      "arguments": {
+        "wo": "10115",
+        "umkreis": 25,
+        "angebotsart": 34,
+        "page": 1,
+        "size": 2,
+        "veroeffentlicht_seit": 7
+      },
+      "isError": false,
+      "status": "ba_job_search_page",
+      "code": null,
+      "sha256": "b81b388e85478b53d3bbd7dea035aff56789f17400f6b422724ab695aee44fe1",
+      "bytes": 34132,
+      "returned_count": 2,
+      "description_characters": null,
+      "coverage_complete": false
+    },
+    {
+      "name": "de_stepstone_get_capabilities",
+      "arguments": {},
+      "isError": false,
+      "status": "native_result",
+      "code": null,
+      "sha256": "f119576ffb656580a546b8efa63f466098f7a4689e07bbfff5c55d960ba364a3",
+      "bytes": 2115,
+      "returned_count": null,
+      "description_characters": null,
+      "coverage_complete": false
+    },
+    {
+      "name": "de_public_interamt_read",
+      "arguments": {
+        "operation": "agency_list"
+      },
+      "isError": true,
+      "status": "credential_required",
+      "code": "missing_approved_key",
+      "sha256": "19d643f8c65736f70c524380fe24782b5c552bad8ff4835ba75c2ee281204f00",
+      "bytes": 517,
+      "returned_count": null,
+      "description_characters": null,
+      "coverage_complete": false
+    },
+    {
+      "name": "shared_get_public_inventory",
+      "arguments": {
+        "source": "arbeitnow",
+        "page": 1
+      },
+      "isError": false,
+      "status": "success",
+      "code": null,
+      "sha256": "0d68e1501e9411eb8a7b8e45a227cfc6098e1ca45bd2b5e694bacee03b21c435",
+      "bytes": 822040,
+      "returned_count": null,
+      "description_characters": null,
+      "coverage_complete": false
+    }
+  ],
+  "tool_count": 52
+}
