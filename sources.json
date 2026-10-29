@@ -1105,14 +1105,36 @@
         "DE"
       ],
       "category": "temporary_work",
-      "status": "research_required",
+      "status": "implemented",
       "references": [
         "https://www.zenjob.com/de/"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "zenjob"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_detail",
+          "public_tool": "de_public_german_board_detail",
+          "fixed_arguments": {
+            "source": "zenjob"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
-      ]
+        "Original anonymous read-only list/full visible detail code, exact native route/query/identity guards and current robots. No account, application, contact or subscription.",
+        "Source transport, whole descriptions, publication/renewal/shift clocks, frozen coverage and applicant eligibility remain separate. No career/degree/title acquisition filters.",
+        "Public primary shift cards and actual native page links; no assumed total or invented final page. Every shift has its own UUID. Shift start, publication and expiry differ.",
+        "Full visible requirements and separate notes extend beyond structured description and are retained. PART_TIME/student shift supply is not a verified working-student contract. A native schema URL can omit /jobs/; UUID is reconciled without requesting the alternate route. Native filter POST/app/signup are unsupported."
+      ],
+      "code_audited_on": "2026-10-29",
+      "last_saved_transport_evidence": "2026-10-29"
     },
     {
       "id": "youngcapital",
@@ -1376,11 +1398,14 @@
       "category": "matching_platform",
       "status": "research_required",
       "references": [
-        "https://instaffo.com/"
+        "https://instaffo.com/",
+        "https://www.instaffo.com/faq",
+        "https://jobs.instaffo.com/de/jobs"
       ],
       "routes": [],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition.",
+        "Provider FAQ observed29October2026 excludes internships and working-student roles from its service scope. Student-only workflows may record this objective source-scope exclusion; this is not proof the entire public job universe is login-only. Original public jobs inventory remains a broader implementation question."
       ]
     },
     {
@@ -1390,14 +1415,36 @@
         "DE"
       ],
       "category": "specialist_board",
-      "status": "research_required",
+      "status": "implemented",
       "references": [
         "https://www.get-in-engineering.de/"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "getinengineering"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_detail",
+          "public_tool": "de_public_german_board_detail",
+          "fixed_arguments": {
+            "source": "getinengineering"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
-      ]
+        "Original anonymous read-only list/full visible detail code, exact native route/query/identity guards and current robots. No account, application, contact or subscription.",
+        "Source transport, whole descriptions, publication/renewal/shift clocks, frozen coverage and applicant eligibility remain separate. No career/degree/title acquisition filters.",
+        "SSR first39 cards reconcile with native JSON. The published openV2 GET job/search continuation uses start=page_index*39, limit39 and its required X-Requested-With protocol header; offsets0/39/78 verified. SSR start query resets and is not continuation. Standard verified TLS remains enabled.",
+        "Full native DTO content sections match every visible section plus independent JobPosting. Home-office labels do not establish remote eligibility, and structured datePosted is not verified employer-original publication."
+      ],
+      "code_audited_on": "2026-10-29",
+      "last_saved_transport_evidence": "2026-10-29"
     },
     {
       "id": "bund_de",
@@ -2314,15 +2361,17 @@
         "DE"
       ],
       "category": "national_board",
-      "status": "research_required",
+      "status": "access_limited",
       "references": [
         "https://www.heyjobs.co/de-de/"
       ],
       "routes": [],
       "limits": [
-        "Discovered as actual external primary cards in native XING inventory on2026-10-29. Retain these records; do not treat them as native XING bodies.",
-        "Official provider inventory, objective country/model partitions, continuation, current policy and complete native descriptions still require original verification. A few external links are not a provider census."
-      ]
+        "Dated ordinary public canonical root, all-jobs directory and advertised GFJ sitemaps returned200. Root zero search state is a landing reducer, not empty inventory; directory/canonical URI counts are not active vacancies or an employer census.",
+        "Actual native internship and Frankfurt list routes and an advertised untracked canonical job returned202 with an incomplete technical HTML response. No WAF/challenge execution, alternate fingerprint, Next-data rewrite or protected API workaround. This is route-specific, not proof every possible future provider interface is unavailable.",
+        "No implemented full vacancy-list/body acquisition. Public applicant terms permit viewing without registration; do not label the202 a missing-login requirement."
+      ],
+      "last_saved_transport_evidence": "2026-10-29"
     }
   ]
 }
