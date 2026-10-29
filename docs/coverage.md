@@ -4,7 +4,7 @@ As of 29 October 2026. This is code/source-contract coverage, not a fresh vacanc
 
 | Implementation/access state | Sources/channel groups |
 | --- | --- |
-| access_limited | 12 |
+| access_limited | 13 |
 | context_only | 4 |
 | credential_required | 3 |
 | external_connector | 3 |
@@ -12,7 +12,7 @@ As of 29 October 2026. This is code/source-contract coverage, not a fresh vacanc
 | requires_employer_seed | 7 |
 | research_required | 32 |
 
-The registry has 94 unique entries: 43 apply to Egypt and 79 to Germany, including shared entries. These counts overlap; they are not numbers of vacancies, employers or live working transports.
+The registry has 95 unique entries: 43 apply to Egypt and 80 to Germany, including shared entries. These counts overlap; they are not numbers of vacancies, employers or live working transports.
 
 ## What still needs original implementation or access
 
@@ -121,6 +121,8 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [Khamsat](https://khamsat.com/) | EG | research_required | freelance_demand |
 | [HeyJobs](https://www.heyjobs.co/de-de/) | DE | access_limited | national_board |
 
+| [Studierendenwerk Frankfurt official student portal](https://stellenmarkt.swffm.de/) | DE | access_limited | student_board |
+
 Jobmensa public list/detail routes were added in v0.4.2 with live policy checks, native continuation and synthetic regressions. This changes implementation status only; it does not close any national or historical coverage claim.
 
 StudentJob and YoungCapital native list/detail readers were added in v0.4.3. External redirect records are retained and can remain access-limited under current robots. Their presence does not mean original-employer body access or applicant fit was verified.
@@ -158,3 +160,11 @@ student contracts, remote eligibility or source-original dates. HeyJobs native
 list/detail202 limits are explicit despite permitted directory/sitemap200.
 Instaffo's FAQ excludes internships/working-student roles; its public general job
 board remains a broader research/implementation entry, not a login-only claim.
+
+
+v0.4.8 adds the official Frankfurt student portal native list/body and finite
+employer discovery contracts. All56 native references and six employer profiles
+were traversed in a dated test.48 visible HTML bodies and seven published PDF
+text alternatives are qualified separately; one PDF-only ad remains limited.
+No denied PDF/viewer fetch or rewrite occurred. Source, date, start/model conflict,
+portal worksite and employer/frozen-coverage ambiguities remain explicit.

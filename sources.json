@@ -2372,6 +2372,46 @@
         "No implemented full vacancy-list/body acquisition. Public applicant terms permit viewing without registration; do not label the202 a missing-login requirement."
       ],
       "last_saved_transport_evidence": "2026-10-29"
+    },
+    {
+      "id": "swffm",
+      "name": "Studierendenwerk Frankfurt official student portal",
+      "countries": [
+        "DE"
+      ],
+      "category": "student_board",
+      "status": "access_limited",
+      "references": [
+        "https://stellenmarkt.swffm.de/",
+        "https://stellenmarkt.swffm.de/stellenangebote/",
+        "https://stellenmarkt.swffm.de/unternehmensprofile"
+      ],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "swffm"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_detail",
+          "public_tool": "de_public_german_board_detail",
+          "fixed_arguments": {
+            "source": "swffm"
+          }
+        }
+      ],
+      "limits": [
+        "Original permitted anonymous native primary pages, active-page/enabled continuation checks and complete provided HTML bodies. Homepage featured links, finite directory/profile references and ad counts are separate from vacancy/employer/frozen coverage.",
+        "All56 native ad references across pages20/20/16 and six finite employer profiles were read in a dated engineering traversal. The disabled terminal Next has a root href and is never followed. The portal name is not proof every job is in Hesse; first native job was in Münster.",
+        "48 ads have native visible HTML sections,seven have independently published HTML text alternatives beside PDF viewers, and one has no full provided HTML text. Preserve structured descriptions and alternative text independently, including model/start-date conflicts. Untruncated provided HTML is not verification of PDF/employer completeness.",
+        "Native PDFs are robots-denied and were not fetched. No viewer rewrite, asset request, Ajax, role query, account, application, email or contact. The one PDF-only ad stays source-limited, never empty or complete."
+      ],
+      "code_audited_on": "2026-10-29",
+      "last_saved_transport_evidence": "2026-10-29"
     }
   ]
 }

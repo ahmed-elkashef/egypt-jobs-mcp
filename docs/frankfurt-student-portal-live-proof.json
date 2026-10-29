@@ -1,0 +1,44 @@
+{
+  "as_of": "2026-10-29",
+  "kind": "bounded_original_campus_source_engineering_proof",
+  "source": "swffm",
+  "native_pages": [
+    1,
+    2,
+    3
+  ],
+  "primary_ad_references_each": [
+    20,
+    20,
+    16
+  ],
+  "distinct_ad_references": 56,
+  "finite_employer_profiles_read": 6,
+  "parsed_visible_html_bodies": 48,
+  "parsed_published_html_pdf_text_alternatives": 7,
+  "unresolved_pdf_only_bodies": 1,
+  "native_pdf_policy": "denied",
+  "pdf_or_viewer_requested": false,
+  "provided_html_text_is_verified_pdf_completeness": false,
+  "disabled_terminal_next_root_href_ignored": true,
+  "native_model_and_start_conflicts_preserved": true,
+  "portal_label_is_hesse_worksite": false,
+  "public_corpus_included": false,
+  "complete_employer_census": false,
+  "frozen_week_complete": false,
+  "coverage_complete": false,
+  "applicant_fit_assessed": false,
+  "actions_started": false,
+  "verification": {
+    "node_tests": 103,
+    "python_tests": 316,
+    "total_tests": 419,
+    "public_board_regressions": 88,
+    "real_stdio_probes": 10,
+    "successful_native_or_context_results": 9,
+    "expected_pdf_only_limit_results": 1,
+    "all_tools_read_only": true,
+    "read_only_tools": 63,
+    "native_public_board_sources": 14
+  }
+}
