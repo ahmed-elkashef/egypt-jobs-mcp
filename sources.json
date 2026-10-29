@@ -893,13 +893,44 @@
         "DE"
       ],
       "category": "student_board",
-      "status": "research_required",
+      "status": "implemented",
       "references": [
-        "https://www.studentjob.de/"
+        "https://www.studentjob.de/",
+        "https://www.studentjob.de/robots.txt",
+        "https://www.studentjob.de/stellenangebote"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "student_board_page",
+          "public_tool": "de_public_student_board_page",
+          "fixed_arguments": {
+            "source": "studentjob"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "student_board_detail",
+          "public_tool": "de_public_student_board_detail",
+          "fixed_arguments": {
+            "source": "studentjob"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "student_board_resolve_external",
+          "public_tool": "de_public_student_board_resolve_external",
+          "fixed_arguments": {
+            "source": "studentjob"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Original public HTML reader verifies current robots, all native primary cards, selected model/sort controls and actual native continuation; no account/application actions.",
+        "External promoted cards remain metadata records; robots can deny their native redirect. No fabricated body or bypass; independently evidenced original sources require separate review.",
+        "Full visible DOM body retains extra requirements beyond JSON-LD; numeric native URL identity overrides placeholder schema ID. Conflicting model labels remain unresolved evidence.",
+        "Germany-market site does not prove Germany worksite or remote-worker eligibility; foreign adverts and mixed/survey postings remain explicit.",
+        "Moving pages/date-only clocks are not a frozen week or national census. Raw HTML is optional machine-local evidence, never public repository fixtures."
       ]
     },
     {
@@ -925,13 +956,44 @@
         "DE"
       ],
       "category": "student_board",
-      "status": "research_required",
+      "status": "implemented",
       "references": [
-        "https://www.youngcapital.de/"
+        "https://www.youngcapital.de/",
+        "https://www.youngcapital.de/robots.txt",
+        "https://www.youngcapital.de/stellenangebote"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "student_board_page",
+          "public_tool": "de_public_student_board_page",
+          "fixed_arguments": {
+            "source": "youngcapital"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "student_board_detail",
+          "public_tool": "de_public_student_board_detail",
+          "fixed_arguments": {
+            "source": "youngcapital"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "student_board_resolve_external",
+          "public_tool": "de_public_student_board_resolve_external",
+          "fixed_arguments": {
+            "source": "youngcapital"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Original public HTML reader verifies current robots, all native primary cards, selected model/sort controls and actual native continuation; no account/application actions.",
+        "External promoted cards remain metadata records; robots can deny their native redirect. No fabricated body or bypass; independently evidenced original sources require separate review.",
+        "Full visible DOM body retains extra requirements beyond JSON-LD; numeric native URL identity overrides placeholder schema ID. Conflicting model labels remain unresolved evidence.",
+        "Germany-market site does not prove Germany worksite or remote-worker eligibility; foreign adverts and mixed/survey postings remain explicit.",
+        "Moving pages/date-only clocks are not a frozen week or national census. Raw HTML is optional machine-local evidence, never public repository fixtures."
       ]
     },
     {

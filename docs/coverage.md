@@ -8,9 +8,9 @@ As of 29 October 2026. This is code/source-contract coverage, not a fresh vacanc
 | context_only | 4 |
 | credential_required | 3 |
 | external_connector | 3 |
-| implemented | 21 |
+| implemented | 23 |
 | requires_employer_seed | 7 |
-| research_required | 51 |
+| research_required | 49 |
 
 The registry has 93 unique entries: 43 apply to Egypt and 78 to Germany, including shared entries. These counts overlap; they are not numbers of vacancies, employers or live working transports.
 
@@ -62,11 +62,11 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [Absolventa](https://www.absolventa.de/) | DE | research_required | graduate_board |
 | [academics](https://www.academics.de/) | DE | research_required | research_board |
 | [EURAXESS](https://euraxess.ec.europa.eu/jobs) | DE | research_required | research_board |
-| [Jobmensa](https://www.jobmensa.de/) | DE | research_required | student_board |
+| [Jobmensa](https://www.jobmensa.de/) | DE | implemented | student_board |
 | [Stellenwerk](https://www.stellenwerk.de/) | DE | research_required | student_board |
-| [StudentJob Germany](https://www.studentjob.de/) | DE | research_required | student_board |
+| [StudentJob Germany](https://www.studentjob.de/) | DE | implemented | student_board |
 | [Zenjob](https://www.zenjob.com/de/) | DE | research_required | temporary_work |
-| [YoungCapital Germany](https://www.youngcapital.de/) | DE | research_required | student_board |
+| [YoungCapital Germany](https://www.youngcapital.de/) | DE | implemented | student_board |
 | [Ausbildung.de](https://www.ausbildung.de/) | DE | research_required | apprenticeships |
 | [Azubiyo](https://www.azubiyo.de/) | DE | research_required | apprenticeships |
 | [AUBI-plus](https://www.aubi-plus.de/) | DE | research_required | apprenticeships |
@@ -121,3 +121,5 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [Khamsat](https://khamsat.com/) | EG | research_required | freelance_demand |
 
 Jobmensa public list/detail routes were added in v0.4.2 with live policy checks, native continuation and synthetic regressions. This changes implementation status only; it does not close any national or historical coverage claim.
+
+StudentJob and YoungCapital native list/detail readers were added in v0.4.3. External redirect records are retained and can remain access-limited under current robots. Their presence does not mean original-employer body access or applicant fit was verified.

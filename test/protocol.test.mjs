@@ -22,8 +22,8 @@ test('real unified stdio lists countries and routes through Egypt and Germany of
   try{
     await client.connect(transport);
     const list=await client.listTools();
-    for(const name of ['list_countries','list_country_sources','plan_country_scan','eg_read_source_page','de_ba_job_suche','de_stepstone_get_capabilities','shared_get_public_inventory','de_public_interamt_capabilities','de_public_interamt_read','de_public_jobmensa_capabilities','de_public_jobmensa_page','de_public_jobmensa_detail'])assert.ok(list.tools.some(t=>t.name===name),name);
-    assert.equal(list.tools.length,55);
+    for(const name of ['list_countries','list_country_sources','plan_country_scan','eg_read_source_page','de_ba_job_suche','de_stepstone_get_capabilities','shared_get_public_inventory','de_public_interamt_capabilities','de_public_interamt_read','de_public_jobmensa_capabilities','de_public_jobmensa_page','de_public_jobmensa_detail','de_public_student_boards_capabilities','de_public_student_board_page','de_public_student_board_detail','de_public_student_board_resolve_external'])assert.ok(list.tools.some(t=>t.name===name),name);
+    assert.equal(list.tools.length,59);
     assert.ok(list.tools.every(t=>t.annotations?.readOnlyHint===true));
     const countries=await client.callTool({name:'list_countries',arguments:{}});
     assert.equal(countries.structuredContent.countries.length,2);
@@ -32,6 +32,10 @@ test('real unified stdio lists countries and routes through Egypt and Germany of
     assert.equal(student.structuredContent.source,'jobmensa');
     const refused=await client.callTool({name:'de_public_jobmensa_page',arguments:{url:'https://example.test/jobs-suchen'}});
     assert.equal(refused.isError,true);assert.equal(refused.structuredContent.returned_count,null);
+    const boards=await client.callTool({name:'de_public_student_boards_capabilities',arguments:{}});
+    assert.deepEqual(boards.structuredContent.sources,['studentjob','youngcapital']);
+    const unsafe=await client.callTool({name:'de_public_student_board_page',arguments:{source:'studentjob',url:'https://example.test/stellenangebote'}});
+    assert.equal(unsafe.isError,true);assert.equal(unsafe.structuredContent.returned_count,null);
     const interamt=await client.callTool({name:'de_public_interamt_read',arguments:{operation:'agency_list'}});
     assert.equal(interamt.isError,true);assert.equal(interamt.structuredContent.status,'credential_required');
     for(const source of (await client.callTool({name:'list_country_sources',arguments:{country:'DE'}})).structuredContent.sources){

@@ -50,7 +50,7 @@ The federation forwards full native responses without shortening job description
 
 ## Germany public boards
 
-The original [Jobmensa reader](countries/de/student-boards/README.md) enumerates complete public native pages and full JobPosting details without a browser. Current robots policy, exact native continuation and model/date/worker-country ambiguities remain explicit. It makes no account, contact or application action.
+The original [Jobmensa, StudentJob and YoungCapital readers](countries/de/student-boards/README.md) enumerate complete public native pages and full visible job details without a browser. Current robots policy, exact native continuation and model/date/worker-country ambiguities remain explicit. It makes no account, contact or application action.
 
 ## Additional Germany API
 
