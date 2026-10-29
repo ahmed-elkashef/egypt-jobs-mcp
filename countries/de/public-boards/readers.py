@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import json
 import os
 import re
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
+from io import BytesIO
 from pathlib import Path
 from urllib.error import HTTPError
 from urllib.parse import parse_qs, unquote, urlencode, urljoin, urlsplit, urlunsplit
@@ -19,10 +21,12 @@ from xml.etree import ElementTree
 import berlin
 import englishjobs
 import jobware
+import source_capture
+import xing
 from lxml import html
 from native_flight import public_search_state
 
-AGENT = "job-market-mcp/0.4.5"
+AGENT = "job-market-mcp/0.4.6"
 MAX_BYTES = 8 * 1024 * 1024
 ORIGINS = {
     name: "https://www." + host
@@ -39,7 +43,9 @@ ORIGINS["jobs_de"] = "https://www.jobs.de"
 ORIGINS["jobware"] = "https://www.jobware.de"
 ORIGINS["englishjobs"] = englishjobs.ORIGIN
 ORIGINS["berlinstartupjobs"] = berlin.ORIGIN
+ORIGINS["xing"] = xing.ORIGIN
 LIST_PATHS = {
+    "xing": "/jobs/k-student",
     "englishjobs": "/in/hessen",
     "berlinstartupjobs": "/",
     "jobware": "/jobsearch/sitemap/sitemap-advertisements.xml",
@@ -105,6 +111,8 @@ def checked_url(source, url, operation):
         return englishjobs.checked_url(url, operation)
     if source == "berlinstartupjobs":
         return berlin.checked_url(url, operation)
+    if source == "xing":
+        return xing.checked_url(url, operation)
     if operation == "inventory":
         if path != LIST_PATHS[source]:
             raise SourceError("Only the observed unfiltered inventory path is supported")
@@ -130,6 +138,8 @@ def checked_url(source, url, operation):
 
 
 def identity(source, url):
+    if source == "xing":
+        return xing.native_id(url)
     match = re.fullmatch(DETAILS[source], unquote(urlsplit(url).path), re.I)
     if not match:
         raise SourceError("Native detail identity absent")
@@ -179,6 +189,10 @@ def fetch(source, url, operation, policy=None):
         body = response.read(MAX_BYTES + 1)
         if len(body) > MAX_BYTES:
             raise SourceError("Full source exceeds bound; no truncated response")
+        if source == "xing" and urlsplit(url).path.endswith(".xml.gz") and body[:2] == b"\x1f\x8b":
+            body = gzip.GzipFile(fileobj=BytesIO(body)).read(MAX_BYTES + 1)
+            if len(body) > MAX_BYTES:
+                raise SourceError("Full decompressed native resource exceeds bound; no clipping")
         return body, response.geturl()
 
 
@@ -642,6 +656,10 @@ def postings(value):
 
 def parse_detail(source, body, url):
     checked_url(source, url, "detail")
+    if source == "xing":
+        result = envelope(source, body, url, "german_public_board_detail")
+        result.update(xing.detail(body, url))
+        return result
     if source == "berlinstartupjobs":
         result = envelope(source, body, url, "german_public_board_detail")
         result.update(berlin.detail(body, url))
@@ -727,6 +745,10 @@ def parse_detail(source, body, url):
 
 def parse_inventory(source, body, url):
     checked_url(source, url, "inventory")
+    if source == "xing":
+        result = envelope(source, body, url, "german_public_board_page")
+        result.update(xing.inventory(body, url))
+        return result
     if source in {"englishjobs", "berlinstartupjobs"}:
         result = envelope(source, body, url, "german_public_board_page")
         result.update((englishjobs if source == "englishjobs" else berlin).inventory(body, url))
@@ -790,6 +812,18 @@ def read(source, operation, url):
         robots_sha256=hashlib.sha256(robots).hexdigest(),
         private_raw_checkpoint=capture,
     )
+    if (
+        result.get("kind") == "source_uri_discovery"
+        and len(json.dumps(result, ensure_ascii=False).encode()) > 2 * 1024 * 1024
+    ):
+        manifest = source_capture.record_capture(result)
+        manifest.update(
+            observed_at=result["observed_at"],
+            requested_url=url,
+            robots_sha256=result["robots_sha256"],
+            native_sitemap_kind=result["native_sitemap_kind"],
+        )
+        return manifest
     return result
 
 
@@ -816,6 +850,12 @@ def capabilities():
             },
         },
         "feed_history_cap": ["bund_de"],
+        "source_uri_consumer_segments": {
+            "private_directory_env": "JOB_MARKET_CAPTURE_DIR",
+            "segment_size": 1000,
+            "native_pagination": False,
+            "uri_counts_are_current_jobs": False,
+        },
         "reviewed_by_model": False,
     }
 
@@ -826,10 +866,16 @@ def main():
     parser.add_argument("--operation", choices=["inventory", "detail"])
     parser.add_argument("--url")
     parser.add_argument("--capabilities", action="store_true")
+    parser.add_argument("--capture-id")
+    parser.add_argument("--segment-index", type=int, default=0)
     args = parser.parse_args()
     try:
         result = (
-            capabilities() if args.capabilities else read(args.source, args.operation, args.url)
+            source_capture.read_segment(args.capture_id, args.segment_index)
+            if args.capture_id
+            else capabilities()
+            if args.capabilities
+            else read(args.source, args.operation, args.url)
         )
     except Exception as error:
         result = {
@@ -840,11 +886,14 @@ def main():
             "reviewed_by_model": False,
             "error_type": type(error).__name__,
             "http_status": error.code if isinstance(error, HTTPError) else None,
+            "exact_native_detail_gone": isinstance(error, HTTPError)
+            and error.code == 410
+            and args.operation == "detail",
             "retry_after": error.headers.get("Retry-After")
             if isinstance(error, HTTPError) and error.headers
             else None,
             "message": str(error)
-            if isinstance(error, SourceError)
+            if isinstance(error, (SourceError, xing.XingError, source_capture.CaptureError))
             else "Native source unavailable, changed or incomplete; no partial/empty success.",
         }
     print(json.dumps(result, ensure_ascii=False))

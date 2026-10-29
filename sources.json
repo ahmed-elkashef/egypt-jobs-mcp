@@ -636,14 +636,38 @@
         "DE"
       ],
       "category": "national_board",
-      "status": "research_required",
+      "status": "access_limited",
       "references": [
         "https://www.xing.com/jobs"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "xing"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_detail",
+          "public_tool": "de_public_german_board_detail",
+          "fixed_arguments": {
+            "source": "xing"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
-      ]
+        "Original anonymous native list/full-body/sitemap discovery code. Every native primary card is retained, including promoted external-source records; opaque tracking, signed assets and account graphs are excluded.",
+        "Native source queries, exact page/offset/count and emitted continuation are verified. The student source enum INTERN is labelled Studierende, not proof of a mandatory internship or exact contract.",
+        "Native jobs-in-hessen query is literal text Hessen/radius20, not a verified state polygon. No Hesse-wide membership or worker-country inference.",
+        "Observed student page100 retains20 records but no next link despite native total12718 and bound2000. This is an unresolved provider retrieval cap, not exhausted supply.",
+        "Advertised sitemaps include expired adverts: the first native job URI returned410. URI counts are not active vacancies or an employer census. Large complete URI partitions are stored privately and exposed through immutable consumer segments, explicitly not provider pagination.",
+        "No login, challenge execution, profile/account actions, application, contact or policy bypass. Full bodies preserve the complete native DTO and visible description plus independent JobPosting; employer completeness and fit remain unverified."
+      ],
+      "code_audited_on": "2026-10-29",
+      "last_saved_transport_evidence": "2026-10-29"
     },
     {
       "id": "meinestadt",
@@ -652,14 +676,16 @@
         "DE"
       ],
       "category": "local_board",
-      "status": "research_required",
+      "status": "access_limited",
       "references": [
         "https://jobs.meinestadt.de/"
       ],
       "routes": [],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
-      ]
+        "Current ordinary root inventory reference and its independently advertised advertisement sitemap returnedHTTP403 after allowed robots checks. Route-specific limitation, not zero jobs. No challenge or browser bypass.",
+        "Other legitimate native feeds/APIs and original-employer routes remain discovery questions; this evidence does not declare every possible provider route inaccessible."
+      ],
+      "last_saved_transport_evidence": "2026-10-29"
     },
     {
       "id": "stellenanzeigen",
@@ -777,14 +803,16 @@
         "DE"
       ],
       "category": "specialist_board",
-      "status": "research_required",
+      "status": "access_limited",
       "references": [
         "https://www.jobvector.de/"
       ],
       "routes": [],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
-      ]
+        "Current robots.txt returnedHTTP403. No inventory resource was requested without a readable current policy; this is not zero supply or proof that login is required.",
+        "Other legitimate native feeds/APIs and original-employer routes remain discovery questions; this evidence does not declare every possible provider route inaccessible."
+      ],
+      "last_saved_transport_evidence": "2026-10-29"
     },
     {
       "id": "yourfirm",
@@ -963,14 +991,16 @@
         "DE"
       ],
       "category": "research_board",
-      "status": "research_required",
+      "status": "access_limited",
       "references": [
         "https://euraxess.ec.europa.eu/jobs"
       ],
       "routes": [],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
-      ]
+        "The actual native /jobs/search route from the official navigation is denied by current robots. The permitted advertised sitemap lists basic pages, news and events, not a jobs inventory. No search request or URL rewrite bypass.",
+        "Other legitimate native feeds/APIs and original-employer routes remain discovery questions; this evidence does not declare every possible provider route inaccessible."
+      ],
+      "last_saved_transport_evidence": "2026-10-29"
     },
     {
       "id": "jobmensa",
@@ -2275,6 +2305,23 @@
       "routes": [],
       "limits": [
         "Client-funded demand must be distinguished from freelancer profiles, seller service supply and speculative opportunities; no suitable inventory transport verified."
+      ]
+    },
+    {
+      "id": "heyjobs",
+      "name": "HeyJobs",
+      "countries": [
+        "DE"
+      ],
+      "category": "national_board",
+      "status": "research_required",
+      "references": [
+        "https://www.heyjobs.co/de-de/"
+      ],
+      "routes": [],
+      "limits": [
+        "Discovered as actual external primary cards in native XING inventory on2026-10-29. Retain these records; do not treat them as native XING bodies.",
+        "Official provider inventory, objective country/model partitions, continuation, current policy and complete native descriptions still require original verification. A few external links are not a provider census."
       ]
     }
   ]

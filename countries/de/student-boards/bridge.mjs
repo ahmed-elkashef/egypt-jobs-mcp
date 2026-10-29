@@ -25,3 +25,8 @@ export async function studentBoards(input={}){
 export async function germanBoards(input={}){
  return native('../public-boards/readers.py',input.operation?['--source',input.source,'--operation',input.operation,'--url',input.url]:['--capabilities'],input.source??'german_public_boards');
 }
+
+
+export async function germanBoardCaptureSegment(input){
+ return native('../public-boards/readers.py',['--capture-id',input.capture_id,'--segment-index',String(input.segment_index)],'xing');
+}
