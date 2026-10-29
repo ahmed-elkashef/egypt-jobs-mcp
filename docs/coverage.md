@@ -8,9 +8,9 @@ As of 29 October 2026. This is code/source-contract coverage, not a fresh vacanc
 | context_only | 4 |
 | credential_required | 3 |
 | external_connector | 3 |
-| implemented | 20 |
+| implemented | 21 |
 | requires_employer_seed | 7 |
-| research_required | 52 |
+| research_required | 51 |
 
 The registry has 93 unique entries: 43 apply to Egypt and 78 to Germany, including shared entries. These counts overlap; they are not numbers of vacancies, employers or live working transports.
 
@@ -119,3 +119,5 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [freelancermap](https://www.freelancermap.de/) | DE | research_required | freelance_demand |
 | [GULP](https://www.gulp.de/) | DE | research_required | freelance_demand |
 | [Khamsat](https://khamsat.com/) | EG | research_required | freelance_demand |
+
+Jobmensa public list/detail routes were added in v0.4.2 with live policy checks, native continuation and synthetic regressions. This changes implementation status only; it does not close any national or historical coverage claim.

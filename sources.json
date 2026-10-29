@@ -844,13 +844,30 @@
         "DE"
       ],
       "category": "student_board",
-      "status": "research_required",
+      "status": "implemented",
       "references": [
-        "https://www.jobmensa.de/"
+        "https://www.jobmensa.de/",
+        "https://www.jobmensa.de/robots.txt"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "jobmensa_page",
+          "public_tool": "de_public_jobmensa_page",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public_de",
+          "tool": "jobmensa_detail",
+          "public_tool": "de_public_jobmensa_detail",
+          "fixed_arguments": {}
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Public HTML listing and complete JobPosting detail reader, with current robots checks; no account or application actions.",
+        "Model categories can contain mixed/promoted jobs. Preserve native metadata and inspect actual model/eligibility.",
+        "Native page links only; public pages move, and dates may require details. No frozen historical or nationwide coverage claim.",
+        "Source HTML stays in optional machine-local capture storage; code licensing does not license vacancy content."
       ]
     },
     {

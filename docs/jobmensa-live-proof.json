@@ -1,0 +1,29 @@
+{
+  "as_of": "2026-10-29",
+  "scope": "Bounded current native category route and one complete public detail, not country or historical interval coverage",
+  "source": "jobmensa",
+  "current_robots_http_status": 200,
+  "native_page_returned_counts": [
+    12,
+    8
+  ],
+  "native_reported_total": 20,
+  "actual_native_next_followed": true,
+  "terminal_page_candidate": true,
+  "complete_description_and_original_fields_retained_privately": true,
+  "detail_fields_verified": [
+    "native JSON-LD JobPosting",
+    "complete description HTML",
+    "offset-aware datePosted",
+    "applicantLocationRequirements",
+    "jobLocationType",
+    "workHours",
+    "employmentType",
+    "external apply link without following it"
+  ],
+  "cautions": [
+    "Native internship category also included a working-student card.",
+    "Observed part-time employmentType and 40-hour workHours disagree; native metadata is not a final qualification decision.",
+    "No raw source HTML, job corpus, applicant records or account configuration is published."
+  ]
+}
