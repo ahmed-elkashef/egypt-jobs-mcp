@@ -300,3 +300,37 @@ class AdditionalMetadataSafetyTests(TestCase):
         body = english_page().replace(b"<h3>", b"<script>DO_NOT_EMIT_SCRIPT_TRACKING</script><h3>")
         result = englishjobs.inventory(body, "https://englishjobs.de/in/hessen")
         self.assertNotIn("DO_NOT_EMIT_SCRIPT_TRACKING", json.dumps(result))
+
+
+class JobsNativeStructuredCompletenessTests(TestCase):
+    def test_jobs_preserves_structured_address_and_dto_as_separate_evidence(self):
+        body = next_data(
+            {
+                "data": {
+                    "jobByPath": {
+                        "content": {
+                            "id": 1,
+                            "title": "Native title",
+                            "description": "Complete DTO requirements",
+                            "address": ["Native address label"],
+                            "applicationRequireCv": False,
+                        }
+                    }
+                }
+            }
+        )
+        structured = {
+            "@type": "JobPosting",
+            "title": "Native title",
+            "description": "Structured requirements",
+            "jobLocation": {"address": {"addressCountry": "DE", "addressRegion": "HE"}},
+        }
+        body += (
+            '<script type="application/ld+json">' + json.dumps(structured) + "</script>"
+        ).encode()
+        result = r.parse_detail("jobs_de", body, "https://www.jobs.de/job/native-1")
+        self.assertEqual(
+            result["native_job_posting"]["jobLocation"]["address"]["addressRegion"], "HE"
+        )
+        self.assertEqual(result["native_job"]["address"], ["Native address label"])
+        self.assertFalse(result["requirements_completeness_verified"])

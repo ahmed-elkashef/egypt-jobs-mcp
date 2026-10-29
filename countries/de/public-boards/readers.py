@@ -487,11 +487,21 @@ def jobs_de_detail(body, url):
     if not isinstance(raw, str) or not raw.strip():
         raise SourceError("No complete native body; no snippet fallback")
     text = clean(html.fromstring(raw).text_content())
+    structured = []
+    for script in html.fromstring(body).xpath('//script[@type="application/ld+json"]'):
+        try:
+            structured.extend(postings(json.loads(script.text or "")))
+        except ValueError:
+            continue
+    if len(structured) > 1:
+        raise SourceError("Ambiguous native structured job records")
     result = envelope("jobs_de", body, url, "german_public_board_detail")
     result.update(
         id=str(job["id"]),
         title=job.get("title"),
         native_job=job,
+        native_job_posting=structured[0] if structured else None,
+        native_structured_job_present=bool(structured),
         description=text,
         description_html=raw,
         native_body_fields={

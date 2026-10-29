@@ -160,5 +160,6 @@
     "unresolved": 0,
     "coverage_complete": false,
     "scope": "Engineering full-body retrieval over the complete twelve-category current diagnostic; not a frozen interval or individual fit review."
-  }
+  },
+  "jobs_de_native_dto_and_native_job_posting_preserved_separately": true
 }
