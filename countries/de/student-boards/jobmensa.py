@@ -17,7 +17,7 @@ from urllib.robotparser import RobotFileParser
 from lxml import html
 
 ORIGIN = "https://www.jobmensa.de"
-AGENT = "job-market-mcp/0.4.2"
+AGENT = "job-market-mcp/0.4.3"
 MAX_BYTES = 5 * 1024 * 1024
 QUERY_KEYS = {"categories", "location", "longitude", "latitude", "radius", "page"}
 MODEL_CODES = {
@@ -84,17 +84,26 @@ class SourceError(ValueError):
 
 class SafeRedirect(HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
-        checked_url(newurl)
+        if req is None:
+            raise SourceError("Redirect lacks the original request context")
+        previous, target = urlsplit(req.full_url), urlsplit(newurl)
+        if previous.path == "/robots.txt":
+            if newurl != ORIGIN + "/robots.txt":
+                raise SourceError("Robots redirect requires separate policy verification")
+        else:
+            checked_url(newurl)
+            if previous.path != target.path or parse_qs(previous.query) != parse_qs(target.query):
+                raise SourceError("Redirect changes source identity or requested partition/page")
         return super().redirect_request(req, fp, code, msg, headers, newurl)
 
 
-def fetch(url):
+def fetch(url, *, with_url=False):
     request = Request(url, headers={"User-Agent": AGENT, "Accept": "text/html,text/plain"})
     with build_opener(SafeRedirect()).open(request, timeout=25) as response:
         body = response.read(MAX_BYTES + 1)
         if len(body) > MAX_BYTES:
             raise SourceError("Complete source exceeds the body bound; no truncated result")
-        return body
+        return (body, response.geturl()) if with_url else body
 
 
 def capabilities():
@@ -196,6 +205,8 @@ def parse_page(body, url):
             raise SourceError("Native continuation changed the selected partition")
         pages[int(q.get("page", ["1"])[0])] = candidate
     later = sorted(p for p in pages if p > current)
+    if later and later[0] != current + 1:
+        raise SourceError("Native continuation has a page gap")
     next_url = pages[later[0]] if later else None
     result = _envelope(body, url, "jobmensa_listing_page")
     result.update(
@@ -279,7 +290,7 @@ def read(operation, url):
     policy.parse(robots_body.decode("utf-8").splitlines())
     if not policy.can_fetch(AGENT, url):
         raise SourceError("Current robots policy denies this route; no page request made")
-    body = fetch(url)
+    body, actual_url = fetch(url, with_url=True)
     capture = os.environ.get("JOB_MARKET_CAPTURE_DIR")
     raw_path = None
     if capture:
@@ -292,8 +303,9 @@ def read(operation, url):
                     handle.write(body)
             except FileExistsError:
                 pass  # Another reader stored the same content-addressed response.
-    result = (parse_page if operation == "page" else parse_detail)(body, url)
+    result = (parse_page if operation == "page" else parse_detail)(body, actual_url)
     result.update(
+        requested_url=url,
         robots_sha256=hashlib.sha256(robots_body).hexdigest(),
         private_raw_checkpoint=str(raw_path) if raw_path else None,
     )

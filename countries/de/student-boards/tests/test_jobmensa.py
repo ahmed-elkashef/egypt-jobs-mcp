@@ -129,3 +129,42 @@ class JobmensaTests(TestCase):
         for url in ["https://evil.test/jobs-suchen", reader.ORIGIN + "/login"]:
             with self.assertRaises(ValueError):
                 redirect.redirect_request(None, None, 302, "Found", {}, url)
+
+    def test_redirect_cannot_drop_partition_page_or_native_job_identity(self):
+        from urllib.request import Request
+
+        for initial, target in [
+            (
+                reader.ORIGIN + "/jobs-suchen?categories=internship&page=2",
+                reader.ORIGIN + "/jobs-suchen?page=2",
+            ),
+            (reader.ORIGIN + "/jobs-suchen?page=2", reader.ORIGIN + "/jobs-suchen?page=3"),
+            (reader.ORIGIN + "/jobs/ex/synthetic-1234", reader.ORIGIN + "/jobs/ex/synthetic-1235"),
+            (reader.ORIGIN + "/robots.txt", reader.ORIGIN + "/login"),
+        ]:
+            with self.subTest(initial=initial, target=target), self.assertRaises(ValueError):
+                reader.SafeRedirect().redirect_request(
+                    Request(initial), None, 302, "Found", {}, target
+                )
+
+    def test_actual_final_url_is_preserved_without_caller_only_echo(self):
+        requested = reader.ORIGIN + "/jobs-suchen?categories=internship&page=2"
+        actual = reader.ORIGIN + "/jobs-suchen?page=2&categories=internship"
+        with mock.patch.object(
+            reader,
+            "fetch",
+            side_effect=[
+                b"User-agent: *\nAllow: /\n",
+                (page(next_url="/jobs-suchen?categories=internship&page=3"), actual),
+            ],
+        ):
+            result = reader.read("page", requested)
+            self.assertEqual(result["requested_url"], requested)
+            self.assertEqual(result["source_url"], actual)
+
+    def test_native_page_gap_is_not_silently_skipped(self):
+        with self.assertRaisesRegex(ValueError, "page gap"):
+            reader.parse_page(
+                page(next_url="/jobs-suchen?categories=internship&page=3"),
+                reader.ORIGIN + "/jobs-suchen?categories=internship",
+            )

@@ -1,38 +1,47 @@
-# Germany student boards
+# Public student boards
 
-Original Jobmensa public list and full JobPosting reader. Source adapters remain
-separate from applicant fit, country coverage and application actions.
+Original read-only readers cover Jobmensa and the StudentJob/YoungCapital family.
+They check current robots policy before every resource read. Unknown layouts,
+changed partitions, oversized responses and access failures produce explicit
+limited results with a null listing count, never a successful empty market.
 
-The reader checks the current robots policy before each page and follows only
-the exact public HTTPS origin. Supported native list query fields are contract
-categories, city coordinates/location/radius and source page. Career keywords,
-unknown categories, duplicate parameters, arbitrary paths and foreign redirects
-are refused. Continuation comes from actual page links and cannot change the
-partition. A native terminal is a candidate display endpoint, not a frozen
-historical census. Native categories may include mixed or promoted contracts.
+## MCP
 
-Unified read-only tools:
+- `de_public_jobmensa_capabilities`, `de_public_jobmensa_page`, `de_public_jobmensa_detail`.
+- `de_public_student_boards_capabilities`.
+- `de_public_student_board_page`, `de_public_student_board_detail`,
+  `de_public_student_board_resolve_external`, each with source `studentjob` or `youngcapital`.
 
-- `de_public_jobmensa_capabilities`
-- `de_public_jobmensa_page`
-- `de_public_jobmensa_detail`
+Only exact public origins and observed native paths/query fields are accepted.
+No title, career, education or keyword inventory filters are supported. Jobmensa
+supports its observed contract-category facets. StudentJob/YoungCapital accept
+observed native job-type IDs and verify the actual selected controls. An explicit
+sort must be echoed by the native page. Pagination follows actual native links,
+retains the partition and cannot silently skip a page. Redirects cannot change
+requested page, partition or vacancy identity.
 
-CLI from the repository root:
+StudentJob/YoungCapital preserve every primary native card, including promoted
+cards and external marketplace redirects. External records are not dropped and
+are not assigned invented native body URLs or employers. Their redirect route
+can be denied by current robots; that is an access result. The optional resolver
+performs only a permitted HEAD and returns a Location without fetching the target.
+A target still needs separate identity and policy verification. No denied-route
+GET/browser/proxy workaround is implemented.
 
-```sh
-.venv/bin/python countries/de/student-boards/jobmensa.py --capabilities
-.venv/bin/python countries/de/student-boards/jobmensa.py --operation page --url 'https://www.jobmensa.de/jobs-suchen?categories=internship'
-```
+Detail results retain the complete visible native description and extra facts,
+plus the original JobPosting. Native working-student labels can conflict with
+schema INTERN; schema identifier can be a placeholder. The numeric listing URL
+ID remains the source identity, while contradictory fields remain evidence.
+Germany-market pages include foreign worksites. Neither source-country headings
+nor contract facets establish applicant eligibility, hours, remote-worker country,
+academic recognition or a current hiring state. No fit decision is automated.
 
-`JOB_MARKET_CAPTURE_DIR` optionally saves full source HTML in content-addressed
-machine-local storage before parsing. Keep it outside version control: full HTML
-may contain ephemeral form or tracking material. Results retain a source hash,
-all visible native cards, counter, real continuation, original full detail HTML
-and JSON-LD. A returned body is not a complete qualification review. Dates,
-hours, employment type, workplace and worker-country fields remain separate;
-contradictions are not silently resolved. Apply links are never followed.
+Set `JOB_MARKET_CAPTURE_DIR` to an explicitly private local directory to retain
+content-addressed complete anonymous HTML. Raw pages, form nonces, real vacancy
+corpora, applicant data and credentials must not enter this public repository.
+Code licensing does not grant permission to republish job content.
 
-Live source tests belong in a consumer's private evidence store. Public tests
-use synthetic fixtures and mock policy access; no job datasets or applicant
-information belongs in this repository. No browser, account, contact,
-subscription or submission action is implemented.
+These transports do not establish a frozen historical week or complete market.
+They make no login, save, account, email, application, subscription or contact action.
+Synthetic regressions run with the other retained Python suites. Bounded live
+engineering evidence is recorded separately in `docs/*live-proof.json`.

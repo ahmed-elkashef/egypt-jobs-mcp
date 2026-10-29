@@ -1,0 +1,51 @@
+{
+  "as_of": "2026-10-29",
+  "scope": "Bounded engineering probes, not a vacancy corpus or coverage claim",
+  "observations": [
+    {
+      "source": "youngcapital",
+      "kind": "student_board_page",
+      "source_url": "https://www.youngcapital.de/stellenangebote?page=2",
+      "html_sha256": "040e0b5fc2d3298a74416921a9a38f7d73718df0d564e92ed8068367114d9b59",
+      "returned_count": 30,
+      "reported_total": 19068,
+      "next_url": "https://www.youngcapital.de/stellenangebote?page=3",
+      "native_selected_model_ids": []
+    },
+    {
+      "source": "studentjob",
+      "kind": "student_board_page",
+      "source_url": "https://www.studentjob.de/stellenangebote?search%5Bjob_types%5D%5Bid%5D%5B%5D=6&sort_by=published_date",
+      "html_sha256": "2a4be0c04667f9be3177cbef44a84483feab3c18f2c5fd8d382a7a865e2a7126",
+      "returned_count": 30,
+      "reported_total": 1257,
+      "next_url": "https://www.studentjob.de/stellenangebote?page=2&search%5Bjob_types%5D%5Bid%5D%5B%5D=6&sort_by=published_date",
+      "native_selected_model_ids": [
+        "6"
+      ]
+    }
+  ],
+  "additional_native_detail": {
+    "youngcapital": {
+      "full_visible_body_and_native_facts": true,
+      "no_fit_assessed": true
+    },
+    "studentjob": {
+      "schema_identifier_placeholder_observed": true,
+      "schema_and_native_model_conflict_preserved": true,
+      "visible_body_has_requirements_beyond_schema": true
+    }
+  },
+  "external_redirect": {
+    "current_studentjob_robots_allowed": false,
+    "no_redirect_HEAD_or_GET_performed": true,
+    "all_external_metadata_retained": true
+  },
+  "all_jobs_first_pages": {
+    "studentjob_native_card_count": 30,
+    "youngcapital_native_card_count": 30,
+    "second_pages_differ": true
+  },
+  "coverage_complete": false,
+  "account_or_candidate_action": false
+}
