@@ -1,6 +1,6 @@
 # Original public German board readers
 
-This package reads thirteen providers (EnglishJobs metadata only; source-specific access/cap limits apply) through ordinary permitted HTTP, native JSON,
+This package reads fourteen providers (EnglishJobs metadata only; source-specific access/cap limits apply) through ordinary permitted HTTP, native JSON,
 SSR data and an official feed. No browser, account or application action starts.
 
 | Source | Inventory | Full detail |
@@ -143,3 +143,27 @@ Next-data rewrite or browser fingerprint was used. Instaffo's own current FAQ
 excludes internships/working-student roles; its public general job board remains
 a separate implementation question. These are dated source facts, not national
 coverage claims. See the aggregate proof; raw corpus/bootstrap stays private.
+
+
+## Official Frankfurt student portal in v0.4.8
+
+`swffm` is the official `stellenmarkt.swffm.de` portal. Native unfiltered pages
+and enabled controls are reconciled; the disabled terminal Next points to the
+root and is never followed. The homepage is a featured-reference catalogue. The
+finite employer directory/profile context is separately typed and never returned
+as an empty/full vacancy list or a complete regional/company census.
+
+The dated three-page traversal retained56 distinct ad references (20/20/16) and
+six employer profiles. The portal label does not prove a Hesse worksite: the
+first ad was in Münster. All source cards remain present, including mixed,
+private and graduate categories; student labels do not establish exact contracts.
+
+Native visible HTML sections were available for48 ads. Seven PDF ads independently
+publish a text alternative in the permitted HTML response. Preserve that complete
+provided text separately from structured description: a real case says working
+student in the text and full-time in schema, while another start fact says2027
+and the body says ASAP. No original date, contract or availability is invented.
+The eighth PDF ad has no such full text and remains source-limited. PDFs are
+robots-denied: none were fetched and no viewer, asset or URL rewrite was used.
+Provided-text completeness does not verify PDF/employer completeness. There is
+no keyword/Ajax/query, account, publication, application or contact operation.

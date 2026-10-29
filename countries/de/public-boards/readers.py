@@ -23,12 +23,13 @@ import englishjobs
 import getinengineering
 import jobware
 import source_capture
+import swffm
 import xing
 import zenjob
 from lxml import html
 from native_flight import public_search_state
 
-AGENT = "job-market-mcp/0.4.7"
+AGENT = "job-market-mcp/0.4.8"
 MAX_BYTES = 8 * 1024 * 1024
 ORIGINS = {
     name: "https://www." + host
@@ -48,7 +49,9 @@ ORIGINS["berlinstartupjobs"] = berlin.ORIGIN
 ORIGINS["xing"] = xing.ORIGIN
 ORIGINS["getinengineering"] = getinengineering.ORIGIN
 ORIGINS["zenjob"] = zenjob.ORIGIN
+ORIGINS["swffm"] = swffm.ORIGIN
 LIST_PATHS = {
+    "swffm": swffm.LIST_PATH,
     "getinengineering": "/jobsuche",
     "zenjob": "/de/jobboerse",
     "xing": "/jobs/k-student",
@@ -119,6 +122,8 @@ def checked_url(source, url, operation):
         return berlin.checked_url(url, operation)
     if source == "xing":
         return xing.checked_url(url, operation)
+    if source == "swffm":
+        return swffm.checked_url(url, operation)
     if source in {"getinengineering", "zenjob"}:
         return (getinengineering if source == "getinengineering" else zenjob).checked_url(
             url, operation
@@ -150,6 +155,8 @@ def checked_url(source, url, operation):
 def identity(source, url):
     if source == "xing":
         return xing.native_id(url)
+    if source == "swffm":
+        return swffm.native_id(url)
     if source in {"getinengineering", "zenjob"}:
         return (getinengineering if source == "getinengineering" else zenjob).native_id(url)
     match = re.fullmatch(DETAILS[source], unquote(urlsplit(url).path), re.I)
@@ -673,6 +680,10 @@ def postings(value):
 
 def parse_detail(source, body, url):
     checked_url(source, url, "detail")
+    if source == "swffm":
+        result = envelope(source, body, url, "german_public_board_detail")
+        result.update(swffm.detail(body, url))
+        return result
     if source in {"getinengineering", "zenjob"}:
         result = envelope(source, body, url, "german_public_board_detail")
         result.update(
@@ -768,6 +779,10 @@ def parse_detail(source, body, url):
 
 def parse_inventory(source, body, url):
     checked_url(source, url, "inventory")
+    if source == "swffm":
+        result = envelope(source, body, url, "german_public_board_page")
+        result.update(swffm.inventory(body, url))
+        return result
     if source in {"getinengineering", "zenjob"}:
         result = envelope(source, body, url, "german_public_board_page")
         result.update(
@@ -871,6 +886,7 @@ def capabilities():
             for source in ORIGINS
         },
         "native_partition_discovery": {
+            "swffm": "Official Frankfurt student portal: unfiltered native lists/actual enabled page controls, whole public ad bodies and separately typed finite employer directory/profile context. Homepage featured refs and profile/job refs are not complete vacancy/employer censuses. The portal label does not prove a Hesse worksite. Conflicting native start, model, home-office and date fields are retained; no keyword/Ajax/contact action.",
             "getinengineering": "Whole SSR first39 records; native published openV2 GET search client provides start=0/39/78 with limit39 and required X-Requested-With protocol header. SSR start query resets and is not continuation. No role/degree filters or restricted API calls.",
             "zenjob": "Whole public shift lists and actual page links. Native shift starts, structured publication dates and contract type differ; student shift supply is not automatically a working-student contract. Full visible notes beyond structured description retained. Filter POST/signup/app actions unsupported.",
             "berlinstartupjobs": "Read the root category catalogue, then every category and native continuation; homepage featured cards are incomplete.",
@@ -929,6 +945,7 @@ def main():
                 (
                     SourceError,
                     xing.XingError,
+                    swffm.SwffmError,
                     getinengineering.EngineeringError,
                     zenjob.ZenjobError,
                     source_capture.CaptureError,
