@@ -1,5 +1,5 @@
-import {spawn} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import {runNativeReader} from './native-reader.mjs';
 
 const script=fileURLToPath(new URL('../workday/reader.py',import.meta.url));
 const annotations={readOnlyHint:true,destructiveHint:false,openWorldHint:true};
@@ -12,35 +12,7 @@ export const workdayTools=[
 
 export const limited=error=>({status:'source_limited',source:'workday',count:null,source_result_count:null,error,coverage_complete:false,reviewed_by_model:false});
 
-export function runWorkday(argv,{spawnProcess=spawn,env=process.env}={}) {
-  return new Promise(resolve=>{
-    const names=['PATH','HOME','SYSTEMROOT','TMPDIR','TEMP','TMP','LANG','LC_ALL','HTTPS_PROXY','HTTP_PROXY','NO_PROXY','SSL_CERT_FILE'];
-    const childEnv=Object.fromEntries(names.filter(k=>typeof env[k]==='string').map(k=>[k,env[k]]));
-    const command=env.EGYPT_JOBS_PYTHON||env.JOB_MARKET_PYTHON||'python3';
-    let child,done=false,size=0;
-    const chunks=[];
-    const finish=value=>{if(done)return;done=true;clearTimeout(timer);resolve(value);};
-    const timer=setTimeout(()=>{child?.kill('SIGKILL');finish(limited('native_reader_timeout'));},80000);
-    try {child=spawnProcess(command,[script,...argv],{env:childEnv,stdio:['ignore','pipe','ignore'],shell:false});}
-    catch {finish(limited('native_reader_unavailable'));return;}
-    child.stdout.on('data',chunk=>{
-      if(done)return;
-      size+=chunk.length;
-      if(size>8*1024*1024){child.kill('SIGKILL');finish(limited('complete_response_exceeds_bridge_bound'));return;}
-      chunks.push(chunk);
-    });
-    child.on('error',()=>finish(limited('native_reader_unavailable')));
-    child.on('close',code=>{
-      if(done)return;
-      if(code!==0){finish(limited('native_reader_failed'));return;}
-      try {
-        const result=JSON.parse(Buffer.concat(chunks).toString('utf8'));
-        if(!result||typeof result!=='object'||Array.isArray(result)||!['ok','source_limited'].includes(result.status)||result.source!=='workday')throw Error();
-        finish(result);
-      }catch {finish(limited('invalid_native_reader_result'));}
-    });
-  });
-}
+export function runWorkday(argv,options={}) {return runNativeReader(script,argv,{...options,source:'workday'});}
 
 export async function workday(name,args={}, {run=runWorkday}={}) {
   if(!args||typeof args!=='object'||Array.isArray(args))return limited('invalid_read_arguments');

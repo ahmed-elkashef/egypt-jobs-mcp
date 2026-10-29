@@ -23,7 +23,12 @@ test('real unified stdio lists countries and routes through Egypt and Germany of
     await client.connect(transport);
     const list=await client.listTools();
     for(const name of ['list_countries','list_country_sources','plan_country_scan','eg_read_source_page','de_ba_job_suche','de_stepstone_get_capabilities','shared_get_public_inventory','de_public_interamt_capabilities','de_public_interamt_read','de_public_jobmensa_capabilities','de_public_jobmensa_page','de_public_jobmensa_detail','de_public_student_boards_capabilities','de_public_student_board_page','de_public_student_board_detail','de_public_student_board_resolve_external','de_public_german_boards_capabilities','de_public_german_board_inventory','de_public_german_board_detail','de_public_german_board_capture_segment'])assert.ok(list.tools.some(t=>t.name===name),name);
-    assert.equal(list.tools.length,66);
+    assert.equal(list.tools.length,69);
+    for(const name of ['shared_teamtailor_capabilities','shared_teamtailor_inventory','shared_teamtailor_detail'])assert.ok(list.tools.some(t=>t.name===name),name);
+    const teamtailor=await client.callTool({name:'shared_teamtailor_capabilities',arguments:{}});
+    assert.equal(teamtailor.structuredContent.source,'teamtailor');
+    const unsafeFeed=await client.callTool({name:'shared_teamtailor_inventory',arguments:{careers_origin:'https://api.teamtailor.com'}});
+    assert.equal(unsafeFeed.isError,true);assert.equal(unsafeFeed.structuredContent.returned_count,null);
     for(const name of ['shared_workday_capabilities','shared_workday_inventory','shared_workday_detail'])assert.ok(list.tools.some(t=>t.name===name),name);
     const workday=await client.callTool({name:'shared_workday_capabilities',arguments:{}});
     assert.equal(workday.structuredContent.source,'workday');assert.equal(workday.structuredContent.seed_required,true);

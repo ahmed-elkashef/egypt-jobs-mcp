@@ -58,6 +58,10 @@ The original [public-board readers](countries/de/public-boards/README.md) also c
 
 The [original Workday CXS reader](shared/workday/README.md) adds `shared_workday_capabilities`, `shared_workday_inventory` and `shared_workday_detail`. It enumerates an explicitly identified employer board without role keywords, preserves native continuation and full descriptions, and checks tenant/site/posting identity. The live proof reconciled 922 distinct current postings across 47 native pages and three complete source bodies. The legacy capped Workday domain reader is disabled. Employer discovery and historical interval coverage remain separate requirements.
 
+## Original shared Teamtailor feeds
+
+The [original career-feed reader](shared/teamtailor/README.md) exposes `shared_teamtailor_capabilities`, `shared_teamtailor_inventory` and `shared_teamtailor_detail`. Native advertised API catalogues lead to complete JSON/RSS feeds with full descriptions and additional location/remote/department facts. Native counts, GUIDs, URLs and body variants reconcile without role filters. The dated proof covers three employers and98 current postings; employer discovery and historical weekly coverage remain separate. No account API, secret key or application operation is used.
+
 ## Additional Germany API
 
 Original Interamt capability/list/detail code is included under `countries/de/interamt`. Its public OpenAPI requires an approved API key; single-customer and MultiMandant scopes remain distinct. `de_public_interamt_capabilities` inspects this offline; `de_public_interamt_read` refuses before network without approved local access and an explicitly confirmed API base. No authenticated live access is claimed.
