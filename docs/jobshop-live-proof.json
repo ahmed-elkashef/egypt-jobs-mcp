@@ -1,0 +1,53 @@
+{
+  "version": "0.4.13",
+  "qualified_at": "2026-10-30",
+  "method": "Actual unified read-only MCP against original prototype source before release; exact native redirects/policies, no browser or search key.",
+  "tool_count": 78,
+  "registry_sources": 96,
+  "actual_mcp_calls": 124,
+  "native_inventory_calls": 1,
+  "native_current_posting_references": 115,
+  "source_link_kinds": {
+    "canonical_uuid": 22,
+    "opaque_legacy_redirect": 93
+  },
+  "native_primary_complete_bodies": 115,
+  "distinct_resolved_offer_uuids": 115,
+  "primary_body_character_range": [
+    794,
+    5706
+  ],
+  "schemas_without_description": 115,
+  "context_and_form_text_separate": true,
+  "raw_title_whitespace_preserved": true,
+  "source_qualification_repair": {
+    "initial_limited_reference": "body-031",
+    "actual_source_issue": "Native title/schema have double spaces; rendered H1 collapses whitespace. Preserve raw title, normalize only reconciliation comparison.",
+    "new_regression": true,
+    "additional_actual_mcp_calls": 1,
+    "repeated_other_body_requests": 0
+  },
+  "expected_scope_refusals": 2,
+  "previous_onlyfy_dvinci_teamtailor_workday_capabilities_compatible": true,
+  "local_tests": {
+    "python": 458,
+    "node": 130,
+    "total": 588
+  },
+  "focused_new_tests": {
+    "python": 30,
+    "node": 5
+  },
+  "source_account_application_search_key_script_cdn_contact_subscription_requests": 0,
+  "source_clocks_or_model_fields_promoted_to_original_deadline_eligibility_or_fit": false,
+  "coverage_complete": false,
+  "historical_week_complete": false,
+  "employer_census_complete": false,
+  "person_fit_reviewed": false,
+  "ready_rows": 0,
+  "reader_code_sha256": {
+    "shared/jobshop/reader.py": "5e0ae072c4c194901f0d4bc7adece99761e9231b5aac5dbdc9c21b88f197b289",
+    "shared/public_http.py": "f1e7baf0feb865da14e98e3e5e15a38441963f628fd6e80dc48800f92ec57751",
+    "shared/public-sources/jobshop.mjs": "d41776a65150706ddc322076f3184e1040212cda19cea0d3eb8dbec8679bc68a"
+  }
+}

@@ -24,3 +24,8 @@ provides unfiltered native inventory pages and complete primary job frames
 for independently identified employer boards. Native dates/schema remote
 fields and additional export variants require reconciliation; no role-query
 acquisition, original-clock or worker-country eligibility claim is inferred.
+
+The original shared [Jobshop career reader](../../shared/jobshop/README.md)
+qualifies Fraport's complete native SSR link array and primary CMS adverts,
+separate from the SuccessFactors profile portal, source clocks and form text.
+Other employers and historical supply remain explicit qualification gaps.

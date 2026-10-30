@@ -104,3 +104,8 @@ to the [native Onlyfy career reader](../onlyfy/README.md). Full primary HTML
 comes from the observed public job frame; the shell schema summary and
 secondary export variants remain separate. Continuation requires the actual
 first total and verifies native ranges, current page and terminal controls.
+
+Original `jobshop_capabilities`, `jobshop_inventory` and `jobshop_detail`
+bridge to the [Jobshop native reader](../jobshop/README.md). Native SSR links,
+anchors and independent totals reconcile; complete primary CMS, other context,
+schema/native clocks and form labels stay separate. No search key is used.
