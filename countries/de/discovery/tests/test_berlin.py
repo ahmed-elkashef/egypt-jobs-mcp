@@ -31,7 +31,7 @@ def page(scope="all", start=0, total=5, n=2):
 
 def advert():
     schema = json.dumps({"@type": "JobPosting", "title": "Separate schema title", "description": "Separate schema requirements", "datePosted": "2020-01-01"})
-    return f'''<html><head><link rel="canonical" href="{URL}"><meta property="og:url" content="{URL}"><script type="application/ld+json">{schema}</script></head><body><div id="jobTplContainer"><h1>Student role</h1><p>Bonn; header deadline31December2030</p><div>All introduction and tasks with body-only clause and different deadline30December2030.</div><p>Full requirements and conditions.</p><img src="https://example.invalid/picture.png" alt="Graphic explanation"><a href="https://employer.example/Native-role-de-j9.html">Employer original</a><a href="/profile.pdf">Profile document</a><a href="/apply">Apply</a><script>privateState='not-exported'</script><form><input name="csrf" value="secret"></form></div></body></html>'''.encode()
+    return f'''<html><head><link rel="canonical" href="{URL}"><meta property="og:url" content="{URL}"><script type="application/ld+json">{schema}</script></head><body><div id="jobTplContainer"><h1>Student role</h1><p>Bonn; header deadline31December2030</p><div>All introduction and tasks with body-only clause and different deadline30December2030.</div><p>Full requirements and conditions.</p><img src="https://example.invalid/picture.png" alt="Graphic explanation"><a href="https://employer.example/Native-role-de-j9.html">Employer original</a><a href="/profile.pdf">Profile document</a><a href="/apply">Apply</a><a href="/karte.html#13/50/7">Bonn map control</a><script>privateState='not-exported'</script><form><input name="csrf" value="secret"></form></div></body></html>'''.encode()
 
 
 class BerlinContracts(unittest.TestCase):
@@ -135,7 +135,7 @@ class BerlinContracts(unittest.TestCase):
 
             def get(self, _):
                 self.get_count += 1
-                return Response(self.status, self.body, "text/html")
+                return Response(self.status, self.body, "text/html; charset=utf-8")
         for operation, raw in [(lambda client: inventory(client=client), page()), (lambda client: detail(URL, client=client), advert())]:
             with self.assertRaises(SourceError):
                 operation(Stub(raw, 206))
@@ -143,6 +143,41 @@ class BerlinContracts(unittest.TestCase):
             self.assertEqual(d["native_HTTP_status"], 200)
             self.assertEqual(d["native_GET_requests"], 2)
             self.assertEqual(d["native_read_POST_requests"], 0)
+
+    def test_native_utf8_advert_is_decoded_before_html_charset_sniffing(self):
+        raw = advert().replace(b"Student role</h1>", "Öffentlichkeitsarbeit – Grüße</h1>".encode())
+        d = parse_detail(raw, URL)
+        self.assertEqual(d["title"], "Öffentlichkeitsarbeit – Grüße")
+        self.assertIn("Öffentlichkeitsarbeit – Grüße", d["source_primary_text"])
+        self.assertEqual(d["source_text_encoding"], "utf-8")
+        self.assertEqual(d["source_text_decoding"], "strict_utf8_before_HTML")
+
+    def test_native_utf8_inventory_does_not_depend_on_html_meta(self):
+        raw = page().replace(b'<meta charset="utf-8">', b"")
+        self.assertEqual(parse_inventory(raw)["returned_count"], 2)
+
+    def test_invalid_utf8_is_never_replaced_or_guessed(self):
+        for operation, raw in [(parse_inventory, page()), (lambda value: parse_detail(value, URL), advert())]:
+            with self.subTest(operation=operation), self.assertRaises(SourceError):
+                operation(raw.replace(b"</body>", b"<p>\xff</p></body>"))
+
+    def test_missing_or_other_http_charset_refuses_before_parsing(self):
+        class Stub:
+            def __init__(self, raw, content_type):
+                self.raw, self.content_type = raw, content_type
+
+            def get(self, _):
+                return Response(200, self.raw, self.content_type)
+        for operation, raw in [(lambda client: inventory(client=client), page()), (lambda client: detail(URL, client=client), advert())]:
+            for content_type in ["text/html", "text/html; charset=iso-8859-1", "application/json; charset=utf-8", "text/html; charset=utf-8; charset=latin-1"]:
+                with self.subTest(content_type=content_type), self.assertRaises(SourceError):
+                    operation(Stub(raw, content_type))
+
+    def test_exact_portal_pdf_reference_outside_body_is_preserved_unfetched(self):
+        raw = advert().replace(b"</body>", f'<a href="{URL}?pdf=de">weitere Informationen</a><a href="{URL}?pdf=en">other language</a></body>'.encode())
+        refs = parse_detail(raw, URL)["native_advertised_references"]
+        self.assertEqual(len(refs), 3)
+        self.assertEqual(refs[-1], {"url": URL + "?pdf=de", "text": "weitere Informationen", "independently_verified": False})
 
     def test_full_portal_body_and_separate_schema_are_both_preserved(self):
         d = parse_detail(advert(), URL)

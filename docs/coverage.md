@@ -1,6 +1,6 @@
 # Country source coverage
 
-As of 30 October 2026, MCP v0.4.23 source contracts. This is implementation/access
+As of 30 October 2026, MCP v0.4.24 source contracts. This is implementation/access
 coverage, not a live vacancy census; each access observation retains its date.
 
 | Implementation/access state | Sources/channel groups |
@@ -207,3 +207,11 @@ not fully acquired. School/academic/professional models remain distinct, and
 the unfiltered ambiguity complement remains required. A portal advert may have
 an outside-Berlin worksite, conflicting deadlines and a separately numbered
 employer original. See [the source contract](berlin-state-native-readers.md).
+
+
+v0.4.24 corrects Berlin native advert UTF-8 decoding. HTTP Content-Type must
+explicitly declare UTF-8 and bytes must decode strictly before HTML parsing.
+The earlier native metadata fields, IDs and counts remain valid; affected advert
+wording requires corrected reads. Exact same-advert German PDF references can
+sit outside the main body and are retained unverified. No source/coverage or
+human fit gate is promoted by this correction.

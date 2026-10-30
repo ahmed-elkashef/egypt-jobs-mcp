@@ -39,3 +39,14 @@ These are dated observations, not a current count, complete unfiltered board,
 whole Berlin/state/municipal/Germany employer census or historical week.
 The current Hessen policy redirect and separately advertised HR4YOU career-route
 denial do not qualify those sources or establish a broader provider outage.
+
+
+UTF-8 correction in v0.4.24: the current origin declares text/html with UTF-8.
+Parse strict UTF-8 text, rather than letting libxml guess from HTML5 metadata.
+A missing/other/conflicting HTTP charset or invalid byte sequence refuses the
+read. Full-advert output records the strict decoder and actual Content-Type.
+The exact same-advert ?pdf=de link may sit outside jobTplContainer; retain that
+published reference without reading it or treating it as verified requirements.
+Earlier v0.4.23 advert wording had corrupted German characters and must not be
+used for candidate documents. Native metadata passed its exact German column
+contract and is separately retained.
