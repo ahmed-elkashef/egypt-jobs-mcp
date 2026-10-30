@@ -2258,13 +2258,40 @@
         "*"
       ],
       "category": "direct_ats",
-      "status": "research_required",
+      "status": "requires_employer_seed",
       "references": [
-        "https://www.oracle.com/human-capital-management/recruiting/"
+        "https://www.oracle.com/human-capital-management/recruiting/",
+        "https://www.jpmorganchase.com/careers",
+        "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/jobs",
+        "https://docs.oracle.com/en/cloud/saas/human-resources/farws/op-recruitingcejobrequisitions-get.html",
+        "https://www.rfc-editor.org/rfc/rfc9309.html"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "oracle_capabilities",
+          "public_tool": "shared_oracle_capabilities",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public",
+          "tool": "oracle_inventory",
+          "public_tool": "shared_oracle_inventory",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public",
+          "tool": "oracle_detail",
+          "public_tool": "shared_oracle_detail",
+          "fixed_arguments": {}
+        }
+      ],
       "limits": [
-        "A verified original board/list/detail implementation and employer discovery are required. Existing external libraries or connectors are not treated as complete authored coverage."
+        "Original anonymous Candidate Experience list/detail code currently qualifies only the corporate-advertised JPMC external site CX_1001; other external sites and employers require independent discovery and qualification.",
+        "Native whole-site and verified Germany location partitions retain every role. Pagination reconciles the inner TotalJobsCount/Offset/Limit and complete requisitionList; outer wrapper count/hasMore describe search containers. Later pages require the frozen first total.",
+        "Complete public primary, responsibilities, qualifications, corporate and organization sections remain separate. Internal description/hiring-manager fields and application controls are not exported or used. Job ID, requisition ID, native dates and contract labels remain distinct; no fit, exact student model or original-clock claim is inferred.",
+        "The qualified origin has an unavailable403 robots resource. Source-specific RFC9309 section2.3.1.3 treatment preserves the distinction from actual API/content denial; content denials, throttling, malformed rules and unreachable policy stop. Older readers and global HTTP policy are unchanged.",
+        "One employer site, a complete current partition and a source registry do not establish employer, national or historical weekly coverage. No candidate, account, preview, application, alert, credential, cookie, script execution, contact or subscription request."
       ]
     },
     {

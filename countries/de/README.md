@@ -1,5 +1,11 @@
 # Germany
 
+The original shared [Oracle Candidate Experience reader](../../shared/oracle/README.md)
+qualifies JPMC's external CX_1001 site, including its native Germany location
+partition. It preserves complete public job sections and distinct identities,
+with checked inner job pagination and no role-query acquisition. Other
+employers and external sites require independent qualification.
+
 The Germany package consolidates original StepStone implementation and the maintained BA derivative, including its nine existing job/salary/education/training/coaching tools. Country tools are applicant-neutral and preserve original source evidence.
 
 - [arbeitsmarkt/](arbeitsmarkt/): structured Jobsuche v6 list, full v4 detail and all workplaces/dates, with salary, Ausbildung, study, training and coaching families. Original Greyt GmbH distribution and notices remain intact. Five retained non-job families require their own current live verification; jobs success does not certify them.

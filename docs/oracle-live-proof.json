@@ -1,0 +1,41 @@
+{
+  "qualification_date": "2026-10-30",
+  "stage": "actual_unified_mcp_unreleased_branch_engineering_proof",
+  "published_runtime_release_and_install_verified": false,
+  "tool_count": 84,
+  "native_global_total": 7266,
+  "native_global_pages_sampled": [
+    1,
+    2,
+    291
+  ],
+  "native_global_complete": false,
+  "native_germany_total": 50,
+  "native_germany_unique_metadata_rows": 50,
+  "native_germany_metadata_complete": true,
+  "complete_public_body_samples": 3,
+  "public_body_character_counts": [
+    2526,
+    3510,
+    1588
+  ],
+  "actual_read_only_mcp_calls": 12,
+  "guarded_refusals": 3,
+  "code_file_sha256": {
+    "shared/oracle/reader.py": "d6ce2d74484010476e6086e96fe75fc118f03f16ed76142b1542bdb4449fc680",
+    "shared/public-sources/oracle.mjs": "f1e518f004d4b468da0fa0398301ed01d9f8f7a5c3a08fec4d53f24034d65dce",
+    "shared/public-sources/index.mjs": "39f227ab0383e67553d68fdfa27f4a3eabdb623ae9e67f5587267dacf987924a",
+    "lib/federation.mjs": "5cbe256bf17f2e04c581efb6a9d6c6a979e0b7147c0c8a2c1914f6e8cb86508d",
+    "sources.json": "ef71d006b8043e21af0ed7d7b2743c5cac0deb9c7fa35030f27c02650c681d22"
+  },
+  "local_tests": {
+    "node": 140,
+    "python": 510,
+    "total": 650
+  },
+  "internal_description_or_application_control_values_exported": false,
+  "historical_week_national_or_employer_census_complete": false,
+  "applicant_fit_or_application_readiness": false,
+  "credentials_accounts_applications_contacts_or_schedules": 0,
+  "raw_advert_or_applicant_corpus_published": false
+}
