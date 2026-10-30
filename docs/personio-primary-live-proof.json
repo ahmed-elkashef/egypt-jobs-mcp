@@ -1,0 +1,176 @@
+{
+  "stage": "unreleased_original_native_primary_branch",
+  "server_version": {
+    "name": "job-market-mcp",
+    "version": "0.4.20"
+  },
+  "tool_count": 85,
+  "catalog_all_read_only": true,
+  "actual_tool_calls": 9,
+  "successful_primary_adverts": 4,
+  "guarded_refusals": 4,
+  "primary_source_HTTP_reads": 8,
+  "refusal_HTTP_reads": 0,
+  "body_samples": [
+    {
+      "id": "personio::1komma5grad.jobs.personio.de::2800938",
+      "source_primary_characters": 4444,
+      "company_context_characters": 512,
+      "canonical_locale": "de",
+      "document_language": "en",
+      "native_sections": [
+        "1KOMMA5\u00b0",
+        "Deine Position",
+        "Dein Profil",
+        "Benefits"
+      ],
+      "source_schema_date_posted": "2026-09-17"
+    },
+    {
+      "id": "personio::1komma5grad.jobs.personio.de::2762189",
+      "source_primary_characters": 5026,
+      "company_context_characters": 488,
+      "canonical_locale": "en",
+      "document_language": "en",
+      "native_sections": [
+        "1KOMMA5\u00b0",
+        "Your mission",
+        "Your profile",
+        "Benefits"
+      ],
+      "source_schema_date_posted": "2026-08-20"
+    },
+    {
+      "id": "personio::1komma5grad.jobs.personio.de::2833116",
+      "source_primary_characters": 5736,
+      "company_context_characters": 488,
+      "canonical_locale": "en",
+      "document_language": "en",
+      "native_sections": [
+        "1KOMMA5\u00b0",
+        "Your mission",
+        "Your profile",
+        "Benefits"
+      ],
+      "source_schema_date_posted": "2026-10-07"
+    },
+    {
+      "id": "personio::1komma5grad.jobs.personio.de::2832804",
+      "source_primary_characters": 6509,
+      "company_context_characters": 488,
+      "canonical_locale": "en",
+      "document_language": "en",
+      "native_sections": [
+        "1KOMMA5\u00b0",
+        "Your mission",
+        "Your profile",
+        "Benefits"
+      ],
+      "source_schema_date_posted": "2026-10-07"
+    }
+  ],
+  "receipts": [
+    {
+      "label": "capabilities",
+      "tool": "source_capabilities",
+      "id": null,
+      "sha256": "ac09710a01a5093215e3deb7675f21ef65592a872578bb72cffc7c1f021939f4",
+      "bytes": 8309,
+      "source_primary_characters": null,
+      "company_context_count": null
+    },
+    {
+      "label": "body-2800938",
+      "tool": "shared_personio_detail",
+      "status": "ok",
+      "id": "personio::1komma5grad.jobs.personio.de::2800938",
+      "sha256": "58c61e08c1f2568f0faa314324bf2239224005f473d5ae7073f6be4569c39620",
+      "bytes": 94359,
+      "source_primary_characters": 4444,
+      "company_context_count": 1
+    },
+    {
+      "label": "body-2762189",
+      "tool": "shared_personio_detail",
+      "status": "ok",
+      "id": "personio::1komma5grad.jobs.personio.de::2762189",
+      "sha256": "9c71e0b3ba0ecfd8f6c104440086b1f0e0c36dcee3c1388747a5143ce1e1720a",
+      "bytes": 98174,
+      "source_primary_characters": 5026,
+      "company_context_count": 1
+    },
+    {
+      "label": "body-2833116",
+      "tool": "shared_personio_detail",
+      "status": "ok",
+      "id": "personio::1komma5grad.jobs.personio.de::2833116",
+      "sha256": "c5f3bdb6d30ebebacff1a8dc13cb57e0ac9eb5b20843251d58aa374aae4a804d",
+      "bytes": 111894,
+      "source_primary_characters": 5736,
+      "company_context_count": 1
+    },
+    {
+      "label": "body-2832804",
+      "tool": "shared_personio_detail",
+      "status": "ok",
+      "id": "personio::1komma5grad.jobs.personio.de::2832804",
+      "sha256": "693ffcce613c0b4c8c615331872db1b429b7020e8e8b9b044671170cb0219d5f",
+      "bytes": 128740,
+      "source_primary_characters": 6509,
+      "company_context_count": 1
+    },
+    {
+      "label": "refusal-application",
+      "tool": "shared_personio_detail",
+      "status": "source_limited",
+      "id": null,
+      "sha256": "24f40c17621e377c7b4476cb88fe51e45a74c6713e63dac37e66de36cfca2f99",
+      "bytes": 688,
+      "source_primary_characters": null,
+      "company_context_count": null
+    },
+    {
+      "label": "refusal-role-filter",
+      "tool": "shared_personio_detail",
+      "status": "source_limited",
+      "id": null,
+      "sha256": "24f40c17621e377c7b4476cb88fe51e45a74c6713e63dac37e66de36cfca2f99",
+      "bytes": 688,
+      "source_primary_characters": null,
+      "company_context_count": null
+    },
+    {
+      "label": "refusal-other-origin",
+      "tool": "shared_personio_detail",
+      "status": "source_limited",
+      "id": null,
+      "sha256": "24f40c17621e377c7b4476cb88fe51e45a74c6713e63dac37e66de36cfca2f99",
+      "bytes": 688,
+      "source_primary_characters": null,
+      "company_context_count": null
+    },
+    {
+      "label": "refusal-credentials",
+      "tool": "shared_personio_detail",
+      "status": "source_limited",
+      "id": null,
+      "sha256": "24f40c17621e377c7b4476cb88fe51e45a74c6713e63dac37e66de36cfca2f99",
+      "bytes": 688,
+      "source_primary_characters": null,
+      "company_context_count": null
+    }
+  ],
+  "code_file_sha256": {
+    "shared/personio/reader.py": "a5ff258f5ad7994efdfd9069f94352cb1294dc7c4797bd2f441f2b49d7570653",
+    "shared/public-sources/personio.mjs": "c1acd2367fb6df738bcc2675eceb24a23f9fc0cdbeff3bd0ddd18a776b14eee4",
+    "shared/public-sources/index.mjs": "fca566b022de79294e24047a0fdd3ead4b6dba54e4c74dd77d476bdd4b319522",
+    "lib/federation.mjs": "ef2eb59d72fc35a52241c825bb30b9081d031bc34256efa1f22c262a5ab2e241",
+    "shared/public_http.py": "f1e7baf0feb865da14e98e3e5e15a38441963f628fd6e80dc48800f92ec57751",
+    "sources.json": "e8ff8d8ce460084f446622a1057401b889fa8b17fdfae11ad1592b9d861413d6"
+  },
+  "source_scripts_images_credentials_forms_accounts_or_applications_requested": false,
+  "whole_week_country_or_employer_census_complete": false,
+  "individual_fit_reviewed": false,
+  "applications_accounts_contacts_payments_schedules": 0,
+  "evidence_policy": "Aggregate/hashes only; no raw adverts, forms, scripts, sessions or applicant data."
+}
