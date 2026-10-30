@@ -180,8 +180,8 @@ def parse_detail(body, *, url):
     mains, headings = tree.xpath("//main"), tree.xpath("//h1")
     if canonical != [url] or len(mains) != 1 or len(headings) != 1:
         raise SourceError("native_advert_canonical_main_or_heading_unqualified")
-    sections = {" ".join(node.text_content().split()) for node in mains[0].xpath(".//h2")}
-    if not {"Das Praktikum auf einen Blick", "Die Aufgaben im Praktikum", "So läuft die Bewerbung ab"} <= sections:
+    sections = [" ".join(node.text_content().split()) for node in mains[0].xpath(".//h2")]
+    if not {"Das Praktikum auf einen Blick", "Die Aufgaben im Praktikum", "So läuft die Bewerbung ab"} <= set(sections):
         raise SourceError("native_internship_role_and_application_sections_missing")
     title = " ".join(headings[0].text_content().split())
     links = [{"url": urljoin(url, node.get("href")), "label": " ".join(node.text_content().split())}
@@ -197,17 +197,22 @@ def parse_detail(body, *, url):
             schema_errors.append({"index": index, "error": error.code})
     for node in mains[0].xpath(".//script|.//style|.//noscript|.//iframe|.//template"):
         node.drop_tree()
+    native_nodes = list(mains[0].itertext())
     description = "\n".join(line for line in (re.sub(r"\s+", " ", part).strip()
-                                               for part in mains[0].text_content().splitlines()) if line)
+                                               for part in "".join(native_nodes).splitlines()) if line)
     if not title or not description:
         raise SourceError("complete_native_public_advert_body_missing")
     return {**base("german_internship_advert"), "id": "ausbildung_de::" + identity,
             "native_vacancy_id": identity, "url": url, "title": title, "full_description": description,
             "full_description_acquired": True, "body_representation": "complete_public_portal_main_text",
+            "native_main_text_nodes": native_nodes, "native_section_headings": sections,
+            "portal_education_direction_pay_is_role_salary_proof": False,
+            "portal_school_class_is_university_eligibility_proof": False,
             "native_links": links, "native_media": media, "published_structured_data": schemas,
             "published_structured_data_raw": schema_raw, "published_structured_data_parse_errors": schema_errors,
             "employer_original_status_verified": False, "source_result_count": None, "returned_count": 1,
             "limits": ["Complete portal text is not current employer-original status, individual fit or a verified weekly clock.",
+                       "Generic education-direction descriptions/pay are career context, not this internship's compensation or degree requirements.",
                        "Advertised links and nontext media are evidence only; no application, account, contact or external target was opened."]}
 
 

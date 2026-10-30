@@ -196,6 +196,10 @@ class AusbildungTests(TestCase):
         self.assertTrue(value["full_description_acquired"])
         self.assertFalse(value["employer_original_status_verified"])
         self.assertFalse(value["full_posting_reviewed"])
+        self.assertEqual(" ".join("".join(value["native_main_text_nodes"]).split()), " ".join(value["full_description"].split()))
+        self.assertIn("Die Aufgaben im Praktikum", value["native_section_headings"])
+        self.assertFalse(value["portal_education_direction_pay_is_role_salary_proof"])
+        self.assertFalse(value["portal_school_class_is_university_eligibility_proof"])
 
     def test_malformed_published_schema_retains_body_and_raw_diagnostic_without_repair(self):
         url, raw = advert('{"duplicate":1,"duplicate":2}')

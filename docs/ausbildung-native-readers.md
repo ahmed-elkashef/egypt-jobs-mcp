@@ -67,6 +67,10 @@ The complete main text, advertised links/media references and separately
 published structured data are retained. Malformed JSON-LD is reported with
 its original text rather than repaired. Strict Flight parsing rejects duplicate
 keys, nonfinite numbers, invalid UTF-8 and malformed complete JSON records.
+Script-free native text nodes and actual section headings are preserved so a
+consumer can independently reconstruct and compare the complete text projection.
+Generic education-direction descriptions and their apprenticeship salary ranges
+remain career context, not the internship's pay or degree requirements.
 
 External references and application buttons are evidence only and are not
 followed. A portal mirror can remain available after its employer offer
