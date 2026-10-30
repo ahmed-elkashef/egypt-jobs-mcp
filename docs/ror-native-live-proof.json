@@ -1,0 +1,60 @@
+{
+  "version": "0.4.26",
+  "as_of": "2026-10-30",
+  "implementation": "original_shared_native_ROR_public_HTML_and_complete_immutable_bulk_directory_contracts",
+  "tools": 96,
+  "source_entries": 101,
+  "country_source_entries": {
+    "DE": 86,
+    "EG": 44
+  },
+  "actual_federated_MCP_calls": 21,
+  "native_GET_requests_in_MCP_checks": 4,
+  "bulk_provider_downloads_repeated": 0,
+  "whole_native_archive_revalidated_from_previously_acquired_bytes": true,
+  "record_id": "23500708",
+  "release_version": "2.15",
+  "release_date": "2026-10-20",
+  "global_native_records": 146716,
+  "all_record_ids_unique": true,
+  "country_records": {
+    "DE": 6032,
+    "EG": 291
+  },
+  "country_segments": {
+    "DE": 13,
+    "EG": 1
+  },
+  "all_returned_native_country_fields_compared_to_independent_qualified_projection": true,
+  "directory_segment_provider_GETs": 0,
+  "archive_bytes": 39263398,
+  "archive_published_md5": "5522990688eb1b94811a8145e131b41e",
+  "archive_sha256": "7a7bf58d5ac18436ed98daf5da906913761d54869edf86d405e51966609dd133",
+  "source_resolution_Retry_After_honoured": true,
+  "local_early_metadata_preflight_blocked_before_client_or_network": true,
+  "api_requested": false,
+  "all_statuses_and_types_retained": true,
+  "five_invalid_or_unsafe_scope_requests_refused": true,
+  "vacancy_count": null,
+  "vacancy_country_week_or_all_employer_coverage_complete": false,
+  "reviewed_by_model": false,
+  "individual_profiles_source_scripts_credentials_or_browser_state_included": false,
+  "accounts_contacts_applications_or_payments": 0,
+  "source_references": [
+    "https://ror.readme.io/docs/data-dump",
+    "https://ror.readme.io/docs/zenodo",
+    "https://zenodo.org/records/6347574",
+    "https://zenodo.org/records/23500708"
+  ],
+  "licence_references": [
+    "https://creativecommons.org/licenses/by/4.0",
+    "https://creativecommons.org/publicdomain/zero/1.0",
+    "https://creativecommons.org/publicdomain/zero/1.0/legalcode"
+  ],
+  "limits": [
+    "Research-organisation memberships, not all legal employers, worksites, vacancies, source hiring, personal eligibility or a historical week.",
+    "The native immutable dataset and bounded country arrays validate; this is not a live vacancy or individual full-body review.",
+    "Denied API route never requested. Permitted public HTML and advertised ZIP qualified independently. No redownload to repeat completed acquisition.",
+    "One early metadata preflight rejected locally before transport construction; it made zero provider calls. Real metadata read occurred only after native not-before."
+  ]
+}

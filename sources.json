@@ -787,13 +787,15 @@
         "DE"
       ],
       "category": "national_board",
-      "status": "research_required",
+      "status": "access_limited",
       "references": [
-        "https://www.monster.de/"
+        "https://www.monster.de/",
+        "https://www.monster.com/de/"
       ],
       "routes": [],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "2026-10-30 exact native-origin qualification: old .de robots advertises the new .com/de/ entry; independently permitted new-origin policy then exact public German entry returns HTTP403. Three bounded native GETs across old policy and new policy/entry; zero old-homepage, vacancy/API, retry, account, script or alternate-origin bypass request.",
+        "This is the dated exact entry-route limit, not proof that the whole provider, all products or Germany is unavailable. Vacancy count remains unknown; no source limit is converted to an empty inventory."
       ]
     },
     {
@@ -1548,7 +1550,7 @@
         "Native links or separately verified numeric page/offset/count continuation remain explicit. Moving pages are not frozen historical coverage.",
         "Original campaign, renewal, activation, expiry and observation clocks remain distinct; no invented employer publication or applicant fit.",
         "No login, application, contact, save, subscription or account action. Raw web/session state is excluded from public fixtures.",
-        "Official search route currently denied by robots. Separately permitted official RSS returned500items covering27–29October only; earlier weekly history is unresolved.",
+        "Official search route currently denied by robots. Separately permitted official RSS returned500items covering27\u201329October only; earlier weekly history is unresolved.",
         "Retain incomplete feed metadata; canonical resource URLs remove client fragments/session markers and provider/path namespaces preserve identity."
       ]
     },
@@ -2655,7 +2657,7 @@
       ],
       "limits": [
         "Original permitted anonymous native primary pages, active-page/enabled continuation checks and complete provided HTML bodies. Homepage featured links, finite directory/profile references and ad counts are separate from vacancy/employer/frozen coverage.",
-        "All56 native ad references across pages20/20/16 and six finite employer profiles were read in a dated engineering traversal. The disabled terminal Next has a root href and is never followed. The portal name is not proof every job is in Hesse; first native job was in Münster.",
+        "All56 native ad references across pages20/20/16 and six finite employer profiles were read in a dated engineering traversal. The disabled terminal Next has a root href and is never followed. The portal name is not proof every job is in Hesse; first native job was in M\u00fcnster.",
         "48 ads have native visible HTML sections,seven have independently published HTML text alternatives beside PDF viewers, and one has no full provided HTML text. Preserve structured descriptions and alternative text independently, including model/start-date conflicts. Untruncated provided HTML is not verification of PDF/employer completeness.",
         "Native PDFs are robots-denied and were not fetched. No viewer rewrite, asset request, Ajax, role query, account, application, email or contact. The one PDF-only ad stays source-limited, never empty or complete."
       ],
@@ -2862,6 +2864,43 @@
         "Student category28 includes pupil/professional placements; acquire the unfiltered ambiguity complement. Numbered links preserve scope while weiter can drop it. Freeze initial native total and reconcile selected scope/offset; no career, degree or employer keyword.",
         "Actual outside-Berlin worksites, conflicting deadlines and separately numbered employer originals remain source evidence. Published JobPosting, nontext media, attachments, original clocks, materials, remote eligibility and individual fit need separate review.",
         "Only exact anonymous current-policy HTML GETs; no account, application, subscription, script, session, contact, map, media or payment request."
+      ]
+    },
+    {
+      "id": "ror_research_organisation_directory",
+      "name": "ROR complete native research-organisation directory",
+      "countries": [
+        "DE",
+        "EG"
+      ],
+      "category": "employer_discovery",
+      "status": "implemented",
+      "references": [
+        "https://ror.readme.io/docs/data-dump",
+        "https://ror.readme.io/docs/zenodo",
+        "https://ror.readme.io/docs/ror-data-structure",
+        "https://zenodo.org/records/6347574"
+      ],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "ror_release",
+          "public_tool": "shared_ror_release",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public",
+          "tool": "ror_directory",
+          "public_tool": "shared_ror_directory",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Complete immutable native ROR JSON array, all statuses/types/names/relationships/locations retained; independently policy-permitted public HTML and advertised checksum-verified ZIP, never the denied Zenodo API. Exact source-resolved release and archive SHA bind cached DE/EG segments.",
+        "Research-organisation directory memberships are not all legal employers, subsidiaries, work sites, vacancies, hiring, eligibility or country/week coverage. Source active status means research activity; native locations do not prove job locations. No role, degree, employer or career keyword acquisition.",
+        "Cold bounded reader requires an explicit operator JOB_MARKET_CAPTURE_DIR; native first-resolution Retry-After is returned without redirect following or blocking sleep. Later cached segments make no provider request. Invalid/incomplete records, missing countries, corruption and checksum/count drift refuse without partial/empty promotion.",
+        "Native 2026-10-30 v2.15 qualification:146716 distinct ROR records;6032 with DE locations and291 with EG locations, all statuses retained. These are dated research-directory memberships and overlap across country scopes, never vacancy totals.",
+        "ROR data CC0, GeoNames location attribution per native release references. Original reader implementation; no source scripts, site implementations, candidate data, credentials, accounts, applications or contact exported."
       ]
     }
   ]

@@ -24,6 +24,7 @@ import {jobshopTools,jobshop} from './jobshop.mjs';
 import {successfactorsTools,successfactors} from './successfactors.mjs';
 import {oracleTools,oracle} from './oracle.mjs';
 import {personioTools,personio} from './personio.mjs';
+import {rorTools,ror} from './ror.mjs';
 const inventoryClient = new InventoryClient();
 
 const DEFAULT_TIMEOUT_MS = Number(process.env.JOBFLOW_PUBLIC_JOBS_TIMEOUT_MS || 15000);
@@ -46,6 +47,7 @@ export const tools = [
   ...successfactorsTools,
   ...oracleTools,
   ...personioTools,
+  ...rorTools,
   ...inventoryTools,
   {
     name: "search_public_jobs",
@@ -293,6 +295,10 @@ server.setRequestHandler(CallToolRequestSchema, request => callTool(request.para
 
 export async function callTool(name, args = {}) {
   try {
+    if(rorTools.some(tool=>tool.name===name)) {
+      const data=await ror(name,args);
+      return {...jsonContent(data),structuredContent:data,isError:data.status!=='ok'};
+    }
     if(personioTools.some(tool=>tool.name===name)) {
       const data=await personio(name,args);
       return {...jsonContent(data),structuredContent:data,isError:data.status!=='ok'};

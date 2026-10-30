@@ -1,10 +1,14 @@
 # Job Market MCP
 
-Current original extension: v0.4.25 adds native AUBI-plus German all-offering,
-university-internship and working-student inventory and complete public adverts.
-The 94-tool, 100-source catalogue preserves grouped overlaps, native pagination,
-source counter units and malformed-data limits. The shared native bridge retains
-typed non-promoting source errors. See [AUBI contracts](docs/aubiplus-native-readers.md).
+Current original extension: v0.4.26 adds shared native ROR release and complete
+country-directory readers for Germany and Egypt. The 96-tool, 101-source
+catalogue preserves source types: research organisations are discovery records,
+not vacancies or all employers. Immutable, checksum-verified native snapshots
+support cached country segments without repeated provider reads. See
+[ROR contracts](shared/ror/README.md). Monster records its dated exact new-entry
+HTTP403 limit rather than an unverified inventory.
+The [AUBI contracts](docs/aubiplus-native-readers.md) preserve native grouped
+overlaps, pagination, source counter units and malformed-data limits.
 The earlier [Berlin UTF-8 correction](docs/berlin-state-native-readers.md) remains active.
 
 One source repository for country-based labour-market tools. Egypt and Germany are the first country packages. Public feeds, employer ATS readers and client-project adapters are shared. More countries can use the same contracts without copying another country's implementation.
