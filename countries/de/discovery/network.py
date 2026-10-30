@@ -11,7 +11,7 @@ from urllib.parse import unquote, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 from urllib.robotparser import RobotFileParser
 
-AGENT = "job-market-mcp/0.4.21 (+https://github.com/ahmed-elkashef/job-market-mcp)"
+AGENT = "job-market-mcp/0.4.22 (+https://github.com/ahmed-elkashef/job-market-mcp)"
 MAX_BYTES = 8 * 1024 * 1024
 MEIN = "https://www.meinpraktikum.de"
 MEIN_REST = "https://rest.meinpraktikum.de"
@@ -103,7 +103,8 @@ class NoRedirect(HTTPRedirectHandler):
 class Client:
     """No cookies, credentials, redirects, source scripts or persistent state."""
 
-    def __init__(self):
+    def __init__(self, *, url_check=checked_url):
+        self.url_check = url_check
         self.opener = build_opener(NoRedirect)
         self.policies = {}
         self.last_request = {}
@@ -111,7 +112,7 @@ class Client:
         self.read_post_count = 0
 
     def _raw(self, url, method="GET", body=None, headers=None):
-        checked_url(url, method)
+        self.url_check(url, method)
         request_headers = {"User-Agent": AGENT, "Accept": "application/json,text/html,text/plain;q=0.9"}
         if headers:
             if set(headers) - {"Content-Type", "X-WP-Nonce"}:
@@ -172,12 +173,12 @@ class Client:
         self.last_request[origin] = time.monotonic()
 
     def get(self, url):
-        checked_url(url)
+        self.url_check(url)
         self._policy(url)
         return self._raw(url)
 
     def post(self, url, body, content_type="application/json", public_nonce=None):
-        checked_url(url, "POST")
+        self.url_check(url, "POST")
         self._policy(url)
         headers = {"Content-Type": content_type}
         if public_nonce is not None:

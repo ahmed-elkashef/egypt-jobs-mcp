@@ -1,0 +1,41 @@
+{
+  "runtime_version": "0.4.22",
+  "observed_on": "2026-10-30",
+  "qualification": "Original public HTML reader and actual federated MCP prototype, not a national or completed-week acquisition",
+  "actual_MCP_prototype_calls": 13,
+  "additional_final_canonical_primary_guard_MCP_calls": 2,
+  "catalogue_read_only_tools": 90,
+  "native_scope_examples": {
+    "postcode60323_radius25_internships_returned": 6,
+    "same_postcode_radius100_returned_initial_next_third_final": [
+      15,
+      30,
+      45,
+      4
+    ],
+    "same_scope_native_page_ceiling": 180,
+    "next_third_overlap_native_IDs": 15,
+    "all180_pages_acquired": false,
+    "native_exact_total_exposed": false,
+    "uniform_page_size_established": false,
+    "genuine_scoped_empty_retained": true
+  },
+  "standalone_primary_origins_qualified": [
+    "https://www.hwk-wiesbaden.de",
+    "https://www.hwk-ufr.de"
+  ],
+  "canonical_and_OpenGraph_match_request": true,
+  "inline_fields_not_assumed_complete_primary": true,
+  "source_scripts_robots_denied_and_not_fetched": true,
+  "cookies_sessions_credentials_consents_maps_vCards_apps_contacts_or_payments_requested": false,
+  "source_dataset_or_frontend_implementation_bundled": false,
+  "local_synthetic_tests": {
+    "node": 166,
+    "python": 654,
+    "total": 820,
+    "new_node": 8,
+    "new_python": 22
+  },
+  "native_clocks_university_recognition_worker_countries_media_and_fit_promoted": false,
+  "country_employer_or_week_coverage_complete": false
+}
