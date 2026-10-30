@@ -42,7 +42,7 @@ Four catalogue tools work without acquiring jobs:
 - `source_capabilities`: one source's supported routes, fixed arguments and native tool schemas.
 - `plan_country_scan`: a plan for explicit geography and offset-aware `[from,to)` dates, retaining unresolved sources.
 
-[The source registry](sources.json) currently contains 98 distinct source/channel entries. It is an open discovery register, **not proof that every Egyptian or German employer or vacancy is represented**. Entries explicitly distinguish implemented readers, access-limited routes, employer-seeded readers, credential requirements, external connectors, research gaps and statistical context. [Coverage](docs/coverage.md) explains the remaining work.
+[The source registry](sources.json) currently contains 99 distinct source/channel entries. It is an open discovery register, **not proof that every Egyptian or German employer or vacancy is represented**. Entries explicitly distinguish implemented readers, access-limited routes, employer-seeded readers, credential requirements, external connectors, research gaps and statistical context. [Coverage](docs/coverage.md) explains the remaining work.
 
 ## End to end
 
@@ -115,3 +115,5 @@ Tests use synthetic data, mocked source requests and real local stdio MCP connec
 Personio native German/English description feeds and verified-origin posting links are documented in [the original XML reader contract](docs/personio-native-xml.md). Locale variants share native job identities; XML company-context omissions remain explicit.
 
 Personio complete primary adverts, separate About us context and guarded source identity are available through the original [read-only primary advert tool](docs/personio-primary-adverts.md). XML and primary-page descriptions remain distinct.
+
+Original [German student-market and organisation-directory readers](docs/german-student-and-directory-readers.md) expose native MeinPraktikum inventory/full adverts and personal-use HRK/GVP discovery records. Parent and location IDs, native continuation, source-use restrictions and remaining employer-discovery gaps stay explicit.

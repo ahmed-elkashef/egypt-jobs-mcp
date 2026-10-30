@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of": "2026-10-29",
+  "as_of": "2026-10-30",
   "countries": [
     {
       "code": "EG",
@@ -1588,11 +1588,23 @@
       "category": "employer_discovery",
       "status": "research_required",
       "references": [
-        "https://www.hochschulkompass.de/"
+        "https://www.hochschulkompass.de/hochschulen/downloads.html",
+        "https://hs-kompass.de/kompass/xml/download/hs_liste.txt"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "organisation_directory",
+          "public_tool": "de_public_organisation_directory",
+          "fixed_arguments": {
+            "directory": "higher_education"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Original personal-use organisation reader preserves the complete native university TXT as selected organisation fields. Explicit personal_noncommercial_use=true is required; no public dataset redistribution.",
+        "Organisation main addresses are not all campuses, vacancies or working-student geography. Native homepage strings remain unverified; no automatic HTTPS/domain repair or employer-career-path guess.",
+        "University employment-source discovery remains required. Hospitals, other research institutions and all public employers are not enumerated by this university directory. Status stays research_required; directory metadata is not job coverage."
       ]
     },
     {
@@ -1604,11 +1616,22 @@
       "category": "employer_discovery",
       "status": "research_required",
       "references": [
-        "https://www.bap-personaldienstleister.de/"
+        "https://personaldienstleister.de/der-gvp/mitglieder/gvp-mitglieder/"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "organisation_directory",
+          "public_tool": "de_public_organisation_directory",
+          "fixed_arguments": {
+            "directory": "staffing_members"
+          }
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Original anonymous GVP public member-metadata filter supports native numeric continuation and complete visible organisation labels. The former BAP hostname is retired as the active reference.",
+        "Public CSRF nonce is obtained anonymously and held only in memory. Protected member details/challenge/quota routes are not requested or solved; organisation website links are not available in the metadata template.",
+        "Directory membership is not all staffing employers, a vacancy inventory or actual worksite geography. Full employer employment-source discovery remains research_required; explicit personal noncommercial research acknowledgment is required."
       ]
     },
     {
@@ -2726,6 +2749,42 @@
         "Primary rendered-source HTML, separate page context, schema, requisition reference, URL ID and native clocks remain distinct. Schema summaries are not substituted for full primary content.",
         "Native part/full-time, country, work-pattern and posting/display dates do not establish an exact student contract, Germany remote eligibility, original publication or individual fit.",
         "Only anonymous first-party HTML and robots are requested. Scripts, images, account, application, personalization and contact routes are excluded; links remain data."
+      ]
+    },
+    {
+      "id": "meinpraktikum",
+      "name": "MeinPraktikum native internship and student-job market",
+      "countries": [
+        "DE"
+      ],
+      "category": "student_board",
+      "status": "implemented",
+      "references": [
+        "https://www.meinpraktikum.de/",
+        "https://www.meinpraktikum.de/aktuelle-praktikumsplaetze",
+        "https://www.meinpraktikum.de/werkstudent",
+        "https://www.meinpraktikum.de/statisch/nutzungsbedingungen"
+      ],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "meinpraktikum_inventory",
+          "public_tool": "de_public_meinpraktikum_inventory",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public_de",
+          "tool": "meinpraktikum_detail",
+          "public_tool": "de_public_meinpraktikum_detail",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Explicit personal_noncommercial_use=true is required before network access. Source terms restrict use to noncommercial purposes; no dataset is bundled or publicly redistributed.",
+        "Original native anonymous read POST preserves one-based pagination, exact eq totals, all grouped records and each native location vacancy. Parent job UUID and child URL UUID differ; URL slug text can retain an older date/employer.",
+        "Source internship scope includes foreign/pupil/thesis models. Acquisition does not filter by career interests; Germany worker eligibility, actual student contract and personal fit need full individual review.",
+        "Full primary public advert container, full native role Markdown, source schema and company fields remain separate. Source dates/activation are not verified original publication; no completed week or country census is inferred. Nontext media stays unverified.",
+        "No source scripts, account/user hydration, application controls or session state exported. No apply, login, contact, save, subscription, write-service or media request."
       ]
     }
   ]

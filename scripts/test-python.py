@@ -17,6 +17,7 @@ for directory, arguments in [
     (root / "shared/jobshop", ["-m", "unittest", "discover", "-s", "tests"]),
     (root / "shared/successfactors", ["-m", "unittest", "discover", "-s", "tests"]),
     (root / "shared/oracle", ["-m", "unittest", "discover", "-s", "tests"]),
+    (root / "countries/de/discovery", ["-m", "unittest", "discover", "-s", "tests"]),
     (root / "shared/personio", ["-m", "unittest", "discover", "-s", "tests"]),
 ]:
     env = dict(os.environ)

@@ -1,6 +1,6 @@
 {
   "name": "job-market-mcp",
-  "version": "0.4.20",
+  "version": "0.4.21",
   "private": true,
   "description": "Country-organized read-only labour-market sources: Egypt, Germany and shared infrastructure.",
   "type": "module",
@@ -22,7 +22,7 @@
     "start": "node server.mjs",
     "start:egypt": "node index.mjs",
     "test": "node --test test/*.test.mjs && npm run test --workspaces --if-present",
-    "check": "node --check server.mjs && node --check lib/federation.mjs && node scripts/check-registry.mjs",
+    "check": "node --check server.mjs && node --check lib/federation.mjs && node scripts/check-registry.mjs && node --check countries/de/public-services/discovery.mjs",
     "test:python": "python3 scripts/test-python.py"
   },
   "dependencies": {
