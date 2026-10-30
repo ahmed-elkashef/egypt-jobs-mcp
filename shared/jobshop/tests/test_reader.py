@@ -60,6 +60,109 @@ def response(raw, **kwargs):
 
 
 class NativeJobshopTests(unittest.TestCase):
+    def test_independently_qualified_origins_keep_vendor_redirects_fraport_only(self):
+        capabilities = r.capabilities()
+        self.assertEqual(set(capabilities["independently_verified_origins"]), {r.ORIGIN, r.HAEMA})
+        self.assertEqual(capabilities["legacy_vendor_redirects_verified_for"], [r.ORIGIN])
+        self.assertEqual(r.origin(r.HAEMA), r.HAEMA)
+
+    def test_haema_canonical_identity_is_separate_from_same_uuid_at_fraport(self):
+        uri = CANONICAL.replace(r.ORIGIN, r.HAEMA)
+        self.assertEqual(r.job_uri(uri)[1], r.HAEMA + "::offer_uuid:" + U)
+        self.assertNotEqual(r.job_uri(uri)[1], r.job_uri(CANONICAL)[1])
+        for bad in [uri + "?offerApiId=MTAwNDY=", uri + "?showApplicationForm=true", LEGACY.replace(r.ORIGIN, r.HAEMA)]:
+            with self.subTest(bad=bad), self.assertRaises(r.SourceError):
+                r.read(job_url=bad, transport=lambda *args, **kwargs: self.fail("provider called"))
+
+    def test_haema_whole_board_reads_only_its_qualified_origin_and_all_native_rows(self):
+        uri = CANONICAL.replace(r.ORIGIN, r.HAEMA)
+        rows = [{"url": uri, "title": TITLE}]
+        calls = []
+        def transport(url, **kwargs):
+            calls.append(url)
+            if url == r.HAEMA + "/robots.txt":
+                return {"body": b"User-agent: *\nAllow: /\n"}
+            if url == r.HAEMA + "/":
+                return response(page(rows, home=True))
+            if url == r.HAEMA + "/search":
+                return response(page(rows))
+            self.fail("unqualified source was called")
+        value = r.read(career_origin=r.HAEMA, transport=transport)
+        self.assertEqual(calls, [r.HAEMA + "/robots.txt", r.HAEMA + "/", r.HAEMA + "/search"])
+        self.assertEqual(value["career_origin"], r.HAEMA)
+        self.assertEqual(value["source_result_count"], 1)
+        self.assertEqual(value["listings"][0]["url"], uri)
+        self.assertNotIn(SECRET, json.dumps(value))
+
+    def test_all_three_primary_cms_sections_are_retained_with_separate_context(self):
+        uri = CANONICAL.replace(r.ORIGIN, r.HAEMA)
+        extra = ('<section class="job-data-section"><h2>Equal treatment</h2><p>Whole employer promise.</p></section>'
+                 '<section class="job-data-section"><h2>Company</h2><p>Whole employer background.</p></section>')
+        raw = detail().replace(b'<section class="gallery-section">', extra.encode() + b'<section class="gallery-section">')
+        value = r.parse_detail(raw, uri, uri)
+        self.assertEqual(value["native_primary_cms_section_count"], 3)
+        self.assertEqual(len(value["native_primary_cms_sections"]), 3)
+        self.assertEqual([item["ordinal"] for item in value["native_primary_cms_sections"]], [0, 1, 2])
+        self.assertIn("spätes Pflichtkriterium", value["description"])
+        self.assertIn("Whole employer promise", value["description"])
+        self.assertIn("Whole employer background", value["description_html"])
+        self.assertNotIn("Other person testimonial", value["description"])
+        self.assertNotIn(SECRET, json.dumps(value))
+        self.assertFalse(value["coverage_complete"])
+        self.assertFalse(value["full_posting_reviewed"])
+
+    def test_single_fraport_primary_preserves_existing_exact_section_markup(self):
+        value = r.parse_detail(detail(), LEGACY, FINAL)
+        self.assertEqual(value["native_primary_cms_section_count"], 1)
+        self.assertEqual(value["description_html"], value["native_primary_cms_sections"][0]["html"])
+        self.assertNotIn("data-jobshop-primary-sections", value["description_html"])
+        self.assertEqual(value["career_origin"], r.ORIGIN)
+
+    def test_cross_employer_primary_or_redirect_refuses_even_with_same_uuid(self):
+        uri = CANONICAL.replace(r.ORIGIN, r.HAEMA)
+        with self.assertRaises(r.SourceError):
+            r.parse_detail(detail(), uri, CANONICAL)
+        calls = []
+        def transport(url, **kwargs):
+            calls.append(url)
+            if url == r.HAEMA + "/robots.txt":
+                return {"body": b"User-agent: *\nAllow: /\n"}
+            if url == uri:
+                return response(b"", http_status=302, location=CANONICAL)
+            self.fail("cross-employer data or policy requested")
+        with self.assertRaises(r.SourceError):
+            r.read(job_url=uri, transport=transport)
+        self.assertEqual(calls, [r.HAEMA + "/robots.txt", uri])
+
+    def test_empty_extra_primary_section_cannot_be_hidden_by_other_role_text(self):
+        raw = detail().replace(b'<section class="gallery-section">', b'<section class="job-data-section"></section><section class="gallery-section">')
+        with self.assertRaises(r.SourceError):
+            r.parse_detail(raw, CANONICAL, CANONICAL)
+
+    def test_origin_spoofs_paths_and_unqualified_sites_refuse_before_any_provider(self):
+        for bad in [r.HAEMA + "/", r.HAEMA + "/search", r.HAEMA + ".evil.invalid", "http://karriere.haema.de", None]:
+            with self.subTest(bad=bad), self.assertRaises(r.SourceError):
+                r.read(career_origin=bad, transport=lambda *args, **kwargs: self.fail("provider called"))
+
+    def test_native_pacing_requires_coordination_before_board_or_primary_read(self):
+        calls = []
+        def transport(url, **kwargs):
+            calls.append(url)
+            return {"body": b"User-agent: *\nAllow: /\nCrawl-delay: 1\n"}
+        with self.assertRaisesRegex(r.SourceError, "pacing"):
+            r.read(career_origin=r.HAEMA, transport=transport)
+        self.assertEqual(calls, [r.HAEMA + "/robots.txt"])
+
+    def test_native_wildcard_denial_is_obeyed_before_advert_read(self):
+        uri = CANONICAL.replace(r.ORIGIN, r.HAEMA)
+        calls = []
+        def transport(url, **kwargs):
+            calls.append(url)
+            return {"body": b"User-agent: *\nDisallow: /jobs/*\n"}
+        with self.assertRaisesRegex(r.SourceError, "robots"):
+            r.read(job_url=uri, transport=transport)
+        self.assertEqual(calls, [r.HAEMA + "/robots.txt"])
+
     def test_all_ssr_rows_anchor_titles_and_independent_count_reconcile(self):
         result = r.parse_inventory(page(home=True), page())
         self.assertEqual(2, result["returned_count"])
@@ -299,7 +402,7 @@ class NativeJobshopTests(unittest.TestCase):
 
     def test_offline_capabilities_use_no_profile_or_candidate_fact(self):
         value = r.capabilities()
-        self.assertEqual([r.ORIGIN], value["independently_verified_origins"])
+        self.assertEqual({r.ORIGIN, r.HAEMA}, set(value["independently_verified_origins"]))
         self.assertFalse(value["coverage_complete"])
         self.assertEqual([], value["acquisition_filters"])
 

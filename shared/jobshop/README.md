@@ -1,7 +1,7 @@
 # Original Jobshop SSR and CMS career reader
 
 Original anonymous code for the independently identified Fraport career origin,
-`https://www.jobs-fraport.com`. The public front is talentsconnect/Jobshop; its
+`https://www.jobs-fraport.com`, and Haema, `https://karriere.haema.de`. The public front is talentsconnect/Jobshop; its
 separate SuccessFactors profile link is not proof of a SAP RMK API contract.
 Other custom origins require independent qualification before support is added.
 
@@ -28,7 +28,7 @@ identities until their complete body UUID/alias facts can be reconciled.
 
 The native `JobPosting` may omit description entirely. Its `jobData.description`
 and other text fields may also be empty while the CMS renders a complete advert.
-The reader requires the complete primary `section.job-data-section`, matching
+The reader requires every complete primary `section.job-data-section`, matching
 hero title, native offer UUID and source schema identifier. It preserves its
 whole HTML/text, every top-level CMS section, and full main HTML/text separately.
 
@@ -84,3 +84,33 @@ source counts, complete CMS, credential exclusion, legacy/native IDs, robots,
 advertised redirects, clocks and malformed data. All 588 repository tests pass
 locally. This dated employer qualification is not historical/country coverage
 or applicant fit. No raw advert or applicant corpus is published here.
+
+
+## Haema qualification and multiple primary sections
+
+The actual official Haema homepage advertises `/search`. On30October2026 its
+whole inert SSR URI/title array contained35 canonical UUID links; all35 native
+anchors and titles matched the independently advertised homepage count. These
+are dated employer metadata, not a frozen week, German market census or35
+individually reviewed roles. No career query or temporary scoped search key is
+used. No website reference program is copied or executed.
+
+Haema's current canonical internship advert has three sibling job-data CMS
+sections: role/process, employer promise, and company background. Native title,
+hero and JobPosting UUID/title match. Preserve every complete section in DOM
+order, its HTML/text, aggregate primary HTML/text, and full main/context/form
+labels separately. Single-section Fraport primary markup remains unchanged.
+Generic company material is context, not a new mandatory role requirement.
+
+The current internship page is an explicit initiativ invitation for university,
+voluntary and other placements, including HQ HR or Marketing/Communications.
+It asks for a CV and cover letter naming type, period, location and interests.
+Its upload form allows optional additional documents; form/advert requirements
+must be reconciled. This does not guarantee department capacity, internship
+recognition, personal availability, pay, work permission or applicant fit.
+
+Only exact Haema canonical UUID routes without query are qualified. Haema
+legacy/vendor redirects and cross-employer transitions refuse before the target
+is requested. Fraport retains only its separately qualified advertised redirect
+contract. Current robots, conservative wildcard denial and source pacing guards
+apply; no source scripts, credentials, application, account or contact request.

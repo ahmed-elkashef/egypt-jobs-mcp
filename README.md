@@ -1,6 +1,12 @@
 # Job Market MCP
 
-Current original extension: v0.4.28 adds the unfiltered native Ausbildung.de
+Current original extension: v0.4.29 adds the independently qualified Haema
+Jobshop employer origin and preserves every primary CMS section, including its
+three-section internship template. Fraport vendor redirects remain isolated;
+no hydration keys or browser/account fallback are used. See the
+[Jobshop contracts](shared/jobshop/README.md).
+
+The v0.4.28 extension adds the unfiltered native Ausbildung.de
 internship catalogue and complete public advert readers, with a fixed anonymous
 read-only search operation, separate result/place counters and bound native
 continuation. University placements can occur in the school-labelled section;

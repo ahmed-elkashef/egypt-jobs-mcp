@@ -14,6 +14,18 @@ test('complete inventory and exact native posting URI survive without local filt
  await jobshop('jobshop_detail',{job_url:'https://www.jobs-fraport.com/offer-redirect/?offerApiId=MTAwNDY=&showApplicationForm=false'},{run});
  assert.deepEqual(seen,[['--career-origin','https://www.jobs-fraport.com'],['--job-url','https://www.jobs-fraport.com/offer-redirect/?offerApiId=MTAwNDY=&showApplicationForm=false']]);
 });
+test('qualified Haema origin and acquired canonical URI reach only the fixed native read CLI',async()=>{
+ const seen=[];const run=async args=>{seen.push(args);return {status:'ok'};};
+ const origin='https://karriere.haema.de',url=origin+'/jobs/synthetic-internship/00000000-0000-4000-8000-000000000001';
+ await jobshop('jobshop_inventory',{career_origin:origin},{run});await jobshop('jobshop_detail',{job_url:url},{run});
+ assert.deepEqual(seen,[['--career-origin',origin],['--job-url',url]]);
+});
+test('Haema three-section primary evidence crosses IPC intact with every guard flag unchanged',async()=>{
+ const data={source:'jobshop',status:'ok',career_origin:'https://karriere.haema.de',native_primary_cms_section_count:3,
+  native_primary_cms_sections:[{ordinal:0,text:'Whole role'},{ordinal:1,text:'Whole promise'},{ordinal:2,text:'Whole company context'}],
+  coverage_complete:false,full_posting_reviewed:false,hydration_credentials_exported_or_used:false};
+ const result=await runJobshop([],{spawnProcess:processFixture(JSON.stringify(data))});assert.deepEqual(result,data);
+});
 test('credentials role selection pagination and arbitrary operations never invoke reader',async()=>{
  const run=()=>{throw Error('must not invoke');};
  for(const args of [{career_origin:'x',query:'PR'},{career_origin:'x',token:'secret'},{career_origin:'x',page:1},{career_origin:9},[],null]){
