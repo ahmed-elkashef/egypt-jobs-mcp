@@ -24,6 +24,11 @@ test('real unified stdio lists countries and routes through Egypt and Germany of
     const list=await client.listTools();
     for(const name of ['list_countries','list_country_sources','plan_country_scan','eg_read_source_page','de_ba_job_suche','de_stepstone_get_capabilities','shared_get_public_inventory','de_public_interamt_capabilities','de_public_interamt_read','de_public_jobmensa_capabilities','de_public_jobmensa_page','de_public_jobmensa_detail','de_public_student_boards_capabilities','de_public_student_board_page','de_public_student_board_detail','de_public_student_board_resolve_external','de_public_german_boards_capabilities','de_public_german_board_inventory','de_public_german_board_detail','de_public_german_board_capture_segment'])assert.ok(list.tools.some(t=>t.name===name),name);
     assert.equal(list.tools.length,84);
+    const farCaps=await client.callTool({name:'de_public_german_boards_capabilities',arguments:{}});
+    assert.ok(farCaps.structuredContent.sources.includes('far_retail'));
+    const unsafeFar=await client.callTool({name:'de_public_german_board_detail',arguments:{source:'far_retail',url:'https://career5.successfactors.eu/career?career_ns=job_application'}});
+    assert.equal(unsafeFar.structuredContent.status,'source_limited');
+    assert.equal(unsafeFar.structuredContent.returned_count,null);
     const oracle=await client.callTool({name:'shared_oracle_capabilities',arguments:{}});
     assert.equal(oracle.structuredContent.source,'oracle');
     assert.deepEqual(Object.keys(oracle.structuredContent.native_country_location_partitions),['DE']);
@@ -72,7 +77,7 @@ test('real unified stdio lists countries and routes through Egypt and Germany of
     const unsafe=await client.callTool({name:'de_public_student_board_page',arguments:{source:'studentjob',url:'https://example.test/stellenangebote'}});
     assert.equal(unsafe.isError,true);assert.equal(unsafe.structuredContent.returned_count,null);
     const publicBoards=await client.callTool({name:'de_public_german_boards_capabilities',arguments:{}});
-    assert.deepEqual([...publicBoards.structuredContent.sources].sort(),['absolventa','academics','stellenanzeigen','yourfirm','germantechjobs','bund_de','jobs_de','jobware','berlinstartupjobs','englishjobs','xing','getinengineering','zenjob','swffm'].sort());
+    assert.deepEqual([...publicBoards.structuredContent.sources].sort(),['absolventa','academics','stellenanzeigen','yourfirm','germantechjobs','bund_de','jobs_de','jobware','berlinstartupjobs','englishjobs','xing','getinengineering','zenjob','swffm','far_retail'].sort());
     assert.deepEqual(publicBoards.structuredContent.operations_by_source.englishjobs,['inventory']);
     const noCapture=await client.callTool({name:'de_public_german_board_capture_segment',arguments:{capture_id:'0'.repeat(64),segment_index:0}});assert.equal(noCapture.isError,true);assert.equal(noCapture.structuredContent.returned_count,null);
     const unsafeBoard=await client.callTool({name:'de_public_german_board_inventory',arguments:{source:'germantechjobs',url:'https://germantechjobs.de/api/jobApply'}});

@@ -42,7 +42,7 @@ Four catalogue tools work without acquiring jobs:
 - `source_capabilities`: one source's supported routes, fixed arguments and native tool schemas.
 - `plan_country_scan`: a plan for explicit geography and offset-aware `[from,to)` dates, retaining unresolved sources.
 
-[The source registry](sources.json) currently contains 96 distinct source/channel entries. It is an open discovery register, **not proof that every Egyptian or German employer or vacancy is represented**. Entries explicitly distinguish implemented readers, access-limited routes, employer-seeded readers, credential requirements, external connectors, research gaps and statistical context. [Coverage](docs/coverage.md) explains the remaining work.
+[The source registry](sources.json) currently contains 97 distinct source/channel entries. It is an open discovery register, **not proof that every Egyptian or German employer or vacancy is represented**. Entries explicitly distinguish implemented readers, access-limited routes, employer-seeded readers, credential requirements, external connectors, research gaps and statistical context. [Coverage](docs/coverage.md) explains the remaining work.
 
 ## End to end
 
