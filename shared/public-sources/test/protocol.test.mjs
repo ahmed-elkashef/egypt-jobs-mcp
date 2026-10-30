@@ -1,8 +1,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {tools,callTool,matchesNormalizedJob} from '../index.mjs';
-test('22 tools retain legacy names and expose original Workday and complete capture/detail',async()=>{
-  assert.equal(tools.length,22);for(const name of ['search_public_jobs','search_arbeitnow','search_remotive','search_remoteok','search_jobicy','search_himalayas','search_themuse','search_workable','fetch_workable_jobs','fetch_smartrecruiters_jobs','detect_company_ats','fetch_company_ats_jobs','fetch_personio_jobs','fetch_recruitee_jobs','get_public_inventory','get_public_job_from_snapshot','workday_capabilities','workday_inventory','workday_detail','teamtailor_capabilities','teamtailor_inventory','teamtailor_detail'])assert.ok(tools.some(t=>t.name===name));
+test('25 tools retain legacy names and expose original Workday and complete capture/detail',async()=>{
+  assert.equal(tools.length,25);for(const name of ['search_public_jobs','search_arbeitnow','search_remotive','search_remoteok','search_jobicy','search_himalayas','search_themuse','search_workable','fetch_workable_jobs','fetch_smartrecruiters_jobs','detect_company_ats','fetch_company_ats_jobs','fetch_personio_jobs','fetch_recruitee_jobs','get_public_inventory','get_public_job_from_snapshot','workday_capabilities','workday_inventory','workday_detail','teamtailor_capabilities','teamtailor_inventory','teamtailor_detail','dvinci_capabilities','dvinci_inventory','dvinci_detail'])assert.ok(tools.some(t=>t.name===name));
   const result=await callTool('unknown');assert.equal(result.isError,true);assert.equal(JSON.parse(result.content[0].text).jobs,null);
 });
 
