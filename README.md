@@ -111,3 +111,5 @@ npm run check
 ```
 
 Tests use synthetic data, mocked source requests and real local stdio MCP connections. The Python receiver test binds an owned temporary loopback port. Live probes are separate and bounded; no source census, account connection, application, message, bid, purchase or monitor starts from installation or testing. See [source policy](SOURCE_POLICY.md).
+
+Personio native German/English description feeds and verified-origin posting links are documented in [the original XML reader contract](docs/personio-native-xml.md). Locale variants share native job identities; XML company-context omissions remain explicit.

@@ -73,7 +73,7 @@ function personioHtml(job) {
   if (sections) sections = Array.isArray(sections) ? sections : [sections];
   return sections?.map(s => [valueOf(s.name), valueOf(s.value)].filter(Boolean).join('\n')).join('\n\n') || valueOf(job.description);
 }
-export function normalizeRecord(source, raw, board = null) {
+export function normalizeRecord(source, raw, board = null, feedUrl = null, locale = null) {
   let id, title, company, location, url, html, date, extras = {};
   if (source === 'arbeitnow') {
     ({slug:id,title,company_name:company,location,url,description:html,created_at:date} = raw);
@@ -101,6 +101,19 @@ export function normalizeRecord(source, raw, board = null) {
     html=personioHtml(raw); date=valueOf(raw.createdAt);
     extras = {board_id:board, schedule:valueOf(raw.schedule), employment_type:valueOf(raw.employmentType),
       employmentType:valueOf(raw.employmentType), seniority:valueOf(raw.seniority), department:valueOf(raw.department), createdAt:date};
+    if (!url && /^[1-9][0-9]*$/.test(id) && feedUrl) {
+      const feed = new URL(feedUrl);
+      if (feed.protocol === 'https:' && !feed.port && !feed.username && !feed.password
+          && [board.toLowerCase() + '.jobs.personio.de', board.toLowerCase() + '.jobs.personio.com'].includes(feed.hostname)
+          && feed.pathname === '/xml') {
+        url = `${feed.origin}/job/${id}`;
+        extras.url_basis = 'documented_personio_job_route_native_id';
+      }
+    }
+    extras.url_basis ??= url ? 'provider_url_field' : 'unavailable';
+    extras.source_description_locale = locale;
+    extras.description_scope = 'personio_xml_configured_job_description_blocks';
+    extras.description_context_limit = 'Personio XML excludes the separately configured About us section.';
   } else if (source === 'recruitee') {
     ({id,title,careers_url:url,description:html,created_at:date} = raw); id ??= raw.slug; company=board;
     location=typeof raw.location === 'string' ? raw.location : [raw.location?.city,raw.location?.state,raw.location?.country].filter(Boolean).join(', ');
@@ -131,7 +144,7 @@ export const inventoryTools = [
     source:{type:'string',enum:['arbeitnow','remotive','remoteok','himalayas','themuse','personio','recruitee']},
     page:{type:'integer',minimum:0}, country:{type:'string'}, employment_type:{type:'string'}, location:{type:'string'},
     worldwide:{type:'boolean'}, seniority:{type:'string'}, sort:{type:'string'}, category:{type:'string'}, company:{type:'string'},
-    subdomain:{type:'string',pattern:'^[a-zA-Z0-9][a-zA-Z0-9-]*$'}, metadata_only:{type:'boolean',default:true}
+    subdomain:{type:'string',pattern:'^[a-zA-Z0-9][a-zA-Z0-9-]*$'}, language:{type:'string',enum:['de','en'],description:'Personio native description locale, not a country, working language or vacancy filter. Default de; retain missing translations and reconcile native IDs across locales.'}, metadata_only:{type:'boolean',default:true}
   },required:['source'],additionalProperties:false}},
   {name:'get_public_job_from_snapshot',description:'Retrieve the full captured description and original metadata without a new provider request. Snapshots are process-local and expire; missing snapshots are explicit errors. A quarantined missing-ID record can be inspected by record_index alone.',inputSchema:{type:'object',properties:{snapshot_id:{type:'string'},source_id:{type:'string'},record_index:{type:'integer',minimum:0}},required:['snapshot_id'],anyOf:[{required:['source_id']},{required:['record_index']}],additionalProperties:false}}
 ];
@@ -149,6 +162,7 @@ export class InventoryClient {
     if (args.company && source !== 'themuse') throw new SourceError('company is a Muse native filter only','invalid_argument');
     if (args.location && source !== 'themuse') throw new SourceError('location is a Muse native filter only','invalid_argument');
     if (args.subdomain && !['personio','recruitee'].includes(source)) throw new SourceError('subdomain is an employer-board parameter','invalid_argument');
+    if (args.language !== undefined && (source !== 'personio' || !['de','en'].includes(args.language))) throw new SourceError('language is a qualified Personio description locale only','invalid_argument');
     if (['personio','recruitee'].includes(source) && !/^[a-zA-Z0-9][a-zA-Z0-9-]*$/.test(args.subdomain || '')) throw new SourceError('Invalid public board subdomain','invalid_argument');
     let url, rows, notices=[], pagination={kind:'current_feed',next:null,total:null}, body;
     if (source==='arbeitnow') url=`https://www.arbeitnow.com/api/job-board-api?page=${page}`;
@@ -156,12 +170,12 @@ export class InventoryClient {
     if (source==='remoteok') url='https://remoteok.com/api';
     if (source==='himalayas') { const u=new URL('https://himalayas.app/jobs/api/search');u.searchParams.set('page',String(page));u.searchParams.set('sort',args.sort || 'recent');if(args.country)u.searchParams.set('country',args.country);if(args.employment_type)u.searchParams.set('employment_type',args.employment_type);if(args.worldwide!==undefined)u.searchParams.set('worldwide',String(args.worldwide));if(args.seniority)u.searchParams.set('seniority',args.seniority);url=u.href; }
     if (source==='themuse') { const u=new URL('https://www.themuse.com/api/public/jobs');u.searchParams.set('page',String(page));if(args.location)u.searchParams.set('location',args.location);if(args.category)u.searchParams.set('category',args.category);if(args.company)u.searchParams.set('company',args.company);url=u.href; }
-    if (source==='personio') url=`https://${args.subdomain}.jobs.personio.de/xml`;
+    if (source==='personio') url=`https://${args.subdomain}.jobs.personio.de/xml${args.language ? '?language=' + args.language : ''}`;
     if (source==='recruitee') url=`https://${args.subdomain}.recruitee.com/api/offers/`;
     let text;
     try { text=await requestText(url,this); } catch(error) {
       if (source !== 'personio' || error.http_status !== 404) throw error;
-      url=`https://${args.subdomain}.jobs.personio.com/xml`; text=await requestText(url,this);
+      url=`https://${args.subdomain}.jobs.personio.com/xml${args.language ? '?language=' + args.language : ''}`; text=await requestText(url,this);
     }
     if (source==='personio') {rows=personioPositions(text);body=null;}
     else { try { body=JSON.parse(text); } catch {throw new SourceError('Source did not return valid JSON','malformed_response');} }
@@ -171,7 +185,8 @@ export class InventoryClient {
     if(source==='himalayas') { rows=array(body.jobs,'jobs');const total=body.totalCount??null;const offset=body.offset??(page-1)*20;const limit=body.limit??20;if(!Number.isSafeInteger(limit)||limit<1||offset!==(page-1)*limit||(total!==null&&(!Number.isSafeInteger(total)||total<0)))throw new SourceError('Himalayas page/offset/limit mismatch','invalid_continuation');pagination={kind:'native_page',page,offset,limit,total,next:rows.length&&typeof total==='number'&&offset+rows.length<total?{page:page+1}:null,provider_cursor:body.nextCursor??null};notices=['Attribute Himalayas and retain original application links.',body.comments??body._comments??null].filter(Boolean); }
     if(source==='themuse') {rows=array(body.results,'results');if(body.page!==undefined&&body.page!==page)throw new SourceError('Muse returned another native page','invalid_continuation');pagination={kind:'native_page',page:body.page??page,total:body.total??null,page_count:body.page_count??null,next:typeof body.page_count==='number'&&page+1<body.page_count?{page:page+1}:null};}
     if(source==='recruitee') rows=Array.isArray(body)?body:array(body.offers,'offers');
-    const records=rows.map((raw,index)=>({...normalizeRecord(source,raw,args.subdomain??null),record_index:index}));
+    const records=rows.map((raw,index)=>({...normalizeRecord(source,raw,args.subdomain??null,url,source==='personio' ? args.language ?? 'de' : null),record_index:index}));
+    if (source==='personio') notices.push('The native XML description locale is independent of career-page display language and job working-language requirements. A missing translation is not an empty vacancy. Reconcile IDs across locales; never add locale counts. XML excludes the separately configured About us section.');
     const quarantine=records.filter(x=>!x.id).map(x=>({record_index:x.record_index,reason:'missing_stable_id'}));
     const jobs=records.filter(x=>x.id); const counts=new Map();for(const x of jobs)counts.set(x.id,(counts.get(x.id)??0)+1);
     const duplicate_ids=[...counts].filter(([,n])=>n>1).map(([id,count])=>({id,count}));

@@ -1,6 +1,57 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { InventoryClient, normalizeRecord, publication, requestText, SourceError, errorResult } from '../inventory.mjs';
+const personioXML = (id = '17', body = '') => `<workzag-jobs><position><id>${id}</id><name>Example</name><jobDescriptions>${body}</jobDescriptions></position></workzag-jobs>`;
+test('Personio English locale survives the native com fallback and links use the actual origin', async () => {
+  const urls = [];
+  const client = new InventoryClient({fetchImpl: async url => {
+    urls.push(url);
+    return urls.length === 1 ? reply('missing', 404) : reply(personioXML('17', '<jobDescription><name>Mission</name><value>Complete English role</value></jobDescription>'));
+  }});
+  const data = await client.inventory({source:'personio', subdomain:'Example', language:'en'});
+  assert.deepEqual(urls, ['https://Example.jobs.personio.de/xml?language=en', 'https://Example.jobs.personio.com/xml?language=en']);
+  assert.equal(data.jobs[0].url, 'https://example.jobs.personio.com/job/17');
+  assert.equal(data.jobs[0].source_description_locale, 'en');
+  assert.equal(client.detail({snapshot_id:data.snapshot_id, source_id:'17'}).job.description, 'Mission\nComplete English role');
+});
+test('Personio default locale retains empty descriptions as records and names XML context limits', async () => {
+  const client = new InventoryClient({fetchImpl:async url => {
+    assert.equal(url, 'https://example.jobs.personio.de/xml'); return reply(personioXML());
+  }});
+  const data = await client.inventory({source:'personio', subdomain:'example'});
+  assert.equal(data.count, 1); assert.equal(data.jobs[0].description_status, 'missing');
+  assert.equal(data.jobs[0].source_description_locale, 'de');
+  assert.equal(data.jobs[0].url_basis, 'documented_personio_job_route_native_id');
+  assert.match(data.jobs[0].description_context_limit, /About us/);
+});
+test('Personio locale is not silently accepted for other providers or unsupported values', async () => {
+  let requests = 0;
+  const client = new InventoryClient({fetchImpl:async () => {requests++; return reply({});}});
+  for (const args of [{source:'remoteok',language:'en'}, {source:'personio',subdomain:'example',language:'de&country=DE'}, {source:'personio',subdomain:'example',language:null}])
+    await assert.rejects(client.inventory(args), error => error.code === 'invalid_argument');
+  assert.equal(requests, 0);
+});
+test('Personio native IDs do not become invented posting paths', () => {
+  for (const id of ['../apply', '17?x=1', '0', '-1', '017']) {
+    const job = normalizeRecord('personio', {id}, 'example', 'https://example.jobs.personio.de/xml', 'de');
+    assert.equal(job.url, null); assert.equal(job.id, id);
+  }
+  assert.equal(normalizeRecord('personio', {id:'17'}, 'example', 'https://other.jobs.personio.de/xml').url, null);
+  assert.equal(normalizeRecord('personio', {id:'17'}, 'example', 'https://example.jobs.personio.de:8443/xml').url, null);
+});
+test('Personio provider URLs remain exact and do not receive a derived-route provenance label', () => {
+  const job = normalizeRecord('personio', {id:'17',recruitingUrl:'https://careers.example.org/advert/17'}, 'example', 'https://example.jobs.personio.de/xml');
+  assert.equal(job.url, 'https://careers.example.org/advert/17'); assert.equal(job.url_basis, 'provider_url_field');
+});
+test('Personio locale variants retain one native identity and do not alter original native XML', async () => {
+  const client = new InventoryClient({fetchImpl:async url => reply(personioXML('17', url.includes('language=en') ? '<jobDescription><name>Role</name><value>English</value></jobDescription>' : ''))});
+  const de = await client.inventory({source:'personio',subdomain:'example'});
+  const en = await client.inventory({source:'personio',subdomain:'example',language:'en'});
+  assert.equal(de.jobs[0].id, en.jobs[0].id); assert.equal(de.jobs[0].description_status, 'missing');
+  assert.equal(en.jobs[0].description_status, 'captured_full_provider_field');
+  assert.equal(de.jobs[0].source_data.jobDescriptions, undefined);
+  assert.equal(client.detail({snapshot_id:en.snapshot_id, source_id:'17'}).job.source_data.jobDescriptions.jobDescription.value, 'English');
+});
 const reply = (body, status=200, headers={}) => new Response(typeof body==='string'?body:JSON.stringify(body),{status,headers});
 const row = i => ({slug:`synthetic-${i}`,title:'Synthetic example',company_name:'Example',description:'<p>Full &amp; unchanged</p>',created_at:1700000000});
 test('325 native rows survive; continuation above former page25 cap is exact',async()=>{

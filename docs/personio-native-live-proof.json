@@ -1,0 +1,53 @@
+{
+  "stage": "actual_prototype_unified_mcp",
+  "actual_tool_calls": 5,
+  "provider_reads": 2,
+  "snapshot_detail_provider_reads": 0,
+  "de_count": 309,
+  "en_count": 309,
+  "native_ID_sets_equal": true,
+  "locale_counts_added": false,
+  "all_posting_links_present": true,
+  "de_missing": [
+    "2762189",
+    "2833116",
+    "2832804"
+  ],
+  "en_nonempty": 33,
+  "receipts": [
+    {
+      "label": "de-metadata",
+      "tool": "shared_get_public_inventory",
+      "sha256": "1c40437c43a5f1c80e62a0989cbe6f471a8b9c09658e1cec13d6e50ba52090f7",
+      "bytes": 1510382
+    },
+    {
+      "label": "en-metadata",
+      "tool": "shared_get_public_inventory",
+      "sha256": "e6ee95ecbeeccaf05bebdfe3afdad68e9b71e40ad3a10eb8793c17057d1bd417",
+      "bytes": 1495096
+    },
+    {
+      "label": "en-body-2762189",
+      "tool": "shared_get_public_job_from_snapshot",
+      "sha256": "bfa97e9faa44c9b4989f3ff801a4c41f449d5999cc5c8b33ab2c44b321ab91ca",
+      "bytes": 58325
+    },
+    {
+      "label": "en-body-2833116",
+      "tool": "shared_get_public_job_from_snapshot",
+      "sha256": "dc07d45fa721d96c997fc2160e777186d43e09ce12ace46fb29b125fa0d85147",
+      "bytes": 66347
+    },
+    {
+      "label": "en-body-2832804",
+      "tool": "shared_get_public_job_from_snapshot",
+      "sha256": "5bb20eb91039b6c0a14ca9fa527028a7c2c77d64da7a79fda6abe3aba041b8ec",
+      "bytes": 123659
+    }
+  ],
+  "source_country_or_week_complete": false,
+  "individual_fit_reviewed": false,
+  "applications_contacts_schedules": 0,
+  "evidence_policy": "Aggregate/hashes only; no adverts, source HTML or applicant data."
+}
