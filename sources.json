@@ -2713,7 +2713,7 @@
     },
     {
       "id": "jobshop",
-      "name": "Original Jobshop/talentsconnect native career reader",
+      "name": "Jobshop original qualified employer SSR and CMS reader",
       "countries": [
         "DE"
       ],
@@ -2721,7 +2721,9 @@
       "status": "requires_employer_seed",
       "references": [
         "https://www.jobs-fraport.com/",
-        "https://www.jobs-fraport.com/search"
+        "https://www.jobs-fraport.com/search",
+        "https://karriere.haema.de/",
+        "https://karriere.haema.de/search"
       ],
       "routes": [
         {
@@ -2744,10 +2746,11 @@
         }
       ],
       "limits": [
-        "Only independently qualified Fraport custom-origin SSR/CMS and advertised public redirect contracts are supported; no employer census or other custom-origin claim.",
+        "Only independently qualified Fraport and Haema custom-origin SSR/CMS contracts are supported. Advertised legacy/vendor redirects remain Fraport-only; no other custom-origin or employer-census claim.",
         "Every SSR URI/title reconciles with native anchors and independent board total. Canonical UUID and opaque legacy references remain separate until body alias reconciliation.",
         "Complete primary CMS, sanitized full main/context, raw native/schema clocks and form labels stay separate. No search key, account, script/CDN, application or contact request.",
-        "One current employer snapshot does not establish original publication, historical week, meaningful expiry, student/remote eligibility or person fit."
+        "One current employer snapshot does not establish original publication, historical week, meaningful expiry, student/remote eligibility or person fit.",
+        "Haema is independently qualified from its actual unfiltered homepage/search:35SSR references/35DOM anchors match the independent count. Current canonical UUID adverts can contain three job-data CMS sections; preserve every complete primary section and separate full main/context/form labels. CV+cover-letter requirements may be in the role while optional upload labels differ. A generic initiativ internship invitation is not guaranteed department capacity. Only Haema canonical routes without query are qualified; legacy/vendor redirects remain Fraport-only, and cross-employer redirects refuse. No hydration credentials, scripts, account, contact, application or original-clock/fit promotion."
       ]
     },
     {

@@ -7,7 +7,7 @@ import json
 import re
 import sys
 from pathlib import Path
-from urllib.parse import parse_qs, urlsplit
+from urllib.parse import parse_qs, unquote, urlsplit
 
 from lxml import etree, html
 
@@ -15,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from public_http import MAX_BYTES, SourceError, load_json, request, robot_policy  # noqa: E402
 
 ORIGIN = "https://www.jobs-fraport.com"
+HAEMA = "https://karriere.haema.de"
+ORIGINS = {ORIGIN, HAEMA}
+AGENT = "job-market-mcp/0.4.29"
 VENDOR = "https://fraport.job-shop.com"
 UUID = r"[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}"
 SAFE_FIELDS = {
@@ -29,7 +32,7 @@ SAFE_FIELDS = {
 }
 LIMITS = [
     "One independently identified employer board is not a Germany/employer census or a complete historical week.",
-    "Only the independently qualified Fraport custom origin/current Nuxt SSR and CMS contracts are supported; a SuccessFactors profile link does not make this front a verified SAP RMK API.",
+    "Only independently qualified Fraport and Haema custom origins/current Nuxt SSR and CMS contracts are supported. Legacy vendor redirects remain Fraport-only; a SuccessFactors profile link is not a verified SAP RMK API.",
     "Inventory reconciles every SSR URI/title with native anchors and an independently advertised whole-board count, not client-filter placeholders or search-provider credentials.",
     "JobPosting and native jobData descriptions may be absent. Complete primary job-data CMS HTML, sanitized full main and secondary CMS/context sections remain separate.",
     "Schema educationRequirements may hold a work-model label; native create/update/start/validThrough clocks do not establish original publication, meaningful expiry, student eligibility or a Germany-based remote contract.",
@@ -38,7 +41,7 @@ LIMITS = [
 
 
 def origin(value):
-    if value != ORIGIN:
+    if not isinstance(value, str) or value not in ORIGINS:
         raise SourceError("unverified_independent_jobshop_career_origin")
     return value
 
@@ -47,18 +50,19 @@ def job_uri(value):
     if not isinstance(value, str) or len(value) > 4096 or any(ord(c) < 32 for c in value):
         raise SourceError("invalid_native_jobshop_uri")
     parsed = urlsplit(value)
-    if parsed.scheme + "://" + parsed.netloc != ORIGIN or parsed.fragment:
+    base = parsed.scheme + "://" + parsed.netloc
+    if base not in ORIGINS or parsed.fragment:
         raise SourceError("unverified_native_jobshop_uri")
     query = parse_qs(parsed.query, keep_blank_values=True)
     opaque = query.get("offerApiId")
     if opaque is not None and (len(opaque) != 1 or not re.fullmatch(r"[A-Za-z0-9_+/=-]{1,128}", opaque[0])):
         raise SourceError("invalid_native_offer_reference")
     canonical = re.fullmatch(r"/jobs/[^/?#\\\s]+/(" + UUID + ")", parsed.path)
-    if canonical and set(query) <= {"offerApiId"}:
-        return value, ORIGIN + "::offer_uuid:" + canonical[1], canonical[1], opaque[0] if opaque else None
-    if (parsed.path == "/offer-redirect/" and set(query) == {"offerApiId", "showApplicationForm"}
+    if canonical and set(query) <= ({"offerApiId"} if base == ORIGIN else set()):
+        return value, base + "::offer_uuid:" + canonical[1], canonical[1], opaque[0] if opaque else None
+    if (base == ORIGIN and parsed.path == "/offer-redirect/" and set(query) == {"offerApiId", "showApplicationForm"}
             and opaque and query["showApplicationForm"] == ["false"]):
-        return value, ORIGIN + "::offer_reference:" + opaque[0], None, opaque[0]
+        return value, base + "::offer_reference:" + opaque[0], None, opaque[0]
     raise SourceError("account_application_or_non_native_job_route_refused")
 
 
@@ -191,6 +195,9 @@ def parse_inventory(home_raw, search_raw, career_origin=ORIGIN):
 def parse_detail(raw, requested_url, final_url):
     _, identity, requested_uuid, opaque = job_uri(requested_url)
     _, _, final_uuid, final_opaque = job_uri(final_url)
+    base = urlsplit(requested_url).scheme + "://" + urlsplit(requested_url).netloc
+    if urlsplit(final_url).scheme + "://" + urlsplit(final_url).netloc != base:
+        raise SourceError("native_jobshop_cross_employer_primary_refused")
     if not final_uuid or requested_uuid and requested_uuid != final_uuid or opaque and final_opaque != opaque:
         raise SourceError("native_redirect_posting_identity_changed")
     doc = document(raw)
@@ -211,7 +218,7 @@ def parse_detail(raw, requested_url, final_url):
     headings = doc.xpath('//main//h1')
     primary = doc.xpath('//main//section[contains(concat(" ",normalize-space(@class)," ")," job-data-section ")]')
     mains = doc.xpath('//main[contains(concat(" ",normalize-space(@class)," ")," main-container ")]')
-    if (len(headings) != 1 or len(primary) != 1 or len(mains) != 1 or not text(primary[0])
+    if (len(headings) != 1 or not primary or len(mains) != 1 or any(not text(node) for node in primary)
             or not isinstance(native.get("title"), str)
             or text(headings[0]) != " ".join(native["title"].split())
             or " ".join(str(schema.get("title") or "").split()) != " ".join(native["title"].split())
@@ -223,10 +230,16 @@ def parse_detail(raw, requested_url, final_url):
                          "visible_or_requirement_verified": False})
     main = sanitize(mains[0])
     form_text = [" ".join(form.text_content().split()) for form in mains[0].xpath('.//form')]
-    return {"status": "ok", "source": "jobshop", "kind": "jobshop_native_detail", "career_origin": ORIGIN,
+    primary_sections = [{"ordinal": index, "html": markup(sanitize(node)), "text": text(node)}
+                        for index, node in enumerate(primary)]
+    primary_html = (primary_sections[0]["html"] if len(primary_sections) == 1 else
+                    '<div data-jobshop-primary-sections="' + str(len(primary_sections)) + '">'
+                    + "".join(node["html"] for node in primary_sections) + "</div>")
+    return {"status": "ok", "source": "jobshop", "kind": "jobshop_native_detail", "career_origin": base,
             "id": identity, "url": requested_url, "native_final_url": final_url, "title": native["title"],
             "native_offer_uuid": final_uuid, "native_offer_reference": opaque,
-            "description": text(primary[0]), "description_html": markup(sanitize(primary[0])),
+            "description": " ".join(node["text"] for node in primary_sections), "description_html": primary_html,
+            "native_primary_cms_sections": primary_sections, "native_primary_cms_section_count": len(primary_sections),
             "body_representation": "native_jobshop_full_primary_cms_html", "source_body_untruncated": True,
             "native_full_main_html_without_forms_scripts_controls": markup(main), "native_full_main_text": text(main),
             "native_cms_sections": sections, "native_application_form_text_data_only": form_text,
@@ -238,34 +251,52 @@ def parse_detail(raw, requested_url, final_url):
 
 
 def public_request(url, **kwargs):
-    return request(url, **kwargs, timeout=10, redirect_metadata=True, agent="job-market-mcp/0.4.13")
+    return request(url, **kwargs, timeout=10, redirect_metadata=True, agent=AGENT)
 
 
 def read(*, career_origin=None, job_url=None, transport=public_request):
     if (career_origin is None) == (job_url is None):
         raise SourceError("one_explicit_inventory_or_job_scope_required")
     if career_origin is not None:
-        origin(career_origin)
+        base = origin(career_origin)
     else:
         job_uri(job_url)
+        parsed = urlsplit(job_url)
+        base = parsed.scheme + "://" + parsed.netloc
+    allowed_origins = {base} | ({VENDOR} if base == ORIGIN else set())
     policies, provenance = {}, []
     def step(url):
         parsed = urlsplit(url)
         base = parsed.scheme + "://" + parsed.netloc
-        if base not in {ORIGIN, VENDOR}:
+        if base not in allowed_origins:
             raise SourceError("unverified_advertised_origin")
         if base not in policies:
             policies[base] = robot_policy(base, transport=transport)
         rules, _ = policies[base]
-        if rules is not None and not rules.can_fetch("job-market-mcp", url):
-            raise SourceError("robots_denied")
+        if rules is not None:
+            if not rules.can_fetch(AGENT, url):
+                raise SourceError("robots_denied")
+            entries = [entry for entry in rules.entries if entry.applies_to(AGENT)]
+            if not entries and rules.default_entry:
+                entries = [rules.default_entry]
+            target = parsed.path + ("?" + parsed.query if parsed.query else "")
+            for entry in entries:
+                for rule in entry.rulelines:
+                    path = unquote(rule.path)
+                    if not rule.allowance and ("*" in path or path.endswith("$")):
+                        pattern = path[:-1] if path.endswith("$") else path
+                        pattern = "^" + re.escape(pattern).replace(r"\*", ".*") + ("$" if path.endswith("$") else "")
+                        if re.search(pattern, target):
+                            raise SourceError("robots_wildcard_denied_conservatively")
+            if rules.crawl_delay(AGENT) or rules.request_rate(AGENT):
+                raise SourceError("source_pacing_requires_operator_coordination")
         response = transport(url, accept="text/html")
         provenance.append({"url": url, "method": "GET", "http_status": response.get("http_status", 200),
                            "bytes": len(response["body"]), "sha256": hashlib.sha256(response["body"]).hexdigest(),
                            "requested_at": response.get("requested_at"), "observed_at": response.get("observed_at")})
         return response
     if career_origin is not None:
-        home, page = step(ORIGIN + "/"), step(ORIGIN + "/search")
+        home, page = step(base + "/"), step(base + "/search")
         if home.get("http_status", 200) != 200 or page.get("http_status", 200) != 200:
             raise SourceError("native_inventory_redirect_requires_requalification")
         if any("text/html" not in (r.get("content_type") or "").lower() for r in [home, page]):
@@ -301,6 +332,9 @@ def read(*, career_origin=None, job_url=None, transport=public_request):
                 external_reference = query["externalId"][0]
             else:
                 job_uri(location)
+                parsed_location = urlsplit(location)
+                if parsed_location.scheme + "://" + parsed_location.netloc != base:
+                    raise SourceError("native_jobshop_cross_employer_redirect_refused")
             current = location
         else:
             raise SourceError("native_redirect_ceiling")
@@ -309,7 +343,7 @@ def read(*, career_origin=None, job_url=None, transport=public_request):
 
 def capabilities():
     return {"status": "ok", "source": "jobshop", "operations": ["inventory", "detail"],
-            "independently_verified_origins": [ORIGIN], "inventory": "Whole SSR link table plus native anchor/title and independent board-count reconciliation; no search API/key.",
+            "independently_verified_origins": sorted(ORIGINS), "legacy_vendor_redirects_verified_for": [ORIGIN], "inventory": "Whole SSR link table plus native anchor/title and independent board-count reconciliation; no search API/key.",
             "body": "Complete primary CMS job-data section, separate sanitized full main/context sections/schema and form labels; no schema-only description assumption.",
             "max_complete_response_bytes": MAX_BYTES, "native_redirect_ceiling": 2,
             "acquisition_filters": [], "coverage_complete": False, "limits": LIMITS}
