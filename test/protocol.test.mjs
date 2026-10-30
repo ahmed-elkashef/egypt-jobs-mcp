@@ -23,8 +23,12 @@ test('real unified stdio lists countries and routes through Egypt and Germany of
     await client.connect(transport);
     const list=await client.listTools();
     for(const name of ['list_countries','list_country_sources','plan_country_scan','eg_read_source_page','de_ba_job_suche','de_stepstone_get_capabilities','shared_get_public_inventory','de_public_interamt_capabilities','de_public_interamt_read','de_public_jobmensa_capabilities','de_public_jobmensa_page','de_public_jobmensa_detail','de_public_student_boards_capabilities','de_public_student_board_page','de_public_student_board_detail','de_public_student_board_resolve_external','de_public_german_boards_capabilities','de_public_german_board_inventory','de_public_german_board_detail','de_public_german_board_capture_segment'])assert.ok(list.tools.some(t=>t.name===name),name);
-    assert.equal(list.tools.length,75);
-    for(const name of ['shared_onlyfy_capabilities','shared_onlyfy_inventory','shared_onlyfy_detail'])assert.ok(list.tools.some(t=>t.name===name),name);
+    assert.equal(list.tools.length,78);
+    for(const name of ['shared_onlyfy_capabilities','shared_jobshop_capabilities','shared_jobshop_inventory','shared_jobshop_detail','shared_onlyfy_inventory','shared_onlyfy_detail'])assert.ok(list.tools.some(t=>t.name===name),name);
+    const jobshop=await client.callTool({name:'shared_jobshop_capabilities',arguments:{}});
+    assert.equal(jobshop.structuredContent.source,'jobshop');
+    const unsafeJobshop=await client.callTool({name:'shared_jobshop_detail',arguments:{job_url:'https://www.jobs-fraport.com/application/apply'}});
+    assert.equal(unsafeJobshop.isError,true);
     const onlyfy=await client.callTool({name:'shared_onlyfy_capabilities',arguments:{}});
     assert.equal(onlyfy.structuredContent.source,'onlyfy');assert.equal(onlyfy.structuredContent.seed_required,true);
     const unsafeOnlyfy=await client.callTool({name:'shared_onlyfy_inventory',arguments:{board_url:'https://example.onlyfy.jobs/application/apply/forbidden'}});

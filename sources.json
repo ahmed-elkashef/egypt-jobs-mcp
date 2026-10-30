@@ -1481,7 +1481,7 @@
         "Native links or separately verified numeric page/offset/count continuation remain explicit. Moving pages are not frozen historical coverage.",
         "Original campaign, renewal, activation, expiry and observation clocks remain distinct; no invented employer publication or applicant fit.",
         "No login, application, contact, save, subscription or account action. Raw web/session state is excluded from public fixtures.",
-        "Official search route currently denied by robots. Separately permitted official RSS returned500items covering27\u201329October only; earlier weekly history is unresolved.",
+        "Official search route currently denied by robots. Separately permitted official RSS returned500items covering27–29October only; earlier weekly history is unresolved.",
         "Retain incomplete feed metadata; canonical resource URLs remove client fragments/session markers and provider/path namespaces preserve identity."
       ]
     },
@@ -2503,12 +2503,51 @@
       ],
       "limits": [
         "Original permitted anonymous native primary pages, active-page/enabled continuation checks and complete provided HTML bodies. Homepage featured links, finite directory/profile references and ad counts are separate from vacancy/employer/frozen coverage.",
-        "All56 native ad references across pages20/20/16 and six finite employer profiles were read in a dated engineering traversal. The disabled terminal Next has a root href and is never followed. The portal name is not proof every job is in Hesse; first native job was in M\u00fcnster.",
+        "All56 native ad references across pages20/20/16 and six finite employer profiles were read in a dated engineering traversal. The disabled terminal Next has a root href and is never followed. The portal name is not proof every job is in Hesse; first native job was in Münster.",
         "48 ads have native visible HTML sections,seven have independently published HTML text alternatives beside PDF viewers, and one has no full provided HTML text. Preserve structured descriptions and alternative text independently, including model/start-date conflicts. Untruncated provided HTML is not verification of PDF/employer completeness.",
         "Native PDFs are robots-denied and were not fetched. No viewer rewrite, asset request, Ajax, role query, account, application, email or contact. The one PDF-only ad stays source-limited, never empty or complete."
       ],
       "code_audited_on": "2026-10-29",
       "last_saved_transport_evidence": "2026-10-29"
+    },
+    {
+      "id": "jobshop",
+      "name": "Original Jobshop/talentsconnect native career reader",
+      "countries": [
+        "DE"
+      ],
+      "category": "direct_ats",
+      "status": "requires_employer_seed",
+      "references": [
+        "https://www.jobs-fraport.com/",
+        "https://www.jobs-fraport.com/search"
+      ],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "jobshop_capabilities",
+          "public_tool": "shared_jobshop_capabilities",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public",
+          "tool": "jobshop_inventory",
+          "public_tool": "shared_jobshop_inventory",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public",
+          "tool": "jobshop_detail",
+          "public_tool": "shared_jobshop_detail",
+          "fixed_arguments": {}
+        }
+      ],
+      "limits": [
+        "Only independently qualified Fraport custom-origin SSR/CMS and advertised public redirect contracts are supported; no employer census or other custom-origin claim.",
+        "Every SSR URI/title reconciles with native anchors and independent board total. Canonical UUID and opaque legacy references remain separate until body alias reconciliation.",
+        "Complete primary CMS, sanitized full main/context, raw native/schema clocks and form labels stay separate. No search key, account, script/CDN, application or contact request.",
+        "One current employer snapshot does not establish original publication, historical week, meaningful expiry, student/remote eligibility or person fit."
+      ]
     }
   ]
 }

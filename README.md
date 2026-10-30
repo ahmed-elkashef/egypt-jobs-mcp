@@ -70,6 +70,10 @@ The [original publication reader](shared/dvinci/README.md) adds complete compact
 
 The [original Onlyfy native reader](shared/onlyfy/README.md) exposes complete unfiltered career pages with checked native continuation and full primary job-ad HTML. It keeps the shell schema summary and additional export variants separate from the primary ad, with no account, script/CDN, print/PDF or application request. Employer seeds and historical coverage remain explicit requirements.
 
+## Original shared Jobshop career boards
+
+The [original Jobshop reader](shared/jobshop/README.md) reconciles the whole native SSR link array with every source anchor and an independent board count. It follows actual policy-checked public redirects and preserves complete primary CMS HTML, full context, source clocks and form labels separately, without source search credentials or application operations.
+
 ## Additional Germany API
 
 Original Interamt capability/list/detail code is included under `countries/de/interamt`. Its public OpenAPI requires an approved API key; single-customer and MultiMandant scopes remain distinct. `de_public_interamt_capabilities` inspects this offline; `de_public_interamt_read` refuses before network without approved local access and an explicitly confirmed API base. No authenticated live access is claimed.

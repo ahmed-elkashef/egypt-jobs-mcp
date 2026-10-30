@@ -21,11 +21,11 @@ class NoRedirect(HTTPRedirectHandler):
         return None
 
 
-def request(url, *, accept, agent="job-market-mcp/0.4.12", bound=MAX_BYTES, opener=None):
+def request(url, *, accept, agent="job-market-mcp/0.4.12", bound=MAX_BYTES, opener=None, timeout=15, redirect_metadata=False):
     started = datetime.now(timezone.utc).isoformat()
     try:
         with (opener or build_opener(NoRedirect())).open(
-                Request(url, headers={"User-Agent": agent, "Accept": accept}), timeout=15) as response:
+                Request(url, headers={"User-Agent": agent, "Accept": accept}), timeout=timeout) as response:
             raw = response.read(bound + 1)
             if response.status != 200:
                 raise SourceError("unexpected_http_status", http_status=response.status)
@@ -34,6 +34,9 @@ def request(url, *, accept, agent="job-market-mcp/0.4.12", bound=MAX_BYTES, open
             return {"body": raw, "content_type": response.headers.get("Content-Type"),
                     "requested_at": started, "observed_at": datetime.now(timezone.utc).isoformat()}
     except HTTPError as error:
+        if redirect_metadata and error.code in {301, 302, 303, 307, 308}:
+            return {"body": b"", "http_status": error.code, "location": error.headers.get("Location"),
+                    "requested_at": started, "observed_at": datetime.now(timezone.utc).isoformat()}
         raise SourceError("source_http_error", http_status=error.code,
                           retry_after=error.headers.get("Retry-After")) from None
     except SourceError:
@@ -52,6 +55,8 @@ def robot_policy(base, *, transport=request):
             return None, {"robots_status": error.http_status, "basis": "RFC9309 robots resource unavailable."}
         raise SourceError("robots_unavailable_or_denied", http_status=error.http_status,
                           retry_after=error.retry_after) from None
+    if response.get("http_status", 200) != 200:
+        raise SourceError("robots_unavailable_or_denied", http_status=response["http_status"])
     try:
         text = response["body"].decode("utf-8-sig")
     except UnicodeDecodeError:
