@@ -98,3 +98,9 @@ bridge calls the retained Python [public publication reader](../dvinci/README.md
 Its exact documented publishing GETs are separate from protected account REST
 and application endpoints. Inventory is compact complete-array metadata by
 default; `include_body: true` reads all full native publication body variants.
+
+Original `onlyfy_capabilities`, `onlyfy_inventory` and `onlyfy_detail` bridge
+to the [native Onlyfy career reader](../onlyfy/README.md). Full primary HTML
+comes from the observed public job frame; the shell schema summary and
+secondary export variants remain separate. Continuation requires the actual
+first total and verifies native ranges, current page and terminal controls.

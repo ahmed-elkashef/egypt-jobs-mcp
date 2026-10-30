@@ -18,3 +18,9 @@ complete compact metadata and full native bodies for explicit employer portals.
 They do not narrow acquisition by candidate interests or infer student/remote
 eligibility from configurable employer labels. Two tested portals are examples,
 not a German employer census or historical weekly supply.
+
+The original shared [Onlyfy career reader](../../shared/onlyfy/README.md)
+provides unfiltered native inventory pages and complete primary job frames
+for independently identified employer boards. Native dates/schema remote
+fields and additional export variants require reconciliation; no role-query
+acquisition, original-clock or worker-country eligibility claim is inferred.

@@ -66,6 +66,10 @@ The [original career-feed reader](shared/teamtailor/README.md) exposes `shared_t
 
 The [original publication reader](shared/dvinci/README.md) adds complete compact metadata arrays, optional full-body arrays and exact native publication details for independently identified portals. It preserves every rendered section, raw variants and all ten company description fields; publication availability, requisition creation and job-entry clocks remain separate. The dated proof covers two portals and 28 current publications. No protected account REST or application endpoint is requested.
 
+## Original shared Onlyfy career boards
+
+The [original Onlyfy native reader](shared/onlyfy/README.md) exposes complete unfiltered career pages with checked native continuation and full primary job-ad HTML. It keeps the shell schema summary and additional export variants separate from the primary ad, with no account, script/CDN, print/PDF or application request. Employer seeds and historical coverage remain explicit requirements.
+
 ## Additional Germany API
 
 Original Interamt capability/list/detail code is included under `countries/de/interamt`. Its public OpenAPI requires an approved API key; single-customer and MultiMandant scopes remain distinct. `de_public_interamt_capabilities` inspects this offline; `de_public_interamt_read` refuses before network without approved local access and an explicitly confirmed API base. No authenticated live access is claimed.

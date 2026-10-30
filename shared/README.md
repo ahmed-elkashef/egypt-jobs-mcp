@@ -3,6 +3,7 @@
 Country packages reference the same public feed and employer-board implementations rather than copying a global adapter into every country.
 
 - [public-sources/](public-sources/): complete native Arbeitnow/Remotive/RemoteOK/Himalayas/The Muse/Personio/Recruitee responses, process-local snapshot/detail reads and retained legacy tools with their explicit limits.
+- [Original Onlyfy](onlyfy/README.md): native employer career-page ranges/current-page/next-button reconciliation and complete primary ad HTML, distinct from shell summaries and export variants.
 - [Original d.vinci](dvinci/README.md): documented anonymous complete regular-publication metadata/full arrays and exact details; preserve rendered/raw/company body variants, mutable labels and distinct clocks. Employer seeds remain required.
 - [Original Teamtailor](teamtailor/README.md): anonymous advertised career-site JSON/RSS feeds, native source-count/identity reconciliation and complete body variants, separate from the secret-key account API.
 - [Original Workday](workday/README.md): anonymous native CXS whole-page inventory, initial-total-bounded continuation and complete native job descriptions for explicitly verified employer boards. No account or application calls.
