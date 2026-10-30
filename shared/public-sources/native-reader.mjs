@@ -22,12 +22,16 @@ export function runNativeReader(script,argv,{source,countField='count',spawnProc
     child.on('error',()=>finish(limited('native_reader_unavailable')));
     child.on('close',code=>{
       if(done)return;
-      if(code!==0){finish(limited('native_reader_failed'));return;}
+      if(code!==0&&code!==2){finish(limited('native_reader_failed'));return;}
       try {
         const result=JSON.parse(Buffer.concat(chunks).toString('utf8'));
         if(!result||typeof result!=='object'||Array.isArray(result)||!['ok','source_limited'].includes(result.status)||result.source!==source)throw Error();
+        // Fixed readers use exit2 for a typed, non-promoting source limit.
+        // Preserve its exact policy/contract evidence, never a failed 'ok'.
+        if(code===2&&(result.status!=='source_limited'||result.coverage_complete!==false
+          ||result.reviewed_by_model!==false||result[countField]!==null))throw Error();
         finish(result);
-      }catch {finish(limited('invalid_native_reader_result'));}
+      }catch {finish(limited(code===2?'native_reader_failed':'invalid_native_reader_result'));}
     });
   });
 }

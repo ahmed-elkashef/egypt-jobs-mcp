@@ -1221,14 +1221,31 @@
       "countries": [
         "DE"
       ],
-      "category": "apprenticeships",
-      "status": "research_required",
+      "category": "student_apprenticeship_and_entry_board",
+      "status": "implemented",
       "references": [
         "https://www.aubi-plus.de/"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "aubiplus_inventory",
+          "public_tool": "de_public_aubiplus_inventory",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public_de",
+          "tool": "aubiplus_detail",
+          "public_tool": "de_public_aubiplus_detail",
+          "fixed_arguments": {}
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Original anonymous native Germany all/student-internship/working-student inventory and complete public-advert reader. No role query or artificial personal-use gate.",
+        "Preserve native grouped overlaps, every visible offer, scope/country/page and acquired next URI. Native Plaetze counter is not qualified as unique adverts; no counter/anzahl page arithmetic. Moving counts refuse.",
+        "Student views can contain school/EQ/retraining or study-funding offers. Native namespaces, labels, start dates, geography and Homeoffice are not university eligibility, original clocks, exact pay or Germany-remote permission.",
+        "Whole header/body/sidebar and published application information are separate from employer originals, actual application forms and unreviewed media. Malformed published JSON-LD is reported without silent repair or promotion.",
+        "No source scripts, cookies, accounts, applications, bookmarks, subscriptions, media, contact or payment requests."
       ]
     },
     {

@@ -1,0 +1,110 @@
+{
+  "version": "0.4.25",
+  "status": "original_native_readers_synthetic_tests_and_actual_MCP_passed_clean_CI_pending",
+  "catalogue_tools": 94,
+  "source_registry_entries": 100,
+  "new_regressions": {
+    "AUBI_python": 21,
+    "AUBI_node": 8,
+    "shared_typed_error_bridge_node": 4
+  },
+  "local_validation": {
+    "node_groups": [
+      54,
+      52,
+      13,
+      67
+    ],
+    "Node_total": 186,
+    "prior_full_python": 705,
+    "final_AUBI_python": 21,
+    "expected_clean_CI_Python_total": 706,
+    "configured_Ruff": "passed",
+    "registry_and_syntax": "passed"
+  },
+  "actual_final_MCP_calls": 15,
+  "earlier_prototype_failure": {
+    "calls": 1,
+    "reason": "Previously unqualified acquired internship/thesis namespace; now explicitly qualified and covered by regression. Shared bridge previously hid the typed source error; now preserves only validated non-promoting failure envelopes."
+  },
+  "actual_final_receipt_hashes": [
+    {
+      "label": "all-first",
+      "sha256": "8b36be03bf7ae110bd4ad4e9415beed4b5cc92452cdfe83a78cbbe8beb95a010"
+    },
+    {
+      "label": "all-next",
+      "sha256": "b73ce8b008ac44b235e532e1520d42bdc4ce87771a94db440fb0c2ef9c1a1585"
+    },
+    {
+      "label": "student_internship-first",
+      "sha256": "1724d607b7a08660f54ff92097c21ff3a659be941b9cecdcc17039246cff10fe"
+    },
+    {
+      "label": "student_internship-next",
+      "sha256": "3a6b4d218fe8919638a9ae3d67c610f3431c823405b47584d5794e30dd61ea54"
+    },
+    {
+      "label": "student_internship-final",
+      "sha256": "871c068f97c1f657c81da042b0dfdde07142f21c1334ff4b1f2c7915d6946f50"
+    },
+    {
+      "label": "working_student-first",
+      "sha256": "e9df6d9c5cb93519176eaf2ceb5402960468cc4fd254fc46108caae575df7f71"
+    },
+    {
+      "label": "working_student-next",
+      "sha256": "44abb022e2b1641c18f954f3306af33965f32bb1b688b878729975852762a5dc"
+    },
+    {
+      "label": "working_student-final",
+      "sha256": "e3d3ef7988ecc0d96e38419cc56f21fc583a8abb7b1be0a9b3bd2421325377de"
+    },
+    {
+      "label": "primary-hr-internship",
+      "sha256": "74924ae73d649477d58554870edf1b4499e1a459db16fccae5905bdf830510a8"
+    },
+    {
+      "label": "primary-video-working-student",
+      "sha256": "82c5ff5416f5f2a6a969395613ec46d093b5a92c7cb0cb5272e41ae02a45349e"
+    },
+    {
+      "label": "primary-eq-model-ambiguity",
+      "sha256": "0a638340d269e72b1bedb2570394104f547fad9fc6162975cc9eb39b03fc9fe2"
+    },
+    {
+      "label": "primary-internship-thesis",
+      "sha256": "d92bb9fb476ce3cc9e7a537723496533a1f79673e9a5c321539f33d6c084c55d"
+    },
+    {
+      "label": "refuse-missing-next-URI",
+      "sha256": "5f572f9f84d8b69c641b3708e8c407bf6cc95e74dd3ecc485c99d16d815003ff"
+    },
+    {
+      "label": "refuse-source-script",
+      "sha256": "85fb5037522ca07aa232ff19eee6e2ba4e148b31153fa6a9968523f2a0ebe2a3"
+    },
+    {
+      "label": "refuse-role-scope",
+      "sha256": "f08ad4d3233917aa16a9701cb93aaafd6212d5b8a9baee591fa88b54e57c62b5"
+    }
+  ],
+  "dated_native_view_findings": {
+    "student_internship_counter_Plaetze": 101,
+    "working_student_counter_Plaetze": 52,
+    "counts_not_qualified_as_unique_adverts": true,
+    "native_page_terminals": {
+      "student_internship": 5,
+      "working_student": 3
+    },
+    "native_groups_and_overlapping_occurrences_preserved": true,
+    "all_source_counter_drift_observed": true,
+    "counter_stability_is_not_atomic_snapshot": true,
+    "student_label_does_not_prove_university_eligibility": true,
+    "four_full_primary_variants_qualified": true,
+    "malformed_JobPosting_diagnostics_not_repaired_or_promoted": true
+  },
+  "country_week_or_employer_census_complete": false,
+  "source_datasets_or_implementation_copied": false,
+  "accounts_applications_contacts_subscriptions_or_payments_requested": false
+}

@@ -1,6 +1,6 @@
 # Country source coverage
 
-As of 30 October 2026, MCP v0.4.24 source contracts. This is implementation/access
+As of 30 October 2026, MCP v0.4.25 source contracts. This is implementation/access
 coverage, not a live vacancy census; each access observation retains its date.
 
 | Implementation/access state | Sources/channel groups |
@@ -9,9 +9,9 @@ coverage, not a live vacancy census; each access observation retains its date.
 | context_only | 4 |
 | credential_required | 3 |
 | external_connector | 3 |
-| implemented | 38 |
+| implemented | 39 |
 | requires_employer_seed | 15 |
-| research_required | 24 |
+| research_required | 23 |
 
 The registry has 100 unique entries: 43 apply to Egypt and
 85 to Germany, including shared entries. Counts overlap; they are
@@ -82,7 +82,7 @@ establish all-employer discovery.
 | [YoungCapital Germany](https://www.youngcapital.de/) | DE | implemented | student_board |
 | [Ausbildung.de](https://www.ausbildung.de/) | DE | research_required | apprenticeships |
 | [Azubiyo](https://www.azubiyo.de/) | DE | research_required | apprenticeships |
-| [AUBI-plus](https://www.aubi-plus.de/) | DE | research_required | apprenticeships |
+| [AUBI-plus](https://www.aubi-plus.de/) | DE | implemented | student_apprenticeship_and_entry_board |
 | [IHK apprenticeship channels](https://www.ihk.de/) | DE | research_required | chamber_channels |
 | [Handwerk native Radar offers and qualified chamber primaries](https://www.handwerk.de/infos-zur-ausbildung/lehrstelle-finden) | DE | implemented | chamber_channels |
 | [JOIN](https://join.com/) | DE | requires_employer_seed | smb_board |
@@ -215,3 +215,14 @@ The earlier native metadata fields, IDs and counts remain valid; affected advert
 wording requires corrected reads. Exact same-advert German PDF references can
 sit outside the main body and are retained unverified. No source/coverage or
 human fit gate is promoted by this correction.
+
+
+v0.4.25 adds AUBI-plus native Germany all/student-internship/working-student
+inventory and complete public header/body/facts/application information. Native
+company groups overlap; displayed Plaetze totals are not qualified distinct-ad
+counts and pagination never uses count/anzahl arithmetic. The source student
+label includes school/EQ/retraining cases. Advert JSON-LD can be malformed;
+strict parse errors remain separate from complete visible HTML and never become
+original clocks or eligibility. The native IPC bridge now preserves validated
+non-promoting source-limit evidence on exit2. No whole-country/week or employer
+census follows from these transport additions.

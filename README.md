@@ -1,11 +1,11 @@
 # Job Market MCP
 
-Current original extension: v0.4.24 fixes Berlin advert text decoding. Native
-HTTP UTF-8 is required and decoded strictly before HTML parsing; German wording
-cannot depend on the parser's charset guess. Exact outside-container portal PDF
-references are retained without fetching. The 92-tool, 100-source catalogue is
-unchanged. See [Berlin contracts](docs/berlin-state-native-readers.md)
-and [decoding evidence](docs/berlin-state-utf8-proof.json).
+Current original extension: v0.4.25 adds native AUBI-plus German all-offering,
+university-internship and working-student inventory and complete public adverts.
+The 94-tool, 100-source catalogue preserves grouped overlaps, native pagination,
+source counter units and malformed-data limits. The shared native bridge retains
+typed non-promoting source errors. See [AUBI contracts](docs/aubiplus-native-readers.md).
+The earlier [Berlin UTF-8 correction](docs/berlin-state-native-readers.md) remains active.
 
 One source repository for country-based labour-market tools. Egypt and Germany are the first country packages. Public feeds, employer ATS readers and client-project adapters are shared. More countries can use the same contracts without copying another country's implementation.
 
