@@ -71,7 +71,7 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [Azubiyo](https://www.azubiyo.de/) | DE | research_required | apprenticeships |
 | [AUBI-plus](https://www.aubi-plus.de/) | DE | research_required | apprenticeships |
 | [IHK apprenticeship channels](https://www.ihk.de/) | DE | research_required | chamber_channels |
-| [Handwerk apprenticeship channels](https://www.handwerk.de/) | DE | research_required | chamber_channels |
+| [Handwerk native Radar offers and qualified chamber primaries](https://www.handwerk.de/infos-zur-ausbildung/lehrstelle-finden) | DE | implemented | chamber_channels |
 | [JOIN](https://join.com/) | DE | research_required | smb_board |
 | [GermanTechJobs](https://germantechjobs.de/) | DE | implemented | specialist_board |
 | [Berlin Startup Jobs](https://berlinstartupjobs.com/) | DE | implemented | regional_board |
@@ -168,3 +168,13 @@ were traversed in a dated test.48 visible HTML bodies and seven published PDF
 text alternatives are qualified separately; one PDF-only ad remains limited.
 No denied PDF/viewer fetch or rewrite occurred. Source, date, start/model conflict,
 portal worksite and employer/frozen-coverage ambiguities remain explicit.
+
+
+Handwerk implementation is limited to the explicit native postcode/radius offer
+scope and two independently qualified ODAV primary origins. Actual Radar pages
+have variable, overlapping records and no verified exact total; follow literal
+next requests with the original page ceiling and reconcile native IDs. Inline
+fields can omit standalone requirements. Other chamber/WP/redirect primaries,
+university recognition, country/employer discovery and historical week coverage
+remain separate work. Training firms are organisation context, never vacancies.
+See [the original reader contract](handwerk-native-readers.md).

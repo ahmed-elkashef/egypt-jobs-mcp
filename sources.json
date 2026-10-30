@@ -1249,18 +1249,38 @@
     },
     {
       "id": "handwerk",
-      "name": "Handwerk apprenticeship channels",
+      "name": "Handwerk native Radar offers and qualified chamber primaries",
       "countries": [
         "DE"
       ],
       "category": "chamber_channels",
-      "status": "research_required",
+      "status": "implemented",
       "references": [
-        "https://www.handwerk.de/"
+        "https://www.handwerk.de/infos-zur-ausbildung/lehrstelle-finden",
+        "https://www.lehrstellen-radar.de/5100,0,lsrsearch.html",
+        "https://www.lehrstellen-radar.de/impressum_lehrstellenradar",
+        "https://www.hwk-wiesbaden.de/",
+        "https://www.hwk-ufr.de/"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "handwerk_inventory",
+          "public_tool": "de_public_handwerk_inventory",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public_de",
+          "tool": "handwerk_detail",
+          "public_tool": "de_public_handwerk_detail",
+          "fixed_arguments": {}
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Explicit personal_noncommercial_use=true and native postcode/radius scope are required. Only internship/apprenticeship offer switches are exposed; firms are not vacancies. No career, skill, employer or degree query.",
+        "Original complete native HTML rows and matching inline fields preserve all source IDs, variable/overlapping page sets, original page ceiling and exact next requests. No fixed page size or exact total is inferred. Circles are not a Hesse/Germany/employer census or complete week.",
+        "Native inline fields can omit standalone requirements. Only exact Wiesbaden and Unterfranken ODAV primary routes are qualified; other primary references are retained without redirects or unsupported fetches. Source full-time headers, start dates, generic school minima and firm/related-job context are not university recognition, original clocks, worker-country or personal-fit verdicts.",
+        "No source scripts, consent widget, cookies, user session, map, image, vCard, application, account, subscription or contact request; public source data is not bundled in this original-code repository."
       ]
     },
     {

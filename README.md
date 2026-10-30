@@ -117,3 +117,5 @@ Personio native German/English description feeds and verified-origin posting lin
 Personio complete primary adverts, separate About us context and guarded source identity are available through the original [read-only primary advert tool](docs/personio-primary-adverts.md). XML and primary-page descriptions remain distinct.
 
 Original [German student-market and organisation-directory readers](docs/german-student-and-directory-readers.md) expose native MeinPraktikum inventory/full adverts and personal-use HRK/GVP discovery records. Parent and location IDs, native continuation, source-use restrictions and remaining employer-discovery gaps stay explicit.
+
+Original [Handwerk native readers](docs/handwerk-native-readers.md) expose scoped Radar internship/apprenticeship offers and the qualified standalone Wiesbaden/Unterfranken primaries. Actual variable and overlapping rows, unknown totals, initial page ceilings and genuine empty query scopes remain explicit. Firm-directory records are not jobs; native inline fields can omit standalone full-time requirements. No source-script or application operation.
