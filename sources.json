@@ -2644,6 +2644,52 @@
         "Native experience categories, monthly hours, language and geography do not prove a working-student contract, weekly schedule, original publication or fit. A full current company array is not historical-week or national/employer-census coverage.",
         "Missing, capped, denied, malformed, duplicate or identity-conflicting responses refuse with unknown counts; no partial body or empty-success fiction. Images are not fetched or visually certified."
       ]
+    },
+    {
+      "id": "sap_modern",
+      "name": "SAP modern public careers front",
+      "countries": [
+        "DE"
+      ],
+      "category": "direct_employer",
+      "status": "implemented",
+      "references": [
+        "https://jobs.sap.com/en/jobs/",
+        "https://jobs.sap.com/en/jobs/?country=Germany"
+      ],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_boards_capabilities",
+          "public_tool": "de_public_german_boards_capabilities",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "sap_modern"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_detail",
+          "public_tool": "de_public_german_board_detail",
+          "fixed_arguments": {
+            "source": "sap_modern"
+          }
+        }
+      ],
+      "limits": [
+        "This is the modern SAP front, separate from legacy careers.sap.com RMK. Counts are neither combined nor a national/employer census.",
+        "Only the whole native front and its advertised Germany country facet are qualified. No title, team, experience, contract, keyword, candidate or custom-sort acquisition.",
+        "Every page retains its native count, size, page and source default newest order. Freeze the first total and reconcile every continuation; current metadata is not atomic historical supply.",
+        "Inline and cached Flight record namespaces are parsed as data, without script/module execution. Complete resolved source models must agree across all frames.",
+        "Primary rendered-source HTML, separate page context, schema, requisition reference, URL ID and native clocks remain distinct. Schema summaries are not substituted for full primary content.",
+        "Native part/full-time, country, work-pattern and posting/display dates do not establish an exact student contract, Germany remote eligibility, original publication or individual fit.",
+        "Only anonymous first-party HTML and robots are requested. Scripts, images, account, application, personalization and contact routes are excluded; links remain data."
+      ]
     }
   ]
 }

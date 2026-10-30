@@ -20,7 +20,6 @@ from xml.etree import ElementTree
 
 import berlin
 import englishjobs
-import far_retail
 import getinengineering
 import jobware
 import source_capture
@@ -29,6 +28,9 @@ import xing
 import zenjob
 from lxml import html
 from native_flight import public_search_state
+
+import far_retail
+import sap_modern
 
 AGENT = "job-market-mcp/0.4.8"
 MAX_BYTES = 8 * 1024 * 1024
@@ -52,8 +54,10 @@ ORIGINS["getinengineering"] = getinengineering.ORIGIN
 ORIGINS["zenjob"] = zenjob.ORIGIN
 ORIGINS["swffm"] = swffm.ORIGIN
 ORIGINS["far_retail"] = far_retail.ORIGIN
+ORIGINS["sap_modern"] = sap_modern.ORIGIN
 LIST_PATHS = {
     "far_retail": far_retail.LIST_PATH,
+    "sap_modern": sap_modern.LIST_PATH,
     "swffm": swffm.LIST_PATH,
     "getinengineering": "/jobsuche",
     "zenjob": "/de/jobboerse",
@@ -101,6 +105,8 @@ def without_session(value):
 
 
 def checked_url(source, url, operation):
+    if source == "sap_modern":
+        return sap_modern.checked_url(url, operation)
     if source == "far_retail":
         return far_retail.checked_url(url, operation)
     if source not in ORIGINS:
@@ -158,6 +164,8 @@ def checked_url(source, url, operation):
 
 
 def identity(source, url):
+    if source == "sap_modern":
+        return sap_modern.native_id(url)
     if source == "far_retail":
         return far_retail.native_id(url)
     if source == "xing":
@@ -820,6 +828,8 @@ def parse_inventory(source, body, url):
 
 
 def read(source, operation, url):
+    if source == "sap_modern":
+        return sap_modern.read(operation, url)
     if source == "far_retail":
         return far_retail.read(operation, url)
     checked_url(source, url, operation)
@@ -895,6 +905,7 @@ def capabilities():
             for source in ORIGINS
         },
         "native_partition_discovery": {
+            "sap_modern": "Separate modern SAP front: whole native metadata or advertised Germany facet, exact native page/count/default newest order and agreeing inline/cached Flight models. Native byte lengths, stream closure and namespaces are checked as data; website code is never executed. Full primary HTML, schema/context, URL/requisition identities and native clocks stay separate. No role, candidate, application or source-script request.",
             "far_retail": "Fixed company whole metadata via anonymous native read POST, checked @odata count and unique IDs; non-preview core plus separately loaded benefits/company/recruiter text. Native experience labels are not student contracts; monthly hours are not weekly hours. No hydration bearer, key, cookie, source script, image, account, application or contact operation.",
             "swffm": "Official Frankfurt student portal: unfiltered native lists/actual enabled page controls, whole public ad bodies and separately typed finite employer directory/profile context. Homepage featured refs and profile/job refs are not complete vacancy/employer censuses. The portal label does not prove a Hesse worksite. Conflicting native start, model, home-office and date fields are retained; no keyword/Ajax/contact action.",
             "getinengineering": "Whole SSR first39 records; native published openV2 GET search client provides start=0/39/78 with limit39 and required X-Requested-With protocol header. SSR start query resets and is not continuation. No role/degree filters or restricted API calls.",
@@ -957,6 +968,7 @@ def main():
                     xing.XingError,
                     swffm.SwffmError,
                     far_retail.FarError,
+                    sap_modern.SapModernError,
                     getinengineering.EngineeringError,
                     zenjob.ZenjobError,
                     source_capture.CaptureError,
