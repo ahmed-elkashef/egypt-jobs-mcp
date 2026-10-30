@@ -4,6 +4,7 @@ import {z} from 'zod';
 import {capabilities,read} from '../interamt/client.mjs';
 import {germanDiscovery} from './discovery.mjs';
 import {statePortal} from './state-portals.mjs';
+import {aubiPlus} from './aubiplus.mjs';
 import {jobmensa,studentBoards,germanBoards,germanBoardCaptureSegment} from '../student-boards/bridge.mjs';
 const server=new McpServer({name:'germany-public-services',version:'0.4.0'});
 const result=data=>({content:[{type:'text',text:JSON.stringify(data)}],structuredContent:data,
@@ -37,6 +38,14 @@ server.registerTool('organisation_directory', {
  description:'Read public German organisation discovery seeds for personal noncommercial job research: the official personal-use HRK university TSV or one native GVP staffing-member metadata page. These are organisations, not vacancies or verified workplaces. Preserve native homepages without repair and main-address state without campus inference. GVP anonymous public CSRF stays in memory; protected details/challenges are never requested or solved. No account, contact, application or source dataset redistribution.',
  inputSchema:{directory:z.enum(['higher_education','staffing_members']),page:z.number().int().min(1).max(10000).optional(),personal_noncommercial_use:z.literal(true)},annotations,
 },async input=>result(await germanDiscovery('organisation_directory',input)));
+server.registerTool('aubiplus_inventory', {
+ description:'Read a complete AUBI-plus native German all-offering, student-internship or working-student page without career keywords. Preserve all grouped offer occurrences and context, native scope/country/highlighted page and acquired next URI. Plaetze totals are not qualified unique-advert counts; groups overlap and student labels include EQ/school/retraining. Continuation requires initial counter and exact acquired next URI; moving counts refuse. No count/page arithmetic, login, application, cookie, subscription, source script or contact.',
+ inputSchema:{scope:z.enum(['all','student_internship','working_student']).optional(),page:z.number().int().min(1).max(10000).optional(),first_page_total:z.number().int().positive().max(10000000).optional(),continuation_url:z.string().url().max(4096).optional()},annotations,
+},async input=>result(await aubiPlus('aubiplus_inventory',input)));
+server.registerTool('aubiplus_detail', {
+ description:'Read an exact acquired AUBI-plus public advert with matching native kind/ID, canonical/OpenGraph, complete header/body/sidebar and separately published application information. Keep strict UTF-8 text and report malformed published JSON-LD without repairing or promoting clocks. Related jobs, account/share/bookmark controls and navigation are excluded. Employer originals, nontext requirements, actual application forms, worksite/model eligibility and current active status need separate review. No application, source script, cookie, media, map, contact or account request.',
+ inputSchema:{url:z.string().url().max(4096)},annotations,
+},async input=>result(await aubiPlus('aubiplus_detail',input)));
 server.registerTool('state_portal_inventory', {
  description:'Read one complete native Berlin state-portal all-supply or student-entry page. Exact native offsets, selected filter, original total and numbered continuation reconcile; weiter can drop the student filter. Student scope includes school/professional placements, and unfiltered complement remains required. Berlin portal can list outside-Berlin worksites. Dates/deadlines are source labels, not original-clock/week/eligibility verdicts. No keyword, script, session, account, application, email or subscription.',
  inputSchema:{provider:z.literal('berlin'),scope:z.enum(['all','student_entry']),start:z.number().int().min(0).max(1000000).optional(),first_page_total:z.number().int().positive().max(1000000).optional()},annotations,

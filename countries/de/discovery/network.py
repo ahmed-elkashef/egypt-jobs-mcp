@@ -11,7 +11,7 @@ from urllib.parse import unquote, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 from urllib.robotparser import RobotFileParser
 
-AGENT = "job-market-mcp/0.4.24 (+https://github.com/ahmed-elkashef/job-market-mcp)"
+AGENT = "job-market-mcp/0.4.25 (+https://github.com/ahmed-elkashef/job-market-mcp)"
 MAX_BYTES = 8 * 1024 * 1024
 MEIN = "https://www.meinpraktikum.de"
 MEIN_REST = "https://rest.meinpraktikum.de"
