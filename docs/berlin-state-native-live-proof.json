@@ -1,0 +1,60 @@
+{
+  "version": "0.4.23",
+  "observed_on": "2026-10-30",
+  "phase": "original_federated_prototype_and_local_verification_before_clean_CI_release_or_install",
+  "original_reader_implementation": true,
+  "tools": 92,
+  "registry_entries": 100,
+  "country_applicability_including_shared": {
+    "DE": 85,
+    "EG": 43
+  },
+  "native_source": "Berlin state public portal only; broader state/municipal group remains research_required",
+  "prototype_actual_MCP_calls": 14,
+  "final_HTTP_JobPosting_guard_actual_MCP_calls": 2,
+  "final_guard_native_GET_requests_measured": 4,
+  "local_synthetic_verification": {
+    "Node": 174,
+    "Python": 680,
+    "total": 854,
+    "new_Node_regressions": 8,
+    "new_Python_regressions": 26,
+    "Ruff": "passed",
+    "registry_and_syntax": "passed",
+    "dependency_vulnerabilities": 0
+  },
+  "native_metadata_qualification": {
+    "all_scope_source_count": 618,
+    "all_offsets_read": [
+      0,
+      20,
+      600
+    ],
+    "all_rows_read": 58,
+    "complete_unfiltered_board_acquired": false,
+    "student_scope_source_count": 43,
+    "student_offsets_read": [
+      0,
+      20,
+      40
+    ],
+    "student_unique_records_acquired": 43,
+    "student_group_includes_pupil_professional_and_university_placements": true,
+    "unfiltered_ambiguity_complement_required": true,
+    "numbered_links_retain_filter_while_weiter_drops_it": true
+  },
+  "public_portal_advert_variants_qualified": 4,
+  "advert_identity_and_source_fields": {
+    "canonical_and_OpenGraph_must_match": true,
+    "exactly_one_published_JobPosting_required": true,
+    "complete_portal_header_and_body_separate_from_schema": true,
+    "actual_outside_Berlin_worksites_and_conflicting_deadlines_preserved": true,
+    "employer_originals_may_have_different_native_ids": true,
+    "external_references_and_attachments_not_fetched": true
+  },
+  "scripts_implementation_cookie_accounts_contact_applications_or_payments": false,
+  "country_employer_week_fit_and_active_status_verified": false,
+  "Hessen_native_vacancy_API_reads_qualified": false,
+  "HR4YOU_advertised_own_careers_route_policy_denied": true,
+  "public_source_datasets_or_applicant_data_bundled": false
+}

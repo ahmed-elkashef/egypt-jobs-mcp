@@ -1,5 +1,12 @@
 # Job Market MCP
 
+Current original extension: v0.4.23 adds Berlin state-portal native list/full-advert
+reads with filter-preserving numbered continuation and separate portal/employer
+identity. The catalogue has92 read-only tools and100 registry entries (DE85/EG43,
+including shared). This is source-contract coverage, never an all-country vacancy
+or employer census. See [Berlin contracts](docs/berlin-state-native-readers.md)
+and the [current source register](docs/coverage.md).
+
 One source repository for country-based labour-market tools. Egypt and Germany are the first country packages. Public feeds, employer ATS readers and client-project adapters are shared. More countries can use the same contracts without copying another country's implementation.
 
 The original [Oracle Candidate Experience reader](shared/oracle/README.md)
