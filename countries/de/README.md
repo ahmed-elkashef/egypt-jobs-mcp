@@ -1,5 +1,11 @@
 # Germany
 
+The original anonymous [GULP employment readers](../../docs/gulp-native-readers.md)
+expose whole native counter-bound search pages and complete public role-detail
+JSON through `de_public_gulp_inventory/detail`. Temporary/permanent placement
+types, raw dates and remote flags remain source fields for later individual
+review; they never establish student eligibility or complete German supply.
+
 The original shared [Oracle Candidate Experience reader](../../shared/oracle/README.md)
 qualifies JPMC's external CX_1001 site, including its native Germany location
 partition. It preserves complete public job sections and distinct identities,

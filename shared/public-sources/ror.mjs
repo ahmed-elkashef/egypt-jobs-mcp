@@ -29,7 +29,8 @@ export async function ror(name, args = {}, {run = runRor} = {}) {
   const argv = [name === 'ror_release' ? 'release' : 'directory'];
   if (args.record_id !== undefined) argv.push('--record-id', args.record_id);
   if (name === 'ror_directory') {
-    const offset = args.offset ?? 0, limit = args.limit ?? 200;
+    const offset = args.offset === undefined ? 0 : args.offset;
+    const limit = args.limit === undefined ? 200 : args.limit;
     if (!['DE','EG'].includes(args.country) || !Number.isSafeInteger(offset) || offset < 0 || offset > 1000000
         || !Number.isSafeInteger(limit) || limit < 1 || limit > 500
         || offset > 0 && args.snapshot_sha256 === undefined

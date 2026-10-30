@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.4.27 — 2026-10-30
+
+- Add original anonymous GULP employment whole-page and full-detail read tools.
+  Preserve native zero-based twenty-record pages, acquired counters, whole public
+  role fields, conflicting schedules and malformed-schema diagnostics. Exact
+  fixed read routes, current policy, strict UTF-8 and nonpromoting errors apply.
+- Record dated native Kimeta agent-policy and Stellenwerk robots-HTTP403 limits,
+  keeping legitimate indexed-reader channels distinct from custom collection.
+- Reject explicitly null ROR offsets/limits before reader spawn or cache access;
+  omitted values still use the documented consumer-segment defaults.
+- Reject unknown fields at the actual public-DE MCP boundary, so SDK shape
+  normalization cannot silently remove a filter before a guarded reader sees it.
+- Catalogue: 98 read-only tools and 101 source entries. No all-market coverage,
+  student eligibility, employer-original or frozen-week completeness claim.
+
 ## 0.4.2
 
 - Add original Germany Jobmensa public page/detail tools with current robots checks, strict native URL/continuation validation, complete JSON-LD and private raw capture.

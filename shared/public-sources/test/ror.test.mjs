@@ -25,6 +25,22 @@ test('ROR exact country snapshot continuation reaches only fixed original reader
   assert.deepEqual(invoked, ['directory','--record-id','23500708','--country','EG','--offset','200','--limit','200','--snapshot-sha256','a'.repeat(64)]);
 });
 
+test('ROR explicit null offset cannot silently reset an immutable country segment', async () => {
+  const result = await ror('ror_directory', {record_id:'23500708',country:'DE',offset:null}, {
+    run:()=>assert.fail('null offset must refuse before reader or cache access')
+  });
+  assert.equal(result.status,'source_limited');assert.equal(result.organization_count,null);
+  assert.equal(result.coverage_complete,false);
+});
+
+test('ROR explicit null limit cannot silently become the default country segment', async () => {
+  const result = await ror('ror_directory', {record_id:'23500708',country:'EG',limit:null}, {
+    run:()=>assert.fail('null limit must refuse before reader or cache access')
+  });
+  assert.equal(result.status,'source_limited');assert.equal(result.organization_count,null);
+  assert.equal(result.coverage_complete,false);
+});
+
 test('ROR rejects role queries URLs concept aliases coercions and unbound offsets without executing', async () => {
   const run = () => {assert.fail('invalid input must not spawn reader');};
   for (const [name,args] of [

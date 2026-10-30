@@ -771,13 +771,15 @@
         "DE"
       ],
       "category": "aggregator",
-      "status": "research_required",
+      "status": "access_limited",
       "references": [
-        "https://www.kimeta.de/"
+        "https://www.kimeta.de/",
+        "https://www.kimeta.de/robots.txt"
       ],
       "routes": [],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "2026-10-30 native qualification: the wildcard robots group disallows the custom JobMarketMCP client on all paths. Two policy-only GETs retained the published policy and agent scope; zero native homepage, vacancy, API or source-program requests. No user-agent impersonation, proxy or browser bypass.",
+        "Named approved search/user agents have a distinct published policy and may expose supplemental indexed results through their own legitimate service. That is not approval for this custom native client or proof of a complete accessible inventory. No approved native API/feed route has been qualified; no blanket portal-outage or zero-supply claim."
       ]
     },
     {
@@ -1044,13 +1046,15 @@
         "DE"
       ],
       "category": "student_board",
-      "status": "research_required",
+      "status": "access_limited",
       "references": [
-        "https://www.stellenwerk.de/"
+        "https://www.stellenwerk.de/",
+        "https://www.stellenwerk.de/robots.txt"
       ],
       "routes": [],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "2026-10-30 native qualification: exact robots resource returns HTTP403. One policy GET, zero native homepage, vacancy, API or source-program requests. Stop before content acquisition without a readable current policy; no retry or alternate-host, user-agent, proxy or browser bypass.",
+        "Official indexed content confirms student internship and working-student relevance, but an approved search reader is a separate channel from this native collector. No public native API/feed route has been qualified. This is not zero supply, proof login is needed or a universal service outage."
       ]
     },
     {
@@ -1550,7 +1554,7 @@
         "Native links or separately verified numeric page/offset/count continuation remain explicit. Moving pages are not frozen historical coverage.",
         "Original campaign, renewal, activation, expiry and observation clocks remain distinct; no invented employer publication or applicant fit.",
         "No login, application, contact, save, subscription or account action. Raw web/session state is excluded from public fixtures.",
-        "Official search route currently denied by robots. Separately permitted official RSS returned500items covering27\u201329October only; earlier weekly history is unresolved.",
+        "Official search route currently denied by robots. Separately permitted official RSS returned500items covering27–29October only; earlier weekly history is unresolved.",
         "Retain incomplete feed metadata; canonical resource URLs remove client fragments/session markers and provider/path namespaces preserve identity."
       ]
     },
@@ -2579,14 +2583,34 @@
         "DE"
       ],
       "category": "mixed_jobs_and_projects",
-      "status": "research_required",
+      "status": "implemented",
       "references": [
-        "https://www.gulp.de/"
+        "https://www.gulp.de/gulp2/g/jobs",
+        "https://www.gulp.de/robots.txt",
+        "https://www.gulp.de/gulp2/rest/internal/projects/jobs/search"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "gulp_inventory",
+          "public_tool": "de_public_gulp_inventory",
+          "scope": "one_whole_native_zero_based_twenty_record_job_search_page",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public_de",
+          "tool": "gulp_detail",
+          "public_tool": "de_public_gulp_detail",
+          "scope": "one_complete_exact_acquired_native_public_job_detail",
+          "fixed_arguments": {}
+        }
+      ],
       "limits": [
-        "Client-funded demand must be distinguished from freelancer profiles, seller service supply and speculative opportunities; no suitable inventory transport verified.",
-        "Client employment and own-company careers are distinct from freelance projects. Employment entry currently yields a native script shell; its API is unqualified. The independently advertised own-career HR4YOU route is robots-denied. Neither is a whole-staffing-market access verdict."
+        "Original anonymous employment reader uses only independently qualified native read-only POST search and exact C-prefixed job-detail GET routes. No website reference code copied or executed, no cookies/authentication/account/application/contact/source-script requests. See docs/gulp-native-readers.md.",
+        "Native TEMP_JOB/PERM_JOB are placement types, not university internship or working-student proof. Unfiltered native pages retain all records; metadata descriptions are previews, and full descriptions plus individual model/geography/qualification review remain necessary.",
+        "Fixed native page size20 and zero-based page indices are qualified from the public interface and actual initial/interior/terminal responses. Bind later pages to the initial exact count and reject drift, missing/extra rows or within-page duplicate identities. Live source counts and IDs must still be reconciled across every page; a terminal sample is not complete coverage or an immutable snapshot.",
+        "Preserve whole public detail fields and conflicting schedule/part-time/remote claims. Raw publication/start dates, locale, source country, remote-possible and public contact metadata do not prove original weekly clocks, worksite, Germany remote permission, personal fit or permission to contact.",
+        "Current exact-route policy checks and conservative wildcard denial guards apply; authentication, redirects, throttles and failures stop without retry or bypass. Freelance client projects and own-company HR4YOU careers are separate: no project reader is claimed and the previously observed own-careers robots denial is preserved. This is not a whole-staffing-market census."
       ]
     },
     {
@@ -2657,7 +2681,7 @@
       ],
       "limits": [
         "Original permitted anonymous native primary pages, active-page/enabled continuation checks and complete provided HTML bodies. Homepage featured links, finite directory/profile references and ad counts are separate from vacancy/employer/frozen coverage.",
-        "All56 native ad references across pages20/20/16 and six finite employer profiles were read in a dated engineering traversal. The disabled terminal Next has a root href and is never followed. The portal name is not proof every job is in Hesse; first native job was in M\u00fcnster.",
+        "All56 native ad references across pages20/20/16 and six finite employer profiles were read in a dated engineering traversal. The disabled terminal Next has a root href and is never followed. The portal name is not proof every job is in Hesse; first native job was in Münster.",
         "48 ads have native visible HTML sections,seven have independently published HTML text alternatives beside PDF viewers, and one has no full provided HTML text. Preserve structured descriptions and alternative text independently, including model/start-date conflicts. Untruncated provided HTML is not verification of PDF/employer completeness.",
         "Native PDFs are robots-denied and were not fetched. No viewer rewrite, asset request, Ajax, role query, account, application, email or contact. The one PDF-only ad stays source-limited, never empty or complete."
       ],

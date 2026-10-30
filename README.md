@@ -1,8 +1,11 @@
 # Job Market MCP
 
-Current original extension: v0.4.26 adds shared native ROR release and complete
-country-directory readers for Germany and Egypt. The 96-tool, 101-source
-catalogue preserves source types: research organisations are discovery records,
+Current original extension: v0.4.27 adds native GULP employment inventory and
+complete public job-detail readers, with exact anonymous read-only search POSTs,
+counter-bound whole pages and no browser/account fallback. See the
+[GULP contracts](docs/gulp-native-readers.md). Dated Kimeta and Stellenwerk native
+access limits distinguish approved search readers from the custom collector.
+The 98-tool, 101-source catalogue preserves source types: research organisations are discovery records,
 not vacancies or all employers. Immutable, checksum-verified native snapshots
 support cached country segments without repeated provider reads. See
 [ROR contracts](shared/ror/README.md). Monster records its dated exact new-entry
