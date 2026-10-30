@@ -6,6 +6,7 @@ import {germanDiscovery} from './discovery.mjs';
 import {statePortal} from './state-portals.mjs';
 import {aubiPlus} from './aubiplus.mjs';
 import {gulp} from './gulp.mjs';
+import {ausbildung} from './ausbildung.mjs';
 import {registerStrictReadTool} from './strict-tools.mjs';
 import {jobmensa,studentBoards,germanBoards,germanBoardCaptureSegment} from '../student-boards/bridge.mjs';
 const server=new McpServer({name:'germany-public-services',version:'0.4.0'});
@@ -73,4 +74,12 @@ register('gulp_detail', {
  description:'Read the complete public native GULP job-detail JSON for one exact acquired C-prefixed job URI. Reconcile native identities and retain description, responsibilities, skills, benefits, schedule, salary and separately published JobPosting, including conflicting fields and malformed-schema diagnostics. Preserve UTF-8 strictly; preview text is not a primary. Return text-only role sections without executing source HTML. Public recruiter contact data is evidence, never permission to contact. No account, cookies, application, media, source-script, contact, employer-original or form request; body acquisition is not human review or student eligibility.',
  inputSchema:{url:z.string().url().max(4096)},annotations,
 },async input=>result(await gulp('gulp_detail',input)));
+register('ausbildung_inventory', {
+ description:'Read a whole unfiltered native Ausbildung.de internship catalogue page. Initial public HTML and separately qualified anonymous read-only getInternshipSearchResults POST retain every primary card, both results/place counters, default source geography and exact native from continuation. Bind later pages to acquired counters and protocol revision; reject drift, short pages, unknown filters and deployment changes. The school-section URL and internship labels do not prove school-only or university eligibility. No keyword, arbitrary server action, credential, cookie, source script, application, account or contact request. A terminal sample is not complete coverage or a verified week.',
+ inputSchema:{from:z.number().int().min(0).max(9999980).multipleOf(20).optional(),native_binding:z.object({source:z.literal('ausbildung_de'),catalogue:z.literal('https://www.ausbildung.de/schuelerpraktikum/stellen/'),protocol_sha256:z.literal('2a3916610a6dcb25d4ff77510fd21b01119f1685d8bf530a59035f430567d40c'),resultsCount:z.number().int().positive().max(10000000),vacanciesCount:z.number().int().nonnegative().max(10000000),countryEntryCode:z.literal('DE')}).strict().optional()},annotations,
+},async input=>result(await ausbildung('ausbildung_inventory',input)));
+register('ausbildung_detail', {
+ description:'Read one exact acquired public Ausbildung.de internship advert. Match canonical/vacancy identity and preserve the complete portal main text, native links/media references and separate structured data. University internships occur inside the school-labelled section; assess each role. Portal mirrors can outlive employer originals. No external link, application, account, source script, cookie, media, contact or form request; body acquisition is not current employer status, human fit, enrolment or original-week qualification.',
+ inputSchema:{url:z.string().url().max(4096)},annotations,
+},async input=>result(await ausbildung('ausbildung_detail',input)));
 await server.connect(new StdioServerTransport());
