@@ -167,3 +167,38 @@ The eighth PDF ad has no such full text and remains source-limited. PDFs are
 robots-denied: none were fetched and no viewer, asset or URL rewrite was used.
 Provided-text completeness does not verify PDF/employer completeness. There is
 no keyword/Ajax/query, account, publication, application or contact operation.
+
+## Frankfurt Airport Retail native public board
+
+The original far_retail module is exposed through the existing German board
+capabilities/inventory/detail tools. Its qualified whole board is
+https://frankfurt-airport-retail.de/far/de/karriere-start/jobs. Public job URIs
+use the native /far/de/job/<jobId> route, independently checked against the
+server's matching jobId/title. This is one employer source, not a national or
+Heinemann employer census.
+
+The source's anonymous first-party API uses POST for reads. Only fixed whole
+company jobsearch, non-preview jobdetails and contentful benefits/texts are
+used, after checking policy for the page and each actual API path. The native
+wildcard means all company vacancies; no role, hours or department selector
+is exposed. @odata.count must match every unique metadata row. Capped or
+changed responses refuse rather than presenting a partial or empty market.
+
+A full detail retains introduction/tasks/profile, every returned benefit
+headline, separate company/recruiter copy, raw variants and each exact read's
+provenance. The native client transforms benefit IDs into a prefixed CSV and
+normalizes the recruiter with the native override field; those public read
+parameters are reproduced without executing or copying the client. Hydration
+bearer fields, source scripts/images, account, preview, application and contact
+operations are never used. Source apply links are returned as data only.
+
+Native sector and experience categories are not contract models. Aushilfen,
+Berufseinsteiger and monthly hours do not establish a working-student contract,
+weekly schedule, original publication or fit. Company context remains distinct
+from requirements. Textual completeness does not certify decorative images or
+the external application portal.
+
+The [dated actual MCP proof](../../../docs/far-retail-live-proof.json) reconciles
+all 12 metadata rows, six explicit apprenticeship cuts and all six remaining
+complete public descriptions, with three guarded refusals. All 674 local tests
+pass (140 Node/534 Python). Release CI and installed-runtime checks are separate.

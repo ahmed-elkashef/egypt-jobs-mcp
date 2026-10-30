@@ -41,3 +41,9 @@ adds a verified native Germany partition, complete descriptions and checked
 continuation on SAP's explicitly linked legacy career board. The separate new
 SAP front and other employers remain discovery requirements; source labels and
 posted dates do not establish individual eligibility or historical coverage.
+
+The original far_retail public-board module reads the fixed Frankfurt Airport
+Retail company inventory and complete native primary/CMS text through the
+existing German board tools. Whole counts, exact IDs and separate benefits/
+company context reconcile; source experience labels and monthly hours remain
+raw. No hydration credential or application operation is used.

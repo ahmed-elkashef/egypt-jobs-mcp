@@ -2601,6 +2601,49 @@
         "Complete primary CMS, sanitized full main/context, raw native/schema clocks and form labels stay separate. No search key, account, script/CDN, application or contact request.",
         "One current employer snapshot does not establish original publication, historical week, meaningful expiry, student/remote eligibility or person fit."
       ]
+    },
+    {
+      "id": "far_retail",
+      "name": "Frankfurt Airport Retail public career board",
+      "countries": [
+        "DE"
+      ],
+      "category": "direct_employer",
+      "status": "implemented",
+      "references": [
+        "https://frankfurt-airport-retail.de/far/de/karriere-start/jobs",
+        "https://frankfurt-airport-retail.de/far/de/job/3977-de_DE"
+      ],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "german_boards_capabilities",
+          "public_tool": "de_public_german_boards_capabilities",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_inventory",
+          "public_tool": "de_public_german_board_inventory",
+          "fixed_arguments": {
+            "source": "far_retail"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "german_board_detail",
+          "public_tool": "de_public_german_board_detail",
+          "fixed_arguments": {
+            "source": "far_retail"
+          }
+        }
+      ],
+      "limits": [
+        "Original anonymous first-party read POST implementation qualifies the fixed FAR company board only; all metadata rows reconcile the native @odata count and unique public job IDs. No role, hours or department selector.",
+        "Complete primary introduction/tasks/profile, benefit headlines, company and recruiter copy remain separate with raw/safe variants and exact read-response provenance. Application links remain data; no hydration bearer, key, cookie, account, preview, source-script or application request.",
+        "Native experience categories, monthly hours, language and geography do not prove a working-student contract, weekly schedule, original publication or fit. A full current company array is not historical-week or national/employer-census coverage.",
+        "Missing, capped, denied, malformed, duplicate or identity-conflicting responses refuse with unknown counts; no partial body or empty-success fiction. Images are not fetched or visually certified."
+      ]
     }
   ]
 }

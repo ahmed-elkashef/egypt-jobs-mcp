@@ -20,6 +20,7 @@ from xml.etree import ElementTree
 
 import berlin
 import englishjobs
+import far_retail
 import getinengineering
 import jobware
 import source_capture
@@ -50,7 +51,9 @@ ORIGINS["xing"] = xing.ORIGIN
 ORIGINS["getinengineering"] = getinengineering.ORIGIN
 ORIGINS["zenjob"] = zenjob.ORIGIN
 ORIGINS["swffm"] = swffm.ORIGIN
+ORIGINS["far_retail"] = far_retail.ORIGIN
 LIST_PATHS = {
+    "far_retail": far_retail.LIST_PATH,
     "swffm": swffm.LIST_PATH,
     "getinengineering": "/jobsuche",
     "zenjob": "/de/jobboerse",
@@ -98,6 +101,8 @@ def without_session(value):
 
 
 def checked_url(source, url, operation):
+    if source == "far_retail":
+        return far_retail.checked_url(url, operation)
     if source not in ORIGINS:
         raise SourceError("Unsupported public source")
     parsed = urlsplit(url)
@@ -153,6 +158,8 @@ def checked_url(source, url, operation):
 
 
 def identity(source, url):
+    if source == "far_retail":
+        return far_retail.native_id(url)
     if source == "xing":
         return xing.native_id(url)
     if source == "swffm":
@@ -813,6 +820,8 @@ def parse_inventory(source, body, url):
 
 
 def read(source, operation, url):
+    if source == "far_retail":
+        return far_retail.read(operation, url)
     checked_url(source, url, operation)
     robots, _ = fetch(source, ORIGINS[source] + "/robots.txt", "robots")
     policy = RobotFileParser()
@@ -886,6 +895,7 @@ def capabilities():
             for source in ORIGINS
         },
         "native_partition_discovery": {
+            "far_retail": "Fixed company whole metadata via anonymous native read POST, checked @odata count and unique IDs; non-preview core plus separately loaded benefits/company/recruiter text. Native experience labels are not student contracts; monthly hours are not weekly hours. No hydration bearer, key, cookie, source script, image, account, application or contact operation.",
             "swffm": "Official Frankfurt student portal: unfiltered native lists/actual enabled page controls, whole public ad bodies and separately typed finite employer directory/profile context. Homepage featured refs and profile/job refs are not complete vacancy/employer censuses. The portal label does not prove a Hesse worksite. Conflicting native start, model, home-office and date fields are retained; no keyword/Ajax/contact action.",
             "getinengineering": "Whole SSR first39 records; native published openV2 GET search client provides start=0/39/78 with limit39 and required X-Requested-With protocol header. SSR start query resets and is not continuation. No role/degree filters or restricted API calls.",
             "zenjob": "Whole public shift lists and actual page links. Native shift starts, structured publication dates and contract type differ; student shift supply is not automatically a working-student contract. Full visible notes beyond structured description retained. Filter POST/signup/app actions unsupported.",
@@ -932,13 +942,13 @@ def main():
             "coverage_complete": False,
             "reviewed_by_model": False,
             "error_type": type(error).__name__,
-            "http_status": error.code if isinstance(error, HTTPError) else None,
+            "http_status": error.code if isinstance(error, HTTPError) else getattr(error, "http_status", None),
             "exact_native_detail_gone": isinstance(error, HTTPError)
             and error.code == 410
             and args.operation == "detail",
             "retry_after": error.headers.get("Retry-After")
             if isinstance(error, HTTPError) and error.headers
-            else None,
+            else getattr(error, "retry_after", None),
             "message": str(error)
             if isinstance(
                 error,
@@ -946,6 +956,7 @@ def main():
                     SourceError,
                     xing.XingError,
                     swffm.SwffmError,
+                    far_retail.FarError,
                     getinengineering.EngineeringError,
                     zenjob.ZenjobError,
                     source_capture.CaptureError,

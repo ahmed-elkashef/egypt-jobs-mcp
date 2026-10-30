@@ -1,0 +1,45 @@
+{
+  "qualification_date": "2026-10-30",
+  "stage": "actual_unified_mcp_unreleased_branch_engineering_proof",
+  "published_runtime_release_and_install_verified": false,
+  "tool_count": 84,
+  "source_register_entries": 97,
+  "native_whole_metadata_rows": 12,
+  "explicit_apprenticeship_metadata_exclusions": 6,
+  "every_remaining_native_body_complete": true,
+  "complete_public_body_samples": 6,
+  "primary_body_characters": [
+    1092,
+    1405,
+    1102,
+    2029,
+    2034,
+    1109
+  ],
+  "full_public_text_characters": [
+    2898,
+    3215,
+    2926,
+    3855,
+    3860,
+    2934
+  ],
+  "actual_read_only_mcp_calls": 12,
+  "guarded_refusals": 3,
+  "local_tests": {
+    "node": 140,
+    "python": 534,
+    "total": 674
+  },
+  "code_file_sha256": {
+    "countries/de/public-boards/far_retail.py": "eac9273eda57c62d8c322f93f8881e4d50a150c1aee47b1a2aa4469f3fe7c8c9",
+    "countries/de/public-boards/readers.py": "0f170042c201a2c2c9e259da2b18af9c4bfac53b61f81ee83cc7585324935dae",
+    "countries/de/public-services/server.mjs": "3f88ef7e4ecf5f0c905bde7baeed4693e3808c3fafe865776f13c9ff6051aa2a",
+    "countries/de/student-boards/bridge.mjs": "1c04187996e37c009572a777f77ec682157b020d4221ebb253a3306995a96f93",
+    "sources.json": "abdaa741def1c4e2b0dca5bdd4347da565bafb0c49a4dfc4734bc2afe5130be2"
+  },
+  "source_scripts_images_credentials_or_application_requested": false,
+  "historical_week_national_or_employer_census_complete": false,
+  "applicant_fit_or_application_readiness": false,
+  "raw_advert_or_applicant_corpus_published": false
+}
