@@ -2077,11 +2077,18 @@
           "fixed_arguments": {
             "source": "personio"
           }
+        },
+        {
+          "backend": "public",
+          "tool": "personio_detail",
+          "public_tool": "shared_personio_detail",
+          "fixed_arguments": {}
         }
       ],
       "limits": [
         "Requires a verified employer/board token. Provider support is not discovery of every employer or every German/Egyptian workplace.",
-        "Do not count training, external examples, missing descriptions, date ambiguity or native caps as complete country coverage."
+        "Do not count training, external examples, missing descriptions, date ambiguity or native caps as complete country coverage.",
+        "Original primary HTML detail preserves native role content separately from About us, header and source JobPosting. XML omits About us; translations and career-page display language are independent. No form/session/hydration material is exported."
       ]
     },
     {
