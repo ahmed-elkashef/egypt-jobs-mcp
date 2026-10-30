@@ -1,0 +1,44 @@
+{
+  "tool_count": 75,
+  "native_pages": 7,
+  "native_total": 69,
+  "distinct_handles": 69,
+  "full_native_bodies": 69,
+  "coverage_complete": false,
+  "historical_week_complete": false,
+  "employer_census_complete": false,
+  "person_fit_reviewed": false,
+  "version": "0.4.12",
+  "qualified_at": "2026-10-30",
+  "method": "83 actual unified read-only MCP calls against prototype source before release",
+  "employer_origin": "https://thost.onlyfy.jobs",
+  "native_page_sizes": [
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    9
+  ],
+  "extra_export_variants": 69,
+  "schema_summary_characters": [
+    200
+  ],
+  "primary_body_character_range": [
+    1947,
+    4138
+  ],
+  "german_first_page_handles_reconciled": true,
+  "all_locales_enumerated": false,
+  "out_of_range_and_application_requests_refused": true,
+  "workday_teamtailor_dvinci_capabilities_compatible": true,
+  "tests": {
+    "python": 428,
+    "node": 125,
+    "total": 553
+  },
+  "account_auth_script_cdn_print_pdf_application_contact_subscription_requests": 0,
+  "inferred_original_clocks_or_student_remote_eligibility": false,
+  "ready_rows": 0
+}

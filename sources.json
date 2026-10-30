@@ -2248,13 +2248,37 @@
         "*"
       ],
       "category": "direct_ats",
-      "status": "research_required",
+      "status": "requires_employer_seed",
       "references": [
-        "https://onlyfy.com/"
+        "https://help.xing.com/hc/de/articles/31499221281309-Job-Feed-Integration",
+        "https://thost.de/karriere/haeufig-gestellte-fragen/",
+        "https://thost.onlyfy.jobs/en"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "onlyfy_capabilities",
+          "public_tool": "shared_onlyfy_capabilities",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public",
+          "tool": "onlyfy_inventory",
+          "public_tool": "shared_onlyfy_inventory",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public",
+          "tool": "onlyfy_detail",
+          "public_tool": "shared_onlyfy_detail",
+          "fixed_arguments": {}
+        }
+      ],
       "limits": [
-        "A verified original board/list/detail implementation and employer discovery are required. Existing external libraries or connectors are not treated as complete authored coverage."
+        "Original anonymous onlyfy.jobs native-page and complete full-HTML ad readers require an independently identified employer board. Verified en/de UI route shapes are supported; no employer/country census.",
+        "Native ten-card pages reconcile range, current page, advertised initial total and disabled-next terminal. Continuation requires the observed first total; out-of-range/reset/moving-count responses never become empty supply. No role/country/candidate acquisition queries.",
+        "Shell JobPosting descriptions can be200-character summaries; primary full job HTML and additional export variants stay separate. Schema IDs differ from public handles; date/remote fields do not prove original publication, student model or Germany remote eligibility.",
+        "No account API, credentials, cookies, scripts/CDN, print PDF, application, contact or subscription requests. Legacy published-handle onlyfy.io feeds are distinct and unclaimed, with no guessed handle."
       ]
     },
     {
