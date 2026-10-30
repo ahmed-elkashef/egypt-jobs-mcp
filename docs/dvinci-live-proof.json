@@ -1,0 +1,44 @@
+{
+  "version": "0.4.11",
+  "checked_at": "2026-10-30T00:07:26.164314+00:00",
+  "primary_documentation": "https://static.dvinci-easy.com/files/d.vinci%20job-publication-api.html",
+  "method": "Anonymous documented singular public-publication JSON GETs; no auth, cookie, redirect following or application request.",
+  "portals": [
+    {
+      "origin": "https://dein-weg-zu.dvinci.de",
+      "official_identity_source": "https://karriere.dvinci.de/jobs/",
+      "compact_count": 3,
+      "full_count": 3,
+      "robots_status": 404
+    },
+    {
+      "origin": "https://dtsgroup-career.dvinci.de",
+      "official_identity_source": "https://www.dts.de/de/karriere",
+      "compact_count": 25,
+      "full_count": 25,
+      "robots_status": 404
+    }
+  ],
+  "inventory_scope": "Current active regular DEFAULT publication arrays; fields=small changes fields, not vacancy selection. No role/geography/language filters.",
+  "compact_full_id_sets_match": true,
+  "native_body_count": 28,
+  "exact_native_detail_reads": 2,
+  "native_company_description_fields_preserved": 10,
+  "native_published_html_sections_verified": {
+    "portal": "https://dein-weg-zu.dvinci.de",
+    "sections": 7,
+    "all_rendered_bodies_in_html": true,
+    "raw_weOffer_empty_rendered_offer_nonempty": true
+  },
+  "prototype_real_stdio_probes": 10,
+  "expected_account_path_refusals": 1,
+  "prototype_tool_count": 72,
+  "original_clock_qualified": false,
+  "independent_server_total": null,
+  "employer_census_complete": false,
+  "weekly_history_complete": false,
+  "person_fit_reviewed": false,
+  "application_operations": 0,
+  "coverage_complete": false,
+  "raw_corpus_in_repository": false
+}

@@ -3,6 +3,7 @@
 Country packages reference the same public feed and employer-board implementations rather than copying a global adapter into every country.
 
 - [public-sources/](public-sources/): complete native Arbeitnow/Remotive/RemoteOK/Himalayas/The Muse/Personio/Recruitee responses, process-local snapshot/detail reads and retained legacy tools with their explicit limits.
+- [Original d.vinci](dvinci/README.md): documented anonymous complete regular-publication metadata/full arrays and exact details; preserve rendered/raw/company body variants, mutable labels and distinct clocks. Employer seeds remain required.
 - [Original Teamtailor](teamtailor/README.md): anonymous advertised career-site JSON/RSS feeds, native source-count/identity reconciliation and complete body variants, separate from the secret-key account API.
 - [Original Workday](workday/README.md): anonymous native CXS whole-page inventory, initial-total-bounded continuation and complete native job descriptions for explicitly verified employer boards. No account or application calls.
 - [Python source adapters](../packages/source-adapters/): preserved `egypt_job_sources.remote`, `.ats`, `.freelance` and `.public_apis` interfaces for global feeds, exact Greenhouse/Lever/Ashby boards and public client projects. Their historical Python namespace is retained for installed-client compatibility; it is not an Egypt-only scope restriction.

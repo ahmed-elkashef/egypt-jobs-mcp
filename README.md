@@ -62,6 +62,10 @@ The [original Workday CXS reader](shared/workday/README.md) adds `shared_workday
 
 The [original career-feed reader](shared/teamtailor/README.md) exposes `shared_teamtailor_capabilities`, `shared_teamtailor_inventory` and `shared_teamtailor_detail`. Native advertised API catalogues lead to complete JSON/RSS feeds with full descriptions and additional location/remote/department facts. Native counts, GUIDs, URLs and body variants reconcile without role filters. The dated proof covers three employers and98 current postings; employer discovery and historical weekly coverage remain separate. No account API, secret key or application operation is used.
 
+## Original shared d.vinci publications
+
+The [original publication reader](shared/dvinci/README.md) adds complete compact metadata arrays, optional full-body arrays and exact native publication details for independently identified portals. It preserves every rendered section, raw variants and all ten company description fields; publication availability, requisition creation and job-entry clocks remain separate. The dated proof covers two portals and 28 current publications. No protected account REST or application endpoint is requested.
+
 ## Additional Germany API
 
 Original Interamt capability/list/detail code is included under `countries/de/interamt`. Its public OpenAPI requires an approved API key; single-customer and MultiMandant scopes remain distinct. `de_public_interamt_capabilities` inspects this offline; `de_public_interamt_read` refuses before network without approved local access and an explicitly confirmed API base. No authenticated live access is claimed.

@@ -1481,7 +1481,7 @@
         "Native links or separately verified numeric page/offset/count continuation remain explicit. Moving pages are not frozen historical coverage.",
         "Original campaign, renewal, activation, expiry and observation clocks remain distinct; no invented employer publication or applicant fit.",
         "No login, application, contact, save, subscription or account action. Raw web/session state is excluded from public fixtures.",
-        "Official search route currently denied by robots. Separately permitted official RSS returned500items covering27–29October only; earlier weekly history is unresolved.",
+        "Official search route currently denied by robots. Separately permitted official RSS returned500items covering27\u201329October only; earlier weekly history is unresolved.",
         "Retain incomplete feed metadata; canonical resource URLs remove client fragments/session markers and provider/path namespaces preserve identity."
       ]
     },
@@ -2264,13 +2264,37 @@
         "*"
       ],
       "category": "direct_ats",
-      "status": "research_required",
+      "status": "requires_employer_seed",
       "references": [
-        "https://www.dvinci.de/"
+        "https://www.dvinci.de/",
+        "https://static.dvinci-easy.com/files/d.vinci%20job-publication-api.html",
+        "https://karriere.dvinci.de/jobs/"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "dvinci_capabilities",
+          "public_tool": "shared_dvinci_capabilities",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public",
+          "tool": "dvinci_inventory",
+          "public_tool": "shared_dvinci_inventory",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public",
+          "tool": "dvinci_detail",
+          "public_tool": "shared_dvinci_detail",
+          "fixed_arguments": {}
+        }
+      ],
       "limits": [
-        "A verified original board/list/detail implementation and employer discovery are required. Existing external libraries or connectors are not treated as complete authored coverage."
+        "Original anonymous documented singular /jobPublication list and exact detail readers require an independently identified employer portal. Exact vendor tenants/custom portal paths and capabilities-listed custom origins are supported; no employer/country census.",
+        "Unfiltered regular-publication metadata arrays use documented fields=small by default; optional full arrays and exact details preserve all rendered/raw/company body variants. No independently reported server total or historical weekly completeness is invented.",
+        "Publication availability, requisition creation and job-entry dates remain separate raw source fields. Employer-configurable labels and location wording do not prove original publication, student eligibility or Germany-based remote permission.",
+        "No protected account REST, credentials, cookies, application form/API, contact or subscriptions. Native external/null job URLs are retained without following them; failures have null counts."
       ]
     },
     {
@@ -2455,7 +2479,7 @@
       ],
       "limits": [
         "Original permitted anonymous native primary pages, active-page/enabled continuation checks and complete provided HTML bodies. Homepage featured links, finite directory/profile references and ad counts are separate from vacancy/employer/frozen coverage.",
-        "All56 native ad references across pages20/20/16 and six finite employer profiles were read in a dated engineering traversal. The disabled terminal Next has a root href and is never followed. The portal name is not proof every job is in Hesse; first native job was in Münster.",
+        "All56 native ad references across pages20/20/16 and six finite employer profiles were read in a dated engineering traversal. The disabled terminal Next has a root href and is never followed. The portal name is not proof every job is in Hesse; first native job was in M\u00fcnster.",
         "48 ads have native visible HTML sections,seven have independently published HTML text alternatives beside PDF viewers, and one has no full provided HTML text. Preserve structured descriptions and alternative text independently, including model/start-date conflicts. Untruncated provided HTML is not verification of PDF/employer completeness.",
         "Native PDFs are robots-denied and were not fetched. No viewer rewrite, asset request, Ajax, role query, account, application, email or contact. The one PDF-only ad stays source-limited, never empty or complete."
       ],

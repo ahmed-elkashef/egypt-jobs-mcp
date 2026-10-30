@@ -92,3 +92,9 @@ as a source limit; it is not a successful zero-job test.
 Original wrapper and improvements: Ahmed Elkashef. See
 [dependency credits](THIRD_PARTY_NOTICES.md). Contributions with reproducible
 synthetic failure cases are welcome.
+
+The original `dvinci_capabilities`, `dvinci_inventory` and `dvinci_detail`
+bridge calls the retained Python [public publication reader](../dvinci/README.md).
+Its exact documented publishing GETs are separate from protected account REST
+and application endpoints. Inventory is compact complete-array metadata by
+default; `include_body: true` reads all full native publication body variants.

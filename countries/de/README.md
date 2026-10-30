@@ -12,3 +12,9 @@ For vacancy inventory, BA work, internship, apprenticeship and self-employment o
 The German universe register also includes public-sector/state/municipal portals, major/local/specialist boards, universities/research/hospitals, students/apprenticeships, staffing, direct-employer discovery and freelance client demand. Statistical context and education/training remain separate from vacancies. These branches are not silently reduced to BA or StepStone.
 
 Original additional adapters are still required for the registry's research entries. Interamt and Karriere.NRW publish API surfaces; access/authorization must be established rather than defaulting to browser scraping. Account matching platforms and denied routes remain explicit external limits. [Coverage](../../docs/coverage.md) identifies the exact gap categories.
+
+Original shared [d.vinci publication tools](../../shared/dvinci/README.md) read
+complete compact metadata and full native bodies for explicit employer portals.
+They do not narrow acquisition by candidate interests or infer student/remote
+eligibility from configurable employer labels. Two tested portals are examples,
+not a German employer census or historical weekly supply.

@@ -23,7 +23,12 @@ test('real unified stdio lists countries and routes through Egypt and Germany of
     await client.connect(transport);
     const list=await client.listTools();
     for(const name of ['list_countries','list_country_sources','plan_country_scan','eg_read_source_page','de_ba_job_suche','de_stepstone_get_capabilities','shared_get_public_inventory','de_public_interamt_capabilities','de_public_interamt_read','de_public_jobmensa_capabilities','de_public_jobmensa_page','de_public_jobmensa_detail','de_public_student_boards_capabilities','de_public_student_board_page','de_public_student_board_detail','de_public_student_board_resolve_external','de_public_german_boards_capabilities','de_public_german_board_inventory','de_public_german_board_detail','de_public_german_board_capture_segment'])assert.ok(list.tools.some(t=>t.name===name),name);
-    assert.equal(list.tools.length,69);
+    assert.equal(list.tools.length,72);
+    for(const name of ['shared_dvinci_capabilities','shared_dvinci_inventory','shared_dvinci_detail'])assert.ok(list.tools.some(t=>t.name===name),name);
+    const dvinci=await client.callTool({name:'shared_dvinci_capabilities',arguments:{}});
+    assert.equal(dvinci.structuredContent.source,'dvinci');assert.equal(dvinci.structuredContent.seed_required,true);
+    const unsafePublication=await client.callTool({name:'shared_dvinci_inventory',arguments:{portal_url:'https://example.dvinci-hr.com/jobPublications/'}});
+    assert.equal(unsafePublication.isError,true);assert.equal(unsafePublication.structuredContent.returned_count,null);
     for(const name of ['shared_teamtailor_capabilities','shared_teamtailor_inventory','shared_teamtailor_detail'])assert.ok(list.tools.some(t=>t.name===name),name);
     const teamtailor=await client.callTool({name:'shared_teamtailor_capabilities',arguments:{}});
     assert.equal(teamtailor.structuredContent.source,'teamtailor');
