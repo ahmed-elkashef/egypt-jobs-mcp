@@ -4,7 +4,7 @@ import {spawn} from 'node:child_process';
 export function runNativeReader(script,argv,{source,countField='count',spawnProcess=spawn,env=process.env,timeoutMs=80000}={}) {
   const limited=error=>({status:'source_limited',source,[countField]:null,source_result_count:null,error,coverage_complete:false,reviewed_by_model:false});
   return new Promise(resolve=>{
-    const names=['PATH','HOME','SYSTEMROOT','TMPDIR','TEMP','TMP','LANG','LC_ALL','HTTPS_PROXY','HTTP_PROXY','NO_PROXY','SSL_CERT_FILE'];
+    const names=['PATH','HOME','SYSTEMROOT','TMPDIR','TEMP','TMP','LANG','LC_ALL','HTTPS_PROXY','HTTP_PROXY','NO_PROXY','SSL_CERT_FILE','JOB_MARKET_CAPTURE_DIR'];
     const childEnv=Object.fromEntries(names.filter(k=>typeof env[k]==='string').map(k=>[k,env[k]]));
     const command=env.EGYPT_JOBS_PYTHON||env.JOB_MARKET_PYTHON||'python3';
     let child,done=false,size=0;

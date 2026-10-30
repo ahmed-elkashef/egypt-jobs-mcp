@@ -6,6 +6,13 @@ One repository owns reusable code, source contracts, country discovery registers
 
 Country packages own national sources and country-specific discovery/partition semantics. Shared implementations own cross-country feeds/ATS/client-project transport. The registry links these without claiming that a global feed is locally eligible or that one aggregator is a whole labour market.
 
+Shared ROR release/country-directory readers belong in `shared/ror`, not a
+German-specific adapter. Their complete immutable DE/EG research-organisation
+records remain typed discovery context, including native inactive/withdrawn
+records. The verified full dump, checksum-bound local segments, source licences
+and directory-versus-vacancy boundaries are documented in
+[ROR contracts](../shared/ror/README.md).
+
 ## Execution
 
 The unified server starts five owned stdio backends: Egypt, German BA, German StepStone shared public sources and the new original Interamt reader. Each executable is inside this checkout. Python source paths are bound to this checkout, with a caller-selected Python runtime. No sibling checkout is a runtime dependency.

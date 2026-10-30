@@ -19,6 +19,7 @@ for directory, arguments in [
     (root / "shared/oracle", ["-m", "unittest", "discover", "-s", "tests"]),
     (root / "countries/de/discovery", ["-m", "unittest", "discover", "-s", "tests"]),
     (root / "shared/personio", ["-m", "unittest", "discover", "-s", "tests"]),
+    (root / "shared/ror", ["-m", "unittest", "discover", "-s", "tests"]),
 ]:
     env = dict(os.environ)
     env["PYTHONPATH"] = os.pathsep.join([str(root / "packages/source-adapters/src"), str(root / "countries/de/stepstone")])

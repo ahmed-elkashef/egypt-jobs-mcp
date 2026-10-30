@@ -1,20 +1,20 @@
 # Country source coverage
 
-As of 30 October 2026, MCP v0.4.25 source contracts. This is implementation/access
+As of 30 October 2026, MCP v0.4.26 source contracts. This is implementation/access
 coverage, not a live vacancy census; each access observation retains its date.
 
 | Implementation/access state | Sources/channel groups |
 | --- | --- |
-| access_limited | 13 |
+| access_limited | 14 |
 | context_only | 4 |
 | credential_required | 3 |
 | external_connector | 3 |
-| implemented | 39 |
+| implemented | 40 |
 | requires_employer_seed | 15 |
-| research_required | 23 |
+| research_required | 22 |
 
-The registry has 100 unique entries: 43 apply to Egypt and
-85 to Germany, including shared entries. Counts overlap; they are
+The registry has 101 unique entries: 44 apply to Egypt and
+86 to Germany, including shared entries. Counts overlap; they are
 not vacancies, employers or currently available transports.
 
 ## Remaining implementation and access
@@ -67,7 +67,7 @@ establish all-employer discovery.
 | [stellenanzeigen.de](https://www.stellenanzeigen.de/) | DE | implemented | national_board |
 | [Jobware](https://www.jobware.de/) | DE | implemented | national_board |
 | [Kimeta](https://www.kimeta.de/) | DE | research_required | aggregator |
-| [Monster Germany](https://www.monster.de/) | DE | research_required | national_board |
+| [Monster Germany](https://www.monster.de/) | DE | access_limited | national_board |
 | [jobvector](https://www.jobvector.de/) | DE | access_limited | specialist_board |
 | [Yourfirm](https://www.yourfirm.de/) | DE | implemented | smb_board |
 | [Jobs.de](https://www.jobs.de/) | DE | implemented | national_board |
@@ -101,33 +101,33 @@ establish all-employer discovery.
 | [CAPMAS](https://www.capmas.gov.eg/) | EG | context_only | statistics_context |
 | [BA labour-market statistics API](https://statistik.arbeitsagentur.de/DE/Navigation/Service/API/API-Start-Nav.html) | DE | context_only | statistics_context |
 | [Destatis / GENESIS](https://www.destatis.de/) | DE | context_only | statistics_context |
-| [ILO labour-market statistics](https://ilostat.ilo.org/) | * | context_only | statistics_context |
-| [LinkedIn](https://www.linkedin.com/jobs/) | * | external_connector | external_account_service |
-| [Trackly](https://trackly.ai/) | * | external_connector | external_account_service |
-| [Official Upwork MCP](https://www.upwork.com/ai/mcp) | * | external_connector | external_account_service |
-| [Arbeitnow](https://www.arbeitnow.com/api/job-board-api) | * | implemented | public_job_feed |
-| [Remotive](https://remotive.com/api/remote-jobs) | * | implemented | public_job_feed |
-| [Remote OK](https://remoteok.com/api) | * | implemented | public_job_feed |
-| [Himalayas](https://himalayas.app/api) | * | implemented | public_job_feed |
-| [The Muse](https://www.themuse.com/developers/api/v2) | * | implemented | public_job_feed |
-| [We Work Remotely](https://weworkremotely.com/) | * | implemented | public_job_feed |
-| [Working Nomads](https://www.workingnomads.com/) | * | implemented | public_job_feed |
-| [Jobicy](https://jobicy.com/) | * | implemented | public_job_feed |
-| [Greenhouse](https://developers.greenhouse.io/job-board.html) | * | requires_employer_seed | direct_ats |
-| [Lever](https://github.com/lever/postings-api) | * | requires_employer_seed | direct_ats |
-| [Ashby](https://developers.ashbyhq.com/docs/public-job-posting-api) | * | requires_employer_seed | direct_ats |
-| [Personio](https://developer.personio.de/docs/retrieving-open-job-positions) | * | requires_employer_seed | direct_ats |
-| [Recruitee](https://docs.recruitee.com/) | * | requires_employer_seed | direct_ats |
-| [Workable](https://help.workable.com/) | * | requires_employer_seed | direct_ats |
-| [SmartRecruiters](https://developers.smartrecruiters.com/) | * | requires_employer_seed | direct_ats |
-| [Workday](https://www.workday.com/) | * | requires_employer_seed | direct_ats |
-| [Teamtailor](https://docs.teamtailor.com/) | * | requires_employer_seed | direct_ats |
-| [SAP SuccessFactors](https://www.sap.com/products/hcm/recruiting-software.html) | * | requires_employer_seed | direct_ats |
-| [Oracle Recruiting](https://www.oracle.com/human-capital-management/recruiting/) | * | requires_employer_seed | direct_ats |
-| [onlyfy](https://help.xing.com/hc/de/articles/31499221281309-Job-Feed-Integration) | * | requires_employer_seed | direct_ats |
-| [d.vinci](https://www.dvinci.de/) | * | requires_employer_seed | direct_ats |
-| [Freelancer public client projects](https://developers.freelancer.com/) | * | implemented | freelance_demand |
-| [Optional Upwork marketplace API](https://www.upwork.com/developer) | * | credential_required | freelance_demand |
+| [ILO labour-market statistics](https://ilostat.ilo.org/) | EG, DE | context_only | statistics_context |
+| [LinkedIn](https://www.linkedin.com/jobs/) | EG, DE | external_connector | external_account_service |
+| [Trackly](https://trackly.ai/) | EG, DE | external_connector | external_account_service |
+| [Official Upwork MCP](https://www.upwork.com/ai/mcp) | EG, DE | external_connector | external_account_service |
+| [Arbeitnow](https://www.arbeitnow.com/api/job-board-api) | EG, DE | implemented | public_job_feed |
+| [Remotive](https://remotive.com/api/remote-jobs) | EG, DE | implemented | public_job_feed |
+| [Remote OK](https://remoteok.com/api) | EG, DE | implemented | public_job_feed |
+| [Himalayas](https://himalayas.app/api) | EG, DE | implemented | public_job_feed |
+| [The Muse](https://www.themuse.com/developers/api/v2) | EG, DE | implemented | public_job_feed |
+| [We Work Remotely](https://weworkremotely.com/) | EG, DE | implemented | public_job_feed |
+| [Working Nomads](https://www.workingnomads.com/) | EG, DE | implemented | public_job_feed |
+| [Jobicy](https://jobicy.com/) | EG, DE | implemented | public_job_feed |
+| [Greenhouse](https://developers.greenhouse.io/job-board.html) | EG, DE | requires_employer_seed | direct_ats |
+| [Lever](https://github.com/lever/postings-api) | EG, DE | requires_employer_seed | direct_ats |
+| [Ashby](https://developers.ashbyhq.com/docs/public-job-posting-api) | EG, DE | requires_employer_seed | direct_ats |
+| [Personio](https://developer.personio.de/docs/retrieving-open-job-positions) | EG, DE | requires_employer_seed | direct_ats |
+| [Recruitee](https://docs.recruitee.com/) | EG, DE | requires_employer_seed | direct_ats |
+| [Workable](https://help.workable.com/) | EG, DE | requires_employer_seed | direct_ats |
+| [SmartRecruiters](https://developers.smartrecruiters.com/) | EG, DE | requires_employer_seed | direct_ats |
+| [Workday](https://www.workday.com/) | EG, DE | requires_employer_seed | direct_ats |
+| [Teamtailor](https://docs.teamtailor.com/) | EG, DE | requires_employer_seed | direct_ats |
+| [SAP SuccessFactors](https://www.sap.com/products/hcm/recruiting-software.html) | EG, DE | requires_employer_seed | direct_ats |
+| [Oracle Recruiting](https://www.oracle.com/human-capital-management/recruiting/) | EG, DE | requires_employer_seed | direct_ats |
+| [onlyfy](https://help.xing.com/hc/de/articles/31499221281309-Job-Feed-Integration) | EG, DE | requires_employer_seed | direct_ats |
+| [d.vinci](https://www.dvinci.de/) | EG, DE | requires_employer_seed | direct_ats |
+| [Freelancer public client projects](https://developers.freelancer.com/) | EG, DE | implemented | freelance_demand |
+| [Optional Upwork marketplace API](https://www.upwork.com/developer) | EG, DE | credential_required | freelance_demand |
 | [Malt](https://www.malt.de/) | DE | research_required | freelance_demand |
 | [freelancermap](https://www.freelancermap.de/) | DE | research_required | freelance_demand |
 | [Randstad Professional (formerly GULP) jobs and projects](https://www.gulp.de/) | DE | research_required | mixed_jobs_and_projects |
@@ -139,6 +139,7 @@ establish all-employer discovery.
 | [SAP modern public careers front](https://jobs.sap.com/en/jobs/) | DE | implemented | direct_employer |
 | [MeinPraktikum native internship and student-job market](https://www.meinpraktikum.de/) | DE | implemented | student_board |
 | [Berlin state portal native public offers](https://www.berlin.de/karriereportal/) | DE | implemented | public_sector |
+| [ROR complete native research-organisation directory](https://ror.readme.io/docs/data-dump) | DE, EG | implemented | employer_discovery |
 
 ## Dated implementation notes
 
@@ -226,3 +227,21 @@ strict parse errors remain separate from complete visible HTML and never become
 original clocks or eligibility. The native IPC bridge now preserves validated
 non-promoting source-limit evidence on exit2. No whole-country/week or employer
 census follows from these transport additions.
+
+
+## Shared native ROR release and country-directory contracts
+
+v0.4.26 adds two original shared readers for independently permitted public
+Zenodo HTML and the native advertised checksum-verified complete ROR dump.
+The denied API route is never requested. All146716 native v2.15 records validate,
+including6032 with DE and291 with EG locations, all statuses/types retained.
+Country segments preserve source records and bind the immutable archive SHA256;
+verified cache reads make no provider request. These research-directory
+memberships are not all legal employers, job workplaces, vacancies, hiring,
+individual fit or country/week completion. The national employer census gap
+remains explicit. See [ROR contracts](../shared/ror/README.md).
+
+The 2026-10-30 Monster qualification retains old-origin policy redirection and
+the independently checked new public German entry HTTP403. No retries, API,
+accounts or alternate-route bypass; this is a dated exact-entry observation,
+not a whole-provider outage or an empty market.
