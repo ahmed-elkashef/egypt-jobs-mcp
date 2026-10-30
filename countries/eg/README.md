@@ -11,3 +11,9 @@ The path is source capabilities → native inventory → complete description �
 Outstanding country branches include official labour bulletins/government vacancies, additional national/regional boards, universities/student channels and a maintained employer-directory census. [sources.json](../../sources.json) records each separately. Informal, closed and offline hiring remains an explicit coverage boundary. The existing implementation and saved access evidence must not be represented as a census of all Egyptian opportunities.
 
 Legacy MCP: `node countries/eg/mcp/index.mjs` (or root `index.mjs`). Unified MCP: root `server.mjs`, tools prefixed `eg_` and `shared_`.
+
+The original shared [SAP RMK reader](../../shared/successfactors/README.md)
+adds a verified native Egypt partition, complete descriptions and checked
+continuation on SAP's explicitly linked legacy career board. The separate new
+SAP front and other employers remain discovery requirements; source labels and
+posted dates do not establish individual eligibility or historical coverage.

@@ -109,7 +109,7 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [SmartRecruiters](https://developers.smartrecruiters.com/) | * | requires_employer_seed | direct_ats |
 | [Workday](https://www.workday.com/) | * | research_required | direct_ats |
 | [Teamtailor](https://docs.teamtailor.com/) | * | research_required | direct_ats |
-| [SAP SuccessFactors](https://www.sap.com/products/hcm/recruiting-software.html) | * | research_required | direct_ats |
+| [SAP SuccessFactors](https://www.sap.com/products/hcm/recruiting-software.html) | * | requires_employer_seed | direct_ats |
 | [Oracle Recruiting](https://www.oracle.com/human-capital-management/recruiting/) | * | research_required | direct_ats |
 | [onlyfy](https://onlyfy.com/) | * | research_required | direct_ats |
 | [d.vinci](https://www.dvinci.de/) | * | research_required | direct_ats |

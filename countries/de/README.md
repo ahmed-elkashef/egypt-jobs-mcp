@@ -29,3 +29,9 @@ The original shared [Jobshop career reader](../../shared/jobshop/README.md)
 qualifies Fraport's complete native SSR link array and primary CMS adverts,
 separate from the SuccessFactors profile portal, source clocks and form text.
 Other employers and historical supply remain explicit qualification gaps.
+
+The original shared [SAP RMK reader](../../shared/successfactors/README.md)
+adds a verified native Germany partition, complete descriptions and checked
+continuation on SAP's explicitly linked legacy career board. The separate new
+SAP front and other employers remain discovery requirements; source labels and
+posted dates do not establish individual eligibility or historical coverage.

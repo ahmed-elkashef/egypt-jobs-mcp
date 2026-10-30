@@ -1,0 +1,43 @@
+{
+  "qualification_date": "2026-10-30",
+  "stage": "actual_unified_mcp_unreleased_branch_engineering_proof",
+  "public_runtime_release_and_install_verified": false,
+  "tool_count": 81,
+  "native_global_total": 608,
+  "native_global_pages_sampled": [
+    1,
+    2,
+    25
+  ],
+  "native_global_complete": false,
+  "native_germany_total": 122,
+  "native_germany_unique_metadata_rows": 122,
+  "native_germany_metadata_complete": true,
+  "native_egypt_total": 4,
+  "native_egypt_metadata_complete": true,
+  "complete_body_samples": 3,
+  "body_character_counts": [
+    6012,
+    7333,
+    5380
+  ],
+  "actual_read_only_mcp_calls": 16,
+  "guarded_refusals": 3,
+  "code_file_sha256": {
+    "shared/successfactors/reader.py": "85d229ce7c9bbd17e21c067bff5d46767ee8b28e60db2ce695d4bbab6e034165",
+    "shared/public-sources/successfactors.mjs": "809d12bb936a0eb6ba4104ab564f4a8334211bd5ad3673a2b1efe08b0ed58df1",
+    "shared/public-sources/index.mjs": "63bb76fab17dabb92c0e1e8e5fd2c30430cd021d574044a0a1699bfa3b39b2d2",
+    "lib/federation.mjs": "f3f3c86b70668f3909acaed02a5b3e596afa9b6446b6bc0d5f5adffa9502082b",
+    "sources.json": "4b48bdbe4fa8d9fd902eff3df932c170f822e87784fc852b55e7168b1983ef19"
+  },
+  "local_tests": {
+    "node": 135,
+    "python": 487,
+    "total": 622
+  },
+  "modern_sap_front_implemented_or_combined": false,
+  "historical_week_or_national_or_employer_census_complete": false,
+  "applicant_fit_or_application_readiness": false,
+  "credentials_accounts_applications_contacts_or_schedules": 0,
+  "raw_advert_or_applicant_corpus_published": false
+}
