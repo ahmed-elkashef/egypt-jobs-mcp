@@ -240,3 +240,7 @@ public bodies, separate primary/schema/context variants and three refusal cases
 passed. These are source-format tests, without an applicant-fit or weekly-market
 claim. All 695 local tests pass (140 Node/555 Python), including 21 new targeted
 cases. Exact release CI and installed-runtime qualification remain separate.
+
+## JOIN employer boards
+
+Use `source: "join"` with an independently identified exact company board. The original reader checks both native SSR layouts and every source page/count; general-application context and cached virtual-page rows never add vacancies. Complete primary HTML, separate schema/company content, internal/public IDs and same-company canonical redirects are preserved. No role query or account/application action. See [the full contract](../../../docs/join-native-reader.md).

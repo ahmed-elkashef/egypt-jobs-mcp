@@ -1,0 +1,43 @@
+{
+  "stage": "local_original_reader_qualification_before_release",
+  "version": "0.4.18",
+  "observed_on": "2026-10-30",
+  "actual_MCP_tool_calls": 36,
+  "read_only_tools": 84,
+  "native_scopes": [
+    {
+      "source_board": "join",
+      "actual_vacancies": 4,
+      "native_UI_total_including_general_context": 5,
+      "native_pages": 1,
+      "general_context_count": 1,
+      "corporate_primary_source_verified": true,
+      "secondary_source_note": null
+    },
+    {
+      "source_board": "1komma5grad",
+      "actual_vacancies": 135,
+      "native_UI_total_including_general_context": 136,
+      "native_pages": 28,
+      "general_context_count": 1,
+      "corporate_primary_source_verified": false,
+      "secondary_source_note": "Vendor-advertised public format sample. Current official corporate careers points separately to Personio; not promoted into its primary source."
+    }
+  ],
+  "full_primary_body_samples": 2,
+  "guarded_refusals": 4,
+  "prototype_proof_sha256": "927ae417c2fb03fba1d11b678f3e9501f021703dfaf542bb95b27520738cc435",
+  "source_code_sha256": {
+    "countries/de/public-boards/join_board.py": "b695f6a7d8cd20b915a56448a167fdcd5f8bc74d9eb11c1e46af62851f25b7c8",
+    "countries/de/public-boards/readers.py": "7597acc349343da01170e2ad5c5c142018749d812216e7e9b0f0b4ab3e9340d5",
+    "countries/de/public-services/server.mjs": "d2d06f38c78d0fd8f92b4191c8f25bb89ea92b1d2e7c5421d771f7f7c853216d",
+    "shared/public_http.py": "f1e7baf0feb865da14e98e3e5e15a38441963f628fd6e80dc48800f92ec57751",
+    "sources.json": "5dca7fec4af84f1f1b2a974171961905ec4044336bc60fe2e391bdfce72c6faa"
+  },
+  "all_native_pages_traversed": true,
+  "source_client_code_not_executed_or_copied": true,
+  "native_scripts_images_credentials_application_or_contact_requested": false,
+  "whole_country_week_or_employer_census": false,
+  "individual_applicant_fit_reviewed": false,
+  "applicant_data_published": false
+}
