@@ -101,9 +101,19 @@ def document(raw):
     if not isinstance(raw, bytes) or not re.search(rb"</html\s*>\s*$", raw, re.I):
         raise SourceError("Complete native HTML required; no clipped/login/empty substitute")
     try:
-        return html.fromstring(raw)
+        # The qualified native HTTP response declares UTF-8. libxml can ignore
+        # HTML5 charset metadata and default to Latin-1 for these advert pages.
+        # Decode strictly before parsing; never guess or repair source wording.
+        return html.fromstring(raw.decode("utf-8"))
     except (ValueError, TypeError, ParserError) as error:
         raise SourceError("Malformed native HTML") from error
+
+
+def utf8_response(response):
+    fields = [field.strip().lower() for field in response.content_type.split(";")]
+    charsets = [field.partition("=")[2].strip(' \"') for field in fields[1:] if field.startswith("charset=")]
+    if fields[0] != "text/html" or charsets != ["utf-8"]:
+        raise SourceError("Qualified Berlin HTML requires its native UTF-8 Content-Type; no encoding guess")
 
 
 def base(kind):
@@ -193,8 +203,10 @@ def inventory(scope="all", start=0, *, first_page_total=None, client=None):
     response = transport.get(inventory_uri(scope, start))
     if response.status != 200:
         raise SourceError("Complete native inventory HTTP200 required", http_status=response.status)
+    utf8_response(response)
     result = parse_inventory(response.body, scope, start, first_page_total=first_page_total)
-    result.update(native_HTTP_status=response.status, native_GET_requests=getattr(transport, "get_count", None),
+    result.update(native_HTTP_status=response.status, native_HTTP_content_type=response.content_type,
+                  native_GET_requests=getattr(transport, "get_count", None),
                   native_read_POST_requests=getattr(transport, "read_post_count", None))
     return result
 
@@ -216,7 +228,13 @@ def parse_detail(raw, url):
         parsed = urlsplit(uri)
         if (parsed.scheme == "https" and not parsed.username and not parsed.password
                 and not re.search(r"session|token|nonce|csrf|password|(?:^|[?&])key=", uri, re.I)
-                and not re.search(r"/(?:apply|login|register|bewerben|subscribe|contact|kontakt|maps?|vcard)(?:[/.?]|$)|[?&]ac=(?:application|jobad_map|jobalert)|\.vcf(?:[?#]|$)", uri, re.I)):
+                and not re.search(r"/(?:apply|login|register|bewerben|subscribe|contact|kontakt|maps?|karte|vcard)(?:[/.?]|$)|[?&]ac=(?:application|jobad_map|jobalert)|\.vcf(?:[?#]|$)", uri, re.I)):
+            references.append({"url": uri, "text": clean(link.text_content()), "independently_verified": False})
+    # This published PDF control can sit outside #jobTplContainer. Retain only
+    # the exact same-advert German PDF reference, without fetching the document.
+    for link in tree.xpath('//a[@href]'):
+        uri = urljoin(url, link.get("href"))
+        if uri == url + "?pdf=de" and uri not in {ref["url"] for ref in references}:
             references.append({"url": uri, "text": clean(link.text_content()), "independently_verified": False})
     safe, media = safe_primary(nodes[0])
     text = clean(safe.text_content())
@@ -244,6 +262,7 @@ def parse_detail(raw, url):
             "title": clean(headings[0].text_content()), "full_primary_body": html.tostring(safe, encoding="unicode"),
             "source_primary_text": text, "description": text,
             "body_representation": "native_berlin_complete_public_portal_advert",
+            "source_text_encoding": "utf-8", "source_text_decoding": "strict_utf8_before_HTML",
             "source_body_untruncated": True, "source_active_vacancy_verified": False,
             "published_schema_job_postings": schemas,
             "native_advertised_references": references,
@@ -262,7 +281,9 @@ def detail(url, *, client=None):
     response = transport.get(url)
     if response.status != 200:
         raise SourceError("Complete native advert HTTP200 required", http_status=response.status)
+    utf8_response(response)
     result = parse_detail(response.body, url)
-    result.update(native_HTTP_status=response.status, native_GET_requests=getattr(transport, "get_count", None),
+    result.update(native_HTTP_status=response.status, native_HTTP_content_type=response.content_type,
+                  native_GET_requests=getattr(transport, "get_count", None),
                   native_read_POST_requests=getattr(transport, "read_post_count", None))
     return result

@@ -1,11 +1,11 @@
 # Job Market MCP
 
-Current original extension: v0.4.23 adds Berlin state-portal native list/full-advert
-reads with filter-preserving numbered continuation and separate portal/employer
-identity. The catalogue has92 read-only tools and100 registry entries (DE85/EG43,
-including shared). This is source-contract coverage, never an all-country vacancy
-or employer census. See [Berlin contracts](docs/berlin-state-native-readers.md)
-and the [current source register](docs/coverage.md).
+Current original extension: v0.4.24 fixes Berlin advert text decoding. Native
+HTTP UTF-8 is required and decoded strictly before HTML parsing; German wording
+cannot depend on the parser's charset guess. Exact outside-container portal PDF
+references are retained without fetching. The 92-tool, 100-source catalogue is
+unchanged. See [Berlin contracts](docs/berlin-state-native-readers.md)
+and [decoding evidence](docs/berlin-state-utf8-proof.json).
 
 One source repository for country-based labour-market tools. Egypt and Germany are the first country packages. Public feeds, employer ATS readers and client-project adapters are shared. More countries can use the same contracts without copying another country's implementation.
 

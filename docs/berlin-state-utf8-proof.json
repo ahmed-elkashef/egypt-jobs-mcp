@@ -1,0 +1,100 @@
+{
+  "release": "v0.4.24",
+  "status": "offline_regression_and_5_actual_federated_reads_passed_clean_CI_pending",
+  "network_reads": 0,
+  "native_metadata_unchanged": [
+    {
+      "view": "inventory",
+      "count": 20,
+      "whole_result_identical": true
+    },
+    {
+      "view": "next20",
+      "count": 20,
+      "whole_result_identical": true
+    },
+    {
+      "view": "student-entry",
+      "count": 20,
+      "whole_result_identical": true
+    }
+  ],
+  "strict_utf8_body_checks": [
+    {
+      "native_id": "70660",
+      "raw_sha256": "be702091b45714bdae9d7c28244d1d1401540b1817c419abd4506be25f2d835f",
+      "title_has_no_corruption": true,
+      "native_pdf_reference_retained": true,
+      "whole_body_characters": 4552
+    },
+    {
+      "native_id": "68832",
+      "raw_sha256": "df4d364ccf1446b3d21c677676de6dcf4c77f7ed7d0a446fd42b83e2676b7b26",
+      "title_has_no_corruption": true,
+      "native_pdf_reference_retained": false,
+      "whole_body_characters": 5198
+    },
+    {
+      "native_id": "71118",
+      "raw_sha256": "9d17de33476c56fd3e697f6538488a39b5b7974f6a80a87c7761b00fec812d46",
+      "title_has_no_corruption": true,
+      "native_pdf_reference_retained": false,
+      "whole_body_characters": 4349
+    },
+    {
+      "native_id": "59152",
+      "raw_sha256": "811419b86349ca9f93a5b39b8be2bdcddeeda5c7a8c24333131f607b84389045",
+      "title_has_no_corruption": true,
+      "native_pdf_reference_retained": false,
+      "whole_body_characters": 2354
+    }
+  ],
+  "source_datasets_or_implementation_exported": false,
+  "actual_MCP_calls": 6,
+  "measured_native_GET_requests": 12,
+  "source_post_requests": 0,
+  "native_metadata_reacquisition_not_required": true,
+  "actual_receipt_wrapper_hashes": [
+    {
+      "label": "students-first",
+      "sha256": "5ca05d369bab8f3cd251d0c45c084effbe3b2da435ca3de233f64b83e61f94a9"
+    },
+    {
+      "label": "primary-hr-internship",
+      "sha256": "332022b27b133b7eb8a0b0ea52a7369f0d5ad5d767b8fc0650a496efee097694"
+    },
+    {
+      "label": "primary-student-internship2027",
+      "sha256": "f49fb68ec19c2ffd30c782a422a9f91421cb9819f11692aee6648855175cd4c0"
+    },
+    {
+      "label": "primary-primary71118",
+      "sha256": "d1667525730a2bb08c75fb3bd496b86cb57d0eae13f4cc00b1caf8d714e81ede"
+    },
+    {
+      "label": "primary-pupil-placement",
+      "sha256": "e5c182fcd94f015404c703b2affa49a678923dfefa8d952039d9959b286e02a1"
+    },
+    {
+      "label": "scientific-primary-without-map",
+      "sha256": "3245d0b115ceff62a6bb98eb4f45a30d9d264899115aec84a1565199d3afe8b1"
+    }
+  ],
+  "native_map_control_excluded": true,
+  "separately_numbered_employer_reference_retained_unfetched": true,
+  "local_validation": {
+    "python_tests": 685,
+    "new_five_regressions": 5,
+    "final_berlin_tests": 31,
+    "node_tests": 174,
+    "node_groups": [
+      42,
+      52,
+      13,
+      67
+    ],
+    "configured_ruff": "passed",
+    "registry_and_syntax": "passed",
+    "clean_hosted_CI": "pending"
+  }
+}
