@@ -1,6 +1,7 @@
 # Country source coverage
 
-As of 29 October 2026. This is code/source-contract coverage, not a fresh vacancy census. Source access evidence dates vary and remain attached to the components.
+As of 30 October 2026, MCP v0.4.23 source contracts. This is implementation/access
+coverage, not a live vacancy census; each access observation retains its date.
 
 | Implementation/access state | Sources/channel groups |
 | --- | --- |
@@ -8,21 +9,33 @@ As of 29 October 2026. This is code/source-contract coverage, not a fresh vacanc
 | context_only | 4 |
 | credential_required | 3 |
 | external_connector | 3 |
-| implemented | 33 |
-| requires_employer_seed | 7 |
-| research_required | 32 |
+| implemented | 38 |
+| requires_employer_seed | 15 |
+| research_required | 24 |
 
-The registry has 95 unique entries: 43 apply to Egypt and 80 to Germany, including shared entries. These counts overlap; they are not numbers of vacancies, employers or live working transports.
+The registry has 100 unique entries: 43 apply to Egypt and
+85 to Germany, including shared entries. Counts overlap; they are
+not vacancies, employers or currently available transports.
 
-## What still needs original implementation or access
+## Remaining implementation and access
 
-Germany: additional major/local/specialist/student/apprenticeship boards; state/municipal and institutional discovery; original provider-specific ATS routes beyond the accepted boards; a maintained national/regional employer census. Karriere.NRW requires an approved API key. The new original Interamt reader is implemented but has no authenticated live proof; its customer scopes and published staging deployment cannot be treated as all-Germany access.
+Germany still has additional major/local/specialist/student boards, state and
+municipal portals, institutional/staffing discovery and a national employer
+census gap. Berlin is one qualified state portal, with an unfiltered supply
+scope and a broader student-entry scope; it does not close that group.
+Karriere.NRW and Interamt require approved credentials/provider scopes.
+Hessen's current official portal robots request redirects to an application
+shell; its vacancy/API reads remain unqualified. These are dated exact-route
+observations, not a whole-government access verdict.
 
-Egypt: official bulletins/government hiring, remaining regional/national boards, university/student channels and employer-directory discovery. Existing Forasna/Tanqeeb browser transport is still required where HTTP fails; a maintained parser does not remove it.
+Egypt still has official bulletins/government hiring, remaining regional/national
+boards, university/student channels and employer-directory discovery gaps.
+Forasna/Tanqeeb retain browser transport where anonymous HTTP fails. Shared
+account/offline/referral channels have separate access boundaries. Native
+provider support requires independently verified employer seeds and does not
+establish all-employer discovery.
 
-Shared/account services: native LinkedIn, Upwork, Trackly and private matching remain external connectors with their own permissions. Closed, offline and referral hiring are explicit limits. Missing credentials, terms-limited access and unavailable transports are not code-completion claims.
-
-## Source register
+## Current source register
 
 | Source | Scope | State | Category |
 | --- | --- | --- | --- |
@@ -72,7 +85,7 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [AUBI-plus](https://www.aubi-plus.de/) | DE | research_required | apprenticeships |
 | [IHK apprenticeship channels](https://www.ihk.de/) | DE | research_required | chamber_channels |
 | [Handwerk native Radar offers and qualified chamber primaries](https://www.handwerk.de/infos-zur-ausbildung/lehrstelle-finden) | DE | implemented | chamber_channels |
-| [JOIN](https://join.com/) | DE | research_required | smb_board |
+| [JOIN](https://join.com/) | DE | requires_employer_seed | smb_board |
 | [GermanTechJobs](https://germantechjobs.de/) | DE | implemented | specialist_board |
 | [Berlin Startup Jobs](https://berlinstartupjobs.com/) | DE | implemented | regional_board |
 | [EnglishJobs.de](https://englishjobs.de/) | DE | access_limited | national_board |
@@ -82,8 +95,8 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [Interamt](https://gate.interamt.de/interamtApi/api-doc/index.html) | DE | credential_required | public_sector |
 | [Karriere.NRW](https://developer.karriere.nrw/) | DE | credential_required | state_public_sector |
 | [State and municipal career portals](https://www.berlin.de/karriereportal/) | DE | research_required | public_sector |
-| [Universities, hospitals and research institutions](https://www.hochschulkompass.de/) | DE | research_required | employer_discovery |
-| [Staffing and temporary-work employer boards](https://www.bap-personaldienstleister.de/) | DE | research_required | employer_discovery |
+| [Universities, hospitals and research institutions](https://www.hochschulkompass.de/hochschulen/downloads.html) | DE | research_required | employer_discovery |
+| [Staffing and temporary-work employer boards](https://personaldienstleister.de/der-gvp/mitglieder/gvp-mitglieder/) | DE | research_required | employer_discovery |
 | [National/local employer directory discovery](https://www.unternehmensregister.de/) | DE | research_required | employer_discovery |
 | [CAPMAS](https://www.capmas.gov.eg/) | EG | context_only | statistics_context |
 | [BA labour-market statistics API](https://statistik.arbeitsagentur.de/DE/Navigation/Service/API/API-Start-Nav.html) | DE | context_only | statistics_context |
@@ -107,21 +120,27 @@ Shared/account services: native LinkedIn, Upwork, Trackly and private matching r
 | [Recruitee](https://docs.recruitee.com/) | * | requires_employer_seed | direct_ats |
 | [Workable](https://help.workable.com/) | * | requires_employer_seed | direct_ats |
 | [SmartRecruiters](https://developers.smartrecruiters.com/) | * | requires_employer_seed | direct_ats |
-| [Workday](https://www.workday.com/) | * | research_required | direct_ats |
-| [Teamtailor](https://docs.teamtailor.com/) | * | research_required | direct_ats |
+| [Workday](https://www.workday.com/) | * | requires_employer_seed | direct_ats |
+| [Teamtailor](https://docs.teamtailor.com/) | * | requires_employer_seed | direct_ats |
 | [SAP SuccessFactors](https://www.sap.com/products/hcm/recruiting-software.html) | * | requires_employer_seed | direct_ats |
-| [Oracle Recruiting](https://www.oracle.com/human-capital-management/recruiting/) | * | research_required | direct_ats |
-| [onlyfy](https://onlyfy.com/) | * | research_required | direct_ats |
-| [d.vinci](https://www.dvinci.de/) | * | research_required | direct_ats |
+| [Oracle Recruiting](https://www.oracle.com/human-capital-management/recruiting/) | * | requires_employer_seed | direct_ats |
+| [onlyfy](https://help.xing.com/hc/de/articles/31499221281309-Job-Feed-Integration) | * | requires_employer_seed | direct_ats |
+| [d.vinci](https://www.dvinci.de/) | * | requires_employer_seed | direct_ats |
 | [Freelancer public client projects](https://developers.freelancer.com/) | * | implemented | freelance_demand |
 | [Optional Upwork marketplace API](https://www.upwork.com/developer) | * | credential_required | freelance_demand |
 | [Malt](https://www.malt.de/) | DE | research_required | freelance_demand |
 | [freelancermap](https://www.freelancermap.de/) | DE | research_required | freelance_demand |
-| [GULP](https://www.gulp.de/) | DE | research_required | freelance_demand |
+| [Randstad Professional (formerly GULP) jobs and projects](https://www.gulp.de/) | DE | research_required | mixed_jobs_and_projects |
 | [Khamsat](https://khamsat.com/) | EG | research_required | freelance_demand |
 | [HeyJobs](https://www.heyjobs.co/de-de/) | DE | access_limited | national_board |
-
 | [Studierendenwerk Frankfurt official student portal](https://stellenmarkt.swffm.de/) | DE | access_limited | student_board |
+| [Original Jobshop/talentsconnect native career reader](https://www.jobs-fraport.com/) | DE | requires_employer_seed | direct_ats |
+| [Frankfurt Airport Retail public career board](https://frankfurt-airport-retail.de/far/de/karriere-start/jobs) | DE | implemented | direct_employer |
+| [SAP modern public careers front](https://jobs.sap.com/en/jobs/) | DE | implemented | direct_employer |
+| [MeinPraktikum native internship and student-job market](https://www.meinpraktikum.de/) | DE | implemented | student_board |
+| [Berlin state portal native public offers](https://www.berlin.de/karriereportal/) | DE | implemented | public_sector |
+
+## Dated implementation notes
 
 Jobmensa public list/detail routes were added in v0.4.2 with live policy checks, native continuation and synthetic regressions. This changes implementation status only; it does not close any national or historical coverage claim.
 
@@ -178,3 +197,13 @@ fields can omit standalone requirements. Other chamber/WP/redirect primaries,
 university recognition, country/employer discovery and historical week coverage
 remain separate work. Training firms are organisation context, never vacancies.
 See [the original reader contract](handwerk-native-readers.md).
+
+
+v0.4.23 adds the original Berlin state-portal native inventory and whole public
+advert reader. Actual numbered continuation preserves the student filter while
+`weiter` can drop it. All43 student-category records were observed over3 native
+metadata pages; unfiltered618 supply was sampled58 rows across first/next/last,
+not fully acquired. School/academic/professional models remain distinct, and
+the unfiltered ambiguity complement remains required. A portal advert may have
+an outside-Berlin worksite, conflicting deadlines and a separately numbered
+employer original. See [the source contract](berlin-state-native-readers.md).

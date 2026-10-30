@@ -3,6 +3,7 @@ import {StdioServerTransport} from '@modelcontextprotocol/sdk/server/stdio.js';
 import {z} from 'zod';
 import {capabilities,read} from '../interamt/client.mjs';
 import {germanDiscovery} from './discovery.mjs';
+import {statePortal} from './state-portals.mjs';
 import {jobmensa,studentBoards,germanBoards,germanBoardCaptureSegment} from '../student-boards/bridge.mjs';
 const server=new McpServer({name:'germany-public-services',version:'0.4.0'});
 const result=data=>({content:[{type:'text',text:JSON.stringify(data)}],structuredContent:data,
@@ -36,6 +37,14 @@ server.registerTool('organisation_directory', {
  description:'Read public German organisation discovery seeds for personal noncommercial job research: the official personal-use HRK university TSV or one native GVP staffing-member metadata page. These are organisations, not vacancies or verified workplaces. Preserve native homepages without repair and main-address state without campus inference. GVP anonymous public CSRF stays in memory; protected details/challenges are never requested or solved. No account, contact, application or source dataset redistribution.',
  inputSchema:{directory:z.enum(['higher_education','staffing_members']),page:z.number().int().min(1).max(10000).optional(),personal_noncommercial_use:z.literal(true)},annotations,
 },async input=>result(await germanDiscovery('organisation_directory',input)));
+server.registerTool('state_portal_inventory', {
+ description:'Read one complete native Berlin state-portal all-supply or student-entry page. Exact native offsets, selected filter, original total and numbered continuation reconcile; weiter can drop the student filter. Student scope includes school/professional placements, and unfiltered complement remains required. Berlin portal can list outside-Berlin worksites. Dates/deadlines are source labels, not original-clock/week/eligibility verdicts. No keyword, script, session, account, application, email or subscription.',
+ inputSchema:{provider:z.literal('berlin'),scope:z.enum(['all','student_entry']),start:z.number().int().min(0).max(1000000).optional(),first_page_total:z.number().int().positive().max(1000000).optional()},annotations,
+},async input=>result(await statePortal('state_portal_inventory',input)));
+server.registerTool('state_portal_detail', {
+ description:'Read an exact acquired Berlin public portal advert with matching native ID, canonical/OpenGraph and whole main/header; preserve published JobPosting and unfetched references separately. Portal mirror and employer original can have different IDs/deadlines/worksites. Nontext media, attachments, actual application materials and Germany remote permission remain unverified. No account, apply, source script, map, contact or media request.',
+ inputSchema:{provider:z.literal('berlin'),url:z.string().url().max(4096)},annotations,
+},async input=>result(await statePortal('state_portal_detail',input)));
 server.registerTool('handwerk_inventory', {
  description:'Read one whole native Handwerk Radar internship or apprenticeship offer page for an explicit postcode/radius and personal noncommercial use. Preserve every variable/overlapping source row, matching inline offer fields and actual native continuation with unknown exact total. A circle is not Hesse/Germany coverage. Firm directories are not vacancy supply; no career, skill, employer or degree query. Inline fields can omit standalone primary requirements. No source script, cookie, session, application, contact or account request.',
  inputSchema:{scope:z.enum(['internships','apprenticeships']),postal_code:z.string().regex(/^[0-9]{5}$/),radius_km:z.number().int().min(1).max(1000).optional(),page:z.number().int().min(1).max(10000).optional(),first_native_pages:z.number().int().min(1).max(10000).optional(),personal_noncommercial_use:z.literal(true)},annotations,

@@ -1596,7 +1596,8 @@
       ],
       "routes": [],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition.",
+        "The separately registered original Berlin state reader supports one qualified portal, not all states/municipalities. Hessen official portal policy redirects to an application shell, so no native vacancy/API read is qualified from that observation."
       ]
     },
     {
@@ -2554,18 +2555,19 @@
     },
     {
       "id": "gulp",
-      "name": "GULP",
+      "name": "Randstad Professional (formerly GULP) jobs and projects",
       "countries": [
         "DE"
       ],
-      "category": "freelance_demand",
+      "category": "mixed_jobs_and_projects",
       "status": "research_required",
       "references": [
         "https://www.gulp.de/"
       ],
       "routes": [],
       "limits": [
-        "Client-funded demand must be distinguished from freelancer profiles, seller service supply and speculative opportunities; no suitable inventory transport verified."
+        "Client-funded demand must be distinguished from freelancer profiles, seller service supply and speculative opportunities; no suitable inventory transport verified.",
+        "Client employment and own-company careers are distinct from freelance projects. Employment entry currently yields a native script shell; its API is unqualified. The independently advertised own-career HR4YOU route is robots-denied. Neither is a whole-staffing-market access verdict."
       ]
     },
     {
@@ -2805,6 +2807,44 @@
         "Source internship scope includes foreign/pupil/thesis models. Acquisition does not filter by career interests; Germany worker eligibility, actual student contract and personal fit need full individual review.",
         "Full primary public advert container, full native role Markdown, source schema and company fields remain separate. Source dates/activation are not verified original publication; no completed week or country census is inferred. Nontext media stays unverified.",
         "No source scripts, account/user hydration, application controls or session state exported. No apply, login, contact, save, subscription, write-service or media request."
+      ]
+    },
+    {
+      "id": "berlin_state_jobs",
+      "name": "Berlin state portal native public offers",
+      "countries": [
+        "DE"
+      ],
+      "category": "public_sector",
+      "status": "implemented",
+      "references": [
+        "https://www.berlin.de/karriereportal/",
+        "https://www.karriereportal-stellen.berlin.de/",
+        "https://www.berlin.de/karriereportal/einstieg/praktikum-und-werkstudierende/"
+      ],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "state_portal_inventory",
+          "public_tool": "de_public_state_portal_inventory",
+          "fixed_arguments": {
+            "provider": "berlin"
+          }
+        },
+        {
+          "backend": "public_de",
+          "tool": "state_portal_detail",
+          "public_tool": "de_public_state_portal_detail",
+          "fixed_arguments": {
+            "provider": "berlin"
+          }
+        }
+      ],
+      "limits": [
+        "Qualified native all/student-entry metadata and complete public portal advert only. Not all Berlin, German state/municipal employers, an employer census or complete week.",
+        "Student category28 includes pupil/professional placements; acquire the unfiltered ambiguity complement. Numbered links preserve scope while weiter can drop it. Freeze initial native total and reconcile selected scope/offset; no career, degree or employer keyword.",
+        "Actual outside-Berlin worksites, conflicting deadlines and separately numbered employer originals remain source evidence. Published JobPosting, nontext media, attachments, original clocks, materials, remote eligibility and individual fit need separate review.",
+        "Only exact anonymous current-policy HTML GETs; no account, application, subscription, script, session, contact, map, media or payment request."
       ]
     }
   ]

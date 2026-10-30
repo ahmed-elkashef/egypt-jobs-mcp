@@ -60,12 +60,12 @@ test('organisation file is not provider pagination; staffing pages remain indepe
   assert.deepEqual(probe.calls, [['organisation_directory','--directory','staffing_members','--page','2','--personal-noncommercial-use']]);
 });
 
-test('only three audited German routes are added and source gaps stay explicit', async () => {
+test('audited student and directory routes retain their separate source gaps', async () => {
   for (const name of ['meinpraktikum_inventory','meinpraktikum_detail','organisation_directory']) assert.ok(ALLOWED.public_de.has(name));
   assert.ok(!ALLOWED.public_de.has('member_detail'));
   assert.ok(!ALLOWED.public_de.has('member_challenge'));
   const registry = await loadRegistry();
-  assert.equal(registry.sources.length, 99);
+  assert.equal(registry.sources.length, 100);
   for (const id of ['public_institutions','staffing']) {
     const source = registry.sources.find(row => row.id === id);
     assert.equal(source.status, 'research_required');
