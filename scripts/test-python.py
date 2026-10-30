@@ -16,6 +16,7 @@ for directory, arguments in [
     (root / "shared/onlyfy", ["-m", "unittest", "discover", "-s", "tests"]),
     (root / "shared/jobshop", ["-m", "unittest", "discover", "-s", "tests"]),
     (root / "shared/successfactors", ["-m", "unittest", "discover", "-s", "tests"]),
+    (root / "shared/oracle", ["-m", "unittest", "discover", "-s", "tests"]),
 ]:
     env = dict(os.environ)
     env["PYTHONPATH"] = os.pathsep.join([str(root / "packages/source-adapters/src"), str(root / "countries/de/stepstone")])

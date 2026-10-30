@@ -2,6 +2,12 @@
 
 One source repository for country-based labour-market tools. Egypt and Germany are the first country packages. Public feeds, employer ATS readers and client-project adapters are shared. More countries can use the same contracts without copying another country's implementation.
 
+The original [Oracle Candidate Experience reader](shared/oracle/README.md)
+adds qualified whole-site and Germany inventories with complete public job
+sections. It reconciles the inner vacancy count separately from Oracle's
+outer search-container pagination. Employer discovery, other external sites
+and historical market coverage remain explicit requirements.
+
 The repository was renamed from `egypt-jobs-mcp`; its existing Git history and releases are preserved. It consolidates the authored Egypt adapters, the Germany BA derivative, the original StepStone implementation and the shared public-source server. Exact imported commits and retained licences are in [import provenance](docs/import-provenance.json) and [credits](ACKNOWLEDGMENTS.md).
 
 ## Install and run
@@ -36,7 +42,7 @@ Four catalogue tools work without acquiring jobs:
 - `source_capabilities`: one source's supported routes, fixed arguments and native tool schemas.
 - `plan_country_scan`: a plan for explicit geography and offset-aware `[from,to)` dates, retaining unresolved sources.
 
-[The source registry](sources.json) currently contains 95 distinct source/channel entries. It is an open discovery register, **not proof that every Egyptian or German employer or vacancy is represented**. Entries explicitly distinguish implemented readers, access-limited routes, employer-seeded readers, credential requirements, external connectors, research gaps and statistical context. [Coverage](docs/coverage.md) explains the remaining work.
+[The source registry](sources.json) currently contains 96 distinct source/channel entries. It is an open discovery register, **not proof that every Egyptian or German employer or vacancy is represented**. Entries explicitly distinguish implemented readers, access-limited routes, employer-seeded readers, credential requirements, external connectors, research gaps and statistical context. [Coverage](docs/coverage.md) explains the remaining work.
 
 ## End to end
 

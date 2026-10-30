@@ -22,6 +22,7 @@ import {dvinciTools,dvinci} from './dvinci.mjs';
 import {onlyfyTools,onlyfy} from './onlyfy.mjs';
 import {jobshopTools,jobshop} from './jobshop.mjs';
 import {successfactorsTools,successfactors} from './successfactors.mjs';
+import {oracleTools,oracle} from './oracle.mjs';
 const inventoryClient = new InventoryClient();
 
 const DEFAULT_TIMEOUT_MS = Number(process.env.JOBFLOW_PUBLIC_JOBS_TIMEOUT_MS || 15000);
@@ -42,6 +43,7 @@ export const tools = [
   ...onlyfyTools,
   ...jobshopTools,
   ...successfactorsTools,
+  ...oracleTools,
   ...inventoryTools,
   {
     name: "search_public_jobs",
@@ -295,6 +297,10 @@ export async function callTool(name, args = {}) {
     }
     if(jobshopTools.some(tool=>tool.name===name)) {
       const data=await jobshop(name,args);
+      return {...jsonContent(data),structuredContent:data,isError:data.status!=='ok'};
+    }
+    if(oracleTools.some(tool=>tool.name===name)) {
+      const data=await oracle(name,args);
       return {...jsonContent(data),structuredContent:data,isError:data.status!=='ok'};
     }
     if(successfactorsTools.some(tool=>tool.name===name)) {
