@@ -1,0 +1,71 @@
+{
+  "version": "0.4.17",
+  "stage": "unreleased_original_reader_actual_unified_mcp_qualification",
+  "tool_count": 84,
+  "registry_entries": 98,
+  "actual_mcp_calls": 40,
+  "source_scopes": [
+    {
+      "country": "DE",
+      "total": 55,
+      "page_count": 5,
+      "unique_native_ids": 55
+    },
+    {
+      "country": null,
+      "total": 334,
+      "page_count": 28,
+      "unique_native_ids": 334
+    }
+  ],
+  "germany_is_subset_of_current_global_ids": true,
+  "germany_and_global_not_added_together": true,
+  "complete_public_body_samples": [
+    {
+      "label": "de-student-body",
+      "id": "sap_modern::744000158547668",
+      "native_job_id": "744000158547668",
+      "native_requisition_reference": "REF2276M",
+      "primary_characters": 6178,
+      "schema_characters": 6167,
+      "generic_context_sections": 6
+    },
+    {
+      "label": "de-intern-body",
+      "id": "sap_modern::744000158508563",
+      "native_job_id": "744000158508563",
+      "native_requisition_reference": "REF2959I",
+      "primary_characters": 4703,
+      "schema_characters": 4692,
+      "generic_context_sections": 6
+    }
+  ],
+  "all_inline_and_cached_job_models_agree": true,
+  "native_byte_frames_checked_without_script_execution": true,
+  "runtime_source_scripts_images_credentials_or_application_requested": false,
+  "discovery_client_code_read_as_text_only_not_copied": true,
+  "guarded_refusals": [
+    "role query",
+    "unqualified country",
+    "account route"
+  ],
+  "tests": {
+    "node": 140,
+    "python": 555,
+    "total": 695,
+    "new_targeted_tests": 21
+  },
+  "code_file_sha256": {
+    "countries/de/public-boards/sap_flight.py": "459796f14d2c8db688f84fb5f640dbaa8697472c09bf736e0dcdc1a1c42a3fcf",
+    "countries/de/public-boards/sap_modern.py": "f69bf595a293eb70a42cf5e82b18d2a4e045f0cbbe4573f357f6b22d9789af0b",
+    "countries/de/public-boards/native_flight.py": "20de31b946eb2f6640d308b26467156656620994c2f3713d4b96a5f877f98783",
+    "countries/de/public-boards/readers.py": "8f70c5b0e92f8ab6433d4bb4377b8f3c0dd1a63345a001377f7ac12c5fbb1e2f",
+    "countries/de/public-services/server.mjs": "2775ba9519618393d13006787fbaa6088f04ada15b51752a920fd2cb353f31fd",
+    "countries/de/student-boards/bridge.mjs": "1c04187996e37c009572a777f77ec682157b020d4221ebb253a3306995a96f93",
+    "shared/public_http.py": "f1e7baf0feb865da14e98e3e5e15a38441963f628fd6e80dc48800f92ec57751",
+    "sources.json": "3ae7b56a7bb41787a487cd39db6239e2f3fca4ef7caed47868ac4345e83278bf"
+  },
+  "installed_runtime_qualified": false,
+  "whole_week_national_or_employer_census_complete": false,
+  "person_fit_reviewed": false
+}

@@ -202,3 +202,41 @@ The [dated actual MCP proof](../../../docs/far-retail-live-proof.json) reconcile
 all 12 metadata rows, six explicit apprenticeship cuts and all six remaining
 complete public descriptions, with three guarded refusals. All 674 local tests
 pass (140 Node/534 Python). Release CI and installed-runtime checks are separate.
+
+
+## Modern SAP careers front
+
+The original sap_modern reader uses the existing German public-board tools,
+separately from the legacy SAP SuccessFactors RMK reader. Its fixed board is
+https://jobs.sap.com/en/jobs/; the advertised native Germany facet is
+https://jobs.sap.com/en/jobs/?country=Germany. Follow each actual next page
+and preserve the first native total. No role, experience, department, custom
+sort or candidate query is exposed. A whole current front is not a frozen
+week, national market or complete employer census.
+
+The source serves both inline and cached React Flight frames. The original
+data-only parser checks byte lengths, explicit stream start/closure, separate
+record namespaces and resolved model agreement. It never evaluates website
+scripts or modules. The public native default newest sort, page, size, query
+echo, counts and unique posting IDs must reconcile.
+
+Full primary HTML is retained independently of schema descriptions and generic
+page context. URL IDs differ from requisition references. Posting/display
+clocks, part/full-time and work-pattern labels remain raw; there is no exact
+student contract, original-publication, worker-country or applicant-fit claim.
+Runtime reads only anonymous first-party public HTML and robots. No source
+script, image, account, application, personalization or contact request.
+
+Protocol facts were checked against the
+[public React 19.2 client protocol](https://github.com/facebook/react/blob/v19.2.0/packages/react-client/src/ReactFlightClient.js).
+This is an original Python data reader; source website and framework code are
+not executed or copied into the implementation. Source-specific native and
+installed qualification receipts are recorded separately from unit tests.
+
+The [actual unified MCP qualification](../../../docs/sap-modern-live-proof.json)
+read all five Germany pages (55 unique IDs) and all 28 current whole-front pages
+(334 unique IDs), with the Germany set contained in the whole front. Two complete
+public bodies, separate primary/schema/context variants and three refusal cases
+passed. These are source-format tests, without an applicant-fit or weekly-market
+claim. All 695 local tests pass (140 Node/555 Python), including 21 new targeted
+cases. Exact release CI and installed-runtime qualification remain separate.
