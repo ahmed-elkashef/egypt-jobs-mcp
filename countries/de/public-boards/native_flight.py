@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 from typing import Any
 
@@ -13,10 +14,34 @@ class FlightError(ValueError):
     pass
 
 
+def _pairs(pairs):
+    value = {}
+    for key, item in pairs:
+        if key in value:
+            raise FlightError("Duplicate native JSON property")
+        value[key] = item
+    return value
+
+
+def _number(value):
+    result = float(value)
+    if not math.isfinite(result):
+        raise FlightError("Nonfinite native JSON number")
+    return result
+
+
+def _constant(value):
+    raise FlightError("Nonfinite native JSON constant")
+
+
+def _decoder():
+    return json.JSONDecoder(object_pairs_hook=_pairs, parse_float=_number, parse_constant=_constant)
+
+
 def records_from_html(body: bytes) -> dict[str, Any]:
     tree = html.fromstring(body)
     chunks = []
-    decoder = json.JSONDecoder()
+    decoder = _decoder()
     for script in tree.xpath("//script"):
         text = script.text or ""
         # Each argument must be JSON. No JS evaluator, dynamic import or DOM execution.
@@ -33,7 +58,13 @@ def records_from_html(body: bytes) -> dict[str, Any]:
             ):
                 chunks.append(value[1])
     stream = "".join(chunks).encode("utf-8")
+    return records_from_stream(stream)
+
+
+def records_from_stream(stream: bytes) -> dict[str, Any]:
+    """Parse complete native Flight data records without a JS/HTML execution path."""
     records = {}
+    decoder = _decoder()
     position = 0
     while position < len(stream):
         if stream[position : position + 1] == b"\n":
@@ -63,11 +94,13 @@ def records_from_html(body: bytes) -> dict[str, Any]:
             end = len(stream) if end == -1 else end
             payload = stream[position:end].decode("utf-8")
             position = end + 1
-            try:
-                value = json.loads(payload)
-            except ValueError:
+            if not payload or payload[0] not in '{["-0123456789ntf':
                 # Module/import/debug protocol records are not executed or treated as job data.
                 continue
+            try:
+                value = decoder.decode(payload)
+            except ValueError as error:
+                raise FlightError("Invalid complete native JSON record") from error
         if identity in records and records[identity] != value:
             raise FlightError("Conflicting native Flight record identity")
         records[identity] = value

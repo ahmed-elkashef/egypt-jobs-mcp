@@ -620,13 +620,14 @@
         "DE"
       ],
       "category": "national_board",
-      "status": "research_required",
+      "status": "access_limited",
       "references": [
         "https://de.indeed.com/"
       ],
       "routes": [],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Dated native qualification2026-10-30: current robots200 permits the exact public German entry, but that entry GET returns403. TwoGET attempts total, zero vacancy/API/script reads, no cookies, authentication, retries, redirects, proxy, user-agent or browser bypass. This is an exact-route observation, not zero jobs, a universal outage or evidence about separately approved provider/partner APIs.",
+        "No native inventory/full-description/continuation route is independently qualified. Preserve this barrier and pursue only separately authorized legitimate access; search-index snippets do not establish full supply."
       ]
     },
     {
@@ -1195,14 +1196,36 @@
       "countries": [
         "DE"
       ],
-      "category": "apprenticeships",
-      "status": "research_required",
+      "category": "student_and_apprenticeship_portal",
+      "status": "implemented",
       "references": [
-        "https://www.ausbildung.de/"
+        "https://www.ausbildung.de/",
+        "https://www.ausbildung.de/schuelerpraktikum/stellen/",
+        "https://www.ausbildung.de/robots.txt"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public_de",
+          "tool": "ausbildung_inventory",
+          "public_tool": "de_public_ausbildung_inventory",
+          "scope": "one_whole_unfiltered_native_internship_catalogue_view",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public_de",
+          "tool": "ausbildung_detail",
+          "public_tool": "de_public_ausbildung_detail",
+          "scope": "one_complete_exact_acquired_public_internship_portal_body",
+          "fixed_arguments": {}
+        }
+      ],
       "limits": [
-        "Inventory, full-description access, source-native filters and continuation require verification before operational acquisition."
+        "Original public internship reader uses complete native HTML and the independently qualified anonymous read-only getInternshipSearchResults POST operation. No website program is shipped/executed/copied, no script requests or arbitrary action identity at runtime. Protocol deployment changes require separate requalification. See docs/ausbildung-native-readers.md.",
+        "The school-internship section also contains university placements. Preserve ambiguous models, mandatory/voluntary labels, ages/classes and duration without equating section labels with school-only or degree eligibility. Apprenticeship and working-student inventories outside this internship scope are not claimed.",
+        "Preserve both native resultsCount and vacanciesCount, every primary card, distinct vacancy and parent-posting IDs and multiple-place/branch context. Native from increments are20; later calls require acquired counters and fixed protocol binding. Changed counts, short pages and duplicate within-page IDs refuse. Cross-page drift and acquisition of all preceding pages remain consumer responsibilities.",
+        "No role, geography, model or duration filter is applied. Empty native search state and DE entry locale are qualified; the displayed default Frankfurt context does not prove a personal commute or all-Germany worksites. Native card count is not the vacancy-place counter or an entire German job census.",
+        "Complete portal text and published schema remain separate; preserve malformed-schema diagnostics and nontext/external references without following them. Mirrors may outlive employer originals; current employer status, required materials, university recognition, worksite/remote eligibility, human fit and original weekly clocks need separate evidence.",
+        "Current exact-route robots and conservative wildcard denial checks apply. Authentication, redirects, throttles or other limits stop without retries, cookies, accounts, applications, contacts or bypass."
       ]
     },
     {
