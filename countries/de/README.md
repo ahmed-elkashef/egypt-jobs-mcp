@@ -77,3 +77,5 @@ Protocol facts were checked against the
 This is an original Python data reader; source website and framework code are
 not executed or copied into the implementation. Source-specific native and
 installed qualification receipts are recorded separately from unit tests.
+
+The original JOIN public employer-board inventory and full-primary reader is included through the existing `de_public_german_board_inventory/detail` tools. It preserves both SSR variants, special general-application pagination and distinct native/public job identities. [Contract](../../docs/join-native-reader.md).

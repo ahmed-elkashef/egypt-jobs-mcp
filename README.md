@@ -56,6 +56,8 @@ The federation forwards full native responses without shortening job description
 
 ## Germany public boards
 
+The original [JOIN employer-board reader](docs/join-native-reader.md) handles both public SSR layouts, complete native continuation and distinct public/internal job IDs. Spontaneous-application context and repeated cached rows on a virtual final page are kept separate from vacancies. Primary full HTML, source schema/company context and native dates remain distinct; scope-checked canonical job redirects require no browser. An explicit verified employer board is required.
+
 The original [Jobmensa, StudentJob and YoungCapital readers](countries/de/student-boards/README.md) enumerate complete public native pages and full visible job details without a browser. Current robots policy, exact native continuation and model/date/worker-country ambiguities remain explicit. It makes no account, contact or application action.
 
 The original [public-board readers](countries/de/public-boards/README.md) also cover Absolventa, academics, stellenanzeigen.de, Yourfirm, GermanTechJobs the permitted official government vacancy feed, Jobs.de, Jobware, BerlinStartupJobs EnglishJobs metadata and anonymous XING inventory/body/discovery, get in Engineering, Zenjob public shifts and the official Frankfurt student portal. Native full bodies, verified pagination and distinct clocks remain separate from coverage and applicant fit.

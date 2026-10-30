@@ -30,6 +30,7 @@ from lxml import html
 from native_flight import public_search_state
 
 import far_retail
+import join_board
 import sap_modern
 
 AGENT = "job-market-mcp/0.4.8"
@@ -55,7 +56,9 @@ ORIGINS["zenjob"] = zenjob.ORIGIN
 ORIGINS["swffm"] = swffm.ORIGIN
 ORIGINS["far_retail"] = far_retail.ORIGIN
 ORIGINS["sap_modern"] = sap_modern.ORIGIN
+ORIGINS["join"] = join_board.ORIGIN
 LIST_PATHS = {
+    "join": join_board.LIST_PATH,
     "far_retail": far_retail.LIST_PATH,
     "sap_modern": sap_modern.LIST_PATH,
     "swffm": swffm.LIST_PATH,
@@ -694,6 +697,8 @@ def postings(value):
 
 
 def parse_detail(source, body, url):
+    if source == "join":
+        return join_board.detail(body, url)
     checked_url(source, url, "detail")
     if source == "swffm":
         result = envelope(source, body, url, "german_public_board_detail")
@@ -793,6 +798,8 @@ def parse_detail(source, body, url):
 
 
 def parse_inventory(source, body, url):
+    if source == "join":
+        return join_board.inventory(body, url)
     checked_url(source, url, "inventory")
     if source == "swffm":
         result = envelope(source, body, url, "german_public_board_page")
@@ -828,6 +835,8 @@ def parse_inventory(source, body, url):
 
 
 def read(source, operation, url):
+    if source == "join":
+        return join_board.read(operation, url)
     if source == "sap_modern":
         return sap_modern.read(operation, url)
     if source == "far_retail":
@@ -905,6 +914,7 @@ def capabilities():
             for source in ORIGINS
         },
         "native_partition_discovery": {
+            "join": "Exact verified employer board required. Both native SSR state variants, strict unfiltered page/count echo, distinct internal/public IDs and complete primary HTML. Enabled spontaneous applications are context; a virtual final UI page can repeat cached prior rows and never adds vacancies. Only scope-checked same-company numeric job redirects; no account, application, script or source filter request.",
             "sap_modern": "Separate modern SAP front: whole native metadata or advertised Germany facet, exact native page/count/default newest order and agreeing inline/cached Flight models. Native byte lengths, stream closure and namespaces are checked as data; website code is never executed. Full primary HTML, schema/context, URL/requisition identities and native clocks stay separate. No role, candidate, application or source-script request.",
             "far_retail": "Fixed company whole metadata via anonymous native read POST, checked @odata count and unique IDs; non-preview core plus separately loaded benefits/company/recruiter text. Native experience labels are not student contracts; monthly hours are not weekly hours. No hydration bearer, key, cookie, source script, image, account, application or contact operation.",
             "swffm": "Official Frankfurt student portal: unfiltered native lists/actual enabled page controls, whole public ad bodies and separately typed finite employer directory/profile context. Homepage featured refs and profile/job refs are not complete vacancy/employer censuses. The portal label does not prove a Hesse worksite. Conflicting native start, model, home-office and date fields are retained; no keyword/Ajax/contact action.",
