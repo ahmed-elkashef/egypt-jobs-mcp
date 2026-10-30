@@ -2216,13 +2216,39 @@
         "*"
       ],
       "category": "direct_ats",
-      "status": "research_required",
+      "status": "requires_employer_seed",
       "references": [
-        "https://www.sap.com/products/hcm/recruiting-software.html"
+        "https://www.sap.com/products/hcm/recruiting-software.html",
+        "https://jobs.sap.com/en/jobs/",
+        "https://careers.sap.com/",
+        "https://careers.sap.com/search/"
       ],
-      "routes": [],
+      "routes": [
+        {
+          "backend": "public",
+          "tool": "successfactors_capabilities",
+          "public_tool": "shared_successfactors_capabilities",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public",
+          "tool": "successfactors_inventory",
+          "public_tool": "shared_successfactors_inventory",
+          "fixed_arguments": {}
+        },
+        {
+          "backend": "public",
+          "tool": "successfactors_detail",
+          "public_tool": "shared_successfactors_detail",
+          "fixed_arguments": {}
+        }
+      ],
       "limits": [
-        "A verified original board/list/detail implementation and employer discovery are required. Existing external libraries or connectors are not treated as complete authored coverage."
+        "Original anonymous RMK native search/full-description reader qualifies https://careers.sap.com/search/ only; other employers and configurations require independent discovery and qualification.",
+        "Native whole-board and verified DE/EG country partitions have no role, department, career-status or language filters. Complete rows, ranges, counts, sort and advertised continuation reconcile; later pages require the frozen first-page count.",
+        "The separately advertised modern https://jobs.sap.com/en/jobs/ front is not implemented or combined with the legacy supply. Neither one origin nor an ATS register is an employer/country census.",
+        "Complete description, full job display, distinct URL-site/requisition IDs and raw student/contract/date fields remain separate. Native posted dates are not verified original publication or historical weekly coverage; labels do not establish student eligibility or Germany remote permission.",
+        "Unknown zero/fallback, changed, denied or unsupported reads fail with null counts. No account, key, cookie, script/CDN, alert, application, contact or subscription operation."
       ]
     },
     {

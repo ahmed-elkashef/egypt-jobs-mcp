@@ -74,6 +74,15 @@ The [original Onlyfy native reader](shared/onlyfy/README.md) exposes complete un
 
 The [original Jobshop reader](shared/jobshop/README.md) reconciles the whole native SSR link array with every source anchor and an independent board count. It follows actual policy-checked public redirects and preserves complete primary CMS HTML, full context, source clocks and form labels separately, without source search credentials or application operations.
 
+## Original shared SAP SuccessFactors RMK reader
+
+The [original RMK reader](shared/successfactors/README.md) qualifies SAP's
+explicitly advertised legacy board, with whole native pages, verified Germany
+and Egypt partitions, frozen-count continuation and complete job descriptions.
+URL-site and requisition IDs, primary and additional locations, student status,
+contract fields and posted dates remain separate. The current SAP front is a
+different transport and is not included or combined with the legacy counts.
+
 ## Additional Germany API
 
 Original Interamt capability/list/detail code is included under `countries/de/interamt`. Its public OpenAPI requires an approved API key; single-customer and MultiMandant scopes remain distinct. `de_public_interamt_capabilities` inspects this offline; `de_public_interamt_read` refuses before network without approved local access and an explicitly confirmed API base. No authenticated live access is claimed.
