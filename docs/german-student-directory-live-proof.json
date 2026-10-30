@@ -1,0 +1,211 @@
+{
+  "as_of": "2026-10-30",
+  "purpose": "Dated original-code native format and federated MCP qualification; no source dataset or frontend implementation bundled",
+  "catalogue_tools": 88,
+  "registry_entries": 99,
+  "actual_federated_tool_calls": 16,
+  "successful_read_calls": 12,
+  "guarded_refusals": 4,
+  "local_node_tests": 158,
+  "local_python_tests": 632,
+  "local_total_tests": 790,
+  "new_focused_regressions": {
+    "python": 27,
+    "node": 8
+  },
+  "code_sha256": {
+    "countries/de/discovery/network.py": "449b5a26293ccf04c2421b00da675ae2fdea8c36437d6a126496e715b25ad49a",
+    "countries/de/discovery/meinpraktikum.py": "ce214d203480cdcc5c99049b55a467954f98bec1808ed26eb2ae21e1223630d4",
+    "countries/de/discovery/organisations.py": "4824e0c89a0ae0fe18e261a530f577df7822b276e9b0733b096796aab32db3b3",
+    "countries/de/discovery/reader.py": "1e8756dfceb379ca11c0323a2e6539165625ee2c12319215e9ea75260c622661",
+    "countries/de/public-services/discovery.mjs": "f8d823947226dc6a5efe222809ad2bc526c90b664c8737e0690ca5fe2c7c8adb",
+    "countries/de/public-services/server.mjs": "73198dc882e5c5b4f7c348d5417b8052fef9e7a4d6cd1ecaf6c772e9588d2fb5",
+    "lib/federation.mjs": "750bd6922e9692c1e984c0374166ff5e68f8b9df8be39d0ad60445700fb0760b"
+  },
+  "actual_probe_summaries": [
+    {
+      "label": "internships-first",
+      "tool": "de_public_meinpraktikum_inventory",
+      "isError": false,
+      "status": "ok",
+      "source_kind": "student_market_inventory",
+      "source_result_count": 4166,
+      "returned_count": 10,
+      "native_page": 1,
+      "refusal": false
+    },
+    {
+      "label": "internships-next",
+      "tool": "de_public_meinpraktikum_inventory",
+      "isError": false,
+      "status": "ok",
+      "source_kind": "student_market_inventory",
+      "source_result_count": 4166,
+      "returned_count": 10,
+      "native_page": 2,
+      "refusal": false
+    },
+    {
+      "label": "internships-last",
+      "tool": "de_public_meinpraktikum_inventory",
+      "isError": false,
+      "status": "ok",
+      "source_kind": "student_market_inventory",
+      "source_result_count": 4166,
+      "returned_count": 6,
+      "native_page": 417,
+      "refusal": false
+    },
+    {
+      "label": "working_student-first",
+      "tool": "de_public_meinpraktikum_inventory",
+      "isError": false,
+      "status": "ok",
+      "source_kind": "student_market_inventory",
+      "source_result_count": 2311,
+      "returned_count": 10,
+      "native_page": 1,
+      "refusal": false
+    },
+    {
+      "label": "working_student-next",
+      "tool": "de_public_meinpraktikum_inventory",
+      "isError": false,
+      "status": "ok",
+      "source_kind": "student_market_inventory",
+      "source_result_count": 2311,
+      "returned_count": 10,
+      "native_page": 2,
+      "refusal": false
+    },
+    {
+      "label": "working_student-last",
+      "tool": "de_public_meinpraktikum_inventory",
+      "isError": false,
+      "status": "ok",
+      "source_kind": "student_market_inventory",
+      "source_result_count": 2311,
+      "returned_count": 1,
+      "native_page": 232,
+      "refusal": false
+    },
+    {
+      "label": "advert-1",
+      "tool": "de_public_meinpraktikum_detail",
+      "isError": false,
+      "status": "ok",
+      "source_kind": "student_market_detail",
+      "source_result_count": 1,
+      "returned_count": 1,
+      "native_page": null,
+      "refusal": false
+    },
+    {
+      "label": "advert-2",
+      "tool": "de_public_meinpraktikum_detail",
+      "isError": false,
+      "status": "ok",
+      "source_kind": "student_market_detail",
+      "source_result_count": 1,
+      "returned_count": 1,
+      "native_page": null,
+      "refusal": false
+    },
+    {
+      "label": "staffing-first",
+      "tool": "de_public_organisation_directory",
+      "isError": false,
+      "status": "ok",
+      "source_kind": "organisation_directory",
+      "source_result_count": 4260,
+      "returned_count": 10,
+      "native_page": 1,
+      "refusal": false
+    },
+    {
+      "label": "staffing-next",
+      "tool": "de_public_organisation_directory",
+      "isError": false,
+      "status": "ok",
+      "source_kind": "organisation_directory",
+      "source_result_count": 4260,
+      "returned_count": 10,
+      "native_page": 2,
+      "refusal": false
+    },
+    {
+      "label": "staffing-last",
+      "tool": "de_public_organisation_directory",
+      "isError": false,
+      "status": "ok",
+      "source_kind": "organisation_directory",
+      "source_result_count": 4260,
+      "returned_count": 10,
+      "native_page": 426,
+      "refusal": false
+    },
+    {
+      "label": "higher-education",
+      "tool": "de_public_organisation_directory",
+      "isError": false,
+      "status": "ok",
+      "source_kind": "organisation_directory",
+      "source_result_count": 390,
+      "returned_count": 390,
+      "native_page": null,
+      "refusal": false
+    },
+    {
+      "label": "refuse-apply",
+      "tool": "de_public_meinpraktikum_detail",
+      "isError": true,
+      "status": "source_limited",
+      "source_kind": null,
+      "source_result_count": null,
+      "returned_count": null,
+      "native_page": null,
+      "refusal": true
+    },
+    {
+      "label": "refuse-unacknowledged-use",
+      "tool": "de_public_meinpraktikum_inventory",
+      "isError": true,
+      "status": "source_limited",
+      "source_kind": null,
+      "source_result_count": null,
+      "returned_count": null,
+      "native_page": null,
+      "refusal": true
+    },
+    {
+      "label": "refuse-file-page",
+      "tool": "de_public_organisation_directory",
+      "isError": true,
+      "status": "source_limited",
+      "source_kind": null,
+      "source_result_count": null,
+      "returned_count": null,
+      "native_page": null,
+      "refusal": true
+    },
+    {
+      "label": "refuse-cross-source",
+      "tool": "de_public_meinpraktikum_detail",
+      "isError": true,
+      "status": "source_limited",
+      "source_kind": null,
+      "source_result_count": null,
+      "returned_count": null,
+      "native_page": null,
+      "refusal": true
+    }
+  ],
+  "noncommercial_personal_use_only": true,
+  "HRK_source_dataset_redistributed": false,
+  "source_JS_implementation_copied_or_executed": false,
+  "GVP_nonce_or_user_session_exported": false,
+  "protected_details_challenges_or_captchas_requested_or_solved": false,
+  "source_original_publication_or_this_week_newness_verified": false,
+  "country_week_employer_census_or_individual_fit_complete": false,
+  "applications_accounts_contacts_schedules_or_payments": 0
+}
