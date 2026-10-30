@@ -176,8 +176,10 @@ def parse(raw, uri):
     if len(about) > 1:
         raise SourceError("competing_personio_company_context")
     for heading in main.xpath(".//h2"):
-        if " ".join(heading.text_content().split()) in {"About us", "Über uns"} and not any(
-            heading in node.iter() for node in about
+        if (
+            " ".join(heading.text_content().split()) in {"About us", "Über uns"}
+            and heading not in primary.iter()
+            and not any(heading in node.iter() for node in about)
         ):
             raise SourceError("unmapped_personio_company_context")
     body = public_html(primary)

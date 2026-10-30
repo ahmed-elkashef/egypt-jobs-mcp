@@ -114,6 +114,16 @@ class PersonioPrimaryTests(unittest.TestCase):
         with self.assertRaisesRegex(SourceError, "unmapped_personio_company_context"):
             parse(raw, URL)
 
+    def test_configured_about_us_heading_inside_primary_is_preserved(self):
+        raw = page(
+            primary="<h2>About us</h2><p>A configured introduction remains in the primary</p>"
+        )
+        result = parse(raw, URL)
+        self.assertIn(
+            "A configured introduction remains in the primary", result["source_primary_text"]
+        )
+        self.assertEqual(len(result["native_company_context_sections"]), 1)
+
     def test_missing_primary_marker_or_title_is_not_a_full_body(self):
         for marker in [b"detail-content-block-conditions", b"job-position-title", b"job-header"]:
             with self.subTest(marker=marker), self.assertRaises(SourceError):
